@@ -1,7 +1,6 @@
 import { search_keywords as initialState } from '../../mockData/state/state.json';
-console.log(initialState);
-const searchReducer = (state = initialState, action) => {
-  console.log(state);
+
+const searchKeywordReducer = (state = initialState, action) => {
   let newKeyWords = JSON.parse(JSON.stringify(state));
   let data = action.payload;
 
@@ -18,6 +17,7 @@ const searchReducer = (state = initialState, action) => {
 
       return newKeyWords;
     }
+
     case 'search/remove': {
       let ingredients = newKeyWords.map((k) => k.ingredient_name);
       if (ingredients.includes(data))
@@ -32,4 +32,4 @@ const searchReducer = (state = initialState, action) => {
   }
 };
 
-export default searchReducer;
+export default searchKeywordReducer;

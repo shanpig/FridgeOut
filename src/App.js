@@ -7,7 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
   const d = useDispatch();
-  const search_keywords = useSelector((state) => state);
+  const search_keywords = useSelector((state) => state.search_keywords);
+  console.log(search_keywords);
   return (
     <div>
       <h2>hello</h2>
