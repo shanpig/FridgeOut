@@ -1,12 +1,12 @@
 const addInput = (input) => {
   return {
-    type: 'search/addInput',
+    type: 'keyword/addInput',
     payload: input,
   };
 };
 const removeInput = (input) => {
   return {
-    type: 'search/removeInput',
+    type: 'keyword/removeInput',
     payload: input,
   };
 };

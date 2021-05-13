@@ -1,10 +1,10 @@
-import { search_keywords as keywords } from '../../mockData/state/state.json';
+import { search_keywords as keywords } from '../../../mockData/state/state.json';
 
-export default function searchReducer(state = keywords, action) {
+export default function keywordReducer(state = keywords, action) {
   let newState = state.slice();
 
   switch (action.type) {
-    case 'search/addInput': {
+    case 'keyword/addInput': {
       const {
         ingredient_name: name,
         ingredient_amount: amount,
@@ -22,7 +22,8 @@ export default function searchReducer(state = keywords, action) {
 
       return newState;
     }
-    case 'search/removeInput':
+
+    case 'keyword/removeInput': {
       const {
         ingredient_name: name,
         ingredient_amount: amount,
@@ -37,6 +38,8 @@ export default function searchReducer(state = keywords, action) {
           ...newState.slice(indexOfIngredient + 1),
         ];
       return newState;
+    }
+
     default:
       return state;
   }
