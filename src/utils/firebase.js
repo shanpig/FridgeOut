@@ -82,14 +82,31 @@ async function getUserInfoByEmail(email) {
   return userInfo[0];
 }
 
-async function sendMessageTo(user_id, message) {
-  let data = await db
+async function addToFavorite(userId, recipeId) {
+  await db
     .collection('users')
-    .doc(user_id)
+    .doc(userId)
+    .update({
+      my_favorites: firebase.firestore.FieldValue.arrayUnion(recipeId),
+    });
+}
+
+async function removeFromFavorite(userId, recipeId) {
+  await db
+    .collection('users')
+    .doc(userId)
+    .update({
+      my_favorites: firebase.firestore.FieldValue.arrayRemove(recipeId),
+    });
+}
+
+async function sendMessageTo(userId, message) {
+  await db
+    .collection('users')
+    .doc(userId)
     .update({
       messages: firebase.firestore.FieldValue.arrayUnion(message),
     });
-  return data;
 }
 
 export {
@@ -97,6 +114,8 @@ export {
   getRecipes,
   searchRecipesByIngredientNames,
   signUpNewUser,
+  addToFavorite,
+  removeFromFavorite,
   getUserInfoByEmail,
   sendMessageTo,
 };
