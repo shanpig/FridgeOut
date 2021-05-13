@@ -1,5 +1,5 @@
-// import firebase from 'firebase';
-const firebase = require('firebase');
+import firebase from 'firebase';
+// const firebase = require('firebase');
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAeh2HyVueHBPxSDEq9DQiXHsVDcQhffGI',
@@ -82,52 +82,21 @@ async function getUserInfoByEmail(email) {
   return userInfo[0];
 }
 
-const userInfo = {
-  identity: 'user',
-  name: 'Shanpig',
-  email: 'shanpigLiao@gmail.com',
-  profile: 'https://randomuser.me/api/portraits/men/75.jpg',
-  left_overs: [
-    {
-      ingredient_name: '蛋',
-      ingredient_amount: 5,
-      ingredient_unit: '顆',
-    },
-    {
-      ingredient_name: '紅蘿蔔',
-      ingredient_amount: 0.5,
-      ingredient_unit: '條',
-    },
-    {
-      ingredient_name: '雞胸肉',
-      ingredient_amount: 250,
-      ingredient_unit: 'g',
-    },
-    {
-      ingredient_name: '蔥',
-      ingredient_amount: null,
-      ingredient_unit: null,
-    },
-  ],
-  my_kitchen: ['A01-1234', 'B02-1234'],
-  my_favorites: ['A01-1234', 'B02-1234'],
-  messages: [
-    {
-      type: 'recommendation',
-      from: 'David',
-      timestamp: 1611264582,
-      recipe: 'A05-7455',
-    },
-    {
-      type: 'recommendation',
-      from: 'David',
-      timestamp: 1611264582,
-      recipe: 'E01-0157',
-    },
-  ],
-};
+async function sendMessageTo(user_id, message) {
+  let data = await db
+    .collection('users')
+    .doc(user_id)
+    .update({
+      messages: firebase.firestore.FieldValue.arrayUnion(message),
+    });
+  return data;
+}
 
-getUserInfoByEmail(userInfo.email).then((data) => console.log(data));
-// console.log(info);
-return;
-// export { getRecipe, getRecipes };
+export {
+  getRecipe,
+  getRecipes,
+  searchRecipesByIngredientNames,
+  signUpNewUser,
+  getUserInfoByEmail,
+  sendMessageTo,
+};
