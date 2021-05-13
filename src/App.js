@@ -1,31 +1,15 @@
 import './App.css';
-import {
-  addSearchKeyword,
-  removeSearchKeyword,
-} from './redux/search/searchActions';
 import { useSelector, useDispatch } from 'react-redux';
+import { addToFavorite } from './redux/reducers/user/userActions';
 
 function App() {
   const d = useDispatch();
   const search_keywords = useSelector((state) => state.search_keywords);
-  console.log(search_keywords);
   return (
     <div>
       <h2>hello</h2>
-      <button
-        onClick={() =>
-          d(
-            addSearchKeyword({
-              ingredient_name: '培根',
-              ingredient_amount: 2,
-              ingredient_unit: '條',
-            })
-          )
-        }>
-        push me to add 2 bacon
-      </button>
-      <button onClick={() => d(removeSearchKeyword('培根'))}>
-        remove bacons
+      <button onClick={() => d(addToFavorite('12345'))}>
+        click to add favorite
       </button>
       <div>
         {search_keywords.map((keyword, i) => (
