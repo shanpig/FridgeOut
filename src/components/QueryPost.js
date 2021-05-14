@@ -1,9 +1,9 @@
 export default function QueryPost({ post }) {
   const { by: name, profile_image, ingredients } = post;
   return (
-    <div className='post'>
-      <div className='name'>{name}</div>
+    <div className='post' style={{ display: 'flex', marginBottom: '20px' }}>
       <div className='profile'>
+        <div className='name'>{name}</div>
         <img
           style={{ width: '100px', height: '100px', borderRadius: '50%' }}
           src={profile_image}
