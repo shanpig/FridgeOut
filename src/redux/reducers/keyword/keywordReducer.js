@@ -16,8 +16,11 @@ export default function keywordReducer(state = keywords, action) {
       if (indexOfIngredient < 0) {
         newState.push(action.payload);
       } else {
-        console.log(indexOfIngredient);
-        newState[indexOfIngredient].ingredient_amount += amount;
+        let originalAmount = Number(
+          newState[indexOfIngredient].ingredient_amount
+        );
+        newState[indexOfIngredient].ingredient_amount =
+          originalAmount + Number(amount);
       }
 
       return newState;
