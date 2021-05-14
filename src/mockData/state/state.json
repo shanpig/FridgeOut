@@ -386,6 +386,7 @@
   },
   "society_info": [
     {
+      "post_id": 123,
       "type": "剩食求解",
       "timestamp": 12351582734,
       "data": {
