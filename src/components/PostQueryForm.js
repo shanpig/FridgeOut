@@ -51,7 +51,6 @@ export default function PostQueryForm() {
       by: user.name,
       ingredients: selected,
       profile_image: user.profile,
-      timestamp: new Date().getTime(),
     };
 
     post(message).then((id) =>
