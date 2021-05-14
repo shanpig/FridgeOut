@@ -4,12 +4,25 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import PostQueryForm from './components/PostQueryForm';
+import Posts from './components/Posts.js';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <App />
+          </Route>
+          <Route path='/testPost'>
+            <PostQueryForm></PostQueryForm>
+            <Posts></Posts>
+          </Route>
+        </Switch>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

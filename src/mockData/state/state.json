@@ -478,33 +478,30 @@
   "society_info": [
     {
       "post_id": 123,
-      "type": "剩食求解",
+      "type": "query",
       "timestamp": 12351582734,
-      "data": {
-        "by": "Shanpig",
-        "profile_image": "https://randomuser.me/api/portraits/men/75.jpg",
-        "ingredients": [
-          {
-            "ingredient_name": "蛋",
-            "ingredient_amount": 5,
-            "ingredient_unit": "顆"
-          },
-          {
-            "ingredient_name": "紅蘿蔔",
-            "ingredient_amount": 0.5,
-            "ingredient_unit": "條"
-          }
-        ]
-      }
+
+      "by": "Shanpig",
+      "profile_image": "https://randomuser.me/api/portraits/men/75.jpg",
+      "ingredients": [
+        {
+          "ingredient_name": "蛋",
+          "ingredient_amount": 5,
+          "ingredient_unit": "顆"
+        },
+        {
+          "ingredient_name": "紅蘿蔔",
+          "ingredient_amount": 0.5,
+          "ingredient_unit": "條"
+        }
+      ]
     },
     {
-      "type": "食譜分享",
+      "type": "share",
       "timestamp": 12334535235,
-      "data": {
-        "by": "Christopher",
-        "profile_image": "https://randomuser.me/api/portraits/men/73.jpg",
-        "recipe": "G01-0945"
-      }
+      "by": "Christopher",
+      "profile_image": "https://randomuser.me/api/portraits/men/73.jpg",
+      "recipe": ["G01-0945"]
     }
   ]
 }
