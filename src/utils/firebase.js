@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+// const firebase = require('firebase');
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAeh2HyVueHBPxSDEq9DQiXHsVDcQhffGI',
@@ -16,6 +17,10 @@ const db = firebase.firestore();
 
 // Due to firebase limitations, compound query cannot exceed 10 logical computations.
 // e.g. getRecipes with idList larger than [Array(10)]
+
+function getTimestamp() {
+  return firebase.firestore.FieldValue.serverTimestamp();
+}
 
 async function getRecipe(id) {
   return await db
@@ -109,6 +114,7 @@ async function sendMessageTo(userId, message) {
 }
 
 async function post(message) {
+  message.timestamp = getTimestamp();
   return await db
     .collection('society')
     .add(message)
@@ -131,7 +137,11 @@ async function getPosts() {
     });
 }
 
+// let data = getTimestamp();
+// console.log(data);
+
 export {
+  getTimestamp,
   getRecipe,
   getRecipes,
   searchRecipesByIngredientNames,
