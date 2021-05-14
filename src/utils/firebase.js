@@ -82,7 +82,7 @@ async function getUserInfoByEmail(email) {
 }
 
 async function addToFavorite(userId, recipeId) {
-  await db
+  return await db
     .collection('users')
     .doc(userId)
     .update({
@@ -91,7 +91,7 @@ async function addToFavorite(userId, recipeId) {
 }
 
 async function removeFromFavorite(userId, recipeId) {
-  await db
+  return await db
     .collection('users')
     .doc(userId)
     .update({
@@ -100,11 +100,34 @@ async function removeFromFavorite(userId, recipeId) {
 }
 
 async function sendMessageTo(userId, message) {
-  await db
+  return await db
     .collection('users')
     .doc(userId)
     .update({
       messages: firebase.firestore.FieldValue.arrayUnion(message),
+    });
+}
+
+async function post(message) {
+  return await db
+    .collection('society')
+    .add(message)
+    .then((docRef) => {
+      docRef.update({
+        post_id: docRef.id,
+      });
+      return docRef.id;
+    });
+}
+
+async function getPosts() {
+  return await db
+    .collection('society')
+    .get()
+    .then((snap) => {
+      let posts = [];
+      snap.forEach((doc) => posts.push(doc.data()));
+      return posts;
     });
 }
 
@@ -117,4 +140,6 @@ export {
   removeFromFavorite,
   getUserInfoByEmail,
   sendMessageTo,
+  post,
+  getPosts,
 };
