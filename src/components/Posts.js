@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import QueryPost from './QueryPost';
+import SharePost from './SharePost';
 import { getPosts } from '../utils/firebase';
 
 export default function Posts() {
@@ -17,17 +18,13 @@ export default function Posts() {
     <div className='posts'>
       {posts &&
         posts.map((post, i) => {
-          // switch (post.type) {
-          //   case 'query':
-          //     return <QueryPost key={i} post={post} />;
-          //   case 'share':
-          //     return <></>;
-          //   default:
-          //     return <></>;
-          // }
-          if (post.type === 'query') {
-            console.log(post);
-            return <QueryPost key={i} post={post} />;
+          switch (post.type) {
+            case 'query':
+              return <QueryPost key={i} post={post} />;
+            case 'share':
+              return <SharePost key={i} post={post} />;
+            default:
+              return;
           }
         })}
     </div>
