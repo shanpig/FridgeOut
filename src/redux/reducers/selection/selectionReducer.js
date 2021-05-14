@@ -8,12 +8,16 @@ function recipesReducer(state = recipes, action) {
 
   switch (action.type) {
     case 'select/add/recipe': {
-      if (!newSelectedRecipes.includes(action.payload))
+      const newSelectedRecipesId = newSelectedRecipes.map((r) => r.id);
+      if (!newSelectedRecipesId.includes(action.payload.id))
         newSelectedRecipes.push(action.payload);
       return newSelectedRecipes;
     }
     case 'select/remove/recipe': {
-      return newSelectedRecipes.filter((recipe) => recipe !== action.payload);
+      console.log('hi', action.payload);
+      return newSelectedRecipes.filter(
+        (recipe) => recipe.id !== action.payload
+      );
     }
     default:
       return newSelectedRecipes;

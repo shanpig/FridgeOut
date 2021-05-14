@@ -24,43 +24,63 @@
   "searched_recipes": [
     {
       "keyword": [
-        "蕃茄醬",
-        "醬油膏",
-        "白醋",
-        "香油",
+        "里肌肉",
+        "青椒",
+        "紅甜椒",
+        "黃甜椒",
+        "熱白飯",
+        "熟白芝麻",
+        "醬油",
         "糖",
-        "蒜末",
-        "薑末",
-        "蔥花",
-        "辣椒末"
+        "米酒"
       ],
-      "id": "I03-1429",
-      "tags": ["配料", "醬料", "中式料理", "素食", "海鮮怎麼料理簡單又下飯"],
-      "title": "五味醬(13)",
-      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/yqn48-046a.jpg",
+      "id": "A02-2573",
+      "tags": ["主菜", "豬肉", "日式料理", "葷食", "一個人的簡單料理"],
+      "title": "照燒豬肉蓋飯",
+      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/yqn080-018.jpg",
       "preparation": [
         {
           "category": "【材　料】",
           "ingredients": [
             {
-              "ingredient_name": "a.蕃茄醬",
-              "ingredient_amount": "1",
-              "ingredient_unit": "又"
+              "ingredient_name": "里肌肉",
+              "ingredient_amount": "100",
+              "ingredient_unit": "公克"
             },
             {
-              "ingredient_name": "醬油膏",
+              "ingredient_name": "青椒",
+              "ingredient_amount": "1/3",
+              "ingredient_unit": "顆"
+            },
+            {
+              "ingredient_name": "紅甜椒",
+              "ingredient_amount": "1/3",
+              "ingredient_unit": "顆"
+            },
+            {
+              "ingredient_name": "黃甜椒",
+              "ingredient_amount": "1/3",
+              "ingredient_unit": "顆"
+            },
+            {
+              "ingredient_name": "熱白飯",
+              "ingredient_amount": "",
+              "ingredient_unit": "適量"
+            },
+            {
+              "ingredient_name": "熟白芝麻",
+              "ingredient_amount": "",
+              "ingredient_unit": "適量"
+            }
+          ]
+        },
+        {
+          "category": "【調 味 料】",
+          "ingredients": [
+            {
+              "ingredient_name": "醬油",
               "ingredient_amount": "1",
               "ingredient_unit": "大匙"
-            },
-            {
-              "ingredient_name": "白醋",
-              "ingredient_amount": "1",
-              "ingredient_unit": "大匙"
-            },
-            {
-              "ingredient_name": "香油",
-              "ingredient_amount": "1",
-              "ingredient_unit": "茶匙"
             },
             {
               "ingredient_name": "糖",
@@ -68,29 +88,19 @@
               "ingredient_unit": "大匙"
             },
             {
-              "ingredient_name": "b.蒜末",
-              "ingredient_amount": "1/2",
-              "ingredient_unit": "茶匙"
-            },
-            {
-              "ingredient_name": "薑末",
-              "ingredient_amount": "1/2",
-              "ingredient_unit": "茶匙"
-            },
-            {
-              "ingredient_name": "蔥花",
-              "ingredient_amount": "1",
-              "ingredient_unit": "茶匙"
-            },
-            {
-              "ingredient_name": "辣椒末",
-              "ingredient_amount": "1/2",
-              "ingredient_unit": "茶匙"
+              "ingredient_name": "米酒",
+              "ingredient_amount": "2",
+              "ingredient_unit": "大匙"
             }
           ]
         }
       ],
-      "steps": ["所有材料a混合均勻，加入蒜末、薑末、辣椒末、蔥花拌勻即可。"]
+      "steps": [
+        "里肌肉切片；青椒、紅甜椒和黃甜椒洗淨切小塊，備用。",
+        "熱鍋，倒適量油，放入青椒、紅甜椒和黃甜椒略炒，盛入盤中備用。",
+        "原鍋放入適量油，放入里肌肉片炒至變色，放入調味料充份拌炒入味。",
+        "將作法2的青椒和甜椒鋪在熱白飯上，在放上作法3的里肌肉片，撒上少許熟白芝麻即可食用。"
+      ]
     },
     {
       "keyword": [
@@ -327,7 +337,88 @@
       ]
     }
   ],
-  "selected_recipes": ["G01-5323"],
+  "selected_recipes": [
+    {
+      "keyword": [
+        "里肌肉",
+        "青椒",
+        "紅甜椒",
+        "黃甜椒",
+        "熱白飯",
+        "熟白芝麻",
+        "醬油",
+        "糖",
+        "米酒"
+      ],
+      "id": "A02-2573",
+      "tags": ["主菜", "豬肉", "日式料理", "葷食", "一個人的簡單料理"],
+      "title": "照燒豬肉蓋飯",
+      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/yqn080-018.jpg",
+      "preparation": [
+        {
+          "category": "【材　料】",
+          "ingredients": [
+            {
+              "ingredient_name": "里肌肉",
+              "ingredient_amount": "100",
+              "ingredient_unit": "公克"
+            },
+            {
+              "ingredient_name": "青椒",
+              "ingredient_amount": "1/3",
+              "ingredient_unit": "顆"
+            },
+            {
+              "ingredient_name": "紅甜椒",
+              "ingredient_amount": "1/3",
+              "ingredient_unit": "顆"
+            },
+            {
+              "ingredient_name": "黃甜椒",
+              "ingredient_amount": "1/3",
+              "ingredient_unit": "顆"
+            },
+            {
+              "ingredient_name": "熱白飯",
+              "ingredient_amount": "",
+              "ingredient_unit": "適量"
+            },
+            {
+              "ingredient_name": "熟白芝麻",
+              "ingredient_amount": "",
+              "ingredient_unit": "適量"
+            }
+          ]
+        },
+        {
+          "category": "【調 味 料】",
+          "ingredients": [
+            {
+              "ingredient_name": "醬油",
+              "ingredient_amount": "1",
+              "ingredient_unit": "大匙"
+            },
+            {
+              "ingredient_name": "糖",
+              "ingredient_amount": "1",
+              "ingredient_unit": "大匙"
+            },
+            {
+              "ingredient_name": "米酒",
+              "ingredient_amount": "2",
+              "ingredient_unit": "大匙"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        "里肌肉切片；青椒、紅甜椒和黃甜椒洗淨切小塊，備用。",
+        "熱鍋，倒適量油，放入青椒、紅甜椒和黃甜椒略炒，盛入盤中備用。",
+        "原鍋放入適量油，放入里肌肉片炒至變色，放入調味料充份拌炒入味。",
+        "將作法2的青椒和甜椒鋪在熱白飯上，在放上作法3的里肌肉片，撒上少許熟白芝麻即可食用。"
+      ]
+    }
+  ],
   "selected_left_overs": [
     {
       "ingredient_name": "蛋",

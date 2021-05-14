@@ -1,7 +1,7 @@
-const addRecipeToSelections = (id) => {
+const addRecipeToSelections = (recipe) => {
   return {
     type: 'select/add/recipe',
-    payload: id,
+    payload: recipe,
   };
 };
 

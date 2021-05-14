@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-// const firebase = require('firebase');
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAeh2HyVueHBPxSDEq9DQiXHsVDcQhffGI',
@@ -46,7 +45,7 @@ async function searchRecipesByIngredientNames(ingredientNames) {
     .where('keyword', 'array-contains-any', ingredientNames)
     .get()
     .then((snap) => snap.forEach((doc) => recipes.push(doc.data())));
-  console.log(recipes.map((recipe) => recipe.title + ' ' + recipe.id));
+  console.log(recipes[0]);
   return recipes;
 }
 
