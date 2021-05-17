@@ -1,77 +1,73 @@
-import React from 'react';
-import state from '../mockData/state/state.json';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-const { keyword, id, tags, title, main_image, preparation, steps } =
-  state.searched_recipes[1];
+import { useParams } from 'react-router';
+import { getRecipe } from '../utils/firebase';
 
 export default function Recipe() {
+  let cat = '';
+  let group = '';
+  const [{ id, title, main_image, ingredients, steps }, setRecipe] = useState(
+    {}
+  );
+  const { id: recipeId } = useParams();
+
+  useEffect(() => {
+    getRecipe(recipeId).then((recipe) => {
+      setRecipe(recipe);
+    });
+  }, [id]);
+
   return (
     <Container>
       <RecipeImageContainer>
         <RecipeImage src={main_image} alt='' />
-        <AddToButton value=''>
-          <option key={0} value='' disabled>
-            加到...
-          </option>
-          <option key={1} value='add-to-favorite'>
-            我的收藏
-          </option>
-          <option key={2} value='add-to-kitchen'>
-            我的廚房
-          </option>
-        </AddToButton>
+        <AddToButtonGroup>
+          <AddToButton value=''>+ 收藏</AddToButton>
+          <AddToButton value=''>+ 我的廚房</AddToButton>
+        </AddToButtonGroup>
       </RecipeImageContainer>
       <Title>{title}</Title>
       <ListTitle>食材：</ListTitle>
+
       <IngredientList>
-        <IngredientCategories>
-          {preparation.map((prep, i) => {
-            return (
-              <React.Fragment key={i}>
-                <Category>{prep.category}</Category>
-                <ul key={i}>
-                  {prep.ingredients.map((ingredient, i) => {
-                    const {
-                      ingredient_name: name,
-                      ingredient_amount: amount,
-                      ingredient_unit: unit,
-                    } = ingredient;
-                    if (name.includes('.')) {
-                      const [char, text] = name.split('.');
-                      return (
-                        <React.Fragment key={i}>
-                          <IngredientCategory>
-                            <span>{char}.</span>
-                          </IngredientCategory>
-                          <Ingredient>
-                            <span>{text}</span>
-                            <span>{amount + ' ' + unit}</span>
-                          </Ingredient>
-                        </React.Fragment>
-                      );
-                    }
-                    return (
-                      <Ingredient key={i}>
-                        <span>{name}</span>
-                        <span>{amount + ' ' + unit}</span>
-                      </Ingredient>
-                    );
-                  })}
-                </ul>
-              </React.Fragment>
+        {ingredients &&
+          ingredients.map((ingredient, i) => {
+            let ingredientItem = [];
+
+            if (ingredient.ingredient_cat !== cat) {
+              ingredientItem.push(
+                <IngredientCat>{ingredient.ingredient_cat}</IngredientCat>
+              );
+              cat = ingredient.ingredient_cat;
+            }
+            if (ingredient.ingredient_group !== group) {
+              ingredientItem.push(
+                <IngredientGroup>{ingredient.ingredient_group}</IngredientGroup>
+              );
+              group = ingredient.ingredient_group;
+            }
+
+            ingredientItem.push(
+              <Ingredient>
+                {ingredient.ingredient_name}&nbsp;
+                {ingredient.ingredient_amount}&nbsp;
+                {ingredient.ingredient_unit}
+              </Ingredient>
             );
+
+            return <IngredientItem key={i}>{ingredientItem}</IngredientItem>;
           })}
-        </IngredientCategories>
       </IngredientList>
+
       <StepTitle>步驟：</StepTitle>
       <Steps>
-        {steps.map((step, i) => (
-          <Step key={i}>
-            <span>{i + 1}.</span>
-            <span>{step.trim()}</span>
-          </Step>
-        ))}
+        {steps &&
+          steps.map((step, i) => (
+            <Step key={i}>
+              <span>{i + 1}.</span>
+              <span>{step.trim()}</span>
+            </Step>
+          ))}
       </Steps>
     </Container>
   );
@@ -92,18 +88,21 @@ const RecipeImage = styled.img`
   object-fit: cover;
 `;
 
-const AddToButton = styled.select`
-  background-color: white;
+const AddToButtonGroup = styled.div`
+  display: flex;
   position: absolute;
-  text-align: left;
   right: 10px;
   bottom: 10px;
+  gap: 5px;
+`;
+
+const AddToButton = styled.button`
+  background-color: white;
   cursor: pointer;
   border-radius: 5px;
   line-height: 1.3;
   border: 1px solid gray;
-  width: 66px;
-  height: 22px;
+  padding: 3px 5px;
 `;
 
 const Title = styled.h1`
@@ -113,32 +112,20 @@ const Title = styled.h1`
 
 const ListTitle = styled.h3``;
 
-const Category = styled.h3`
-  margin-top: 15px;
-`;
-
-const IngredientList = styled.div`
+const IngredientList = styled.ul`
   padding-left: 50px;
   display: flex;
+  flex-direction: column;
+  list-style-type: none;
 `;
 
-const IngredientCategories = styled.div`
-  width: 100%;
-`;
+const IngredientItem = styled.li``;
 
-const IngredientCategory = styled.div`
-  margin: 15px 0;
-`;
+const IngredientCat = styled.div``;
 
-const Ingredient = styled.div`
-  display: flex;
-  margin: 5px 0;
-  /* justify-content: space-between; */
+const IngredientGroup = styled.div``;
 
-  span:first-child {
-    margin-right: 5px;
-  }
-`;
+const Ingredient = styled.div``;
 
 const StepTitle = styled.h3`
   margin-top: 16px;
