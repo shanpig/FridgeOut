@@ -14,9 +14,7 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   const [shownRecipesPage, setShownRecipesPage] = useState(0);
   const [ingredientsNeeded, setIngredientsNeeded] = useState([]);
-  const search_keywords = useSelector((state) => {
-    return state.search_keywords;
-  });
+  const search_keywords = useSelector((state) => state.search_keywords);
   const leftOvers = useSelector((state) => state.user_info.left_overs);
   const selectedRecipes = useSelector((state) => state.selected_recipes);
 
@@ -42,21 +40,9 @@ function App() {
   }
 
   function gatherCurrentIngredientsFromRecipes() {
-    let nested = selectedRecipes.reduce((acc, recipe) => {
-      let ingredientGroup = recipe.preparation.map((prep) => {
-        let gatheredingredients = prep.ingredients;
-        gatheredingredients.forEach((ingr) => {
-          ingr.ingredient_name = ingr.ingredient_name.replace(
-            /[a-zA-Z\.]/g,
-            ''
-          );
-        });
-        return gatheredingredients;
-      });
-
-      return [...acc, ...ingredientGroup];
-    }, []);
-    return nested.flat();
+    let gatheredIngredients = [];
+    gatheredIngredients = selectedRecipes.map((recipe) => recipe.ingredients);
+    return gatheredIngredients.flat();
   }
 
   return (
@@ -91,7 +77,7 @@ function App() {
       <ul
         style={{
           display: 'flex',
-          height: '150px',
+          maxHeight: '150px',
           flexDirection: 'column',
           flexWrap: 'wrap',
         }}>
