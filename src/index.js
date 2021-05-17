@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import PostQueryForm from './components/PostQueryForm';
 import Posts from './components/Posts.js';
-import Recipe from './components/Recipe';
+import Recipe from './components/recipe';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,13 +16,16 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path='/'>
+            <></>
+          </Route>
+          <Route path='/search'>
             <App />
           </Route>
           <Route path='/testPost'>
             <PostQueryForm></PostQueryForm>
             <Posts></Posts>
           </Route>
-          <Route path='/testRecipe'>
+          <Route path='/testRecipe/:id'>
             <Recipe></Recipe>
           </Route>
         </Switch>
