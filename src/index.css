@@ -3,6 +3,15 @@
    License: none (public domain)
 */
 
+* {
+  font-size: 18px;
+  box-sizing: border-box;
+}
+button {
+  background-color: transparent;
+  border: none;
+}
+
 html,
 body,
 div,
