@@ -29,15 +29,15 @@ function RawItem({ readOnly, className, ...props }) {
   );
 }
 
-export default function SideBar() {
+export default function SideBar({ sidebarOpen, setSidebarOpen }) {
   const SELECTED_LEFTOVER = useRef(null);
   const SELECTED_RECIPES = useRef(null);
   const REMAIN_LEFTOVERS = useRef(null);
   const NEEDED_INGREDIENT = useRef(null);
   return (
-    <Aside>
+    <Aside open={sidebarOpen}>
       <HeaderSection>
-        <BackIcon onClick={() => console.log('close the sidebar')} />
+        <BackIcon onClick={() => setSidebarOpen(false)} />
         <img src={LogoSrc} alt='' />
       </HeaderSection>
 
@@ -149,6 +149,8 @@ const Aside = styled.aside`
   flex-direction: column;
   gap: 10px;
   overflow-y: auto;
+  left: ${(props) => (props.open ? '0%' : '-100%')};
+  transition: left ease 0.3s;
 `;
 
 const HeaderSection = styled.section`

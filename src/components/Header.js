@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../variables';
 import LogoSrc from '../images/LogoWithTextBlack.png';
@@ -8,10 +8,11 @@ import { CgProfile } from 'react-icons/cg';
 import Sidebar from './SideBar';
 
 export default function Header() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
       <MainHeader>
-        <Burger />
+        <Burger onClick={() => setSidebarOpen(true)} />
         <Logo src={LogoSrc}></Logo>
         <Nav>
           <NavButton id='search'>
@@ -24,7 +25,9 @@ export default function Header() {
           </NavButton>
         </Nav>
       </MainHeader>
-      <Sidebar></Sidebar>
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}></Sidebar>
     </>
   );
 }
