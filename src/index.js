@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import Header from './components/Header';
 import PostQueryForm from './components/PostQueryForm';
 import Posts from './components/Posts.js';
 import Recipe from './components/recipe';
@@ -13,6 +14,7 @@ import Recipe from './components/recipe';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <Header></Header>
       <Router>
         <Switch>
           <Route exact path='/'>
