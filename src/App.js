@@ -21,7 +21,6 @@ function App() {
   useEffect(() => {
     let ingredientNames = search_keywords.map((s) => s.ingredient_name);
     searchRecipesByIngredientNames(ingredientNames).then((searchedRecipes) => {
-      console.log(searchedRecipes.length);
       setRecipes(searchedRecipes);
     });
   }, [search_keywords.length]);
@@ -57,19 +56,17 @@ function App() {
       <h2>&lt;搜尋關鍵字&gt;</h2>
       <div>
         {search_keywords.map((keyword, i) => (
-          <>
-            <p key={i}>
-              <button onClick={() => d(removeInput(keyword))}>X</button>
-              <span>{Object.values(keyword).join(' ')}</span>
-            </p>
-          </>
+          <p key={i}>
+            <button onClick={() => d(removeInput(keyword))}>X</button>
+            <span>{Object.values(keyword).join(' ')}</span>
+          </p>
         ))}
       </div>
       <br />
       <p style={{ color: 'red' }}>功能：查看使用者加入的食譜</p>
       <ul>
-        {selectedRecipes.map((recipe) => (
-          <li>{recipe.title}</li>
+        {selectedRecipes.map((recipe, i) => (
+          <li key={i}>{recipe.title}</li>
         ))}
       </ul>
       <br />
@@ -81,9 +78,9 @@ function App() {
           flexDirection: 'column',
           flexWrap: 'wrap',
         }}>
-        {ingredientsNeeded.map((ingredient) => {
+        {ingredientsNeeded.map((ingredient, i) => {
           return (
-            <li>
+            <li key={i}>
               {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}
               {ingredient.ingredient_unit}
             </li>
@@ -110,7 +107,7 @@ function App() {
           recipes
             .slice(shownRecipesPage * 10, shownRecipesPage * 10 + 10)
             .map((recipe, i) => (
-              <div style={{ display: 'flex' }}>
+              <div style={{ display: 'flex' }} key={i}>
                 <input
                   type='checkbox'
                   onChange={(e) => {

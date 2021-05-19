@@ -14,7 +14,6 @@ function recipesReducer(state = recipes, action) {
       return newSelectedRecipes;
     }
     case 'select/remove/recipe': {
-      console.log('hi', action.payload);
       return newSelectedRecipes.filter(
         (recipe) => recipe.id !== action.payload
       );

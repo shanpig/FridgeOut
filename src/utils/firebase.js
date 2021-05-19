@@ -50,7 +50,6 @@ async function searchRecipesByIngredientNames(ingredientNames) {
     .where('keyword', 'array-contains-any', ingredientNames)
     .get()
     .then((snap) => snap.forEach((doc) => recipes.push(doc.data())));
-  console.log(recipes[0]);
   return recipes;
 }
 

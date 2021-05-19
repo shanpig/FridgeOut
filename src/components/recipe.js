@@ -22,8 +22,12 @@ export default function Recipe() {
       <RecipeImageContainer>
         <RecipeImage src={main_image} alt='' />
         <AddToButtonGroup>
-          <AddToButton value=''>+ 收藏</AddToButton>
-          <AddToButton value=''>+ 我的廚房</AddToButton>
+          <AddToButton key={1} value=''>
+            + 收藏
+          </AddToButton>
+          <AddToButton key={2} value=''>
+            + 我的廚房
+          </AddToButton>
         </AddToButtonGroup>
       </RecipeImageContainer>
       <Title>{title}</Title>
