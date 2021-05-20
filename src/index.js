@@ -10,6 +10,7 @@ import Header from './components/common/Header';
 import PostQueryForm from './components/pending/PostQueryForm';
 import Posts from './components/pending/Posts.js';
 import RecipePage from './components/RecipePage/RecipePage';
+import SearchPage from './components/SeachPage/SearchPage';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
 
@@ -27,7 +28,8 @@ ReactDOM.render(
             <></>
           </Route>
           <Route path='/search'>
-            <App />
+            {/* <App /> */}
+            <SearchPage></SearchPage>
           </Route>
           <Route path='/profile/:id'>
             <></>
