@@ -10,6 +10,8 @@ import Header from './components/common/Header';
 import PostQueryForm from './components/pending/PostQueryForm';
 import Posts from './components/pending/Posts.js';
 import RecipePage from './components/RecipePage/RecipePage';
+import HeaderSpacer from './components/common/HeaderSpacer';
+import FooterSpacer from './components/common/FooterSpacer';
 
 import RecipeItem from './components/common/RecipeItem';
 import testRecipe from './mockData/recipe/客家釀豆腐.json';
@@ -17,7 +19,8 @@ import testRecipe from './mockData/recipe/客家釀豆腐.json';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <Header></Header> */}
+      <Header></Header>
+      <HeaderSpacer></HeaderSpacer>
       <Router>
         <Switch>
           <Route exact path='/'>
@@ -26,18 +29,22 @@ ReactDOM.render(
           <Route path='/search'>
             <App />
           </Route>
-          <Route path='/testPost'>
-            <PostQueryForm></PostQueryForm>
-            <Posts></Posts>
+          <Route path='/profile/:id'>
+            <></>
           </Route>
           <Route path='/testRecipe/:id'>
             <RecipePage></RecipePage>
+          </Route>
+          <Route path='/testPost'>
+            <PostQueryForm></PostQueryForm>
+            <Posts></Posts>
           </Route>
           <Route path='/test/components/recipeComponent'>
             <RecipeItem recipe={testRecipe}></RecipeItem>
           </Route>
         </Switch>
       </Router>
+      <FooterSpacer></FooterSpacer>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
