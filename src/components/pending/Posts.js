@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import QueryPost from './QueryPost';
 import SharePost from './SharePost';
-import { getPosts } from '../utils/firebase';
+import { getPosts } from '../../utils/firebase';
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);

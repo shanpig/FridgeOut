@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { theme } from '../variables';
+import { theme } from '../../variables';
 import styled from 'styled-components';
 import { BsArrow90DegLeft } from 'react-icons/bs';
-import LogoSrc from '../images/LogoWithTextOrange.png';
+import LogoSrc from '../../images/LogoWithTextOrange.png';
 import { AiFillCaretLeft, AiOutlineClose } from 'react-icons/ai';
 
 function RawItem({ readOnly, className, ...props }) {

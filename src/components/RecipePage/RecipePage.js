@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router';
-import { getRecipe } from '../utils/firebase';
+import { getRecipe } from '../../utils/firebase';
 
-export default function Recipe() {
+export default function RecipePage() {
   let cat = '';
   let group = '';
   const [{ id, title, main_image, ingredients, steps }, setRecipe] = useState(

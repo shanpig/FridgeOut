@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { theme } from '../variables';
-import LogoSrc from '../images/LogoWithTextBlack.png';
+import { theme } from '../../variables';
+import LogoSrc from '../../images/LogoWithTextBlack.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsSearch } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
@@ -51,6 +51,7 @@ const MainHeader = styled.div`
 const Burger = styled(GiHamburgerMenu)`
   width: 30px;
   height: 30px;
+  cursor: pointer;
 
   @media screen and (min-width: 769px) {
     display: none;

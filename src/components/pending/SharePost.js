@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRecipe } from '../utils/firebase';
+import { getRecipe } from '../../utils/firebase';
 
 export default function SharePost({ post }) {
   const [recipe, setRecipe] = useState({});

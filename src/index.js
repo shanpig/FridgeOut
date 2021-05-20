@@ -6,15 +6,18 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import Header from './components/Header';
-import PostQueryForm from './components/PostQueryForm';
-import Posts from './components/Posts.js';
-import Recipe from './components/recipe';
+import Header from './components/common/Header';
+import PostQueryForm from './components/pending/PostQueryForm';
+import Posts from './components/pending/Posts.js';
+import RecipePage from './components/RecipePage/RecipePage';
+
+import RecipeItem from './components/common/RecipeItem';
+import testRecipe from './mockData/recipe/客家釀豆腐.json';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Header></Header>
+      {/* <Header></Header> */}
       <Router>
         <Switch>
           <Route exact path='/'>
@@ -28,7 +31,10 @@ ReactDOM.render(
             <Posts></Posts>
           </Route>
           <Route path='/testRecipe/:id'>
-            <Recipe></Recipe>
+            <RecipePage></RecipePage>
+          </Route>
+          <Route path='/test/components/recipeComponent'>
+            <RecipeItem recipe={testRecipe}></RecipeItem>
           </Route>
         </Switch>
       </Router>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { post } from '../utils/firebase';
+import { post } from '../../utils/firebase';
 
 const mockLeftovers = [
   {

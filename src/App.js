@@ -1,6 +1,6 @@
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import IngredientForm from './components/IngredientForm';
+import IngredientForm from './components/common/IngredientForm';
 import { addInput, removeInput } from './redux/reducers/keyword/keywordActions';
 import { useEffect, useState } from 'react';
 import { searchRecipesByIngredientNames } from './utils/firebase';
