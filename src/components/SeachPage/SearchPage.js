@@ -7,14 +7,12 @@ import RecipeItem from './RecipeItem';
 import SidebarBody from '../common/SidebarBody';
 import { theme } from '../../variables';
 import { searchRecipesByIngredientNames } from '../../utils/firebase';
-import RecipePage from '../RecipePage/RecipePage';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 export default function SearchPage() {
   const d = useDispatch();
   const [recipes, setRecipes] = useState([]);
-
-  const [recipesPage, setRecipesPage] = useState(1);
+  const [recipesPage, setRecipesPage] = useState(0);
   const searchKeywords = useSelector((state) => state.searched_keywords);
   const leftOvers = useSelector((state) => state.user_info.left_overs);
 
@@ -22,13 +20,15 @@ export default function SearchPage() {
     let ingredientNames = searchKeywords.map((s) => s.ingredient_name);
     searchRecipesByIngredientNames(ingredientNames).then((searchedRecipes) => {
       setRecipes(searchedRecipes);
+      setRecipesPage(0);
     });
   }, [searchKeywords]);
 
   function movePage(num) {
+    console.log(recipes.length);
     let nextPage = recipesPage + num;
-    let maxPage = Math.round(recipes.length / 10);
-    if (nextPage < 1 || nextPage > maxPage) return;
+    let maxPage = Math.floor(recipes.length / 10);
+    if (nextPage < 0 || nextPage > maxPage) return;
     setRecipesPage((p) => p + num);
   }
 
@@ -39,7 +39,7 @@ export default function SearchPage() {
       <MiscRow>
         <Pagination>
           <PrevPageButton onClick={() => movePage(-1)} />
-          {recipesPage}/{Math.round(recipes.length / 10)}
+          {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
           <NextPageButton onClick={() => movePage(1)} />
         </Pagination>
         <SortSelection>
@@ -47,26 +47,22 @@ export default function SearchPage() {
             排序
           </option>
           <option value=''>食材種類 (少到多)</option>
+          <option value=''>食材種類 (多到少)</option>
         </SortSelection>
       </MiscRow>
       <ContentRow>
         <SearchedRecipes>
-          {recipes &&
-            recipes
-              .slice(recipesPage * 10, recipesPage * 10 + 10)
-              .map((recipe, i) => <RecipeItem key={i} recipe={recipe} />)}
+          {recipes
+            .sort((a, b) => a.ingredients.length - b.ingredients.length)
+            .slice(recipesPage * 10, recipesPage * 10 + 10)
+            .map((recipe, i) => (
+              <RecipeItem key={i} recipe={recipe} />
+            ))}
         </SearchedRecipes>
         <DeskTopSidebar>
           <SidebarBody />
         </DeskTopSidebar>
       </ContentRow>
-      <MiscRow>
-        <Pagination>
-          <PrevPageButton onClick={() => movePage(-1)} />
-          {recipesPage}/{Math.round(recipes.length / 10)}
-          <NextPageButton onClick={() => movePage(1)} />
-        </Pagination>
-      </MiscRow>
     </Main>
   );
 }
