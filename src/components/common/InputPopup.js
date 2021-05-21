@@ -18,7 +18,7 @@ export default function InputPopup({ open, setOpen }) {
     setInputs([...inputs.slice(0, i), ...inputs.slice(i + 1)]);
   }
 
-  function setTextChange(e, i) {
+  function onTextChange(e, i) {
     const text = e.target.value;
     setInputs([...inputs.slice(0, i), text, ...inputs.slice(i + 1)]);
   }
@@ -52,7 +52,7 @@ export default function InputPopup({ open, setOpen }) {
               <input
                 type='text'
                 value={input}
-                onChange={(e) => setTextChange(e, i)}
+                onChange={(e) => onTextChange(e, i)}
                 disabled={i !== inputs.length - 1}
               />
               <button onClick={() => removeInputField(i)}>X{i}</button>
