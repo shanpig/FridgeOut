@@ -20,10 +20,21 @@ export default function FilterBar() {
 const Bar = styled.ul`
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 40px;
+  padding: 5px 0;
+
+  @media screen and (min-width: 769px) {
+    padding: 30px 15px;
+  }
 `;
 
-const Filter = styled.li``;
+const Filter = styled.li`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+`;
 
-const CheckBox = styled.input``;
+const CheckBox = styled.input`
+  transform: scale(2);
+`;
 const Label = styled.label``;
