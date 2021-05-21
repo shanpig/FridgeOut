@@ -5,7 +5,7 @@ import userReducer from './reducers/user/userReducer';
 
 const reducer = combineReducers({
   user_info: userReducer,
-  search_keywords: keywordReducer,
+  searched_keywords: keywordReducer,
   selected_recipes: recipesReducer,
 });
 

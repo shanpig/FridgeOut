@@ -1,4 +1,4 @@
-import { search_keywords as keywords } from '../../../mockData/state/state.json';
+import { searched_keywords as keywords } from '../../../mockData/state/state.json';
 
 export default function keywordReducer(state = keywords, action) {
   let newState = state.slice();
