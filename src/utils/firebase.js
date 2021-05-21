@@ -44,6 +44,7 @@ async function getRecipes(idList) {
 }
 
 async function searchRecipesByIngredientNames(ingredientNames) {
+  if (ingredientNames.length === 0) return [];
   let recipes = [];
   await db
     .collection('recipes')
