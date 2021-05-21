@@ -72,11 +72,6 @@ export default function SidebarBody() {
             selectedRecipes.map((recipe, i) => (
               <Item key={i} className='item' type='recipe' recipe={recipe} />
             ))}
-          {/* <Item className='item' type='recipe' recipe={{ name: '魯雞絲' }} />
-          <Item className='item' type='recipe' recipe={{ name: '魯雞絲' }} />
-          <Item className='item' type='recipe' recipe={{ name: '魯雞絲' }} />
-          <Item className='item' type='recipe' recipe={{ name: '魯雞絲' }} />
-          <Item className='item' type='recipe' recipe={{ name: '魯雞絲' }} /> */}
         </List>
       </Section>
 
@@ -91,25 +86,41 @@ export default function SidebarBody() {
             className='item'
             type='ingredient'
             readOnly={true}
-            ingredient={{ name: '雞胸肉', amount: 50, unit: '克' }}
+            ingredient={{
+              ingredient_name: '雞胸肉',
+              ingredient_amount: 50,
+              ingredient_unit: '克',
+            }}
           />
           <Item
             className='item'
             type='ingredient'
             readOnly={true}
-            ingredient={{ name: '雞胸肉', amount: 50, unit: '克' }}
+            ingredient={{
+              ingredient_name: '雞胸肉',
+              ingredient_amount: 50,
+              ingredient_unit: '克',
+            }}
           />
           <Item
             className='item'
             type='ingredient'
             readOnly={true}
-            ingredient={{ name: '雞胸肉', amount: 50, unit: '克' }}
+            ingredient={{
+              ingredient_name: '雞胸肉',
+              ingredient_amount: 50,
+              ingredient_unit: '克',
+            }}
           />
           <Item
             className='item'
             type='ingredient'
             readOnly={true}
-            ingredient={{ name: '雞胸肉', amount: 50, unit: '克' }}
+            ingredient={{
+              ingredient_name: '雞胸肉',
+              ingredient_amount: 50,
+              ingredient_unit: '克',
+            }}
           />
         </List>
       </Section>
@@ -125,7 +136,11 @@ export default function SidebarBody() {
             className='item'
             type='ingredient'
             readOnly={true}
-            ingredient={{ name: '醬油', amount: '', unit: '' }}
+            ingredient={{
+              ingredient_name: '醬油',
+              ingredient_amount: '',
+              ingredient_unit: '',
+            }}
           />
         </List>
       </Section>
