@@ -3,14 +3,19 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchBar from './SearchBar';
 import FilterBar from './FilterBar';
-import RecipeItem from '../common/RecipeItem';
+import RecipeItem from './RecipeItem';
+import SidebarBody from '../common/SidebarBody';
+import { theme } from '../../variables';
 import { searchRecipesByIngredientNames } from '../../utils/firebase';
+import RecipePage from '../RecipePage/RecipePage';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 export default function SearchPage() {
   const d = useDispatch();
   const [recipes, setRecipes] = useState([]);
-  const [shownRecipesPage, setShownRecipesPage] = useState(0);
-  const searchKeywords = useSelector((state) => state.search_keywords);
+
+  const [recipesPage, setRecipesPage] = useState(1);
+  const searchKeywords = useSelector((state) => state.searched_keywords);
   const leftOvers = useSelector((state) => state.user_info.left_overs);
 
   useEffect(() => {
@@ -20,32 +25,121 @@ export default function SearchPage() {
     });
   }, [searchKeywords]);
 
+  function movePage(num) {
+    let nextPage = recipesPage + num;
+    let maxPage = Math.round(recipes.length / 10);
+    if (nextPage < 1 || nextPage > maxPage) return;
+    setRecipesPage((p) => p + num);
+  }
+
   return (
     <Main>
       <SearchBar></SearchBar>
       <FilterBar></FilterBar>
-      <SortSelection>
-        <option value='' disabled>
-          排序
-        </option>
-        <option value=''>食材種類 (少到多)</option>
-      </SortSelection>
-      <SearchedRecipes>
-        {recipes &&
-          recipes
-            .slice(shownRecipesPage * 10, shownRecipesPage * 10 + 10)
-            .map((recipe, i) => <RecipeItem recipe={recipe} />)}
-      </SearchedRecipes>
+      <MiscRow>
+        <Pagination>
+          <PrevPageButton onClick={() => movePage(-1)} />
+          {recipesPage}/{Math.round(recipes.length / 10)}
+          <NextPageButton onClick={() => movePage(1)} />
+        </Pagination>
+        <SortSelection>
+          <option value='' disabled>
+            排序
+          </option>
+          <option value=''>食材種類 (少到多)</option>
+        </SortSelection>
+      </MiscRow>
+      <ContentRow>
+        <SearchedRecipes>
+          {recipes &&
+            recipes
+              .slice(recipesPage * 10, recipesPage * 10 + 10)
+              .map((recipe, i) => <RecipeItem key={i} recipe={recipe} />)}
+        </SearchedRecipes>
+        <DeskTopSidebar>
+          <SidebarBody />
+        </DeskTopSidebar>
+      </ContentRow>
+      <MiscRow>
+        <Pagination>
+          <PrevPageButton onClick={() => movePage(-1)} />
+          {recipesPage}/{Math.round(recipes.length / 10)}
+          <NextPageButton onClick={() => movePage(1)} />
+        </Pagination>
+      </MiscRow>
     </Main>
   );
 }
 
 const Main = styled.main`
   padding: 10px;
+
+  @media screen and (min-width: 769px) {
+    padding: 60px 42px;
+    background-color: ${theme.lighterOrange};
+  }
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  padding: 5px 0;
+  width: 100%;
+`;
+
+const MiscRow = styled(Row)`
+  align-items: center;
+`;
+
+const ContentRow = styled(Row)`
+  align-items: flex-start;
+  margin-top: 20px;
+`;
+
+const PrevPageButton = styled(AiOutlineArrowLeft)`
+  cursor: pointer;
+  font-size: 1.1em;
+  @media screen and (min-width: 769px) {
+    font-size: 0.8em;
+  }
+`;
+
+const NextPageButton = styled(AiOutlineArrowRight)`
+  cursor: pointer;
+  font-size: 1.1em;
+  @media screen and (min-width: 769px) {
+    font-size: 0.8em;
+  }
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3em;
+  user-select: none;
 `;
 
 const SortSelection = styled.select`
   padding: 3px 5px;
 `;
 
-const SearchedRecipes = styled.ul``;
+const SearchedRecipes = styled.ul`
+  @media screen and (min-width: 769px) {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+`;
+
+const DeskTopSidebar = styled.aside`
+  display: none;
+  @media screen and (min-width: 769px) {
+    display: unset;
+    margin-left: 40px;
+    background-color: white;
+  }
+`;
