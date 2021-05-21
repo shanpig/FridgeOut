@@ -5,7 +5,7 @@ import LogoSrc from '../../images/LogoWithTextBlack.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsSearch } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
-import Sidebar from './SideBar';
+import Sidebar from './Sidebar';
 
 export default function Header() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -42,6 +42,7 @@ const MainHeader = styled.div`
   border-bottom: 1px solid ${theme.orange};
   position: fixed;
   z-index: 10;
+  box-shadow: 0px 2px 10px -5px black;
 
   @media screen and (min-width: 769px) {
     background-color: ${theme.orange};
@@ -49,8 +50,8 @@ const MainHeader = styled.div`
 `;
 
 const Burger = styled(GiHamburgerMenu)`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
 
   @media screen and (min-width: 769px) {

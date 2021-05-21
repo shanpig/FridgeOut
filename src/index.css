@@ -4,9 +4,16 @@
 */
 
 * {
-  font-size: 18px;
+  font-size: 14pt;
   box-sizing: border-box;
 }
+
+@media screen and (min-width: 769px) {
+  * {
+    font-size: 18pt;
+  }
+}
+
 button {
   background-color: transparent;
   border: none;
