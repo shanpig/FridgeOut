@@ -11,11 +11,9 @@ import PostQueryForm from './components/pending/PostQueryForm';
 import Posts from './components/pending/Posts.js';
 import RecipePage from './components/RecipePage/RecipePage';
 import SearchPage from './components/SeachPage/SearchPage';
+import LandingPage from './components/LandingPage/LandingPage';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
-
-import RecipeItem from './components/common/RecipeItem';
-import testRecipe from './mockData/recipe/客家釀豆腐.json';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,7 +23,7 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path='/'>
-            <></>
+            <LandingPage></LandingPage>
           </Route>
           <Route path='/search'>
             {/* <App /> */}
@@ -40,9 +38,6 @@ ReactDOM.render(
           <Route path='/testPost'>
             <PostQueryForm></PostQueryForm>
             <Posts></Posts>
-          </Route>
-          <Route path='/test/components/recipeComponent'>
-            <RecipeItem recipe={testRecipe}></RecipeItem>
           </Route>
         </Switch>
       </Router>
