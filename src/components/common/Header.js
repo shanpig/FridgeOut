@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../variables';
+import { Link } from 'react-router-dom';
 import LogoSrc from '../../images/LogoWithTextBlack.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsSearch } from 'react-icons/bs';
@@ -13,9 +14,11 @@ export default function Header() {
     <>
       <MainHeader>
         <Burger onClick={() => setSidebarOpen(true)} />
-        <Logo src={LogoSrc}></Logo>
+        <StyledLink to='/'>
+          <Logo src={LogoSrc}></Logo>
+        </StyledLink>
         <Nav>
-          <NavButton id='search'>
+          <NavButton to='/search' id='search'>
             <SearchIcon />
             <span>搜尋</span>
           </NavButton>
@@ -59,16 +62,19 @@ const Burger = styled(GiHamburgerMenu)`
   }
 `;
 
-const Logo = styled.img`
-  width: 119px;
-  height: 40px;
-  max-height: 40px;
+const StyledLink = styled(Link)`
   margin: 0 auto;
-
+  transform: translate(-15px, 0);
   @media screen and (min-width: 769px) {
     margin: 0;
     margin-right: auto;
   }
+`;
+
+const Logo = styled.img`
+  width: 119px;
+  height: 40px;
+  max-height: 40px;
 `;
 
 const Nav = styled.nav`
@@ -92,7 +98,7 @@ const Nav = styled.nav`
   }
 `;
 
-const NavButton = styled.button`
+const NavButton = styled(Link)`
   flex: 1 1 50%;
   height: 60%;
   background-color: transparent;

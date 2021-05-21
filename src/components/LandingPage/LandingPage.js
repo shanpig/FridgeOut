@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { theme } from '../../variables';
 export default function LandingPage() {
   return (
@@ -9,11 +10,13 @@ export default function LandingPage() {
       <Text>
         透過您的食材進行搜索，選擇食譜後，食材將自動從食譜中扣除，讓您可以掌握剩餘食材的使用方式！
       </Text>
+      <Button>
+        <StyledLink to='/search'>點我開始使用...</StyledLink>
+      </Button>
     </Main>
   );
 }
 const Main = styled.main`
-  background-color: ${theme.lighterOrange};
   padding: 40px 46px;
   width: 100%;
   display: flex;
@@ -32,4 +35,19 @@ const Text = styled.p`
   text-align: center;
   line-height: 1.3;
   font-family: Robo;
+`;
+
+const Button = styled.button`
+  border-radius: 100px;
+  padding: 10px 20px;
+  background-color: ${theme.lightOrange};
+
+  &:hover {
+    background-color: ${theme.orange};
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;

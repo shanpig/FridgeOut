@@ -85,7 +85,8 @@ const Popup = styled.div`
   top: calc(100% + 10px);
   right: 0;
   z-index: 10;
-  width: 300px;
+  min-width: 300px;
+  width: fit-content;
 `;
 
 const Title = styled.h1``;
@@ -105,6 +106,7 @@ const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 0.8em;
 `;
 
 const AddFromFridgeButton = styled.button`
