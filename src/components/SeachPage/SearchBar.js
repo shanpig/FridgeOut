@@ -1,11 +1,13 @@
 import { theme } from '../../variables';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { GrFormClose, GrFormAdd } from 'react-icons/gr';
 import InputPopup from '../common/InputPopup';
+import { removeInput } from '../../redux/reducers/keyword/keywordActions';
 
 export default function SearchBar() {
+  const d = useDispatch();
   const [popupOpen, setPopupOpen] = useState(false);
   const keywords = useSelector((state) => {
     return state.searched_keywords;
@@ -26,9 +28,7 @@ export default function SearchBar() {
               <Input key={i}>
                 {name} {amount} {unit}
                 <RemoveInput
-                  onClick={() =>
-                    console.log('remove input: ', name)
-                  }></RemoveInput>
+                  onClick={() => d(removeInput(keyword))}></RemoveInput>
               </Input>
             );
           })}
@@ -43,6 +43,7 @@ const Bar = styled.div`
   padding: 10px 0;
   display: flex;
   align-items: center;
+  position: relative;
   gap: 15px;
 
   @media screen and (min-width: 769px) {
@@ -80,7 +81,14 @@ const RemoveInput = styled(GrFormClose)`
 `;
 
 const AddButton = styled(GrFormAdd)`
-  font-size: 1.5em;
+  transform: scale(1.5);
+  min-width: 20px;
+  min-height: 20px;
   margin-left: auto;
   cursor: pointer;
+
+  @media screen and (min-width: 769px) {
+    transform: scale(1.2);
+    font-size: 1em;
+  }
 `;
