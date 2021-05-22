@@ -103,6 +103,8 @@ const NavButton = styled(Link)`
   height: 60%;
   background-color: transparent;
   border: none;
+  text-decoration: none;
+  color: unset;
   display: flex;
   align-items: center;
   justify-content: center;
