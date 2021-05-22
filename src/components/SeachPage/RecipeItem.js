@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addRecipeToSelections } from '../../redux/reducers/selection/selectionActions';
@@ -35,9 +36,9 @@ export default function RecipeItem({ recipe }) {
 
   return (
     <Item>
-      <ImageSection>
+      <ImageLink to={`/recipe/${id}`}>
         <Image src={main_image}></Image>
-      </ImageSection>
+      </ImageLink>
       <TextSection>
         <TitleRow>
           <Title>{title}</Title>
@@ -78,7 +79,7 @@ const AddButton = styled(GrFormAdd)`
   cursor: pointer;
 `;
 
-const ImageSection = styled.div`
+const ImageLink = styled(Link)`
   flex: 1 1 130px;
   display: flex;
   align-items: center;
