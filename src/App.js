@@ -10,11 +10,13 @@ import SearchPage from './components/SeachPage/SearchPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
+import ScrollToTop from './components/common/ScrollToTop';
 
 function App() {
   return (
     <Body>
       <Router>
+        <ScrollToTop />
         <Header></Header>
         <HeaderSpacer></HeaderSpacer>
         <Switch>
@@ -22,13 +24,12 @@ function App() {
             <LandingPage></LandingPage>
           </Route>
           <Route path='/search'>
-            {/* <App /> */}
             <SearchPage></SearchPage>
           </Route>
           <Route path='/profile/:id'>
             <></>
           </Route>
-          <Route path='/testRecipe/:id'>
+          <Route path='/recipe/:id'>
             <RecipePage></RecipePage>
           </Route>
           <Route path='/testPost'>
@@ -43,7 +44,8 @@ function App() {
 }
 
 const Body = styled.div`
-  height: 100vh;
+  height: max-content;
+  min-height: 100vh;
 
   @media screen and (min-width: 769px) {
     background-color: ${theme.lighterOrange};
