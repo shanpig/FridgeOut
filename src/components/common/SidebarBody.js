@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { theme } from '../../variables';
 import { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AiFillCaretLeft, AiOutlineClose } from 'react-icons/ai';
+import { removeInput } from '../../redux/reducers/keyword/keywordActions';
+import { removeRecipeFromSelections } from '../../redux/reducers/selection/selectionActions';
 import {
   assessIngredientsUsage,
   gatherIngredientsFromRecipes,
@@ -10,7 +12,17 @@ import {
 import { fractionStringToTC } from '../../utils/math';
 
 function RawItem({ readOnly, className, ...props }) {
-  let content, targetName;
+  const d = useDispatch();
+  let content, target;
+
+  function remove(data, type) {
+    if (type === 'ingredient') {
+      d(removeInput(data));
+    } else if (type === 'recipe') {
+      d(removeRecipeFromSelections(data));
+    }
+  }
+
   if (props.type === 'ingredient') {
     let {
       ingredient_name: name,
@@ -19,18 +31,17 @@ function RawItem({ readOnly, className, ...props }) {
     } = props.ingredient;
     if (amount) amount = fractionStringToTC(amount);
     content = `${name} ${amount} ${unit}`;
-    targetName = name;
+    target = props.ingredient;
   } else if (props.type === 'recipe') {
-    const { title } = props.recipe;
+    const { title, id } = props.recipe;
     content = title;
-    targetName = title;
+    target = id;
   }
   return (
     <li className={className}>
       {content}
       {!readOnly ? (
-        <CloseButton
-          onClick={() => console.log(`remove ${targetName}`)}></CloseButton>
+        <CloseButton onClick={() => remove(target, props.type)}></CloseButton>
       ) : (
         ''
       )}
@@ -66,7 +77,7 @@ export default function SidebarBody() {
 
   return (
     <BodySection>
-      <Section ref={SELECTED_LEFTOVER}>
+      <Section ref={SELECTED_LEFTOVER} className='open'>
         <SectionTitle
           onClick={(e) => SELECTED_LEFTOVER.current.classList.toggle('open')}>
           <h2>已選剩食</h2>
@@ -87,7 +98,7 @@ export default function SidebarBody() {
         </List>
       </Section>
 
-      <Section ref={SELECTED_RECIPES}>
+      <Section ref={SELECTED_RECIPES} className='open'>
         <SectionTitle
           onClick={() => SELECTED_RECIPES.current.classList.toggle('open')}>
           <h2>已選食譜</h2>
@@ -101,7 +112,7 @@ export default function SidebarBody() {
         </List>
       </Section>
 
-      <Section ref={REMAIN_LEFTOVERS}>
+      <Section ref={REMAIN_LEFTOVERS} className='open'>
         <SectionTitle
           onClick={() => REMAIN_LEFTOVERS.current.classList.toggle('open')}>
           <h2>剩餘食材</h2>
@@ -120,7 +131,7 @@ export default function SidebarBody() {
         </List>
       </Section>
 
-      <Section ref={NEEDED_INGREDIENT}>
+      <Section ref={NEEDED_INGREDIENT} className='open'>
         <SectionTitle
           onClick={() => NEEDED_INGREDIENT.current.classList.toggle('open')}>
           <h2>不足食材</h2>
@@ -135,23 +146,15 @@ export default function SidebarBody() {
               ingredient={ingr}
             />
           ))}
-          {/* <Item
-            className='item'
-            type='ingredient'
-            readOnly={true}
-            ingredient={{
-              ingredient_name: '醬油',
-              ingredient_amount: '',
-              ingredient_unit: '',
-            }}
-          /> */}
         </List>
       </Section>
     </BodySection>
   );
 }
 
-const BodySection = styled.section``;
+const BodySection = styled.section`
+  flex-grow: 1;
+`;
 
 const SectionTitle = styled.div`
   position: relative;
