@@ -6,7 +6,7 @@ import LogoSrc from '../../images/LogoWithTextBlack.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsSearch } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar/Sidebar';
 
 export default function Header() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,9 +28,7 @@ export default function Header() {
           </NavButton>
         </Nav>
       </MainHeader>
-      <Sidebar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}></Sidebar>
+      <MainSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     </>
   );
 }
@@ -136,4 +134,10 @@ const SearchIcon = styled(BsSearch)`
 
 const ProfileIcon = styled(CgProfile)`
   font-size: 25px;
+`;
+
+const MainSidebar = styled(Sidebar)`
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
 `;

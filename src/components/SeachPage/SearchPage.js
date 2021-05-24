@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SearchBar from './SearchBar';
 import FilterBar from './FilterBar';
 import RecipeItem from './RecipeItem';
-import SidebarBody from '../common/SidebarBody';
+import SidebarBody from '../common/Sidebar/SidebarBody';
 import { theme } from '../../variables';
 import { searchRecipesByIngredientNames } from '../../utils/firebase';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';

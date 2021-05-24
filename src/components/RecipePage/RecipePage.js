@@ -3,7 +3,7 @@ import { theme } from '../../variables';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router';
 import { getRecipe } from '../../utils/firebase';
-import SidebarBody from '../common/SidebarBody';
+import SidebarBody from '../common/Sidebar/SidebarBody';
 import { BiArrowBack } from 'react-icons/bi';
 
 export default function RecipePage() {

@@ -1,8 +1,8 @@
-import { theme } from '../../variables';
+import { theme } from '../../../variables';
 import styled from 'styled-components';
 import SidebarBody from './SidebarBody';
 import { BsArrow90DegLeft } from 'react-icons/bs';
-import LogoSrc from '../../images/LogoWithTextOrange.png';
+import LogoSrc from '../../../images/LogoWithTextOrange.png';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
   return (
