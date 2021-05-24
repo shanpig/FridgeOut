@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 import { theme } from '../../variables';
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { AiFillCaretLeft, AiOutlineClose } from 'react-icons/ai';
+import {
+  assessIngredientsUsage,
+  gatherIngredientsFromRecipes,
+} from '../../utils/recipes';
+import { fractionStringToTC } from '../../utils/math';
 
 function RawItem({ readOnly, className, ...props }) {
   let content, targetName;
   if (props.type === 'ingredient') {
-    const {
+    let {
       ingredient_name: name,
       ingredient_amount: amount,
       ingredient_unit: unit,
     } = props.ingredient;
+    if (amount) amount = fractionStringToTC(amount);
     content = `${name} ${amount} ${unit}`;
     targetName = name;
   } else if (props.type === 'recipe') {
@@ -39,6 +45,24 @@ export default function SidebarBody() {
   const NEEDED_INGREDIENT = useRef(null);
   const selectedLeftover = useSelector((state) => state.searched_keywords);
   const selectedRecipes = useSelector((state) => state.selected_recipes);
+  const [ingredientsLeft, setIngredientsLeft] = useState([]);
+  const [ingredientsNeeded, setIngredientsNeeded] = useState([]);
+
+  useEffect(() => {
+    // if (selectedLeftover || selectedRecipes) return;
+    const ingredientsOnHand = selectedLeftover;
+    const ingredientsRequired = gatherIngredientsFromRecipes(selectedRecipes);
+
+    // console.log('ingredientsOnHand: ', ingredientsOnHand);
+    // console.log('ingredientsRequired: ', ingredientsRequired);
+    const [left, needed] = assessIngredientsUsage(
+      ingredientsOnHand,
+      ingredientsRequired
+    );
+
+    setIngredientsLeft(left);
+    setIngredientsNeeded(needed);
+  }, [selectedLeftover, selectedRecipes]);
 
   return (
     <BodySection>
@@ -50,14 +74,16 @@ export default function SidebarBody() {
         </SectionTitle>
         <List>
           {selectedLeftover &&
-            selectedLeftover.map((leftover, i) => (
-              <Item
-                key={i}
-                className='item'
-                type='ingredient'
-                ingredient={leftover}
-              />
-            ))}
+            selectedLeftover.map((leftover, i) => {
+              return (
+                <Item
+                  key={i}
+                  className='item'
+                  type='ingredient'
+                  ingredient={leftover}
+                />
+              );
+            })}
         </List>
       </Section>
 
@@ -82,46 +108,15 @@ export default function SidebarBody() {
           <DropDownArrow />
         </SectionTitle>
         <List>
-          <Item
-            className='item'
-            type='ingredient'
-            readOnly={true}
-            ingredient={{
-              ingredient_name: '雞胸肉',
-              ingredient_amount: 50,
-              ingredient_unit: '克',
-            }}
-          />
-          <Item
-            className='item'
-            type='ingredient'
-            readOnly={true}
-            ingredient={{
-              ingredient_name: '雞胸肉',
-              ingredient_amount: 50,
-              ingredient_unit: '克',
-            }}
-          />
-          <Item
-            className='item'
-            type='ingredient'
-            readOnly={true}
-            ingredient={{
-              ingredient_name: '雞胸肉',
-              ingredient_amount: 50,
-              ingredient_unit: '克',
-            }}
-          />
-          <Item
-            className='item'
-            type='ingredient'
-            readOnly={true}
-            ingredient={{
-              ingredient_name: '雞胸肉',
-              ingredient_amount: 50,
-              ingredient_unit: '克',
-            }}
-          />
+          {ingredientsLeft &&
+            ingredientsLeft.map((ingr) => (
+              <Item
+                className='item'
+                type='ingredient'
+                readOnly={true}
+                ingredient={ingr}
+              />
+            ))}
         </List>
       </Section>
 
@@ -132,7 +127,15 @@ export default function SidebarBody() {
           <DropDownArrow />
         </SectionTitle>
         <List>
-          <Item
+          {ingredientsNeeded.map((ingr) => (
+            <Item
+              className='item'
+              type='ingredient'
+              readOnly={true}
+              ingredient={ingr}
+            />
+          ))}
+          {/* <Item
             className='item'
             type='ingredient'
             readOnly={true}
@@ -141,7 +144,7 @@ export default function SidebarBody() {
               ingredient_amount: '',
               ingredient_unit: '',
             }}
-          />
+          /> */}
         </List>
       </Section>
     </BodySection>
