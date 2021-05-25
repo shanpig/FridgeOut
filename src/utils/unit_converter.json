@@ -1,0 +1,54 @@
+{
+  "杯": {
+    "type": "volume",
+    "to_basis": 227
+  },
+  "大匙": {
+    "type": "volume",
+    "to_basis": 15
+  },
+  "小匙": {
+    "type": "volume",
+    "to_basis": 5
+  },
+  "盎司": {
+    "type": "weight",
+    "to_basis": 28.37
+  },
+  "斤": {
+    "type": "weight",
+    "to_basis": 0.6
+  },
+  "g": {
+    "type": "weight",
+    "to_basis": 1
+  },
+  "公克": {
+    "type": "weight",
+    "to_basis": 1
+  },
+  "茶匙": {
+    "type": "volume",
+    "to_basis": 5
+  },
+  "cc": {
+    "type": "volume",
+    "to_basis": 1
+  },
+  "克": {
+    "type": "weight",
+    "to_basis": 1
+  },
+  "㏄": {
+    "type": "volume",
+    "to_basis": 1
+  },
+  "錢": {
+    "type": "weight",
+    "to_basis": 3.125
+  },
+  "兩": {
+    "type": "weight",
+    "to_basis": 31.25
+  }
+}
