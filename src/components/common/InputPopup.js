@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInput } from '../../redux/reducers/keyword/keywordActions';
 import { GrFormClose, GrFormAdd } from 'react-icons/gr';
+import { fraction } from 'mathjs';
 
 export default function InputPopup({ open, setOpen }) {
   const [inputs, setInputs] = useState(['']);
@@ -29,8 +30,9 @@ export default function InputPopup({ open, setOpen }) {
     inputs.forEach((input) => {
       input = input.replace(/ +/g, ' ').trim();
       if (!input.length) return;
-      const [ingredient_name, ingredient_amount, ingredient_unit] =
+      let [ingredient_name, ingredient_amount, ingredient_unit] =
         input.split(' ');
+      ingredient_amount = fraction(ingredient_amount);
       d(
         addInput({
           ingredient_name,

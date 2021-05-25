@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { GrFormClose, GrFormAdd } from 'react-icons/gr';
 import InputPopup from '../common/InputPopup';
 import { removeInput } from '../../redux/reducers/keyword/keywordActions';
+import { fractionStringToTC } from '../../utils/math';
 
 export default function SearchBar() {
   const d = useDispatch();
@@ -24,9 +25,10 @@ export default function SearchBar() {
               ingredient_amount: amount,
               ingredient_unit: unit,
             } = keyword;
+            // console.log(amount);
             return (
               <Input key={i}>
-                {name} {amount} {unit}
+                {name} {fractionStringToTC(amount)} {unit}
                 <RemoveInput
                   onClick={() => d(removeInput(keyword))}></RemoveInput>
               </Input>

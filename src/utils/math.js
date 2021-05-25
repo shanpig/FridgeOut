@@ -9,13 +9,15 @@ function getFractionFromTCAmount(Amount) {
 }
 
 function fractionStringToTC(fractionString) {
+  if (!fractionString) return '';
   const fraction = math.fraction(fractionString);
   const { n, d } = fraction;
   const integer = Math.floor(n / d);
   const dividend = n % d;
 
   if (integer === 0) {
-    return `${dividend}/${d}`;
+    if (dividend !== 0) return `${dividend}/${d}`;
+    else return '0';
   } else if (dividend === 0) return integer;
   else return `${integer}又${dividend}/${d}`;
 }
