@@ -21,20 +21,26 @@ const setLeftOver = (leftOver) => {
   };
 };
 
-const addToKitchen = (id) => {
-  console.log('add to kitchen: ', id);
+const addToFavorite = (recipe) => {
+  console.log('add to favorite: ', recipe);
   return {
-    type: 'user/add/kitchen',
-    payload: id,
+    type: 'user/add/favorite',
+    payload: recipe,
   };
 };
 
-const removeFromKitchen = (id) => {
-  console.log('remove from kitchen: ', id);
+const removeFromFavorite = (recipe) => {
+  console.log('remove from favorite: ', recipe);
   return {
-    type: 'user/remove/kitchen',
-    payload: id,
+    type: 'user/remove/favorite',
+    payload: recipe,
   };
 };
 
-export { setUser, setLeftOvers, setLeftOver, addToKitchen, removeFromKitchen };
+export {
+  setUser,
+  setLeftOvers,
+  setLeftOver,
+  addToFavorite,
+  removeFromFavorite,
+};
