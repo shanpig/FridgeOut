@@ -22,7 +22,7 @@ export default function Header() {
             <SearchIcon />
             <span>搜尋</span>
           </NavButton>
-          <NavButton id='profile'>
+          <NavButton to='/profile' id='profile'>
             <ProfileIcon />
             <span>個人</span>
           </NavButton>

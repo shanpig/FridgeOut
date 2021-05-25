@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Header from './components/common/Header';
 import PostQueryForm from './components/pending/PostQueryForm';
 import Posts from './components/pending/Posts.js';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 import RecipePage from './components/RecipePage/RecipePage';
 import SearchPage from './components/SeachPage/SearchPage';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -26,12 +27,22 @@ function App() {
           <Route path='/search'>
             <SearchPage></SearchPage>
           </Route>
-          <Route path='/profile/:id'>
-            <></>
+          <Route path='/profile'>
+            <ProfilePage></ProfilePage>
           </Route>
           <Route path='/recipe/:id'>
             <RecipePage></RecipePage>
           </Route>
+          <Route path='/posts'>
+            <></>
+          </Route>
+          <Route path='/post/shareRecipe'>
+            <></>
+          </Route>
+          <Route path='/post/recommendRecipe'>
+            <></>
+          </Route>
+
           <Route path='/testPost'>
             <PostQueryForm></PostQueryForm>
             <Posts></Posts>
