@@ -14,7 +14,11 @@ export default function keywordReducer(state = keywords, action) {
         (k) => k.ingredient_name === name && k.ingredient_unit === unit
       );
       if (indexOfIngredient < 0) {
-        newState.push(action.payload);
+        newState.push({
+          ingredient_name: name,
+          ingredient_amount: amount || '',
+          ingredient_unit: unit || '',
+        });
       } else {
         let originalAmount = Number(
           newState[indexOfIngredient].ingredient_amount
