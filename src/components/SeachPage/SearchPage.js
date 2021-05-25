@@ -123,6 +123,8 @@ const SortSelection = styled.select`
 `;
 
 const SearchedRecipes = styled.ul`
+  width: 100%;
+
   @media screen and (min-width: 769px) {
     width: 60%;
     display: flex;
@@ -135,6 +137,7 @@ const DeskTopSidebar = styled.aside`
   display: none;
   @media screen and (min-width: 769px) {
     display: unset;
+    flex-grow: 1;
     margin-left: 40px;
     background-color: white;
   }

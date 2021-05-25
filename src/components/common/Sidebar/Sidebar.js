@@ -26,9 +26,12 @@ const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow-y: auto;
   left: ${(props) => (props.open ? '0%' : '-100%')};
   transition: left ease 0.3s;
+
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
 `;
 
 const HeaderSection = styled.section`

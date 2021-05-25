@@ -137,7 +137,5 @@ const ProfileIcon = styled(CgProfile)`
 `;
 
 const MainSidebar = styled(Sidebar)`
-  @media screen and (min-width: 769px) {
-    display: none;
-  }
+  display: none;
 `;

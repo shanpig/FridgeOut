@@ -4,51 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiFillCaretLeft, AiOutlineClose } from 'react-icons/ai';
 import SidebarItem from './SidebarItem';
-import { removeInput } from '../../../redux/reducers/keyword/keywordActions';
-import { removeRecipeFromSelections } from '../../../redux/reducers/selection/selectionActions';
 import {
   assessIngredientsUsage,
   gatherIngredientsFromRecipes,
 } from '../../../utils/recipes';
-import { fractionStringToTC } from '../../../utils/math';
-
-// function RawItem({ readOnly, className, ...props }) {
-//   const d = useDispatch();
-//   let content, target;
-
-//   function remove(data, type) {
-//     if (type === 'ingredient') {
-//       d(removeInput(data));
-//     } else if (type === 'recipe') {
-//       d(removeRecipeFromSelections(data));
-//     }
-//   }
-
-//   if (props.type === 'ingredient') {
-//     let {
-//       ingredient_name: name,
-//       ingredient_amount: amount,
-//       ingredient_unit: unit,
-//     } = props.ingredient;
-//     if (amount) amount = fractionStringToTC(amount);
-//     content = `${name} ${amount} ${unit}`;
-//     target = props.ingredient;
-//   } else if (props.type === 'recipe') {
-//     const { title, id } = props.recipe;
-//     content = title;
-//     target = id;
-//   }
-//   return (
-//     <li className={className}>
-//       {content}
-//       {!readOnly ? (
-//         <CloseButton onClick={() => remove(target, props.type)}></CloseButton>
-//       ) : (
-//         ''
-//       )}
-//     </li>
-//   );
-// }
 
 export default function SidebarBody() {
   const SELECTED_LEFTOVER = useRef(null);
@@ -154,6 +113,7 @@ export default function SidebarBody() {
 
 const BodySection = styled.section`
   flex-grow: 1;
+  overflow-y: auto;
 `;
 
 const SectionTitle = styled.div`

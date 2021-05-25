@@ -6,14 +6,14 @@
 */
 
 * {
-  font-size: 14pt;
+  font-size: 10pt;
   box-sizing: border-box;
   font-family: 'Roboto', 'Noto Sans TC';
 }
 
 @media screen and (min-width: 769px) {
   * {
-    font-size: 18pt;
+    font-size: 12pt;
   }
 }
 

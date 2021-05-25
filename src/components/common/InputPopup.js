@@ -46,7 +46,7 @@ export default function InputPopup({ open, setOpen }) {
 
   return (
     <Popup open={open}>
-      <Title>輸入剩食</Title>
+      <Title>輸入剩食 (例：雞肉 100 克)</Title>
       <Form action=''>
         {inputs.map((input, i) => {
           return (
