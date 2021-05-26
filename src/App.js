@@ -1,5 +1,10 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import { theme } from './variables';
 import styled from 'styled-components';
 import Header from './components/common/Header';
@@ -28,6 +33,7 @@ function App() {
             <SearchPage></SearchPage>
           </Route>
           <Route path='/profile'>
+            <Redirect to='/profile/fridge' />
             <ProfilePage></ProfilePage>
           </Route>
           <Route path='/recipe/:id'>
