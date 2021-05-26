@@ -33,7 +33,6 @@ function App() {
             <SearchPage></SearchPage>
           </Route>
           <Route path='/profile'>
-            <Redirect to='/profile/fridge' />
             <ProfilePage></ProfilePage>
           </Route>
           <Route path='/recipe/:id'>

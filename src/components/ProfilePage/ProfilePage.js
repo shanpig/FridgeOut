@@ -2,12 +2,14 @@ import styled from 'styled-components';
 import { theme } from '../../variables';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+
 import Fridge from './Fridge';
 import Kitchen from './Kitchen';
 import Favorites from './Favorites';
 import {
   useRouteMatch,
   Switch,
+  Redirect,
   Route,
   NavLink as Link,
 } from 'react-router-dom';
@@ -44,14 +46,15 @@ export default function ProfilePage() {
       <ContentRow>
         <MainContent>
           <Switch>
-            <Route path={`${match.url}/fridge`}>
-              <Fridge></Fridge>
-            </Route>
             <Route path={`${match.url}/kitchen`}>
               <Kitchen></Kitchen>
             </Route>
             <Route path={`${match.url}/favorites`}>
               <Favorites></Favorites>
+            </Route>
+            <Route path={`${match.url}/`}>
+              <Redirect to={`${match.url}/fridge`} />
+              <Fridge></Fridge>
             </Route>
           </Switch>
         </MainContent>
