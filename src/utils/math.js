@@ -3,6 +3,7 @@ import { create, all } from 'mathjs';
 const math = create(all);
 
 function getFractionFromTCAmount(amount) {
+  if (!amount) return '';
   amount = amount.toString();
   if (amount.includes('又')) {
     const [integer, fraction] = amount.split('又');

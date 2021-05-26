@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addInput } from '../../redux/reducers/keyword/keywordActions';
 import { GrFormClose, GrFormAdd } from 'react-icons/gr';
 import { fraction } from 'mathjs';
+import { getFractionFromTCAmount, fractionStringToTC } from '../../utils/math';
 
 export default function InputPopup({ open, setOpen }) {
   const [inputs, setInputs] = useState(['']);
+  const fridge = useSelector((state) => state.user_info.left_overs);
   const d = useDispatch();
 
   function addInputField() {
@@ -32,7 +34,7 @@ export default function InputPopup({ open, setOpen }) {
       if (!input.length) return;
       let [ingredient_name, ingredient_amount, ingredient_unit] =
         input.split(' ');
-      ingredient_amount = fraction(ingredient_amount);
+      ingredient_amount = getFractionFromTCAmount(ingredient_amount);
       d(
         addInput({
           ingredient_name,
@@ -44,6 +46,16 @@ export default function InputPopup({ open, setOpen }) {
     });
 
     setOpen(false);
+  }
+
+  function addAllFridgeItems() {
+    let ingredients = fridge.map(
+      (leftovers) =>
+        `${leftovers.ingredient_name} ${fractionStringToTC(
+          leftovers.ingredient_amount
+        )} ${leftovers.ingredient_unit}`
+    );
+    setInputs(ingredients);
   }
 
   return (
@@ -66,8 +78,8 @@ export default function InputPopup({ open, setOpen }) {
         <GrFormAdd onClick={() => addInputField()} />
       </Form>
       <ButtonGroup>
-        <AddFromFridgeButton onClick={() => {}}>
-          從我的冰箱加入
+        <AddFromFridgeButton onClick={() => addAllFridgeItems()}>
+          使用冰箱食材
         </AddFromFridgeButton>
         <ConfirmButton onClick={() => addAllInputs()}>確認新增</ConfirmButton>
       </ButtonGroup>
