@@ -7,7 +7,7 @@ import PostQueryForm from './components/pending/PostQueryForm';
 import Posts from './components/pending/Posts.js';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import RecipePage from './components/RecipePage/RecipePage';
-import SearchPage from './components/SeachPage/SearchPage';
+import SearchPage from './components/SearchPage/SearchPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';

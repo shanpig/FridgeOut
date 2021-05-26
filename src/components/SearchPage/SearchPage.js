@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import FilterBar from './FilterBar';
 import RecipeItem from './RecipeItem';
 import SidebarBody from '../common/Sidebar/SidebarBody';
+import { GrFormAdd } from 'react-icons/gr';
 import { theme } from '../../variables';
 import { searchRecipesByIngredientNames } from '../../utils/firebase';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
@@ -56,7 +57,7 @@ export default function SearchPage() {
             .sort((a, b) => a.ingredients.length - b.ingredients.length)
             .slice(recipesPage * 10, recipesPage * 10 + 10)
             .map((recipe, i) => (
-              <RecipeItem key={i} recipe={recipe} />
+              <RecipeItem key={i} recipe={recipe} button={AddButton} />
             ))}
         </SearchedRecipes>
         <DeskTopSidebar>
@@ -141,4 +142,10 @@ const DeskTopSidebar = styled.aside`
     margin-left: 40px;
     background-color: white;
   }
+`;
+
+const AddButton = styled(GrFormAdd)`
+  font-size: 2em;
+  margin-left: auto;
+  cursor: pointer;
 `;

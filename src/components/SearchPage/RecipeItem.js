@@ -2,14 +2,13 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addRecipeToSelections } from '../../redux/reducers/selection/selectionActions';
-import { GrFormAdd } from 'react-icons/gr';
 import styled from 'styled-components';
 
 function removeRepeat(array) {
   return Array.from(new Set(array));
 }
 
-export default function RecipeItem({ recipe }) {
+export default function RecipeItem({ recipe, button: Button }) {
   const d = useDispatch();
   const { main_image, title, ingredients, id } = recipe;
   const leftovers = useSelector((state) => state.searched_keywords);
@@ -42,7 +41,7 @@ export default function RecipeItem({ recipe }) {
       <TextSection>
         <TitleRow>
           <Title>{title}</Title>
-          <AddButton onClick={() => d(addRecipeToSelections(recipe))} />
+          <Button onClick={() => d(addRecipeToSelections(recipe))} />
         </TitleRow>
         <h2>使用剩食：</h2>
         <UsedLeftovers key={1}>
@@ -63,7 +62,8 @@ export default function RecipeItem({ recipe }) {
 
 const Item = styled.li`
   width: 100%;
-  min-height: 180px;
+  height: 100%;
+  /* min-height: 180px; */
   display: flex;
   padding: 20px 10px;
   position: relative;
@@ -71,12 +71,6 @@ const Item = styled.li`
   @media screen and (min-width: 769px) {
     background-color: white;
   }
-`;
-
-const AddButton = styled(GrFormAdd)`
-  font-size: 2em;
-  margin-left: auto;
-  cursor: pointer;
 `;
 
 const ImageLink = styled(Link)`
@@ -87,7 +81,7 @@ const ImageLink = styled(Link)`
 
 const Image = styled.div`
   width: 100%;
-  height: 160px;
+  height: 100%;
   background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
