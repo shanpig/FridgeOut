@@ -137,14 +137,15 @@ const NavRow = styled(Row)`
   align-items: center;
   gap: 5px;
   background-color: #f6f6f6;
-  height: 50px;
+  min-height: 50px;
   padding: 0 20px;
+  flex-wrap: wrap;
 `;
 
 const NavItem = styled(Link)`
   color: black;
   text-decoration: none;
-  padding: 0 20px;
+  padding: 0 10px;
   height: 100%;
   line-height: 50px;
   position: relative;
@@ -178,19 +179,47 @@ const NavItem = styled(Link)`
   }
 `;
 
-const ContentRow = styled(Row)``;
-const MainContent = styled.div`
-  flex-grow: 1;
+const ContentRow = styled(Row)`
+  margin: 20px 0;
+  gap: 0 20px;
+  flex-wrap: nowrap;
 `;
+
+const MainContent = styled.div`
+  flex-grow: 3;
+`;
+
 const SideContent = styled.div`
-  flex-grow: 1;
   display: none;
   @media screen and (min-width: 769px) {
-    display: unset;
+    max-width: 250px;
+    min-width: 250px;
+    height: 120px;
+    flex: 1 1;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+    background-color: white;
   }
 `;
 
-const KitchenCount = styled.div``;
-const FavoriteCount = styled.div``;
+const SidebarCount = styled.div`
+  flex-grow: 1;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  & span {
+    font-size: 2em;
+    color: ${theme.orange};
+  }
+`;
+
+const KitchenCount = styled(SidebarCount)`
+  border-right: 1px solid ${theme.orange};
+`;
+const FavoriteCount = styled(SidebarCount)``;
 
 const UserEmail = styled.div``;
