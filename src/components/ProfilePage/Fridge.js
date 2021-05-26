@@ -1,3 +1,4 @@
+import { theme } from '../../variables';
 import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,6 +62,7 @@ export default function Fridge() {
   return (
     <FridgeContent>
       <Ingredients
+        placeholder='試著輸入食材吧！ e.g. 雞肉 100 克'
         disabled={!isEditing}
         rows={fridge.length + 1}
         onChange={(e) => setIngredientsText(e.target.value)}
@@ -73,15 +75,30 @@ export default function Fridge() {
 
 const FridgeContent = styled.div`
   position: relative;
-  margin: 20px 0;
+  padding: 0 5px;
 `;
 
 const Ingredients = styled.textarea`
+  border: 1px solid ${theme.orange};
+  min-height: 130px;
   width: 100%;
+  padding: 10px;
+  resize: vertical;
+  transition: background-color 0.3s ease;
+
+  &[disabled] {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
 `;
 
 const EditButton = styled(AiTwotoneEdit)`
+  cursor: pointer;
   position: absolute;
+  width: 20px;
   right: 10px;
   top: 10px;
+
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
