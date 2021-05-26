@@ -1,6 +1,7 @@
 import { create, all } from 'mathjs';
 import _ from 'lodash';
 import units from './unit_converter.json';
+import { getFractionFromTCAmount } from './math';
 const math = create(all);
 
 function compareAmount(a, b) {
@@ -88,6 +89,7 @@ function gatherIngredientsFromRecipes(_recipes) {
       } = ingredient;
 
       if (amount) {
+        amount = getFractionFromTCAmount(amount);
         amount = math.fraction(amount);
 
         const index = gatheredIngredients.findIndex(
@@ -134,6 +136,7 @@ function assessIngredientsUsage(_onHand, _required) {
     } = { ...ingredient };
 
     if (amount) {
+      amount = getFractionFromTCAmount(amount);
       amount = math.fraction(amount);
 
       let index = onHand.findIndex((ingr) => ingr.ingredient_name === name);

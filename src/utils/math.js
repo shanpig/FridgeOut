@@ -2,10 +2,13 @@ import { create, all } from 'mathjs';
 
 const math = create(all);
 
-function getFractionFromTCAmount(Amount) {
-  const [integer, fraction] = Amount.split('又');
+function getFractionFromTCAmount(amount) {
+  amount = amount.toString();
+  if (amount.includes('又')) {
+    const [integer, fraction] = amount.split('又');
 
-  return math.add(integer, math.fraction(fraction));
+    return math.add(integer, math.fraction(fraction));
+  } else return math.fraction(amount);
 }
 
 function fractionStringToTC(fractionString) {

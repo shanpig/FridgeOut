@@ -27,18 +27,27 @@ export default function userReducer(state = user_info, action) {
       };
     }
 
-    case 'user/add/kitchen': {
-      return {
-        ...state,
-        my_kitchen: [...state.my_kitchen, action.payload],
-      };
+    case 'user/add/favorite': {
+      let recipe = action.payload;
+      let { my_favorites } = state;
+      let hasFavorite = my_favorites.find(
+        (favorite) => favorite.id === recipe.id
+      );
+      if (hasFavorite) return state;
+      else
+        return {
+          ...state,
+          my_favorites: [...state.my_favorites, action.payload],
+        };
     }
 
-    case 'user/remove/kitchen': {
+    case 'user/remove/favorite': {
       const removeTargetId = action.payload;
       return {
         ...state,
-        my_kitchen: state.my_kitchen.filter((id) => id !== removeTargetId),
+        my_favorites: state.my_favorites.filter(
+          (recipe) => recipe.id !== removeTargetId
+        ),
       };
     }
 

@@ -2,7 +2,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { removeInput } from '../../../redux/reducers/keyword/keywordActions';
 import { removeRecipeFromSelections } from '../../../redux/reducers/selection/selectionActions';
-import { fractionStringToTC } from '../../../utils/math';
+import {
+  fractionStringToTC,
+  getFractionFromTCAmount,
+} from '../../../utils/math';
 import { AiOutlineClose } from 'react-icons/ai';
 
 export default function SidebarItem({ readOnly, className, ...props }) {
@@ -23,7 +26,10 @@ export default function SidebarItem({ readOnly, className, ...props }) {
       ingredient_amount: amount,
       ingredient_unit: unit,
     } = props.ingredient;
-    if (amount) amount = fractionStringToTC(amount);
+    if (amount) {
+      amount = getFractionFromTCAmount(amount);
+      amount = fractionStringToTC(amount);
+    }
     content = `${name} ${amount} ${unit}`;
     target = props.ingredient;
   } else if (props.type === 'recipe') {
