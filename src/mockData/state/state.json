@@ -31,323 +31,75 @@
       "ingredient_unit": ""
     }
   ],
-  "searched_recipes": [
+  "searched_recipes": [],
+  "selected_recipes": [
     {
       "keyword": [
-        "里肌肉",
-        "青椒",
-        "紅甜椒",
-        "黃甜椒",
-        "熱白飯",
-        "熟白芝麻",
-        "醬油",
-        "糖",
+        "雞肉",
+        "薑",
+        "片",
+        "水",
+        "狗尾草",
+        "鹽",
+        "米",
+        "酒",
+        "薑片",
         "米酒"
       ],
-      "id": "A02-2573",
-      "tags": ["主菜", "豬肉", "日式料理", "葷食", "一個人的簡單料理"],
-      "title": "照燒豬肉蓋飯",
-      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/yqn080-018.jpg",
-      "preparation": [
+      "id": "A03-1383",
+      "tags": ["湯", "雞肉", "中式料理", "葷食", "2步驟燉補超簡單"],
+      "title": "九尾雞",
+      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/bk180-029a.jpg",
+      "ingredients": [
         {
-          "category": "【材　料】",
-          "ingredients": [
-            {
-              "ingredient_name": "里肌肉",
-              "ingredient_amount": "100",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "青椒",
-              "ingredient_amount": "1/3",
-              "ingredient_unit": "顆"
-            },
-            {
-              "ingredient_name": "紅甜椒",
-              "ingredient_amount": "1/3",
-              "ingredient_unit": "顆"
-            },
-            {
-              "ingredient_name": "黃甜椒",
-              "ingredient_amount": "1/3",
-              "ingredient_unit": "顆"
-            },
-            {
-              "ingredient_name": "熱白飯",
-              "ingredient_amount": "",
-              "ingredient_unit": "適量"
-            },
-            {
-              "ingredient_name": "熟白芝麻",
-              "ingredient_amount": "",
-              "ingredient_unit": "適量"
-            }
-          ]
+          "ingredient_name": "雞肉",
+          "ingredient_cat": "【材　料】",
+          "ingredient_group": "",
+          "ingredient_amount": "600",
+          "ingredient_unit": "公克"
         },
         {
-          "category": "【調 味 料】",
-          "ingredients": [
-            {
-              "ingredient_name": "醬油",
-              "ingredient_amount": "1",
-              "ingredient_unit": "大匙"
-            },
-            {
-              "ingredient_name": "糖",
-              "ingredient_amount": "1",
-              "ingredient_unit": "大匙"
-            },
-            {
-              "ingredient_name": "米酒",
-              "ingredient_amount": "2",
-              "ingredient_unit": "大匙"
-            }
-          ]
-        }
-      ],
-      "steps": [
-        "里肌肉切片；青椒、紅甜椒和黃甜椒洗淨切小塊，備用。",
-        "熱鍋，倒適量油，放入青椒、紅甜椒和黃甜椒略炒，盛入盤中備用。",
-        "原鍋放入適量油，放入里肌肉片炒至變色，放入調味料充份拌炒入味。",
-        "將作法2的青椒和甜椒鋪在熱白飯上，在放上作法3的里肌肉片，撒上少許熟白芝麻即可食用。"
-      ]
-    },
-    {
-      "keyword": [
-        "糯米粉",
-        "水",
-        "細砂糖",
-        "苦甜巧克力",
-        "鮮奶油",
-        "抹茶粉",
-        "水",
-        "麥芽糖",
-        "細砂糖"
-      ],
-      "id": "G01-0825",
-      "tags": ["點心", "米食及米類製品", "日式料理", "素食", "超簡單手工麻糬"],
-      "title": "日式烤麻糬",
-      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/ck81-024.jpg",
-      "preparation": [
+          "ingredient_name": "薑片",
+          "ingredient_cat": "【材　料】",
+          "ingredient_group": "",
+          "ingredient_amount": "5",
+          "ingredient_unit": "公克"
+        },
         {
-          "category": "【材　料】",
-          "ingredients": [
-            {
-              "ingredient_name": "A.糯米粉",
-              "ingredient_amount": "200",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "水",
-              "ingredient_amount": "300",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "細砂糖",
-              "ingredient_amount": "20",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "B.苦甜巧克力",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "鮮奶油",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "C.抹茶粉",
-              "ingredient_amount": "15",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "水",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "麥芽糖",
-              "ingredient_amount": "50",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "細砂糖",
-              "ingredient_amount": "30",
-              "ingredient_unit": "公克"
-            }
-          ]
-        }
-      ],
-      "steps": [
-        "材料B隔水加熱融化拌勻即為巧克力淋醬，備用。",
-        "取材料C中的水、麥芽糖及細砂糖以小火煮至溶解無顆粒，取少許糖液和抹茶粉拌勻，再加抹茶粉倒入鍋中攪拌均勻即為抹茶淋醬。",
-        "糯米粉過篩；將材料A中的水和細砂糖以小火煮至滾沸，沖入糯米粉內拌至成團。",
-        "取作法4約50公克的生米糰，放入滾沸的水中煮至浮起呈透明狀。",
-        "將作法5加入作法4中，揉至米糰呈光滑細緻如耳垂般柔軟，分小塊放入蒸籠中以大火蒸熟。",
-        "取出作法5蒸熟的糯米團放入盆中，攪打至有Q性，放入抹上少許沙拉油的耐熱袋內攤平待涼後，分割成約2公分乘3公分的長條狀，串上竹籤。",
-        "以炭火將作法6烤至軟化且表面呈金黃，視個人喜好淋上作法1的巧克力淋醬或作法2的抹茶醬即可食用。"
-      ]
-    },
-    {
-      "keyword": [
-        "糯米粉",
-        "水",
-        "細砂糖",
-        "苦甜巧克力",
-        "鮮奶油",
-        "抹茶粉",
-        "水",
-        "麥芽糖",
-        "細砂糖"
-      ],
-      "id": "G01-0825",
-      "tags": ["點心", "米食及米類製品", "日式料理", "素食", "超簡單手工麻糬"],
-      "title": "日式烤麻糬",
-      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/ck81-024.jpg",
-      "preparation": [
+          "ingredient_name": "水",
+          "ingredient_cat": "【材　料】",
+          "ingredient_group": "",
+          "ingredient_amount": "1200",
+          "ingredient_unit": "㏄"
+        },
         {
-          "category": "【材　料】",
-          "ingredients": [
-            {
-              "ingredient_name": "A.糯米粉",
-              "ingredient_amount": "200",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "水",
-              "ingredient_amount": "300",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "細砂糖",
-              "ingredient_amount": "20",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "B.苦甜巧克力",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "鮮奶油",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "C.抹茶粉",
-              "ingredient_amount": "15",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "水",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "麥芽糖",
-              "ingredient_amount": "50",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "細砂糖",
-              "ingredient_amount": "30",
-              "ingredient_unit": "公克"
-            }
-          ]
-        }
-      ],
-      "steps": [
-        "材料B隔水加熱融化拌勻即為巧克力淋醬，備用。",
-        "取材料C中的水、麥芽糖及細砂糖以小火煮至溶解無顆粒，取少許糖液和抹茶粉拌勻，再加抹茶粉倒入鍋中攪拌均勻即為抹茶淋醬。",
-        "糯米粉過篩；將材料A中的水和細砂糖以小火煮至滾沸，沖入糯米粉內拌至成團。",
-        "取作法4約50公克的生米糰，放入滾沸的水中煮至浮起呈透明狀。",
-        "將作法5加入作法4中，揉至米糰呈光滑細緻如耳垂般柔軟，分小塊放入蒸籠中以大火蒸熟。",
-        "取出作法5蒸熟的糯米團放入盆中，攪打至有Q性，放入抹上少許沙拉油的耐熱袋內攤平待涼後，分割成約2公分乘3公分的長條狀，串上竹籤。",
-        "以炭火將作法6烤至軟化且表面呈金黃，視個人喜好淋上作法1的巧克力淋醬或作法2的抹茶醬即可食用。"
-      ]
-    },
-    {
-      "keyword": [
-        "糯米粉",
-        "水",
-        "細砂糖",
-        "苦甜巧克力",
-        "鮮奶油",
-        "抹茶粉",
-        "水",
-        "麥芽糖",
-        "細砂糖"
-      ],
-      "id": "G01-0825",
-      "tags": ["點心", "米食及米類製品", "日式料理", "素食", "超簡單手工麻糬"],
-      "title": "日式烤麻糬",
-      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/ck81-024.jpg",
-      "preparation": [
+          "ingredient_name": "狗尾草",
+          "ingredient_cat": "【材　料】",
+          "ingredient_group": "",
+          "ingredient_amount": "100",
+          "ingredient_unit": "公克"
+        },
         {
-          "category": "【材　料】",
-          "ingredients": [
-            {
-              "ingredient_name": "A.糯米粉",
-              "ingredient_amount": "200",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "水",
-              "ingredient_amount": "300",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "細砂糖",
-              "ingredient_amount": "20",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "B.苦甜巧克力",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "鮮奶油",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "C.抹茶粉",
-              "ingredient_amount": "15",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "水",
-              "ingredient_amount": "60",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "麥芽糖",
-              "ingredient_amount": "50",
-              "ingredient_unit": "公克"
-            },
-            {
-              "ingredient_name": "細砂糖",
-              "ingredient_amount": "30",
-              "ingredient_unit": "公克"
-            }
-          ]
+          "ingredient_name": "鹽",
+          "ingredient_cat": "【調 味 料】",
+          "ingredient_group": "",
+          "ingredient_amount": "1.5",
+          "ingredient_unit": "茶匙"
+        },
+        {
+          "ingredient_name": "米酒",
+          "ingredient_cat": "【調 味 料】",
+          "ingredient_group": "",
+          "ingredient_amount": "50",
+          "ingredient_unit": "㏄"
         }
       ],
       "steps": [
-        "材料B隔水加熱融化拌勻即為巧克力淋醬，備用。",
-        "取材料C中的水、麥芽糖及細砂糖以小火煮至溶解無顆粒，取少許糖液和抹茶粉拌勻，再加抹茶粉倒入鍋中攪拌均勻即為抹茶淋醬。",
-        "糯米粉過篩；將材料A中的水和細砂糖以小火煮至滾沸，沖入糯米粉內拌至成團。",
-        "取作法4約50公克的生米糰，放入滾沸的水中煮至浮起呈透明狀。",
-        "將作法5加入作法4中，揉至米糰呈光滑細緻如耳垂般柔軟，分小塊放入蒸籠中以大火蒸熟。",
-        "取出作法5蒸熟的糯米團放入盆中，攪打至有Q性，放入抹上少許沙拉油的耐熱袋內攤平待涼後，分割成約2公分乘3公分的長條狀，串上竹籤。",
-        "以炭火將作法6烤至軟化且表面呈金黃，視個人喜好淋上作法1的巧克力淋醬或作法2的抹茶醬即可食用。"
+        "雞肉塊放入沸水中汆燙去血水備用。",
+        "將狗尾草、所有材料與米酒放入電鍋中，外鍋加一杯水，蓋上鍋蓋，按下開關，待開關跳起，續燜30分鐘後，加入鹽調味即可。"
       ]
     }
   ],
-  "selected_recipes": [],
   "user_info": {
     "identity": "user",
     "name": "Shanpig",
@@ -375,7 +127,7 @@
         "ingredient_unit": ""
       }
     ],
-    "my_favorites": ["A01-1234", "B02-1234"],
+    "my_favorites": [],
     "messages": [
       {
         "type": "recommendation",
