@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addRecipeToSelections } from '../../redux/reducers/selection/selectionActions';
 import styled from 'styled-components';
 
 function removeRepeat(array) {
   return Array.from(new Set(array));
 }
 
-export default function RecipeItem({ recipe, button: Button }) {
+export default function RecipeItem({ recipe, button: Button, buttonAction }) {
   const d = useDispatch();
   const { main_image, title, ingredients, id } = recipe;
   const leftovers = useSelector((state) => state.searched_keywords);
@@ -41,7 +40,7 @@ export default function RecipeItem({ recipe, button: Button }) {
       <TextSection>
         <TitleRow>
           <Title>{title}</Title>
-          <Button onClick={() => d(addRecipeToSelections(recipe))} />
+          <Button onClick={() => d(buttonAction())} />
         </TitleRow>
         <h2>使用剩食：</h2>
         <UsedLeftovers key={1}>

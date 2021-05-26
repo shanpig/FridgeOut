@@ -9,6 +9,7 @@ import { GrFormAdd } from 'react-icons/gr';
 import { theme } from '../../variables';
 import { searchRecipesByIngredientNames } from '../../utils/firebase';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { addRecipeToSelections } from '../../redux/reducers/selection/selectionActions';
 
 export default function SearchPage() {
   const d = useDispatch();
@@ -26,7 +27,6 @@ export default function SearchPage() {
   }, [searchKeywords]);
 
   function movePage(num) {
-    console.log(recipes.length);
     let nextPage = recipesPage + num;
     let maxPage = Math.floor(recipes.length / 10);
     if (nextPage < 0 || nextPage > maxPage) return;
@@ -57,7 +57,12 @@ export default function SearchPage() {
             .sort((a, b) => a.ingredients.length - b.ingredients.length)
             .slice(recipesPage * 10, recipesPage * 10 + 10)
             .map((recipe, i) => (
-              <RecipeItem key={i} recipe={recipe} button={AddButton} />
+              <RecipeItem
+                key={i}
+                recipe={recipe}
+                button={AddButton}
+                buttonAction={() => addRecipeToSelections(recipe)}
+              />
             ))}
         </SearchedRecipes>
         <DeskTopSidebar>
@@ -145,6 +150,7 @@ const DeskTopSidebar = styled.aside`
 `;
 
 const AddButton = styled(GrFormAdd)`
+  min-width: 18px;
   font-size: 2em;
   margin-left: auto;
   cursor: pointer;

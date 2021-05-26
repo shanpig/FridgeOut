@@ -6,6 +6,7 @@ import { getRecipe } from '../../utils/firebase';
 import SidebarBody from '../common/Sidebar/SidebarBody';
 import { BiArrowBack } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
+import { addToFavorite } from '../../redux/reducers/user/userActions';
 import { addRecipeToSelections } from '../../redux/reducers/selection/selectionActions';
 
 export default function RecipePage() {
@@ -37,13 +38,20 @@ export default function RecipePage() {
           <RecipeImageContainer>
             <RecipeImage src={main_image} alt='' />
             <AddToButtonGroup>
-              <AddToButton key={1} value=''>
+              <AddToButton
+                key={1}
+                value=''
+                onClick={() => {
+                  if (recipe.id) d(addToFavorite(recipe));
+                }}>
                 + 收藏
               </AddToButton>
               <AddToButton
                 key={2}
                 value=''
-                onClick={() => d(addRecipeToSelections(recipe))}>
+                onClick={() => {
+                  if (recipe.id) d(addRecipeToSelections(recipe));
+                }}>
                 + 我的廚房
               </AddToButton>
             </AddToButtonGroup>
