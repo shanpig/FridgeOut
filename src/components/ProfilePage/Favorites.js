@@ -42,12 +42,13 @@ const Recipe = styled.li`
 
 const ImageContainer = styled(Link)`
   overflow: hidden;
-  max-height: 150px;
+  height: 150px;
 `;
 
 const Title = styled.h2``;
 
 const Image = styled.img`
+  transform: translateY(-20%);
   width: 100%;
 `;
 
