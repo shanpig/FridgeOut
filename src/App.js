@@ -14,6 +14,7 @@ import ProfilePage from './components/ProfilePage/ProfilePage';
 import RecipePage from './components/RecipePage/RecipePage';
 import SearchPage from './components/SearchPage/SearchPage';
 import LandingPage from './components/LandingPage/LandingPage';
+import LoginPage from './components/LoginPage/LoginPage';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
 import ScrollToTop from './components/common/ScrollToTop';
@@ -32,8 +33,14 @@ function App() {
           <Route path='/search'>
             <SearchPage></SearchPage>
           </Route>
-          <Route path='/profile'>
+          <Route path='/profile/:uid'>
+            <ProfilePage />
+          </Route>
+          <Route exact path='/profile'>
             <ProfilePage></ProfilePage>
+          </Route>
+          <Route path='/login'>
+            <LoginPage />
           </Route>
           <Route path='/recipe/:id'>
             <RecipePage></RecipePage>

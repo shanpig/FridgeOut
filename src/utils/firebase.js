@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+
 // const firebase = require('firebase');
 const firebaseConfig = {
   apiKey: 'AIzaSyAeh2HyVueHBPxSDEq9DQiXHsVDcQhffGI',
@@ -11,8 +12,60 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
+// const auth = firebase.auth().useDeviceLanguage();
+const provider = new firebase.auth.GoogleAuthProvider();
+// provider.setCustomParameters({
+//   login_hint: 'user@example.com',
+// });
+
+function signInWithPopup() {
+  return firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      const credential = result.credential;
+      const token = credential.accessToken;
+      const user = result.user;
+      return {
+        signInMethod: credential.signInMethod,
+        accessToken: credential.accessToken,
+        uid: user.uid,
+        username: user.displayName,
+        email: user.email,
+        profileImage: user.photoURL,
+      };
+    })
+    .catch((err) => {
+      console.log(err);
+      return '';
+    });
+}
+
+function getUserData(uid) {
+  return db
+    .collection('users')
+    .doc(uid)
+    .get()
+    .then((doc) => doc.data());
+}
+
+function updateUserFridge(uid, fridge) {
+  return db.collection('users').doc(uid).update({ left_overs: fridge });
+}
+function updateUserKitchen(uid, kitchen) {
+  return db.collection('users').doc(uid).update({ my_kitchen: kitchen });
+}
+function updateUserFavorites(uid, favorites) {
+  return db.collection('users').doc(uid).update({ my_favorites: favorites });
+}
+
+function registerUser(userData) {
+  db.collection('users')
+    .doc(userData.uid)
+    .set(userData)
+    .then(() => console.log(`user ${userData.name} added.`));
+}
 
 // Due to firebase limitations, compound query cannot exceed 10 logical computations.
 // e.g. getRecipes with idList larger than [Array(10)]
@@ -140,6 +193,9 @@ async function getPosts() {
 // console.log(data);
 
 export {
+  signInWithPopup,
+  getUserData,
+  registerUser,
   getTimestamp,
   getRecipe,
   getRecipes,
@@ -151,4 +207,5 @@ export {
   sendMessageTo,
   post,
   getPosts,
+  firebase,
 };

@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import { theme } from '../../variables';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { signInWithPopup, getUserData } from '../../utils/firebase';
+import { setUser } from '../../redux/reducers/user/userActions';
 import Fridge from './Fridge';
 import Kitchen from './Kitchen';
 import Favorites from './Favorites';
 import {
   useRouteMatch,
+  useParams,
+  useHistory,
   Switch,
   Redirect,
   Route,
@@ -15,7 +18,11 @@ import {
 } from 'react-router-dom';
 
 export default function ProfilePage() {
+  const d = useDispatch();
+  const history = useHistory();
+
   const {
+    identity,
     name,
     email,
     profile,
@@ -26,6 +33,9 @@ export default function ProfilePage() {
   const myKitchen = useSelector((state) => state.selected_recipes);
   let match = useRouteMatch();
 
+  if (identity === 'none') {
+    return <Redirect to='/login' />;
+  }
   return (
     <Main>
       <ProfileRow>

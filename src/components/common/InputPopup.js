@@ -6,11 +6,14 @@ import { addInput } from '../../redux/reducers/keyword/keywordActions';
 import { GrFormClose, GrFormAdd } from 'react-icons/gr';
 import { fraction } from 'mathjs';
 import { getFractionFromTCAmount, fractionStringToTC } from '../../utils/math';
+import { useHistory } from 'react-router-dom';
 
 export default function InputPopup({ open, setOpen }) {
   const [inputs, setInputs] = useState(['']);
+  const identity = useSelector((state) => state.user_info.identity);
   const fridge = useSelector((state) => state.user_info.left_overs);
   const d = useDispatch();
+  const history = useHistory();
 
   function addInputField() {
     let lastInput = inputs[inputs.length - 1];
@@ -49,6 +52,7 @@ export default function InputPopup({ open, setOpen }) {
   }
 
   function addAllFridgeItems() {
+    if (identity === 'none') return history.push('/login');
     let ingredients = fridge.map(
       (leftovers) =>
         `${leftovers.ingredient_name} ${fractionStringToTC(

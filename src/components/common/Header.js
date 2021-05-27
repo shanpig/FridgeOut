@@ -7,8 +7,10 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsSearch } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import Sidebar from './Sidebar/Sidebar';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
+  const { identity, name, profile } = useSelector((state) => state.user_info);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
@@ -22,8 +24,10 @@ export default function Header() {
             <SearchIcon />
             <span>搜尋</span>
           </NavButton>
-          <NavButton to='/profile/fridge' id='profile'>
-            <ProfileIcon />
+          <NavButton
+            to={identity !== 'none' ? `/profile/${name}/fridge` : '/login'}
+            id='profile'>
+            {profile ? <ProfileImage src={profile} /> : <ProfileIcon />}
             <span>個人</span>
           </NavButton>
         </Nav>
@@ -130,6 +134,12 @@ const NavButton = styled(Link)`
 
 const SearchIcon = styled(BsSearch)`
   font-size: 25px;
+`;
+
+const ProfileImage = styled.img`
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
 `;
 
 const ProfileIcon = styled(CgProfile)`
