@@ -53,11 +53,42 @@ function getUserData(uid) {
 function updateUserFridge(uid, fridge) {
   return db.collection('users').doc(uid).update({ left_overs: fridge });
 }
-function updateUserKitchen(uid, kitchen) {
-  return db.collection('users').doc(uid).update({ my_kitchen: kitchen });
+
+function addRecipeToUserKitchen(uid, recipe) {
+  return db
+    .collection('users')
+    .doc(uid)
+    .update({ my_kitchen: firebase.firestore.FieldValue.arrayUnion(recipe) });
 }
-function updateUserFavorites(uid, favorites) {
-  return db.collection('users').doc(uid).update({ my_favorites: favorites });
+
+function removeRecipeFromUserKitchen(uid, recipe) {
+  return db
+    .collection('users')
+    .doc(uid)
+    .update({ my_kitchen: firebase.firestore.FieldValue.arrayRemove(recipe) });
+}
+
+function setUserLeftovers(uid, leftovers) {
+  console.log(leftovers);
+  return db.collection('users').doc(uid).update({
+    left_overs: leftovers,
+  });
+}
+
+function addRecipeToUserFavorites(uid, recipe) {
+  return db
+    .collection('users')
+    .doc(uid)
+    .update({ my_favorites: firebase.firestore.FieldValue.arrayUnion(recipe) });
+}
+
+function removeRecipeFromUserFavorites(uid, recipe) {
+  return db
+    .collection('users')
+    .doc(uid)
+    .update({
+      my_favorites: firebase.firestore.FieldValue.arrayRemove(recipe),
+    });
 }
 
 function registerUser(userData) {
@@ -200,6 +231,11 @@ export {
   getRecipe,
   getRecipes,
   searchRecipesByIngredientNames,
+  addRecipeToUserKitchen,
+  removeRecipeFromUserKitchen,
+  addRecipeToUserFavorites,
+  removeRecipeFromUserFavorites,
+  setUserLeftovers,
   signUpNewUser,
   addToFavorite,
   removeFromFavorite,
