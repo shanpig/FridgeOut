@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import RecipeItem from '../SearchPage/RecipeItem';
 import { GrFormTrash } from 'react-icons/gr';
-import { removeRecipeFromSelections } from '../../redux/reducers/selection/selectionActions';
+import { removeFromKitchen } from '../../redux/reducers/user/userActions';
 
 export default function Kitchen() {
-  const kitchen = useSelector((state) => state.selected_recipes);
+  const kitchen = useSelector((state) => {
+    const userInfo = state.user_info;
+    return userInfo.my_kitchen;
+  });
 
   return (
     <KitchenContent>
@@ -16,7 +19,7 @@ export default function Kitchen() {
           key={i}
           recipe={recipe}
           button={RemoveButton}
-          buttonAction={() => removeRecipeFromSelections(recipe.id)}
+          buttonAction={() => removeFromKitchen(recipe)}
         />
       ))}
     </KitchenContent>
@@ -37,8 +40,8 @@ const Recipe = styled(RecipeItem)`
 `;
 
 const RemoveButton = styled(GrFormTrash)`
-  min-width: 18px;
-  font-size: 2em;
+  min-width: 25px;
+  font-size: 25px;
   margin-left: auto;
   cursor: pointer;
 `;

@@ -17,7 +17,7 @@ export default function Favorites() {
             <Image src={recipe.main_image}></Image>
           </ImageContainer>
           <Title>{recipe.title}</Title>
-          <RemoveButton onClick={() => d(removeFromFavorite(recipe.id))} />
+          <RemoveButton onClick={() => d(removeFromFavorite(recipe))} />
         </Recipe>
       ))}
     </FavoritesContent>

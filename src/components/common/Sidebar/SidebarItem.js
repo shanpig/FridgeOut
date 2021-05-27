@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { removeInput } from '../../../redux/reducers/keyword/keywordActions';
-import { removeRecipeFromSelections } from '../../../redux/reducers/selection/selectionActions';
+import { removeFromKitchen } from '../../../redux/reducers/user/userActions';
 import {
   fractionStringToTC,
   getFractionFromTCAmount,
@@ -16,7 +16,7 @@ export default function SidebarItem({ readOnly, className, ...props }) {
     if (type === 'ingredient') {
       d(removeInput(data));
     } else if (type === 'recipe') {
-      d(removeRecipeFromSelections(data));
+      d(removeFromKitchen(data));
     }
   }
 

@@ -40,7 +40,7 @@ export default function RecipeItem({ recipe, button: Button, buttonAction }) {
       <TextSection>
         <TitleRow>
           <Title>{title}</Title>
-          <Button onClick={() => d(buttonAction())} />
+          <Button onClick={() => d(buttonAction(recipe))} />
         </TitleRow>
         <h2>使用剩食：</h2>
         <UsedLeftovers key={1}>
@@ -104,6 +104,7 @@ const TitleRow = styled.div`
 const Title = styled.h1`
   font-size: 1.3em;
   font-weight: bold;
+  flex-shrink: 1;
 `;
 
 const UsedLeftovers = styled.ul`

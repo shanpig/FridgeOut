@@ -15,7 +15,7 @@ export default function SidebarBody() {
   const REMAIN_LEFTOVERS = useRef(null);
   const NEEDED_INGREDIENT = useRef(null);
   const selectedLeftover = useSelector((state) => state.searched_keywords);
-  const selectedRecipes = useSelector((state) => state.selected_recipes);
+  const selectedRecipes = useSelector((state) => state.user_info.my_kitchen);
   const [ingredientsLeft, setIngredientsLeft] = useState([]);
   const [ingredientsNeeded, setIngredientsNeeded] = useState([]);
 

@@ -9,7 +9,7 @@ import { GrFormAdd } from 'react-icons/gr';
 import { theme } from '../../variables';
 import { searchRecipesByIngredientNames } from '../../utils/firebase';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { addRecipeToSelections } from '../../redux/reducers/selection/selectionActions';
+import { addToKitchen } from '../../redux/reducers/user/userActions';
 
 export default function SearchPage() {
   const d = useDispatch();
@@ -19,11 +19,16 @@ export default function SearchPage() {
   const leftOvers = useSelector((state) => state.user_info.left_overs);
 
   useEffect(() => {
+    let subscribed = true;
     let ingredientNames = searchKeywords.map((s) => s.ingredient_name);
     searchRecipesByIngredientNames(ingredientNames).then((searchedRecipes) => {
-      setRecipes(searchedRecipes);
-      setRecipesPage(0);
+      if (subscribed) {
+        setRecipes(searchedRecipes);
+        setRecipesPage(0);
+      }
     });
+
+    return () => (subscribed = false);
   }, [searchKeywords]);
 
   function movePage(num) {
@@ -61,7 +66,7 @@ export default function SearchPage() {
                 key={i}
                 recipe={recipe}
                 button={AddButton}
-                buttonAction={() => addRecipeToSelections(recipe)}
+                buttonAction={() => addToKitchen(recipe)}
               />
             ))}
         </SearchedRecipes>
@@ -150,8 +155,8 @@ const DeskTopSidebar = styled.aside`
 `;
 
 const AddButton = styled(GrFormAdd)`
-  min-width: 18px;
-  font-size: 2em;
+  min-width: 25px;
+  font-size: 25px;
   margin-left: auto;
   cursor: pointer;
 `;

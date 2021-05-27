@@ -28,9 +28,10 @@ export default function ProfilePage() {
     profile,
     left_overs: leftOvers,
     my_favorites: myFavorites,
+    my_kitchen: myKitchen,
     messages,
   } = useSelector((state) => state.user_info);
-  const myKitchen = useSelector((state) => state.selected_recipes);
+
   let match = useRouteMatch();
 
   if (identity === 'none') {
