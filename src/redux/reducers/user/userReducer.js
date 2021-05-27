@@ -51,6 +51,30 @@ export default function userReducer(state = user_info, action) {
       };
     }
 
+    case 'user/add/kitchen': {
+      let recipe = action.payload;
+      let { my_kitchen } = state;
+      let target = my_kitchen.find(
+        (recipeTarget) => recipeTarget.id === recipe.id
+      );
+      if (target) return state;
+      else
+        return {
+          ...state,
+          my_kitchen: [...state.my_kitchen, action.payload],
+        };
+    }
+
+    case 'user/remove/kitchen': {
+      const removeTargetId = action.payload;
+      return {
+        ...state,
+        my_kitchen: state.my_kitchen.filter(
+          (recipe) => recipe.id !== removeTargetId
+        ),
+      };
+    }
+
     default:
       return state;
   }

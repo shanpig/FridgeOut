@@ -32,122 +32,22 @@
     }
   ],
   "searched_recipes": [],
-  "selected_recipes": [
-    {
-      "keyword": [
-        "雞肉",
-        "薑",
-        "片",
-        "水",
-        "狗尾草",
-        "鹽",
-        "米",
-        "酒",
-        "薑片",
-        "米酒"
-      ],
-      "id": "A03-1383",
-      "tags": ["湯", "雞肉", "中式料理", "葷食", "2步驟燉補超簡單"],
-      "title": "九尾雞",
-      "main_image": "https://d3l76hx23vw40a.cloudfront.net/recipe/bk180-029a.jpg",
-      "ingredients": [
-        {
-          "ingredient_name": "雞肉",
-          "ingredient_cat": "【材　料】",
-          "ingredient_group": "",
-          "ingredient_amount": "600",
-          "ingredient_unit": "公克"
-        },
-        {
-          "ingredient_name": "薑片",
-          "ingredient_cat": "【材　料】",
-          "ingredient_group": "",
-          "ingredient_amount": "5",
-          "ingredient_unit": "公克"
-        },
-        {
-          "ingredient_name": "水",
-          "ingredient_cat": "【材　料】",
-          "ingredient_group": "",
-          "ingredient_amount": "1200",
-          "ingredient_unit": "㏄"
-        },
-        {
-          "ingredient_name": "狗尾草",
-          "ingredient_cat": "【材　料】",
-          "ingredient_group": "",
-          "ingredient_amount": "100",
-          "ingredient_unit": "公克"
-        },
-        {
-          "ingredient_name": "鹽",
-          "ingredient_cat": "【調 味 料】",
-          "ingredient_group": "",
-          "ingredient_amount": "1.5",
-          "ingredient_unit": "茶匙"
-        },
-        {
-          "ingredient_name": "米酒",
-          "ingredient_cat": "【調 味 料】",
-          "ingredient_group": "",
-          "ingredient_amount": "50",
-          "ingredient_unit": "㏄"
-        }
-      ],
-      "steps": [
-        "雞肉塊放入沸水中汆燙去血水備用。",
-        "將狗尾草、所有材料與米酒放入電鍋中，外鍋加一杯水，蓋上鍋蓋，按下開關，待開關跳起，續燜30分鐘後，加入鹽調味即可。"
-      ]
-    }
-  ],
   "user_info": {
-    "identity": "user",
-    "name": "Shanpig",
-    "email": "shanpigLiao@gmail.com",
-    "profile": "https://randomuser.me/api/portraits/men/75.jpg",
-    "left_overs": [
-      {
-        "ingredient_name": "蛋",
-        "ingredient_amount": 5,
-        "ingredient_unit": "顆"
-      },
-      {
-        "ingredient_name": "紅蘿蔔",
-        "ingredient_amount": 0.5,
-        "ingredient_unit": "條"
-      },
-      {
-        "ingredient_name": "雞胸肉",
-        "ingredient_amount": 250,
-        "ingredient_unit": "g"
-      },
-      {
-        "ingredient_name": "蔥",
-        "ingredient_amount": "",
-        "ingredient_unit": ""
-      }
-    ],
+    "identity": "none",
+    "id": "",
+    "name": "Random",
+    "email": "",
+    "profile": "",
+    "left_overs": [],
+    "my_kitchen": [],
     "my_favorites": [],
-    "messages": [
-      {
-        "type": "recommendation",
-        "from": "David",
-        "timestamp": 1611264582,
-        "recipe": "A05-7455"
-      },
-      {
-        "type": "recommendation",
-        "from": "David",
-        "timestamp": 1611264582,
-        "recipe": "E01-0157"
-      }
-    ]
+    "messages": []
   },
   "society_info": [
     {
       "post_id": 123,
       "type": "query",
-      "timestamp": 12351582734,
+      "timestamp": 1622000199005,
 
       "by": "Shanpig",
       "profile_image": "https://randomuser.me/api/portraits/men/75.jpg",
@@ -166,7 +66,7 @@
     },
     {
       "type": "share",
-      "timestamp": 12334535235,
+      "timestamp": 1622000199100,
       "by": "Christopher",
       "profile_image": "https://randomuser.me/api/portraits/men/73.jpg",
       "recipe": ["G01-0945"]
