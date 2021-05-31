@@ -4,7 +4,7 @@ import { theme } from '../../variables';
 import { Link } from 'react-router-dom';
 import LogoSrc from '../../images/LogoWithTextBlack.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { BsSearch } from 'react-icons/bs';
+import { BsSearch, BsPeopleFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import Sidebar from './Sidebar/Sidebar';
 import { useSelector } from 'react-redux';
@@ -23,6 +23,10 @@ export default function Header() {
           <NavButton to='/search' id='search'>
             <SearchIcon />
             <span>搜尋</span>
+          </NavButton>
+          <NavButton to='/posts'>
+            <CommunityIcon />
+            <span>社群</span>
           </NavButton>
           <NavButton
             to={identity !== 'none' ? `/profile/${name}/fridge` : '/login'}
@@ -116,8 +120,8 @@ const NavButton = styled(Link)`
     color: black;
   }
 
-  &:first-child {
-    border-right: 2px solid ${theme.orange};
+  &:not(:first-child) {
+    border-left: 1px solid ${theme.orange};
   }
 
   @media screen and (min-width: 769px) {
@@ -126,24 +130,28 @@ const NavButton = styled(Link)`
       display: none;
     }
 
-    &:first-child {
-      border-right: unset;
+    &:not(:first-child) {
+      border-left: unset;
     }
   }
 `;
 
 const SearchIcon = styled(BsSearch)`
-  font-size: 25px;
+  font-size: 20px;
+`;
+
+const CommunityIcon = styled(BsPeopleFill)`
+  font-size: 20px;
+`;
+
+const ProfileIcon = styled(CgProfile)`
+  font-size: 20px;
 `;
 
 const ProfileImage = styled.img`
   border-radius: 50%;
   width: 25px;
   height: 25px;
-`;
-
-const ProfileIcon = styled(CgProfile)`
-  font-size: 25px;
 `;
 
 const MainSidebar = styled(Sidebar)`

@@ -35,7 +35,7 @@ export default function SidebarItem({ readOnly, className, ...props }) {
   } else if (props.type === 'recipe') {
     const { title, id } = props.recipe;
     content = title;
-    target = id;
+    target = props.recipe;
   }
   return (
     <li className={className}>

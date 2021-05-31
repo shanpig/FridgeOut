@@ -75,6 +75,14 @@ export default function userReducer(state = user_info, action) {
       };
     }
 
+    case 'user/set/post_holder': {
+      const leftovers = action.payload;
+      return {
+        ...state,
+        recommend_post_holder: leftovers,
+      };
+    }
+
     default:
       return state;
   }

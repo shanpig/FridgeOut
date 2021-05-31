@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import { theme } from '../../variables';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { signInWithPopup, getUserData } from '../../utils/firebase';
-import { setUser } from '../../redux/reducers/user/userActions';
+import { signInWithPopup, getUserData, logOut } from '../../utils/firebase';
+import { setUser, signOutUser } from '../../redux/reducers/user/userActions';
+import { FiLogOut } from 'react-icons/fi';
 import Fridge from './Fridge';
 import Kitchen from './Kitchen';
+import Messages from './Messages';
 import Favorites from './Favorites';
 import {
   useRouteMatch,
@@ -34,6 +36,13 @@ export default function ProfilePage() {
 
   let match = useRouteMatch();
 
+  function signOut() {
+    console.log('hi');
+    logOut().then(() => {
+      d(signOutUser());
+    });
+  }
+
   if (identity === 'none') {
     return <Redirect to='/login' />;
   }
@@ -53,6 +62,9 @@ export default function ProfilePage() {
         <NavItem activeClassName='active' to={`${match.url}/favorites`}>
           食譜收藏
         </NavItem>
+        <NavItem activeClassName='active' to={`${match.url}/messages`}>
+          我的訊息
+        </NavItem>
       </NavRow>
       <ContentRow>
         <MainContent>
@@ -62,6 +74,9 @@ export default function ProfilePage() {
             </Route>
             <Route path={`${match.url}/favorites`}>
               <Favorites></Favorites>
+            </Route>
+            <Route path={`${match.url}/messages`}>
+              <Messages></Messages>
             </Route>
             <Route path={`${match.url}/`}>
               <Redirect to={`${match.url}/fridge`} />
@@ -78,6 +93,10 @@ export default function ProfilePage() {
           </FavoriteCount>
         </SideContent>
       </ContentRow>
+      <Logout onClick={() => signOut()}>
+        登出
+        <LogoutButton />
+      </Logout>
     </Main>
   );
 }
@@ -237,3 +256,13 @@ const KitchenCount = styled(SidebarCount)`
 const FavoriteCount = styled(SidebarCount)``;
 
 const UserEmail = styled.div``;
+
+const Logout = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: red;
+  cursor: pointer;
+`;
+
+const LogoutButton = styled(FiLogOut)``;

@@ -13,12 +13,15 @@ import { FcGoogle } from 'react-icons/fc';
 
 const userTemplate = {
   identity: 'user',
+  id: '',
   name: 'Random',
   email: '',
   profile: '',
   left_overs: [],
   my_favorites: [],
+  my_kitchen: [],
   messages: [],
+  recommend_post_holder: {},
 };
 
 export default function LoginPage() {
@@ -35,6 +38,7 @@ export default function LoginPage() {
           name: username,
           email,
           profile: profileImage,
+          id: uid,
         };
         registerUser(userData);
         d(setUser(userData));
@@ -44,7 +48,10 @@ export default function LoginPage() {
     });
   }
 
-  if (identity !== 'none') return <Redirect to={`/profile/${name}`} />;
+  useEffect(() => {
+    if (identity !== 'none') history.goBack();
+  }, [identity]);
+
   return (
     <Main>
       <LoginForm>

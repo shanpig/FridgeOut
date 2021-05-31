@@ -6,10 +6,30 @@ import {
   removeRecipeFromUserFavorites,
 } from '../../../utils/firebase';
 
+const userTemplate = {
+  identity: 'none',
+  id: '',
+  name: 'Random',
+  email: '',
+  profile: '',
+  left_overs: [],
+  my_favorites: [],
+  my_kitchen: [],
+  messages: [],
+  recommend_post_holder: {},
+};
+
 const setUser = (user_info) => {
   return {
     type: 'user/set/all',
     payload: user_info,
+  };
+};
+
+const signOutUser = () => {
+  return {
+    type: 'user/set/all',
+    payload: userTemplate,
   };
 };
 
@@ -97,15 +117,25 @@ const removeFromKitchen = (recipe) => {
       await removeRecipeFromUserKitchen(userInfo.id, recipe);
       console.log('hi, ', userInfo.name);
     }
+    console.log(`remove recipe from kitchen ${recipe}`);
     return dispatch(_removeFromKitchen(recipe.id));
+  };
+};
+
+const setRecommendPostHolder = (post) => {
+  return {
+    type: 'user/set/post_holder',
+    payload: post,
   };
 };
 
 export {
   setUser,
+  signOutUser,
   setLeftOvers,
   addToFavorite,
   removeFromFavorite,
   addToKitchen,
   removeFromKitchen,
+  setRecommendPostHolder,
 };
