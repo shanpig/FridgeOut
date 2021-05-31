@@ -2,7 +2,6 @@ import { theme } from '../../variables';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import RecipeItem from '../SearchPage/RecipeItem';
 import { GrFormTrash } from 'react-icons/gr';
 import { removeFromKitchen } from '../../redux/reducers/user/userActions';
 
@@ -21,11 +20,20 @@ export default function Messages() {
           const time = new Date(timestamp.toDate()).toLocaleString();
           return (
             <Message>
-              <From>{from}</From>
-              <Time>{time}</Time>
+              <From>
+                {from} <Time>{time}</Time>
+              </From>
+
               <Recipe>
                 <RecipeImage src={recipe.main_image} />
-                <RecipeTitle>{recipe.title}</RecipeTitle>
+                <RecipeContent>
+                  <RecipeTitle>{recipe.title}</RecipeTitle>
+                  <Ingredients>
+                    {recipe.ingredients.slice(0, 5).map((ingredients) => (
+                      <Ingredient>{ingredients.ingredient_name}</Ingredient>
+                    ))}
+                  </Ingredients>
+                </RecipeContent>
               </Recipe>
             </Message>
           );
@@ -35,6 +43,7 @@ export default function Messages() {
 }
 
 const MessagesContent = styled.ul`
+  position: relative;
   padding: 0 5px;
   width: 100%;
   display: flex;
@@ -42,20 +51,40 @@ const MessagesContent = styled.ul`
   gap: 10px;
 `;
 
-const Recipe = styled(RecipeItem)`
+const Message = styled.li`
+  background-color: white;
+  padding: 5px;
+`;
+
+const Recipe = styled.div`
   border: 1px solid ${theme.orange};
+  display: flex;
   height: 100px;
 `;
 
-const RemoveButton = styled(GrFormTrash)`
-  min-width: 25px;
-  font-size: 25px;
-  margin-left: auto;
-  cursor: pointer;
+const RecipeContent = styled.div`
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
 `;
 
-const Message = styled.div``;
 const From = styled.div``;
-const Time = styled.div``;
+const Time = styled.span``;
 const RecipeTitle = styled.h2``;
-const RecipeImage = styled.img``;
+const RecipeImage = styled.div`
+  flex-grow: 1;
+  flex-shrink: 1;
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+`;
+
+const Ingredients = styled.ul`
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+`;
+const Ingredient = styled.li``;

@@ -7,7 +7,11 @@ function removeRepeat(array) {
   return Array.from(new Set(array));
 }
 
-export default function RecipeItem({ recipe, button: Button, buttonAction }) {
+export default function RecipeItem({
+  recipe,
+  button: Button,
+  buttonAction = () => {},
+}) {
   const d = useDispatch();
   const { main_image, title, ingredients, id } = recipe;
   const leftovers = useSelector((state) => state.searched_keywords);

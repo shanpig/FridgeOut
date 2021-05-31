@@ -33,28 +33,12 @@
   ],
   "searched_recipes": [],
   "user_info": {
-    "identity": "user",
-    "id": "io6ldONx2CUtoXIMxks4BKqGqxE2",
-    "name": "Shanpig",
-    "email": "shanpigLiao@gmail.com",
-    "profile": "https://firebasestorage.googleapis.com/v0/b/leftoverrecipe-3910d.appspot.com/o/face2.jpg?alt=media&token=75c93b5b-c983-4f48-bf05-68bc152a292b",
-    "left_overs": [
-      {
-        "ingredient_name": "牛腱",
-        "ingredient_amount": 500,
-        "ingredient_unit": "g"
-      },
-      {
-        "ingredient_name": "蛋",
-        "ingredient_amount": 12,
-        "ingredient_unit": "顆"
-      },
-      {
-        "ingredient_name": "辣椒",
-        "ingredient_amount": 5,
-        "ingredient_unit": "條"
-      }
-    ],
+    "identity": "none",
+    "id": "",
+    "name": "Random",
+    "email": "",
+    "profile": "",
+    "left_overs": [],
     "my_kitchen": [],
     "my_favorites": [],
     "messages": [],
