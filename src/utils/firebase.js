@@ -13,6 +13,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const storage = firebase.storage().ref();
 // const auth = firebase.auth().useDeviceLanguage();
 const provider = new firebase.auth.GoogleAuthProvider();
 // provider.setCustomParameters({
@@ -40,6 +41,10 @@ function signInWithPopup() {
       console.log(err);
       return '';
     });
+}
+
+function logOut() {
+  return firebase.auth().signOut();
 }
 
 function getUserData(uid) {
@@ -98,11 +103,18 @@ function registerUser(userData) {
     .then(() => console.log(`user ${userData.name} added.`));
 }
 
+function uploadImage(imageFile) {
+  return storage
+    .child(imageFile.name)
+    .put(imageFile)
+    .then((snap) => snap.ref.getDownloadURL());
+}
+
 // Due to firebase limitations, compound query cannot exceed 10 logical computations.
 // e.g. getRecipes with idList larger than [Array(10)]
 
 function getTimestamp() {
-  return firebase.firestore.FieldValue.serverTimestamp();
+  return firebase.firestore.Timestamp.now();
 }
 
 async function getRecipe(id) {
@@ -188,6 +200,8 @@ async function removeFromFavorite(userId, recipeId) {
 }
 
 async function sendMessageTo(userId, message) {
+  message.timestamp = getTimestamp();
+  console.log(message);
   return await db
     .collection('users')
     .doc(userId)
@@ -209,6 +223,19 @@ async function post(message) {
     });
 }
 
+function uploadRecipe(recipe) {
+  console.log(recipe);
+  return db
+    .collection('recipes')
+    .add(recipe)
+    .then((docRef) => {
+      docRef.update({
+        id: docRef.id,
+      });
+      return docRef.id;
+    });
+}
+
 async function getPosts() {
   return await db
     .collection('society')
@@ -220,16 +247,15 @@ async function getPosts() {
     });
 }
 
-// let data = getTimestamp();
-// console.log(data);
-
 export {
   signInWithPopup,
+  logOut,
   getUserData,
   registerUser,
   getTimestamp,
   getRecipe,
   getRecipes,
+  uploadImage,
   searchRecipesByIngredientNames,
   addRecipeToUserKitchen,
   removeRecipeFromUserKitchen,
@@ -243,5 +269,6 @@ export {
   sendMessageTo,
   post,
   getPosts,
+  uploadRecipe,
   firebase,
 };
