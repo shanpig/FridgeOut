@@ -10,6 +10,7 @@ import {
   addToFavorite,
   addToKitchen,
 } from '../../redux/reducers/user/userActions';
+import GoBackButton from '../common/GoBackButton';
 // import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
 export default function RecipePage() {
@@ -34,7 +35,7 @@ export default function RecipePage() {
 
   return (
     <Main>
-      <GoBackButton onClick={history.goBack}></GoBackButton>
+      <GoBackButton></GoBackButton>
       <ContentRow>
         <MainContent>
           <Title>{title}</Title>
@@ -145,15 +146,6 @@ const MainContent = styled.div`
   @media screen and (min-width: 769px) {
     width: 60%;
   }
-`;
-
-const GoBackButton = styled(BiArrowBack)`
-  cursor: pointer;
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  font-size: 1.3em;
-  transform: scale(1.3);
 `;
 
 const RecipeImageContainer = styled.div`
