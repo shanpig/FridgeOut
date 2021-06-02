@@ -34,7 +34,7 @@ export default function SidebarBody() {
 
   return (
     <BodySection>
-      <Section ref={SELECTED_LEFTOVER} className='open'>
+      {/* <Section ref={SELECTED_LEFTOVER} className='open'>
         <SectionTitle
           onClick={(e) => SELECTED_LEFTOVER.current.classList.toggle('open')}>
           <h2>已選剩食</h2>
@@ -53,7 +53,7 @@ export default function SidebarBody() {
               );
             })}
         </List>
-      </Section>
+      </Section> */}
 
       <Section ref={SELECTED_RECIPES} className='open'>
         <SectionTitle
@@ -124,7 +124,7 @@ const SectionTitle = styled.div`
 `;
 
 const List = styled.ul`
-  padding: 0 30px;
+  padding: 0 20px;
   height: 0;
   display: flex;
   flex-direction: column;
@@ -138,10 +138,10 @@ const DropDownArrow = styled(AiFillCaretLeft)`
 `;
 
 const Section = styled.section`
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid ${theme.lightOrange};
+  border-top: 1px solid gray;
 
   &.open ${DropDownArrow} {
     transform: rotateZ(-90deg);
@@ -152,18 +152,10 @@ const Section = styled.section`
   }
 `;
 
-const CloseButton = styled(AiOutlineClose)``;
-
 const Item = styled(SidebarItem)`
-  width: fit-content;
+  width: 100%;
   padding: 3px 10px;
   display: flex;
   align-items: center;
-  gap: 20px;
-  border: 1px solid ${theme.orange};
-  border-radius: 20px;
-
-  & ${CloseButton} {
-    cursor: pointer;
-  }
+  justify-content: space-between;
 `;

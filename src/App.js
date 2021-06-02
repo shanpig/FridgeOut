@@ -23,56 +23,55 @@ import PostsPage from './components/Community/PostsPage';
 
 function App() {
   return (
-    <Body>
-      <Router>
-        <ScrollToTop />
-        <Header></Header>
-        <HeaderSpacer></HeaderSpacer>
-        <Switch>
-          <Route exact path='/'>
-            <LandingPage></LandingPage>
-          </Route>
-          <Route path='/search'>
-            <SearchPage></SearchPage>
-          </Route>
-          <Route path='/posts'>
-            <PostsPage></PostsPage>
-          </Route>
-          <Route path='/recipe/:id'>
-            <RecipePage></RecipePage>
-          </Route>
-          <Route path='/login'>
-            <LoginPage />
-          </Route>
-          <Route path='/profile/:uid'>
-            <ProfilePage />
-          </Route>
-          <Route exact path='/profile'>
-            <ProfilePage></ProfilePage>
-          </Route>
-          <Route path='/form/query'>
-            <PostQueryForm></PostQueryForm>
-          </Route>
-          <Route path='/form/recommend/:id'>
-            <RecommendForm></RecommendForm>
-          </Route>
-          <Route path='/form/share'>
-            <ShareRecipeForm></ShareRecipeForm>
-          </Route>
-        </Switch>
-      </Router>
-      <FooterSpacer></FooterSpacer>
-    </Body>
+    <>
+      <Body>
+        <Router>
+          <ScrollToTop />
+          <Header></Header>
+          <HeaderSpacer></HeaderSpacer>
+          <Switch>
+            <Route exact path='/'>
+              <LandingPage></LandingPage>
+            </Route>
+            <Route path='/search'>
+              <SearchPage></SearchPage>
+            </Route>
+            <Route path='/posts'>
+              <PostsPage></PostsPage>
+            </Route>
+            <Route path='/recipe/:id'>
+              <RecipePage></RecipePage>
+            </Route>
+            <Route path='/login'>
+              <LoginPage />
+            </Route>
+            <Route path='/profile/:uid'>
+              <ProfilePage />
+            </Route>
+            <Route exact path='/profile'>
+              <ProfilePage></ProfilePage>
+            </Route>
+            <Route path='/form/query'>
+              <PostQueryForm></PostQueryForm>
+            </Route>
+            <Route path='/form/recommend/:id'>
+              <RecommendForm></RecommendForm>
+            </Route>
+            <Route path='/form/share'>
+              <ShareRecipeForm></ShareRecipeForm>
+            </Route>
+          </Switch>
+        </Router>
+        <FooterSpacer></FooterSpacer>
+      </Body>
+    </>
   );
 }
 
 const Body = styled.div`
   height: max-content;
   min-height: 100vh;
-
-  @media screen and (min-width: 769px) {
-    background-color: ${theme.lighterOrange};
-  }
+  background-color: rgba(0, 0, 0, 0.9);
 `;
 
 export default App;

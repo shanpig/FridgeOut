@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { theme } from '../../variables';
+import { theme, headerConfig } from '../../variables';
 import { Link } from 'react-router-dom';
 import LogoSrc from '../../images/LogoWithTextBlack.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { BsSearch, BsPeopleFill } from 'react-icons/bs';
+import { BsSearch, BsPeople, BsPerson } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import Sidebar from './Sidebar/Sidebar';
 import { useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ export default function Header() {
       <MainHeader>
         <Burger onClick={() => setSidebarOpen(true)} />
         <StyledLink to='/'>
-          <Logo src={LogoSrc}></Logo>
+          <Logo>LOGO</Logo>
         </StyledLink>
         <Nav>
           <NavButton to='/search' id='search'>
@@ -43,18 +43,17 @@ export default function Header() {
 
 const MainHeader = styled.div`
   width: 100%;
-  height: 70px;
-  background-color: ${theme.lighterOrange};
+  background-color: black;
   padding: 0 30px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid ${theme.orange};
   position: fixed;
   z-index: 10;
+  height: ${headerConfig.mobile_height};
   box-shadow: 0px 2px 10px -5px black;
 
   @media screen and (min-width: 769px) {
-    background-color: ${theme.orange};
+    height: ${headerConfig.computer_height};
   }
 `;
 
@@ -70,6 +69,7 @@ const Burger = styled(GiHamburgerMenu)`
 
 const StyledLink = styled(Link)`
   margin: 0 auto;
+  text-decoration: none;
   transform: translate(-15px, 0);
   @media screen and (min-width: 769px) {
     margin: 0;
@@ -77,10 +77,13 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Logo = styled.img`
+const Logo = styled.h2`
   width: 119px;
   height: 40px;
   max-height: 40px;
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
 `;
 
 const Nav = styled.nav`
@@ -88,13 +91,13 @@ const Nav = styled.nav`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50px;
+  height: 40px;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  gap: 10px;
   align-items: center;
-  background-color: ${theme.lighterOrange};
+  background-color: rgb(50, 50, 50);
+  overflow-y: hidden;
 
   @media screen and (min-width: 769px) {
     width: fit-content;
@@ -106,28 +109,35 @@ const Nav = styled.nav`
 
 const NavButton = styled(Link)`
   flex: 1 1 50%;
-  height: 60%;
   background-color: transparent;
   border: none;
+  position: relative;
   text-decoration: none;
-  color: unset;
+  width: 70px;
+  height: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 
-  & > span {
-    color: black;
-  }
-
   &:not(:first-child) {
-    border-left: 1px solid ${theme.orange};
+    border-left: 1px solid lightslategrey;
   }
 
   @media screen and (min-width: 769px) {
-    white-space: nowrap;
     & > span {
-      display: none;
+      /* display: none; */
+      opacity: 0;
+      position: absolute;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      transition: all 0.2s ease;
+    }
+
+    &:hover span {
+      opacity: 1;
     }
 
     &:not(:first-child) {
@@ -137,15 +147,15 @@ const NavButton = styled(Link)`
 `;
 
 const SearchIcon = styled(BsSearch)`
-  font-size: 20px;
+  font-size: 25px;
 `;
 
-const CommunityIcon = styled(BsPeopleFill)`
-  font-size: 20px;
+const CommunityIcon = styled(BsPeople)`
+  font-size: 25px;
 `;
 
-const ProfileIcon = styled(CgProfile)`
-  font-size: 20px;
+const ProfileIcon = styled(BsPerson)`
+  font-size: 25px;
 `;
 
 const ProfileImage = styled.img`
