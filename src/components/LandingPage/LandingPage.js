@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { theme, headerConfig, mainContentConfig } from "../../variables";
-import { Animated } from "react-animated-css";
-import { BsChevronRight } from "react-icons/bs";
-import backgroundImageSrc from "../../images/kitchen-table.jpg";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { theme, headerConfig, mainContentConfig } from '../../variables';
+import { Animated } from 'react-animated-css';
+import { BsChevronRight } from 'react-icons/bs';
+import backgroundImageSrc from '../../images/kitchen-table.jpg';
 export default function LandingPage() {
   return (
     <Main>
@@ -38,6 +38,7 @@ const Main = styled.main`
   gap: 20px;
   align-items: center;
   min-height: calc(100vh - ${headerConfig.mobile_height});
+  font-family: 'Montserrat';
   overflow: auto;
 `;
 
@@ -117,7 +118,7 @@ const Button = styled.div`
   padding: 20px 5px 10px;
   transition: gap 0.2s ease-out;
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     right: 0;

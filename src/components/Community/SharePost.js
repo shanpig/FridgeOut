@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import { getRecipe } from "../../utils/firebase";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { getRecipe } from '../../utils/firebase';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Post from './Post';
 
 export default function SharePost({ post }) {
   const [recipe, setRecipe] = useState({});
-  const { by: name, profile_image, recipe: recipeData } = post;
+  const { by: name, profile_image, timestamp, recipe: recipeData } = post;
 
   useEffect(() => {
     getRecipe(recipeData.id).then((recipe) => {
@@ -15,61 +16,25 @@ export default function SharePost({ post }) {
   }, []);
 
   return (
-    <Post>
-      <Profile>
-        <ProfileImage src={profile_image} alt="" />
-        <Name>{name}</Name>
-      </Profile>
-      <Content>
-        <Title>{name} 分享了一份食譜！</Title>
-        <Recipe to={`/recipe/${recipe.id}`}>
-          <ImageCol>
-            <RecipeImage src={recipe && recipe.main_image} alt="" />
-          </ImageCol>
-          <InfoCol>
-            <RecipeName>{recipe.title}</RecipeName>
-            <RecipeIngredients>
-              {recipe.ingredients &&
-                recipe.ingredients.map((ingredient, i) => (
-                  <Ingredient key={i}>{ingredient.ingredient_name}</Ingredient>
-                ))}
-            </RecipeIngredients>
-          </InfoCol>
-        </Recipe>
-      </Content>
+    <Post name={name} profile_image={profile_image} timestamp={timestamp}>
+      <Title>{name} 分享了一份食譜！</Title>
+      <Recipe to={`/recipe/${recipe.id}`}>
+        <ImageCol>
+          <RecipeImage src={recipe && recipe.main_image} alt="" />
+        </ImageCol>
+        <InfoCol>
+          <RecipeName>{recipe.title}</RecipeName>
+          <RecipeIngredients>
+            {recipe.ingredients &&
+              recipe.ingredients.map((ingredient, i) => (
+                <Ingredient key={i}>{ingredient.ingredient_name}</Ingredient>
+              ))}
+          </RecipeIngredients>
+        </InfoCol>
+      </Recipe>
     </Post>
   );
 }
-
-const Post = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px;
-  padding-bottom: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-`;
-
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
-const Name = styled.h2``;
-
-const ProfileImage = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
 
 const ImageCol = styled.div`
   width: fit-content;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setRecommendPostHolder } from '../../redux/reducers/user/userActions';
+import Post from './Post';
 
 function timeDifference(previous) {
   const current = new Date();
@@ -35,77 +36,29 @@ function timeDifference(previous) {
 export default function QueryPost({ post }) {
   const d = useDispatch();
   const { by: name, profile_image, ingredients, timestamp, post_id } = post;
+  console.log(name);
   function setPostHolder() {
     console.log(ingredients);
     d(setRecommendPostHolder(post));
   }
   return (
-    <Post>
-      <Profile>
-        <ProfileImage src={profile_image} alt="" />
-        <Name className="name">{name}</Name>
-        <Time>{timeDifference(new Date(timestamp.toDate()))}</Time>
-      </Profile>
-      <Content>
-        <Title>發問：這些食材可以做甚麼呢？</Title>
-        <Ingredients>
-          {ingredients &&
-            ingredients.map((ingredient, i) => (
-              <Ingredient key={i}>
-                {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}
-                {ingredient.ingredient_unit}
-              </Ingredient>
-            ))}
-        </Ingredients>
-        <Button to={`/form/recommend/${post_id}`} onClick={setPostHolder}>
-          幫助他！
-        </Button>
-      </Content>
+    <Post name={name} profile_image={profile_image} timestamp={timestamp}>
+      <Title>發問：這些食材可以做甚麼呢？</Title>
+      <Ingredients>
+        {ingredients &&
+          ingredients.map((ingredient, i) => (
+            <Ingredient key={i}>
+              {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}
+              {ingredient.ingredient_unit}
+            </Ingredient>
+          ))}
+      </Ingredients>
+      <Button to={`/form/recommend/${post_id}`} onClick={setPostHolder}>
+        幫助他！
+      </Button>
     </Post>
   );
 }
-
-const Post = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  padding-bottom: 0;
-  background-color: rgba(255, 255, 255, 0.9);
-
-  & * {
-    color: black;
-    font-family: 'Roboto';
-  }
-`;
-
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
-const Name = styled.h2`
-  font-size: 1.1em;
-`;
-
-const Time = styled.div`
-  font-size: 0.8em;
-  color: gray;
-`;
-
-const ProfileImage = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
 
 const Title = styled.h2`
   font-size: 1.2em;
