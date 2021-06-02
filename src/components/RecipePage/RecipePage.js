@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { mainContentConfig, theme } from '../../variables';
-import styled from 'styled-components';
-import { useParams, useHistory } from 'react-router';
-import { getRecipe } from '../../utils/firebase';
-import SidebarBody from '../common/Sidebar/SidebarBody';
-import { BiArrowBack } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { mainContentConfig, theme } from "../../variables";
+import styled from "styled-components";
+import { useParams, useHistory } from "react-router";
+import { getRecipe } from "../../utils/firebase";
+import SidebarBody from "../common/Sidebar/SidebarBody";
+import backgroundImageSrc from "../../images/kitchen-table.jpg";
+import { IoCloseCircleSharp } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 import {
   addToFavorite,
   addToKitchen,
-} from '../../redux/reducers/user/userActions';
-import GoBackButton from '../common/GoBackButton';
+} from "../../redux/reducers/user/userActions";
+import GoBackButton from "../common/GoBackButton";
 // import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
 export default function RecipePage() {
   const d = useDispatch();
   const history = useHistory();
-  let cat = '';
-  let group = '';
+  let cat = "";
+  let group = "";
   const [{ id, title, main_image, ingredients, steps }, setRecipeInfo] =
     useState({});
   const [recipe, setRecipe] = useState({});
@@ -35,35 +36,36 @@ export default function RecipePage() {
 
   return (
     <Main>
-      {/* <GoBackButton></GoBackButton> */}
-      <ContentRow>
-        <Left>
-          <RecipeImageContainer src={main_image}>
-            {/* <RecipeImage src={main_image} alt='' /> */}
-            <AddToButtonGroup>
-              <AddToButton
-                key={1}
-                value=''
-                onClick={() => {
-                  if (recipe.id) d(addToFavorite(recipe));
-                }}>
-                + 收藏
-              </AddToButton>
-              <AddToButton
-                key={2}
-                value=''
-                onClick={() => {
-                  if (recipe.id) d(addToKitchen(recipe));
-                }}>
-                + 我的廚房
-              </AddToButton>
-            </AddToButtonGroup>
-          </RecipeImageContainer>
-          <Title>{title}</Title>
-        </Left>
-        <Right>
-          <ListTitle>食材：</ListTitle>
+      <Card>
+        <CloseButton onClick={() => history.goBack()}></CloseButton>
+        <CardHead></CardHead>
+        <RecipeImageContainer src={main_image}>
+          {/* <RecipeImage src={main_image} alt='' /> */}
+        </RecipeImageContainer>
+        <Title>{title}</Title>
+        <AddToButtonGroup>
+          <AddToButton
+            key={1}
+            value=""
+            onClick={() => {
+              if (recipe.id) d(addToFavorite(recipe));
+            }}
+          >
+            + 收藏
+          </AddToButton>
+          <AddToButton
+            key={2}
+            value=""
+            onClick={() => {
+              if (recipe.id) d(addToKitchen(recipe));
+            }}
+          >
+            + 我的廚房
+          </AddToButton>
+        </AddToButtonGroup>
 
+        <ListContainer>
+          <ListTitle>食材</ListTitle>
           <IngredientList>
             {ingredients &&
               ingredients.map((ingredient, i) => {
@@ -97,8 +99,9 @@ export default function RecipePage() {
                 );
               })}
           </IngredientList>
-
-          <StepTitle>步驟：</StepTitle>
+        </ListContainer>
+        <ListContainer>
+          <ListTitle>步驟</ListTitle>
           <Steps>
             {steps &&
               steps.map((step, i) => (
@@ -108,11 +111,11 @@ export default function RecipePage() {
                 </Step>
               ))}
           </Steps>
-        </Right>
+        </ListContainer>
         {/* <SidebarContent>
           <SidebarBody />
         </SidebarContent> */}
-      </ContentRow>
+      </Card>
     </Main>
   );
 }
@@ -120,6 +123,11 @@ export default function RecipePage() {
 const Main = styled.main`
   padding: 10px 0 50px;
   position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(${backgroundImageSrc});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   max-width: 1024px;
   margin: 0 auto;
   min-height: ${mainContentConfig.computer_height};
@@ -130,67 +138,63 @@ const Main = styled.main`
   }
 `;
 
-const ContentRow = styled.div`
+const CloseButton = styled(IoCloseCircleSharp)`
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+  right: -10px;
+  top: -10px;
+  width: 30px;
+  height: 30px;
+  fill: white;
+  cursor: pointer;
+
+  &:hover {
+    fill: black;
+    background-color: white;
+    transform: scale(1.2);
+  }
+`;
+
+const Card = styled.div`
+  background-color: white;
+  position: relative;
   display: flex;
   flex-direction: column;
-  /* padding: 5px 0; */
-  justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
+  width: 600px;
+  margin: 20px auto;
+
+  & * {
+    color: black;
+    font-family: "Roboto";
+  }
+`;
+
+const CardHead = styled.div`
+  height: 150px;
   width: 100%;
-  margin-top: 20px;
-
-  @media screen and (min-width: 769px) {
-    gap: 100px;
-    justify-content: space-between;
-    flex-direction: row;
-  }
-`;
-
-const Left = styled.div`
-  position: relative;
-  flex-grow: 1;
-  max-width: 500px;
-
-  @media screen and (min-width: 769px) {
-    max-width: 300px;
-  }
-`;
-
-const Right = styled.div`
-  position: relative;
-  max-width: 500px;
-  flex-grow: 3;
-  padding: 0 20px;
-  overflow-y: auto;
-
-  @media screen and (min-width: 769px) {
-    max-width: unset;
-  }
+  background: #5a5959;
 `;
 
 const AddToButton = styled.button`
-  background-color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
   position: relative;
   border-radius: 5px;
   line-height: 1.3;
   border: 1px solid gray;
   padding: 3px 5px;
-
-  @media screen and (min-width: 769px) {
-    top: 40px;
-    transition: top ease 0.3s;
-    &:hover {
-      background-color: rgb(0, 0, 0);
-    }
-  }
 `;
 
 const RecipeImageContainer = styled.div`
   position: relative;
-  width: 300px;
-  height: 300px;
+  margin-top: -125px;
+  border: 2px solid white;
+  box-shadow: 0 0 10px -6px black;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   background-image: url(${(props) => props.src});
   background-position: center;
   background-size: cover;
@@ -203,31 +207,31 @@ const RecipeImageContainer = styled.div`
 
 const AddToButtonGroup = styled.div`
   display: flex;
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
   gap: 5px;
-  overflow: hidden;
+  margin-bottom: 10px;
 `;
 
 const Title = styled.h1`
   line-height: 1.3;
   font-size: 1.7em;
   text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+`;
+
+const ListContainer = styled.div`
+  width: 100%;
+  padding: 10px 10px 15px;
+  background-color: #f0f0f0;
 `;
 
 const ListTitle = styled.h3`
-  font-size: 1.3em;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 2px solid #c7c6c6;
 `;
 
 const IngredientList = styled.ul`
-  padding-left: 50px;
+  padding-left: 30px;
   display: flex;
   flex-direction: column;
   list-style-type: none;
@@ -242,13 +246,17 @@ const IngredientCat = styled.div`
 
 const IngredientGroup = styled.div``;
 
-const Ingredient = styled.div``;
+const Ingredient = styled.div`
+  padding-left: 30px;
+`;
 
 const StepTitle = styled.h3`
   margin-top: 16px;
 `;
 
-const Steps = styled.ul``;
+const Steps = styled.ul`
+  padding-left: 30px;
+`;
 
 const Step = styled.li`
   display: flex;
