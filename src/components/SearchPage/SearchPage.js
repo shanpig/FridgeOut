@@ -41,20 +41,20 @@ export default function SearchPage() {
   return (
     <Main>
       <SearchBar></SearchBar>
-      <FilterBar></FilterBar>
+      {/* <FilterBar></FilterBar> */}
       <MiscRow>
         <Pagination>
           <PrevPageButton onClick={() => movePage(-1)} />
           {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
           <NextPageButton onClick={() => movePage(1)} />
         </Pagination>
-        <SortSelection>
+        {/* <SortSelection>
           <option value='' disabled>
             排序
           </option>
           <option value=''>食材種類 (少到多)</option>
           <option value=''>食材種類 (多到少)</option>
-        </SortSelection>
+        </SortSelection> */}
       </MiscRow>
       <ContentRow>
         <SearchedRecipes>
