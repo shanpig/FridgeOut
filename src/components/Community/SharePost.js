@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { getRecipe } from '../../utils/firebase';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { getRecipe } from "../../utils/firebase";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function SharePost({ post }) {
   const [recipe, setRecipe] = useState({});
@@ -17,14 +17,14 @@ export default function SharePost({ post }) {
   return (
     <Post>
       <Profile>
-        <ProfileImage src={profile_image} alt='' />
+        <ProfileImage src={profile_image} alt="" />
         <Name>{name}</Name>
       </Profile>
       <Content>
         <Title>{name} 分享了一份食譜！</Title>
         <Recipe to={`/recipe/${recipe.id}`}>
           <ImageCol>
-            <RecipeImage src={recipe && recipe.main_image} alt='' />
+            <RecipeImage src={recipe && recipe.main_image} alt="" />
           </ImageCol>
           <InfoCol>
             <RecipeName>{recipe.title}</RecipeName>
@@ -42,12 +42,13 @@ export default function SharePost({ post }) {
 }
 
 const Post = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 10px;
   padding-bottom: 0;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
 `;
 
 const Profile = styled.div`

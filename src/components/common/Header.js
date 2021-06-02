@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { theme, headerConfig } from '../../variables';
-import { Link } from 'react-router-dom';
-import LogoSrc from '../../images/LogoWithTextBlack.png';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { BsSearch, BsPeople, BsPerson } from 'react-icons/bs';
-import { CgProfile } from 'react-icons/cg';
-import Sidebar from './Sidebar/Sidebar';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { theme, headerConfig } from "../../variables";
+import { Link } from "react-router-dom";
+import LogoSrc from "../../images/logo-small.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { BsSearch, BsPeople, BsPerson } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
+import Sidebar from "./Sidebar/Sidebar";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const { identity, name, profile } = useSelector((state) => state.user_info);
@@ -16,21 +16,23 @@ export default function Header() {
     <>
       <MainHeader>
         <Burger onClick={() => setSidebarOpen(true)} />
-        <StyledLink to='/'>
-          <Logo>LOGO</Logo>
+        <StyledLink to="/">
+          {/* <Logo>LOGO</Logo> */}
+          <LogoImg src={LogoSrc}></LogoImg>
         </StyledLink>
         <Nav>
-          <NavButton to='/search' id='search'>
+          <NavButton to="/search" id="search">
             <SearchIcon />
             <span>搜尋</span>
           </NavButton>
-          <NavButton to='/posts'>
+          <NavButton to="/posts">
             <CommunityIcon />
             <span>社群</span>
           </NavButton>
           <NavButton
-            to={identity !== 'none' ? `/profile/${name}/fridge` : '/login'}
-            id='profile'>
+            to={identity !== "none" ? `/profile/${name}/fridge` : "/login"}
+            id="profile"
+          >
             {profile ? <ProfileImage src={profile} /> : <ProfileIcon />}
             <span>個人</span>
           </NavButton>
@@ -84,6 +86,10 @@ const Logo = styled.h2`
   font-size: 30px;
   line-height: 40px;
   text-align: center;
+`;
+
+const LogoImg = styled.img`
+  height: 40px;
 `;
 
 const Nav = styled.nav`

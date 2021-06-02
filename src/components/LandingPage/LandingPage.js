@@ -1,26 +1,26 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { theme, headerConfig, mainContentConfig } from '../../variables';
-import { Animated } from 'react-animated-css';
-import { BsChevronRight } from 'react-icons/bs';
-import backgroundImageSrc from '../../images/kitchen-table.jpg';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { theme, headerConfig, mainContentConfig } from "../../variables";
+import { Animated } from "react-animated-css";
+import { BsChevronRight } from "react-icons/bs";
+import backgroundImageSrc from "../../images/kitchen-table.jpg";
 export default function LandingPage() {
   return (
     <Main>
       <MainContent>
         <Column>
-          <Animated animationIn='fadeInDown'>
+          <Animated animationIn="fadeInDown">
             <H1>Fridge Out</H1>
           </Animated>
-          <Animated animationIn='fadeInUp'>
+          <Animated animationIn="fadeInUp">
             <Text>尊重食材，用至分毫。</Text>
             <Text>淨空冰箱，淨空心靈。</Text>
             <Text>將剩食化為佳餚，是對糧食的珍惜。</Text>
           </Animated>
         </Column>
         <Column>
-          <StyledLink to='/search'>
-            <Animated animationIn='fadeInLeft' animationInDelay={500}>
+          <StyledLink to="/search">
+            <Animated animationIn="fadeInLeft" animationInDelay={500}>
               <Button>
                 前往搜尋
                 <BsChevronRight></BsChevronRight>
@@ -33,11 +33,6 @@ export default function LandingPage() {
   );
 }
 const Main = styled.main`
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(${backgroundImageSrc});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
   width: 100%;
   display: flex;
   gap: 20px;
@@ -122,7 +117,7 @@ const Button = styled.div`
   padding: 20px 5px 10px;
   transition: gap 0.2s ease-out;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
