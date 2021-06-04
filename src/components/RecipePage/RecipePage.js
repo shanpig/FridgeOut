@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { mainContentConfig, theme } from "../../variables";
-import styled from "styled-components";
-import { useParams, useHistory } from "react-router";
-import { getRecipe } from "../../utils/firebase";
-import SidebarBody from "../common/Sidebar/SidebarBody";
-import backgroundImageSrc from "../../images/kitchen-table.jpg";
-import { IoCloseCircleSharp } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { mainContentConfig, theme } from '../../variables';
+import styled from 'styled-components';
+import { useParams, useHistory } from 'react-router';
+import { getRecipe } from '../../utils/firebase';
+import SidebarBody from '../common/Sidebar/SidebarBody';
+import backgroundImageSrc from '../../images/kitchen-table.jpg';
+import { GrClose } from 'react-icons/gr';
+import { useDispatch } from 'react-redux';
 import {
   addToFavorite,
   addToKitchen,
-} from "../../redux/reducers/user/userActions";
-import GoBackButton from "../common/GoBackButton";
+} from '../../redux/reducers/user/userActions';
+import GoBackButton from '../common/GoBackButton';
 // import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
 export default function RecipePage() {
   const d = useDispatch();
   const history = useHistory();
-  let cat = "";
-  let group = "";
+  let cat = '';
+  let group = '';
   const [{ id, title, main_image, ingredients, steps }, setRecipeInfo] =
     useState({});
   const [recipe, setRecipe] = useState({});
@@ -138,20 +138,19 @@ const Main = styled.main`
   }
 `;
 
-const CloseButton = styled(IoCloseCircleSharp)`
+const CloseButton = styled(GrClose)`
   position: absolute;
-  background-color: black;
-  border-radius: 50%;
-  right: -10px;
-  top: -10px;
-  width: 30px;
-  height: 30px;
-  fill: white;
+  right: 10px;
+  top: 10px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
 
+  & path {
+    stroke: white;
+  }
+
   &:hover {
-    fill: black;
-    background-color: white;
     transform: scale(1.2);
   }
 `;
@@ -163,12 +162,13 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  width: 600px;
+  max-width: 600px;
+  width: 90%;
   margin: 20px auto;
 
   & * {
     color: black;
-    font-family: "Roboto";
+    /* font-family: 'Roboto'; */
   }
 `;
 
@@ -256,13 +256,17 @@ const StepTitle = styled.h3`
 
 const Steps = styled.ul`
   padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
 `;
 
 const Step = styled.li`
   display: flex;
   margin-top: 5px;
   margin-left: 5px;
-  line-height: 1.3;
+  line-height: 1.5;
 
   span:first-child {
     margin-right: 5px;
