@@ -44,7 +44,7 @@ export default function ProfilePage() {
   }
 
   if (identity === 'none') {
-    return <Redirect to='/login' />;
+    return <Redirect to="/login" />;
   }
   return (
     <Main>
@@ -53,16 +53,16 @@ export default function ProfilePage() {
         <UserName>{name}</UserName>
       </ProfileRow>
       <NavRow>
-        <NavItem activeClassName='active' to={`${match.url}/fridge`}>
+        <NavItem activeClassName="active" to={`${match.url}/fridge`}>
           我的冰箱
         </NavItem>
-        <NavItem activeClassName='active' to={`${match.url}/kitchen`}>
+        <NavItem activeClassName="active" to={`${match.url}/kitchen`}>
           我的廚房
         </NavItem>
-        <NavItem activeClassName='active' to={`${match.url}/favorites`}>
+        <NavItem activeClassName="active" to={`${match.url}/favorites`}>
           食譜收藏
         </NavItem>
-        <NavItem activeClassName='active' to={`${match.url}/messages`}>
+        <NavItem activeClassName="active" to={`${match.url}/messages`}>
           我的訊息
         </NavItem>
       </NavRow>
@@ -110,7 +110,6 @@ const Main = styled.main`
 
   @media screen and (min-width: 769px) {
     padding: 50px 42px;
-    background-color: ${theme.lighterOrange};
   }
 `;
 
@@ -133,6 +132,9 @@ const ProfileRow = styled(Row)`
   position: relative;
   margin-bottom: 50px;
 
+  @media screen and (min-width: 769px) {
+    height: 200px;
+  }
   /* margin-left: 40px;
   margin-bottom: 30px;
   padding: 20px 30px 20px 60px;
@@ -169,7 +171,7 @@ const NavRow = styled(Row)`
   justify-content: flex-start;
   align-items: center;
   gap: 5px;
-  background-color: #f6f6f6;
+  background-color: rgba(255, 255, 255, 0.8);
   min-height: 50px;
   padding: 0 20px;
   flex-wrap: wrap;
@@ -187,10 +189,6 @@ const NavItem = styled(Link)`
     background-color: #f0f0f0;
   }
 
-  &:active {
-    color: black;
-  }
-
   &::after {
     position: absolute;
     content: '';
@@ -206,6 +204,7 @@ const NavItem = styled(Link)`
   }
 
   &.active {
+    background-color: #f0f0f0;
     &::after {
       width: 80%;
     }
@@ -220,6 +219,7 @@ const ContentRow = styled(Row)`
 
 const MainContent = styled.div`
   flex-grow: 3;
+  flex-shrink: 1;
 `;
 
 const SideContent = styled.div`
@@ -232,13 +232,14 @@ const SideContent = styled.div`
     justify-content: space-evenly;
     align-items: center;
     display: flex;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
   }
 `;
 
 const SidebarCount = styled.div`
   flex-grow: 1;
   height: 60%;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -246,7 +247,9 @@ const SidebarCount = styled.div`
 
   & span {
     font-size: 2em;
+    font-family: 'Montserrat';
     color: ${theme.orange};
+    /* text-shadow: 1px 1px black; */
   }
 `;
 

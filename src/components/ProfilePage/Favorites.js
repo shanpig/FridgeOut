@@ -29,7 +29,11 @@ const FavoritesContent = styled.ul`
   width: 100%;
   display: grid;
   gap: 10px 10px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+
+  @media screen and (min-width: 550px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const Recipe = styled.li`
@@ -38,17 +42,24 @@ const Recipe = styled.li`
   flex-direction: column;
   gap: 10px;
   position: relative;
+
+  &:hover img {
+    transform: scale(1);
+  }
 `;
 
 const ImageContainer = styled(Link)`
   overflow: hidden;
-  height: 150px;
+  width: 100%;
+  aspect-ratio: 1;
+  /* max-height: 150px; */
 `;
 
 const Title = styled.h2``;
 
 const Image = styled.img`
-  transform: translateY(-20%);
+  transition: transform ease 1s;
+  transform: translateY(-5%) scale(1.2);
   width: 100%;
 `;
 

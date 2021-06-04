@@ -44,4 +44,11 @@ const RemoveButton = styled(GrFormTrash)`
   font-size: 25px;
   margin-left: auto;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.3);
+    & path {
+      stroke: red;
+    }
+  }
 `;
