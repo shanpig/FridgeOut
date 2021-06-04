@@ -26,7 +26,7 @@ const Aside = styled.aside`
   top: 0;
   bottom: 0;
   min-width: 240px;
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   gap: 10px;

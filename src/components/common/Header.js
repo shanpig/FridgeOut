@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { theme, headerConfig } from "../../variables";
-import { Link } from "react-router-dom";
-import LogoSrc from "../../images/logo-small.svg";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { BsSearch, BsPeople, BsPerson } from "react-icons/bs";
-import { CgProfile } from "react-icons/cg";
-import Sidebar from "./Sidebar/Sidebar";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { theme, headerConfig } from '../../variables';
+import { Link } from 'react-router-dom';
+import SmallLogoSrc from '../../images/logo-small.svg';
+import LargeLogoSrc from '../../images/logo.svg';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { BsSearch, BsPeople, BsPerson } from 'react-icons/bs';
+import { CgProfile } from 'react-icons/cg';
+import Sidebar from './Sidebar/Sidebar';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   const { identity, name, profile } = useSelector((state) => state.user_info);
@@ -15,10 +16,15 @@ export default function Header() {
   return (
     <>
       <MainHeader>
-        <Burger onClick={() => setSidebarOpen(true)} />
+        <BurgerButton onClick={() => setSidebarOpen(true)}>
+          <Burger />
+        </BurgerButton>
         <StyledLink to="/">
           {/* <Logo>LOGO</Logo> */}
-          <LogoImg src={LogoSrc}></LogoImg>
+          <LogoImg
+            src={SmallLogoSrc}
+            srcSet={`${SmallLogoSrc} 500w, ${LargeLogoSrc} 769w`}
+          ></LogoImg>
         </StyledLink>
         <Nav>
           <NavButton to="/search" id="search">
@@ -30,7 +36,7 @@ export default function Header() {
             <span>社群</span>
           </NavButton>
           <NavButton
-            to={identity !== "none" ? `/profile/${name}/fridge` : "/login"}
+            to={identity !== 'none' ? `/profile/${name}/fridge` : '/login'}
             id="profile"
           >
             {profile ? <ProfileImage src={profile} /> : <ProfileIcon />}
@@ -50,7 +56,7 @@ const MainHeader = styled.div`
   display: flex;
   align-items: center;
   position: fixed;
-  z-index: 10;
+  z-index: 99999;
   height: ${headerConfig.mobile_height};
   box-shadow: 0px 2px 10px -5px black;
 
@@ -59,7 +65,7 @@ const MainHeader = styled.div`
   }
 `;
 
-const Burger = styled(GiHamburgerMenu)`
+const BurgerButton = styled.div`
   width: 25px;
   height: 25px;
   cursor: pointer;
@@ -69,27 +75,33 @@ const Burger = styled(GiHamburgerMenu)`
   }
 `;
 
+const Burger = styled(GiHamburgerMenu)`
+  width: 100%;
+  height: 100%;
+`;
+
 const StyledLink = styled(Link)`
   margin: 0 auto;
   text-decoration: none;
-  transform: translate(-15px, 0);
+  flex-grow: 1;
   @media screen and (min-width: 769px) {
     margin: 0;
     margin-right: auto;
   }
 `;
 
-const Logo = styled.h2`
-  width: 119px;
+const LogoImg = styled.div`
+  background-image: url(${SmallLogoSrc});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
   height: 40px;
-  max-height: 40px;
-  font-size: 30px;
-  line-height: 40px;
-  text-align: center;
-`;
 
-const LogoImg = styled.img`
-  height: 40px;
+  @media screen and (min-width: 769px) {
+    background-image: url(${LargeLogoSrc});
+    background-position: left;
+  }
 `;
 
 const Nav = styled.nav`

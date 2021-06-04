@@ -64,22 +64,26 @@ export default function InputPopup({ open, setOpen }) {
 
   return (
     <Popup open={open}>
+      <Mask onClick={() => setOpen(false)} />
       <Title>輸入剩食 (例：雞肉 100 克)</Title>
-      <Form action=''>
+      <Form action="">
         {inputs.map((input, i) => {
           return (
             <Field key={i}>
-              <input
-                type='text'
+              <TextInput
+                type="text"
                 value={input}
                 onChange={(e) => onTextChange(e, i)}
-                disabled={i !== inputs.length - 1}
+                // disabled={i !== inputs.length - 1}
               />
-              <GrFormClose onClick={() => removeInputField(i)} />
+              {i === inputs.length - 1 ? (
+                <GrFormAdd onClick={() => addInputField()} />
+              ) : (
+                <GrFormClose onClick={() => removeInputField(i)} />
+              )}
             </Field>
           );
         })}
-        <GrFormAdd onClick={() => addInputField()} />
       </Form>
       <ButtonGroup>
         <AddFromFridgeButton onClick={() => addAllFridgeItems()}>
@@ -93,13 +97,12 @@ export default function InputPopup({ open, setOpen }) {
 
 const Popup = styled.div`
   padding: 10px 20px;
-  border: 1px solid ${theme.orange};
   display: ${(props) => (props.open ? 'flex' : 'none')};
   flex-direction: column;
   gap: 10px;
   position: absolute;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 1px;
   top: calc(100% + 10px);
   right: 0;
   z-index: 10;
@@ -107,17 +110,35 @@ const Popup = styled.div`
   width: fit-content;
 `;
 
+const Mask = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+`;
+
 const Title = styled.h1``;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 5px;
 `;
 
 const Field = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+`;
+
+const TextInput = styled.input`
+  outline: none;
+  border: none;
+  border-bottom: 1px solid ${theme.orange};
+  position: relative;
+  background-color: rgba(122, 122, 122, 0.1);
 `;
 
 const ButtonGroup = styled.div`
@@ -127,15 +148,37 @@ const ButtonGroup = styled.div`
   font-size: 0.8em;
 `;
 
-const AddFromFridgeButton = styled.button`
-  border: 1px solid ${theme.orange};
+const Button = styled.button`
   font-size: 0.8em;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+  position: relative;
 `;
-const ConfirmButton = styled.button`
-  background-color: ${theme.orange};
-  font-size: 0.8em;
-  padding: 5px 10px;
-  border-radius: 20px;
+
+const AddFromFridgeButton = styled(Button)`
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    z-index: -1;
+    background-color: black;
+    transition: height ease 0.1s;
+  }
+  &:hover {
+    color: white;
+    &::after {
+      height: 100%;
+    }
+  }
+`;
+const ConfirmButton = styled(Button)`
+  background-color: black;
+  color: white;
+  &::after {
+    height: 100%;
+  }
 `;

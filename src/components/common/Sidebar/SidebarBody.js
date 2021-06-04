@@ -55,23 +55,25 @@ export default function SidebarBody() {
         </List>
       </Section> */}
 
-      <Section ref={SELECTED_RECIPES} className='open'>
+      <Section ref={SELECTED_RECIPES} className="open">
         <SectionTitle
-          onClick={() => SELECTED_RECIPES.current.classList.toggle('open')}>
+          onClick={() => SELECTED_RECIPES.current.classList.toggle('open')}
+        >
           <h2>已選食譜</h2>
           <DropDownArrow />
         </SectionTitle>
         <List>
           {selectedRecipes &&
             selectedRecipes.map((recipe, i) => (
-              <Item key={i} className='item' type='recipe' recipe={recipe} />
+              <Item key={i} className="item" type="recipe" recipe={recipe} />
             ))}
         </List>
       </Section>
 
-      <Section ref={REMAIN_LEFTOVERS} className='open'>
+      <Section ref={REMAIN_LEFTOVERS} className="open">
         <SectionTitle
-          onClick={() => REMAIN_LEFTOVERS.current.classList.toggle('open')}>
+          onClick={() => REMAIN_LEFTOVERS.current.classList.toggle('open')}
+        >
           <h2>剩餘食材</h2>
           <DropDownArrow />
         </SectionTitle>
@@ -80,8 +82,8 @@ export default function SidebarBody() {
             ingredientsLeft.map((ingr, i) => (
               <Item
                 key={i}
-                className='item'
-                type='ingredient'
+                className="item"
+                type="ingredient"
                 readOnly={true}
                 ingredient={ingr}
               />
@@ -89,9 +91,10 @@ export default function SidebarBody() {
         </List>
       </Section>
 
-      <Section ref={NEEDED_INGREDIENT} className='open'>
+      <Section ref={NEEDED_INGREDIENT} className="open">
         <SectionTitle
-          onClick={() => NEEDED_INGREDIENT.current.classList.toggle('open')}>
+          onClick={() => NEEDED_INGREDIENT.current.classList.toggle('open')}
+        >
           <h2>不足食材</h2>
           <DropDownArrow />
         </SectionTitle>
@@ -99,8 +102,8 @@ export default function SidebarBody() {
           {ingredientsNeeded.map((ingr, i) => (
             <Item
               key={i}
-              className='item'
-              type='ingredient'
+              className="item"
+              type="ingredient"
               readOnly={true}
               ingredient={ingr}
             />
@@ -138,10 +141,13 @@ const DropDownArrow = styled(AiFillCaretLeft)`
 `;
 
 const Section = styled.section`
-  padding: 15px;
+  padding: 15px 0;
+  margin: 0 15px;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid gray;
+  &:not(:first-child) {
+    border-top: 1px solid ${theme.darkbrown};
+  }
 
   &.open ${DropDownArrow} {
     transform: rotateZ(-90deg);

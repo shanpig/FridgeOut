@@ -4,6 +4,7 @@ const theme = {
   lighterOrange: '#FFD7A0',
   lightBlue: '#cbf3f0',
   blue: '#2ec4b6',
+  darkbrown: '#412403',
 };
 
 const headerConfig = {
