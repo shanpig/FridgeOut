@@ -39,7 +39,7 @@ const Main = styled.main`
   align-items: center;
   min-height: calc(100vh - ${headerConfig.mobile_height});
   font-family: 'Montserrat';
-  overflow: auto;
+  /* overflow: auto; */
 `;
 
 const MainContent = styled.div`
@@ -51,7 +51,7 @@ const MainContent = styled.div`
   padding: 40px 56px;
   width: 100%;
   height: ${mainContentConfig.mobile_height};
-  overflow: auto;
+  /* overflow: auto; */
 
   gap: 20px;
   @media screen and (min-width: 769px) {
