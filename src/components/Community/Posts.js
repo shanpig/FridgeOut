@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import QueryPost from "./QueryPost";
-import SharePost from "./SharePost";
-import { getPosts } from "../../utils/firebase";
-import { Animated } from "react-animated-css";
+import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import QueryPost from './QueryPost';
+import SharePost from './SharePost';
+import { getPosts } from '../../utils/firebase';
+import { Animated } from 'react-animated-css';
 
 const fromNewToOld = (post1, post2) => {
   return post2.timestamp - post1.timestamp;
@@ -28,21 +28,22 @@ export default function Posts({ category }) {
           .filter((post) => post.type === category)
           .map((post, i) => {
             switch (post.type) {
-              case "query":
+              case 'query':
                 return (
                   <Animated
                     key={i}
-                    animationIn="fadeIn"
+                    animationIn="fadeInDown"
                     animationInDuration={500}
+                    animationInDelay={i * 100}
                   >
                     <QueryPost post={post} />
                   </Animated>
                 );
-              case "share":
+              case 'share':
                 return (
                   <Animated
                     key={i}
-                    animationIn="fadeIn"
+                    animationIn="fadeInDown"
                     animationInDuration={500}
                   >
                     <SharePost post={post} />

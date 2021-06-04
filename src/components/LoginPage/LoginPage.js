@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '../../variables';
 import { useState, useEffect } from 'react';
+import { Animated } from 'react-animated-css';
 import {
   registerUser,
   signInWithPopup,
@@ -54,13 +55,14 @@ export default function LoginPage() {
 
   return (
     <Main>
-      <LoginForm>
-        <Title>Sign In</Title>
-        <LoginButton onClick={() => signIn()}>
-          <GoogleLogin />
-          Click to sign in
-        </LoginButton>
-      </LoginForm>
+      <Animated animationIn={'fadeIn'} animationInDuration={300}>
+        <LoginForm>
+          <Title>請先登入</Title>
+          <LoginButton onClick={() => signIn()}>
+            <GoogleLogin />以 Google 帳號登入
+          </LoginButton>
+        </LoginForm>
+      </Animated>
     </Main>
   );
 }
@@ -70,10 +72,13 @@ const Main = styled.main`
   padding: 10%;
   justify-content: center;
   align-items: center;
+  & * {
+    color: black;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 20px;
 `;
 
@@ -81,6 +86,8 @@ const LoginForm = styled.div`
   padding: 20px;
   background-color: white;
   text-align: center;
+  border-radius: 3px;
+  box-shadow: 1px 1px 8px -5px black;
 `;
 
 const LoginButton = styled.button`

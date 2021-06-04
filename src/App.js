@@ -27,7 +27,7 @@ function App() {
     <>
       <Body>
         <Router>
-          <ScrollToTop />
+          {/* <ScrollToTop /> */}
           <Header></Header>
           <HeaderSpacer></HeaderSpacer>
           <Switch>
