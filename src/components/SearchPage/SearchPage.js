@@ -8,7 +8,7 @@ import SidebarBody from '../common/Sidebar/SidebarBody';
 import { GrFormAdd } from 'react-icons/gr';
 import { theme } from '../../variables';
 import { searchRecipesByIngredientNames } from '../../utils/firebase';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import { addToKitchen } from '../../redux/reducers/user/userActions';
 import { Animated } from 'react-animated-css';
 
@@ -57,26 +57,34 @@ export default function SearchPage() {
             .sort((a, b) => a.ingredients.length - b.ingredients.length)
             .slice(recipesPage * 10, recipesPage * 10 + 10)
             .map((recipe, i) => (
-              <Animated animationInDelay={(i - 1) * 200}>
+              <StyledAnimated
+                animationIn="fadeInUp"
+                animationInDelay={(i - 1) * 200}
+              >
                 <RecipeItem
                   key={i}
+                  readOnly={true}
                   recipe={recipe}
-                  button={isSelected(recipe) ? DisabledButton : AddButton}
+                  Button={isSelected(recipe) ? DisabledButton : AddButton} //
                   buttonAction={() => addToKitchen(recipe)}
                 />
-              </Animated>
+              </StyledAnimated>
             ))}
+          <Pagination>
+            <PrevPageButton onClick={() => movePage(-1)}>
+              <PrevPageIcon />
+            </PrevPageButton>
+            {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
+            <NextPageButton onClick={() => movePage(1)}>
+              <NextPageIcon />
+            </NextPageButton>
+          </Pagination>
         </SearchedRecipes>
         <DeskTopSidebar>
           <SidebarBody />
         </DeskTopSidebar>
       </ContentRow>
       <MiscRow>
-        <Pagination>
-          <PrevPageButton onClick={() => movePage(-1)} />
-          {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
-          <NextPageButton onClick={() => movePage(1)} />
-        </Pagination>
         {/* <SortSelection>
           <option value='' disabled>
             排序
@@ -121,25 +129,45 @@ const MiscRow = styled(Row)`
 
 const ContentRow = styled(Row)`
   margin-top: 30px;
-
   align-items: flex-start;
   /* background-color: rgba(255, 255, 255, 0.8); */
 `;
 
-const PrevPageButton = styled(AiOutlineArrowLeft)`
+const Button = styled.button`
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center;
+
+  &:hover {
+    transform: scale(1.4);
+
+    & path {
+      fill: ${theme.orange};
+    }
+  }
+`;
+
+const PrevPageButton = styled(Button)``;
+
+const PrevPageIcon = styled(AiFillCaretLeft)`
   cursor: pointer;
-  font-size: 1.1em;
+  width: 100%;
+  height: 100%;
+
   @media screen and (min-width: 769px) {
     font-size: 0.8em;
   }
 `;
 
-const NextPageButton = styled(AiOutlineArrowRight)`
+const NextPageButton = styled(Button)``;
+
+const NextPageIcon = styled(AiFillCaretRight)`
   cursor: pointer;
-  font-size: 1.1em;
-  & path {
-    stroke: white;
-  }
+  width: 100%;
+  height: 100%;
+
   @media screen and (min-width: 769px) {
     font-size: 0.8em;
   }
@@ -149,12 +177,16 @@ const Pagination = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
   gap: 10px;
   font-size: 1.3em;
   user-select: none;
   letter-spacing: 5px;
 
   color: white;
+  & path {
+    color: white;
+  }
 `;
 
 const SortSelection = styled.select`
@@ -170,6 +202,10 @@ const SearchedRecipes = styled.ul`
   @media screen and (min-width: 769px) {
     width: 70%;
   }
+`;
+
+const StyledAnimated = styled(Animated)`
+  pointer-events: unset;
 `;
 
 const DeskTopSidebar = styled.aside`

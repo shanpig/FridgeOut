@@ -1,3 +1,4 @@
+import { theme } from '../../variables';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -42,7 +43,11 @@ export default function QueryPost({ post }) {
     d(setRecommendPostHolder(post));
   }
   return (
-    <Post name={name} profile_image={profile_image} timestamp={timestamp}>
+    <PostContent
+      name={name}
+      profile_image={profile_image}
+      timestamp={timestamp}
+    >
       <Title>發問：這些食材可以做甚麼呢？</Title>
       <Ingredients>
         {ingredients &&
@@ -56,30 +61,50 @@ export default function QueryPost({ post }) {
       <Button to={`/form/recommend/${post_id}`} onClick={setPostHolder}>
         幫助他！
       </Button>
-    </Post>
+    </PostContent>
   );
 }
 
+const PostContent = styled(Post)`
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Title = styled.h2`
-  font-size: 1.2em;
-  font-weight: bold;
-  color: gray;
+  font-size: 0.9em;
+  text-align: center;
+  letter-spacing: 2px;
+  text-indent: 5px;
+  color: #706255;
 `;
 const Ingredients = styled.ul`
   display: flex;
+  font-size: 1.2em;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
-  margin-bottom: 5px;
+  margin: 5px 0;
   padding: 5px 10px;
   border: 1px solid lightgray;
+  border-radius: 5px;
 `;
 const Ingredient = styled.li``;
 const Button = styled(Link)`
   width: 100%;
   border-top: 1px solid lightgray;
   padding: 10px 0;
+  background-color: ${theme.lightOrange};
   text-align: center;
   text-decoration: none;
+  border-radius: 8px;
   color: black;
   cursor: pointer;
+  transition: background-color ease 0.1s;
+
+  &:hover {
+    background-color: ${theme.orange};
+  }
 `;

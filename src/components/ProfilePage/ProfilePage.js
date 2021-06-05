@@ -48,68 +48,83 @@ export default function ProfilePage() {
   }
   return (
     <Main>
-      <ProfileRow>
-        <ProfileImage src={profile} />
-        <UserName>{name}</UserName>
-      </ProfileRow>
-      <NavRow>
-        <NavItem activeClassName="active" to={`${match.url}/fridge`}>
-          我的冰箱
-        </NavItem>
-        <NavItem activeClassName="active" to={`${match.url}/kitchen`}>
-          我的廚房
-        </NavItem>
-        <NavItem activeClassName="active" to={`${match.url}/favorites`}>
-          食譜收藏
-        </NavItem>
-        <NavItem activeClassName="active" to={`${match.url}/messages`}>
-          我的訊息
-        </NavItem>
-      </NavRow>
-      <ContentRow>
-        <MainContent>
-          <Switch>
-            <Route path={`${match.url}/kitchen`}>
-              <Kitchen></Kitchen>
-            </Route>
-            <Route path={`${match.url}/favorites`}>
-              <Favorites></Favorites>
-            </Route>
-            <Route path={`${match.url}/messages`}>
-              <Messages></Messages>
-            </Route>
-            <Route path={`${match.url}/`}>
-              <Redirect to={`${match.url}/fridge`} />
-              <Fridge></Fridge>
-            </Route>
-          </Switch>
-        </MainContent>
-        <SideContent>
-          <KitchenCount>
-            廚房的菜單<span>{myKitchen.length}</span>
-          </KitchenCount>
-          <FavoriteCount>
-            收藏的食譜<span>{myFavorites.length}</span>
-          </FavoriteCount>
-        </SideContent>
-      </ContentRow>
-      <Logout onClick={() => signOut()}>
-        登出
-        <LogoutButton />
-      </Logout>
+      <Card>
+        <ProfileRow>
+          <ProfileImage src={profile} />
+          <Col>
+            <UserName>{name}</UserName>
+            <Statistics>
+              <KitchenCount>
+                <span>{myKitchen.length}</span>廚房的菜單
+              </KitchenCount>
+              <FavoriteCount>
+                <span>{myFavorites.length}</span>收藏的食譜
+              </FavoriteCount>
+            </Statistics>
+          </Col>
+        </ProfileRow>
+        <NavRow>
+          <NavItem activeClassName="active" to={`${match.url}/fridge`}>
+            我的冰箱
+          </NavItem>
+          <NavItem activeClassName="active" to={`${match.url}/kitchen`}>
+            我的廚房
+          </NavItem>
+          <NavItem activeClassName="active" to={`${match.url}/favorites`}>
+            食譜收藏
+          </NavItem>
+          <NavItem activeClassName="active" to={`${match.url}/messages`}>
+            我的訊息
+          </NavItem>
+        </NavRow>
+        <ContentRow>
+          <MainContent>
+            <Switch>
+              <Route path={`${match.url}/kitchen`}>
+                <Kitchen></Kitchen>
+              </Route>
+              <Route path={`${match.url}/favorites`}>
+                <Favorites></Favorites>
+              </Route>
+              <Route path={`${match.url}/messages`}>
+                <Messages></Messages>
+              </Route>
+              <Route path={`${match.url}/`}>
+                <Redirect to={`${match.url}/fridge`} />
+                <Fridge></Fridge>
+              </Route>
+            </Switch>
+          </MainContent>
+        </ContentRow>
+        <Logout onClick={() => signOut()}>
+          登出
+          <LogoutButton />
+        </Logout>
+      </Card>
     </Main>
   );
 }
 const Main = styled.main`
-  width: 100%;
   position: relative;
-  padding: 20px 20px;
+  @media screen and (min-width: 769px) {
+    padding: 20px 0;
+    margin: 50px 42px 0;
+    padding-bottom: 30px;
+  }
+`;
+
+const Card = styled.div`
+  /* width: 100%; */
+  max-width: 600px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  padding-bottom: 20px;
+  /* background-color: white; */
+  background-color: #ffe6c2;
 
   @media screen and (min-width: 769px) {
-    padding: 50px 42px;
+    border-radius: 5px;
   }
 `;
 
@@ -123,16 +138,29 @@ const Row = styled.div`
   width: 100%;
 `;
 
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  gap: 15px 0;
+`;
+
 const ProfileRow = styled(Row)`
-  background-image: url('https://picsum.photos/400/150');
+  /* background-image: url('https://picsum.photos/400/150');
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+  justify-content: flex-start;
+  background-color: #ffe6c2;
+  align-items: center;
+  gap: 0 30px;
+  padding: 20px 30px;
   height: 150px;
   position: relative;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 
   @media screen and (min-width: 769px) {
+    border-radius: 5px 5px 0 0;
     height: 200px;
   }
   /* margin-left: 40px;
@@ -145,45 +173,50 @@ const ProfileRow = styled(Row)`
   font-size: 1.3em; */
 `;
 const ProfileImage = styled.img`
-  width: 60px;
-  height: 60px;
-  padding: 2px;
+  width: 100px;
+  height: 100px;
+
   background: white;
   object-fit: contain;
   border-radius: 50%;
-  box-shadow: 2px 1px 7px -5px black;
-  position: absolute;
-  bottom: 0;
-  transform: translate(10px, 60%);
+  /* box-shadow: 2px 1px 7px -5px black; */
+  /* position: absolute; */
+  /* bottom: 0; */
+  /* transform: translate(10px, 60%); */
 
   /* 
   position: absolute;*/
 `;
 
 const UserName = styled.div`
-  position: absolute;
-  bottom: 0;
-  transform: translate(80px, calc(60% + 15px));
-  font-size: 1.3em;
+  /* position: absolute; */
+  /* bottom: 0;
+  transform: translate(80px, calc(60% + 15px)); */
+  color: ${theme.darkbrown};
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 1.8em;
 `;
 
 const NavRow = styled(Row)`
   justify-content: flex-start;
   align-items: center;
-  gap: 5px;
-  background-color: rgba(255, 255, 255, 0.8);
+  /* gap: 5px; */
+  /* background-color: rgba(255, 255, 255, 0.8); */
   min-height: 50px;
   padding: 0 20px;
+  background-color: #fcfcfc;
   flex-wrap: wrap;
 `;
 
 const NavItem = styled(Link)`
-  color: black;
+  /* color: black; */
   text-decoration: none;
-  padding: 0 10px;
+  padding: 10px 5px 5px;
   height: 100%;
-  line-height: 50px;
+  line-height: 1;
   position: relative;
+  color: ${theme.darkbrown};
 
   &:hover {
     background-color: #f0f0f0;
@@ -194,7 +227,7 @@ const NavItem = styled(Link)`
     content: '';
     left: 50%;
     right: 0;
-    bottom: 10px;
+    bottom: 0;
     width: 0;
     height: 2px;
     transform-origin: center;
@@ -204,7 +237,7 @@ const NavItem = styled(Link)`
   }
 
   &.active {
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     &::after {
       width: 80%;
     }
@@ -212,9 +245,11 @@ const NavItem = styled(Link)`
 `;
 
 const ContentRow = styled(Row)`
-  margin: 20px 0;
+  margin: 0;
   gap: 0 20px;
   flex-wrap: nowrap;
+  padding: 20px;
+  background-color: #ffe6c2;
 `;
 
 const MainContent = styled.div`
@@ -222,50 +257,54 @@ const MainContent = styled.div`
   flex-shrink: 1;
 `;
 
-const SideContent = styled.div`
-  display: none;
-  @media screen and (min-width: 769px) {
-    max-width: 250px;
-    min-width: 250px;
-    height: 120px;
-    flex: 1 1;
-    justify-content: space-evenly;
-    align-items: center;
-    display: flex;
-    background-color: rgba(255, 255, 255, 0.9);
-  }
-`;
-
-const SidebarCount = styled.div`
-  flex-grow: 1;
-  height: 60%;
-  color: black;
+const Statistics = styled.div`
+  /* display: none; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 5px 0;
+  /* @media screen and (min-width: 769px) {
+    flex: 1 1;
+    border-radius: 5px;
+    justify-content: space-evenly;
+    background-color: rgba(255, 255, 255, 0.9);
+  } */
+`;
+
+const StatisticsCount = styled.div`
+  flex-grow: 1;
+  height: 60%;
+  display: flex;
+  align-items: baseline;
+  gap: 0 8px;
+  font-size: 0.8em;
+  color: #9f8e7f;
   justify-content: space-between;
 
   & span {
-    font-size: 2em;
-    font-family: 'Montserrat';
-    color: ${theme.orange};
+    font-size: 1.8em;
+    font-family: 'Roboto';
+    font-weight: bold;
+    color: ${theme.darkbrown};
     /* text-shadow: 1px 1px black; */
   }
 `;
 
-const KitchenCount = styled(SidebarCount)`
-  border-right: 1px solid ${theme.orange};
-`;
-const FavoriteCount = styled(SidebarCount)``;
+const KitchenCount = styled(StatisticsCount)``;
+const FavoriteCount = styled(StatisticsCount)``;
 
 const UserEmail = styled.div``;
 
 const Logout = styled.button`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px;
   gap: 5px;
   color: red;
   cursor: pointer;
 `;
 
-const LogoutButton = styled(FiLogOut)``;
+const LogoutButton = styled(FiLogOut)`
+  stroke: red;
+`;

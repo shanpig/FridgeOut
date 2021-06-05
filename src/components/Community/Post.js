@@ -1,18 +1,25 @@
+import { theme } from '../../variables';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setRecommendPostHolder } from '../../redux/reducers/user/userActions';
 import { timeDifference } from '../../utils/math';
 
-export default function Post({ name, profile_image, timestamp, children }) {
+export default function Post({
+  className,
+  name,
+  profile_image,
+  timestamp,
+  children,
+}) {
   return (
     <PostContainer>
+      <ProfileImage src={profile_image} alt="" />
       <Profile>
-        <ProfileImage src={profile_image} alt="" />
         <Name className="name">{name}</Name>
         <Time>{timeDifference(new Date(timestamp.toDate()))}</Time>
       </Profile>
-      <Content>{children}</Content>
+      <Content className={className}>{children}</Content>
     </PostContainer>
   );
 }
@@ -20,21 +27,24 @@ export default function Post({ name, profile_image, timestamp, children }) {
 const PostContainer = styled.div`
   width: 100%;
   display: flex;
+  border-radius: 5px;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  padding-bottom: 0;
-  background-color: rgba(255, 255, 255, 0.9);
+  align-items: center;
+  position: relative;
+  gap: 15px;
+  padding-top: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
 
   & * {
-    color: black;
+    color: ${theme.darkbrown};
+    font-family: 'Noto Sans TC', 'Roboto';
     /* font-family: 'Roboto'; */
   }
 `;
 
 const Profile = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
 `;
 
@@ -48,8 +58,14 @@ const Time = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: ${theme.darkbrown};
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  border: 2px solid white;
+  transform: translateX(-50%);
   border-radius: 50%;
 `;
 

@@ -1,3 +1,4 @@
+import { theme } from '../../variables';
 import { useEffect, useState } from 'react';
 import { getRecipe } from '../../utils/firebase';
 import styled from 'styled-components';
@@ -16,8 +17,12 @@ export default function SharePost({ post }) {
   }, []);
 
   return (
-    <Post name={name} profile_image={profile_image} timestamp={timestamp}>
-      <Title>{name} 分享了一份食譜！</Title>
+    <PostContent
+      name={name}
+      profile_image={profile_image}
+      timestamp={timestamp}
+    >
+      <Title>分享了一份食譜！</Title>
       <Recipe to={`/recipe/${recipe.id}`}>
         <ImageCol>
           <RecipeImage src={recipe && recipe.main_image} alt="" />
@@ -32,9 +37,17 @@ export default function SharePost({ post }) {
           </RecipeIngredients>
         </InfoCol>
       </Recipe>
-    </Post>
+    </PostContent>
   );
 }
+
+const PostContent = styled(Post)`
+  width: 100%;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const ImageCol = styled.div`
   width: fit-content;
@@ -47,14 +60,20 @@ const InfoCol = styled.div`
 `;
 
 const Title = styled.h2`
-  color: gray;
+  color: #706255;
+  font-size: 0.9em;
+  text-align: center;
+  letter-spacing: 2px;
 `;
 
 const Recipe = styled(Link)`
   text-decoration: none;
+  /* color: ${theme.darkbrown}; */
+  width: 100%;
   cursor: pointer;
   margin: 0 10px 10px;
-  border: 1px solid lightgray;
+  border: 1px solid gray;
+  border-radius: 4px;
   display: flex;
   padding: 10px 20px;
   gap: 10px;
@@ -62,7 +81,7 @@ const Recipe = styled(Link)`
 
 const RecipeName = styled.h2`
   font-size: 1.2em;
-  color: black;
+  /* color: black; */
   font-weight: bold;
 `;
 
@@ -83,4 +102,6 @@ const RecipeIngredients = styled.ul`
 
 const Ingredient = styled.li`
   color: gray;
+  line-height: 1.3;
+  border-bottom: 1.5px solid ${theme.orange};
 `;

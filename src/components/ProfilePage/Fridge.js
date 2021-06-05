@@ -6,6 +6,7 @@ import { AiTwotoneEdit, AiFillSave, AiOutlinePlus } from 'react-icons/ai';
 import { fractionStringToTC, isValidNumberString } from '../../utils/math';
 import { setLeftOvers } from '../../redux/reducers/user/userActions';
 import FridgeIngredient from './FridgeIngredient';
+import { Animated } from 'react-animated-css';
 
 export default function Fridge() {
   const d = useDispatch();
@@ -96,30 +97,34 @@ export default function Fridge() {
   }, [fridge]);
 
   return (
-    <FridgeContent>
-      {leftovers.map((ingredient, i) => (
-        <FridgeIngredient
-          key={i}
-          ingredient={ingredient}
-          removeLeftover={() => removeSingleLeftover(i)}
-          setLeftover={(leftover) => setSingleLeftover(leftover, i)}
-        />
-      ))}
-      <AddButton onClick={addNewLeftover}>
-        <AddIcon />
-      </AddButton>
-    </FridgeContent>
+    <Animated animationIn="fadeIn" animationInDuration={1000}>
+      <FridgeContent>
+        {leftovers.map((ingredient, i) => (
+          <FridgeIngredient
+            key={i}
+            ingredient={ingredient}
+            removeLeftover={() => removeSingleLeftover(i)}
+            setLeftover={(leftover) => setSingleLeftover(leftover, i)}
+          />
+        ))}
+        <AddButton onClick={addNewLeftover}>
+          <AddIcon />
+        </AddButton>
+      </FridgeContent>
+    </Animated>
   );
 }
 
 const FridgeContent = styled.div`
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   gap: 5px;
   position: relative;
   background-color: white;
-  padding: 10px;
+  padding: 15px 10px 10px;
+  /* margin-left: 20px; */
+  border-radius: 5px;
 `;
 
 const AddButton = styled.div`
@@ -130,9 +135,9 @@ const AddButton = styled.div`
   align-items: center;
   justify-content: center;
   margin: 10px auto 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: ${theme.lighterOrange};
   cursor: pointer;
-  padding: 3px;
+  padding: 4px;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.2);

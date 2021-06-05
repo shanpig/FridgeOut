@@ -5,8 +5,8 @@ import { useParams, useHistory } from 'react-router';
 import { getRecipe } from '../../utils/firebase';
 import SidebarBody from '../common/Sidebar/SidebarBody';
 import backgroundImageSrc from '../../images/kitchen-table.jpg';
-import { GrClose } from 'react-icons/gr';
-import { useDispatch } from 'react-redux';
+import { GrClose, GrAdd, GrCheckmark } from 'react-icons/gr';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addToFavorite,
   addToKitchen,
@@ -15,6 +15,8 @@ import GoBackButton from '../common/GoBackButton';
 // import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
 export default function RecipePage() {
+  const myKitchen = useSelector((state) => state.user_info.my_kitchen);
+  const myFavorite = useSelector((state) => state.user_info.my_favorites);
   const d = useDispatch();
   const history = useHistory();
   let cat = '';
@@ -34,6 +36,15 @@ export default function RecipePage() {
     });
   }, [id]);
 
+  function isInKitchen(recipe) {
+    console.log(myKitchen);
+    console.log(myKitchen.findIndex((target) => target.id === recipe.id));
+    return myKitchen.findIndex((target) => target.id === recipe.id) >= 0;
+  }
+  function isInFavorite(recipe) {
+    return myFavorite.findIndex((target) => target.id === recipe.id) >= 0;
+  }
+
   return (
     <Main>
       <Card>
@@ -47,25 +58,39 @@ export default function RecipePage() {
           <AddToButton
             key={1}
             value=""
+            className={isInFavorite(recipe) ? 'active' : ''}
             onClick={() => {
               if (recipe.id) d(addToFavorite(recipe));
             }}
           >
-            + 收藏
+            {isInFavorite(recipe) ? (
+              <CheckIcon></CheckIcon>
+            ) : (
+              <AddIcon></AddIcon>
+            )}
+            收藏
           </AddToButton>
           <AddToButton
             key={2}
             value=""
+            className={isInKitchen(recipe) ? 'active' : ''}
             onClick={() => {
               if (recipe.id) d(addToKitchen(recipe));
             }}
           >
-            + 我的廚房
+            {isInKitchen(recipe) ? (
+              <CheckIcon></CheckIcon>
+            ) : (
+              <AddIcon></AddIcon>
+            )}
+            我的廚房
           </AddToButton>
         </AddToButtonGroup>
 
         <ListContainer>
-          <ListTitle>食材</ListTitle>
+          <ListTitle>
+            <ListTitleBullet>食材</ListTitleBullet>
+          </ListTitle>
           <IngredientList>
             {ingredients &&
               ingredients.map((ingredient, i) => {
@@ -100,8 +125,10 @@ export default function RecipePage() {
               })}
           </IngredientList>
         </ListContainer>
-        <ListContainer>
-          <ListTitle>步驟</ListTitle>
+        <StepsContainer>
+          <ListTitle>
+            <ListTitleBullet>步驟</ListTitleBullet>
+          </ListTitle>
           <Steps>
             {steps &&
               steps.map((step, i) => (
@@ -111,7 +138,7 @@ export default function RecipePage() {
                 </Step>
               ))}
           </Steps>
-        </ListContainer>
+        </StepsContainer>
         {/* <SidebarContent>
           <SidebarBody />
         </SidebarContent> */}
@@ -123,8 +150,8 @@ export default function RecipePage() {
 const Main = styled.main`
   padding: 10px 0 50px;
   position: relative;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(${backgroundImageSrc});
+  /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(${backgroundImageSrc}); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -140,14 +167,15 @@ const Main = styled.main`
 
 const CloseButton = styled(GrClose)`
   position: absolute;
-  right: 10px;
-  top: 10px;
-  width: 15px;
-  height: 15px;
+  right: 20px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 
   & path {
-    stroke: white;
+    stroke-width: 3;
+    stroke: ${theme.darkbrown};
   }
 
   &:hover {
@@ -161,13 +189,14 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 20px;
   gap: 10px;
   max-width: 600px;
   width: 90%;
   margin: 20px auto;
 
   & * {
-    color: black;
+    color: ${theme.darkbrown};
     /* font-family: 'Roboto'; */
   }
 `;
@@ -175,17 +204,37 @@ const Card = styled.div`
 const CardHead = styled.div`
   height: 150px;
   width: 100%;
-  background: #5a5959;
+  border-radius: 20px 20px 0 0;
+  background-color: ${theme.orange};
 `;
 
 const AddToButton = styled.button`
   cursor: pointer;
   position: relative;
   border-radius: 5px;
-  line-height: 1.3;
+  /* line-height: 1.3; */
   border: 1px solid gray;
   padding: 3px 5px;
+  transition: 0.2s ease all;
+  display: flex;
+  align-items: center;
+  gap: 0 5px;
+
+  &.active {
+    border: none;
+    pointer-events: none;
+  }
+  &:hover {
+    background-color: ${theme.darkbrown};
+    color: white;
+    & path {
+      stroke: white;
+    }
+  }
 `;
+
+const AddIcon = styled(GrAdd)``;
+const CheckIcon = styled(GrCheckmark)``;
 
 const RecipeImageContainer = styled.div`
   position: relative;
@@ -219,7 +268,7 @@ const Title = styled.h1`
 
 const ListContainer = styled.div`
   width: 100%;
-  padding: 10px 10px 15px;
+  padding: 10px 15px 25px;
   background-color: #f0f0f0;
 `;
 
@@ -227,7 +276,15 @@ const ListTitle = styled.h3`
   font-size: 1.1em;
   font-weight: bold;
   padding: 10px;
-  border-bottom: 2px solid #c7c6c6;
+  border-bottom: 1.5px solid ${theme.darkbrown};
+  margin-bottom: 10px;
+`;
+
+const ListTitleBullet = styled.div`
+  width: fit-content;
+  padding: 5px 15px;
+  border-radius: 30px;
+  border: 1.5px solid ${theme.darkbrown};
 `;
 
 const IngredientList = styled.ul`
@@ -238,7 +295,9 @@ const IngredientList = styled.ul`
   gap: 5px;
 `;
 
-const IngredientItem = styled.li``;
+const IngredientItem = styled.li`
+  letter-spacing: 1px;
+`;
 
 const IngredientCat = styled.div`
   margin: 10px 0;
@@ -267,6 +326,7 @@ const Step = styled.li`
   margin-top: 5px;
   margin-left: 5px;
   line-height: 1.5;
+  letter-spacing: 1px;
 
   span:first-child {
     margin-right: 5px;
@@ -282,4 +342,8 @@ const SidebarContent = styled.div`
     margin-left: 40px;
     background-color: white;
   }
+`;
+
+const StepsContainer = styled(ListContainer)`
+  border-radius: 0 0 20px 20px;
 `;

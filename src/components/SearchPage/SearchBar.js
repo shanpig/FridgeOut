@@ -38,8 +38,7 @@ export default function SearchBar() {
               );
             })}
         </KeywordInputs>
-        <AddButton onClick={() => setPopupOpen(!popupOpen)}></AddButton>
-        <InputPopup open={popupOpen} setOpen={setPopupOpen} />
+        <InputPopup />
       </Bar>
     </Animated>
   );
@@ -87,17 +86,4 @@ const Input = styled.li`
 const RemoveInput = styled(GrFormClose)`
   margin-left: 10px;
   cursor: pointer;
-`;
-
-const AddButton = styled(GrFormAdd)`
-  transform: scale(1.5);
-  min-width: 20px;
-  min-height: 20px;
-  margin-left: auto;
-  cursor: pointer;
-
-  @media screen and (min-width: 769px) {
-    transform: scale(1.2);
-    font-size: 1em;
-  }
 `;

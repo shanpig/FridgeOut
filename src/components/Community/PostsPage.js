@@ -7,6 +7,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import styled from 'styled-components';
+import SmallLogoSrc from '../../images/logo-small.svg';
 
 import Posts from './Posts';
 import { GoPrimitiveDot } from 'react-icons/go';
@@ -20,7 +21,7 @@ export default function PostsPage() {
       <MainContent>
         <ButtonGroup>
           <PostQuery activeClassName="active" to={`${match.url}/query`}>
-            剩食求解
+            求食譜
           </PostQuery>
           <PostRecipe activeClassName="active" to={`${match.url}/share`}>
             分享食譜
@@ -47,9 +48,10 @@ export default function PostsPage() {
 const Main = styled.main``;
 
 const MainContent = styled.div`
-  max-width: 600px;
+  max-width: 400px;
   width: 100%;
   margin: 10px auto;
+  padding: 40px 10px 0;
   display: flex;
   position: relative;
 
@@ -64,14 +66,17 @@ const EndSign = styled(GoPrimitiveDot)`
 `;
 
 const ButtonGroup = styled.div`
+  max-width: 600px;
+  width: 100%;
+  padding: 0 10px;
   display: flex;
   justify-content: space-evenly;
-  align-items: stretch;
-  position: absolute;
-  box-shadow: 0 1px 10px -5px gray;
+  /* align-items: stretch; */
+
+  position: fixed;
+  /* box-shadow: 0 1px 10px -5px gray; */
   z-index: 10;
-  top: 0;
-  /* top: ${headerConfig.computer_height}; */
+  top: calc(${headerConfig.computer_height} + 10px);
   left: 0;
   right: 0;
 
@@ -80,30 +85,46 @@ const ButtonGroup = styled.div`
 `;
 
 const ButtonGroupSpacer = styled.div`
-  height: 30px;
+  height: 40px;
 `;
 
 const Tab = styled(NavLink)`
-  flex-grow: 1;
+  width: 40%;
+  letter-spacing: 10px;
+  text-indent: 10px;
   color: white;
   text-align: center;
   text-decoration: none;
-  background-color: gray;
+  border-radius: 50px;
+  background-color: ${theme.darkbrown};
   display: flex;
   align-items: center;
   justify-content: center;
   /* transform: scale(0.8); */
   transition: all ease 0.3s;
 
+  &:not(.active):hover {
+    width: 50%;
+  }
+
   &.active {
-    color: black;
+    color: ${theme.darkbrown};
+    /* color: white; */
     /* flex-grow: 3; */
     /* transform: scale(1); */
-    border-bottom: 1px solid white;
     background-color: white;
+
+    &::after {
+      display: unset;
+    }
+    /* background-color: white; */
   }
 `;
 
-const PostQuery = styled(Tab)``;
+const PostQuery = styled(Tab)`
+  /* border-radius: 5px 0 0 5px; */
+`;
 
-const PostRecipe = styled(Tab)``;
+const PostRecipe = styled(Tab)`
+  /* border-radius: 0 5px 5px 0; */
+`;

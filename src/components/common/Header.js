@@ -36,7 +36,7 @@ export default function Header() {
             <span>社群</span>
           </NavButton>
           <NavButton
-            to={identity !== 'none' ? `/profile/${name}/fridge` : '/login'}
+            to={identity !== 'none' ? `/profile/${name}/fridge` : '/profile'}
             id="profile"
           >
             {profile ? <ProfileImage src={profile} /> : <ProfileIcon />}

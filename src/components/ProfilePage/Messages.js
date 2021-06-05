@@ -26,8 +26,9 @@ export default function Messages() {
           return (
             <Message>
               <From>
-                <Name>{from}</Name> 在 <Time>{timeDifference(time)}</Time>{' '}
+                <Name>{from}</Name>
                 給了你一個食譜建議！
+                <Time>{timeDifference(time)}</Time>
               </From>
 
               <Recipe to={`/recipe/${recipe.id}`}>
@@ -54,16 +55,17 @@ const MessagesContent = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 
   & * {
-    color: black;
+    /* color: black; */
   }
 `;
 
 const Message = styled.li`
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 15px;
+  padding: 15px 25px;
+  border-radius: 5px;
 `;
 
 const RecipeImage = styled.div`
@@ -104,13 +106,17 @@ const RecipeContent = styled.div`
 `;
 
 const From = styled.div`
+  display: flex;
+  align-items: baseline;
   padding: 0 5px 10px;
+  font-family: 'Roboto';
 `;
 const Name = styled.span`
-  font-size: 1.2em;
+  font-size: 1.1em;
+  margin-right: 5px;
 `;
 const Time = styled.span`
-  margin: 0 5px;
+  margin-left: auto;
 `;
 const RecipeTitle = styled.h2`
   font-size: 1.5em;

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import RecipeItem from '../SearchPage/RecipeItem';
 import { GrFormTrash } from 'react-icons/gr';
 import { removeFromKitchen } from '../../redux/reducers/user/userActions';
+import { Animated } from 'react-animated-css';
 
 export default function Kitchen() {
   const kitchen = useSelector((state) => {
@@ -15,12 +16,14 @@ export default function Kitchen() {
   return (
     <KitchenContent>
       {kitchen.map((recipe, i) => (
-        <Recipe
-          key={i}
-          recipe={recipe}
-          button={RemoveButton}
-          buttonAction={() => removeFromKitchen(recipe)}
-        />
+        <Animated animationIn="fadeInUp" animationInDelay={(i - 1) * 100}>
+          <Recipe
+            key={i}
+            recipe={recipe}
+            Button={RemoveButton}
+            buttonAction={() => removeFromKitchen(recipe)}
+          />
+        </Animated>
       ))}
     </KitchenContent>
   );

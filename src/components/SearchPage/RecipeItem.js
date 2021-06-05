@@ -11,7 +11,8 @@ function removeRepeat(array) {
 
 export default function RecipeItem({
   recipe,
-  button: Button,
+  readOnly = false,
+  Button,
   buttonAction = () => {},
 }) {
   const d = useDispatch();
@@ -39,15 +40,14 @@ export default function RecipeItem({
   }, [ingredients, leftovers]);
 
   return (
-    <Animated animationIn="fadeInUp">
-      <Item>
-        <ImageLink to={`/recipe/${id}`}>
+    <Item>
+      <ItemContent to={`/recipe/${id}`}>
+        <ImageContainer>
           <Image src={main_image}></Image>
-        </ImageLink>
+        </ImageContainer>
         <TextSection>
           <TitleRow>
             <Title>{title}</Title>
-            <Button onClick={() => d(buttonAction(recipe))} />
           </TitleRow>
           <ContentRow>
             {/* <H2>使用剩食：</H2>
@@ -64,39 +64,51 @@ export default function RecipeItem({
             </NeededLeftovers>
           </ContentRow>
         </TextSection>
-      </Item>
-    </Animated>
+      </ItemContent>
+      <ButtonContent>
+        {readOnly ? <></> : <Button onClick={() => d(buttonAction(recipe))} />}
+      </ButtonContent>
+    </Item>
   );
 }
 
-const Item = styled.li`
-  width: 100%;
-  /* height: 150px; */
-  padding: 10px 15px;
-  /* min-height: 180px; */
+const Item = styled.div`
   display: flex;
-  position: relative;
-  align-items: center;
   border-radius: 7px;
   background-color: white;
+  padding: 10px 15px;
+
+  @media screen and (min-width: 769px) {
+    padding: 20px 25px;
+  }
+`;
+
+const ItemContent = styled(Link)`
+  width: 100%;
+  text-decoration: none;
+  /* height: 150px; */
+  /* min-height: 180px; */
+  display: flex;
+  /* position: relative; */
+  align-items: center;
+
   transition: all ease 0.2s;
 
+  @media screen and (min-width: 769px) {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
   &:hover {
-    /* background-color: rgba(255, 255, 255, 0.9); */
+    background-color: white;
 
     & img {
       transform: scale(1);
     }
   }
-
-  @media screen and (min-width: 769px) {
-    padding: 20px 25px;
-    background-color: white;
-  }
 `;
 
-const ImageLink = styled(Link)`
-  flex: 1 1 150px;
+const ImageContainer = styled.div`
+  flex: 1 1 100px;
   border-radius: 10px;
   height: 80px;
   display: flex;
@@ -115,7 +127,7 @@ const Image = styled.img`
 `;
 
 const TextSection = styled.div`
-  flex: 2 1 40%;
+  flex: 3 1 40%;
   margin-left: 15px;
   align-self: stretch;
   display: flex;
@@ -123,6 +135,10 @@ const TextSection = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 3px;
+
+  @media screen and (min-width: 769px) {
+    flex-grow: 2;
+  }
 `;
 
 const TitleRow = styled.div`
@@ -133,7 +149,7 @@ const TitleRow = styled.div`
 `;
 
 const ContentRow = styled.div`
-  display: none;
+  /* display: none; */
   padding-left: 5px;
 
   @media screen and (min-width: 769px) {
@@ -143,6 +159,7 @@ const ContentRow = styled.div`
 
 const Title = styled.h1`
   font-size: 1.3em;
+  color: ${theme.darkbrown};
   font-weight: bold;
   letter-spacing: 1.5px;
   flex-shrink: 1;
@@ -159,6 +176,7 @@ const LiItem = styled.li`
 
 const H2 = styled.h2`
   font-size: 0.9em;
+  color: ${theme.darkbrown};
 `;
 
 const UsedLeftovers = styled.ul`
@@ -185,4 +203,10 @@ const NeededLeftover = styled(LiItem)`
   border-bottom: 1.5px solid ${theme.orange};
   /* color: red; */
   color: black;
+`;
+
+const ButtonContent = styled.div`
+  align-self: flex-start;
+  min-width: 30px;
+  max-width: 30px;
 `;

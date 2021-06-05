@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { GrFormTrash } from 'react-icons/gr';
 import { removeFromFavorite } from '../../redux/reducers/user/userActions';
+import { Animated } from 'react-animated-css';
 
 export default function Favorites() {
   const d = useDispatch();
@@ -12,13 +13,15 @@ export default function Favorites() {
   return (
     <FavoritesContent>
       {favorites.map((recipe, i) => (
-        <Recipe key={i}>
-          <ImageContainer to={`/recipe/${recipe.id}`}>
-            <Image src={recipe.main_image}></Image>
-          </ImageContainer>
-          <Title>{recipe.title}</Title>
-          <RemoveButton onClick={() => d(removeFromFavorite(recipe))} />
-        </Recipe>
+        <Animated animationInDelay={i * 200}>
+          <Recipe key={i}>
+            <ImageContainer to={`/recipe/${recipe.id}`}>
+              <Image src={recipe.main_image}></Image>
+            </ImageContainer>
+            <Title>{recipe.title}</Title>
+            <RemoveButton onClick={() => d(removeFromFavorite(recipe))} />
+          </Recipe>
+        </Animated>
       ))}
     </FavoritesContent>
   );
@@ -55,7 +58,17 @@ const ImageContainer = styled(Link)`
   /* max-height: 150px; */
 `;
 
-const Title = styled.h2``;
+const Title = styled.h2`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.1em;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 7px 0 4px;
+  color: white;
+`;
 
 const Image = styled.img`
   transition: transform ease 1s;
