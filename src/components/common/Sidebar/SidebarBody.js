@@ -59,7 +59,7 @@ export default function SidebarBody() {
         <SectionTitle
           onClick={() => SELECTED_RECIPES.current.classList.toggle('open')}
         >
-          <h2>已選食譜</h2>
+          <H2>已選食譜</H2>
           <DropDownArrow />
         </SectionTitle>
         <List>
@@ -74,7 +74,7 @@ export default function SidebarBody() {
         <SectionTitle
           onClick={() => REMAIN_LEFTOVERS.current.classList.toggle('open')}
         >
-          <h2>剩餘食材</h2>
+          <H2>剩餘食材</H2>
           <DropDownArrow />
         </SectionTitle>
         <List>
@@ -95,7 +95,7 @@ export default function SidebarBody() {
         <SectionTitle
           onClick={() => NEEDED_INGREDIENT.current.classList.toggle('open')}
         >
-          <h2>不足食材</h2>
+          <H2>不足食材</H2>
           <DropDownArrow />
         </SectionTitle>
         <List>
@@ -116,18 +116,25 @@ export default function SidebarBody() {
 
 const BodySection = styled.section`
   flex-grow: 1;
+  padding: 0;
   overflow-y: auto;
 `;
 
 const SectionTitle = styled.div`
   position: relative;
   display: flex;
+  align-items: center;
   cursor: pointer;
   user-select: none;
 `;
 
+const H2 = styled.h2`
+  font-weight: bold;
+  letter-spacing: 1.4px;
+`;
+
 const List = styled.ul`
-  padding: 0 20px;
+  padding: 0;
   height: 0;
   display: flex;
   flex-direction: column;
@@ -160,7 +167,9 @@ const Section = styled.section`
 
 const Item = styled(SidebarItem)`
   width: 100%;
-  padding: 3px 10px;
+  padding: 3px 0;
+  line-height: 1.3;
+  letter-spacing: 0.8px;
   display: flex;
   align-items: center;
   justify-content: space-between;

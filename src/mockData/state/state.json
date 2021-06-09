@@ -5,31 +5,7 @@
   },
   "sorting": "BY_ALPHABET",
   "searched_keywords": [
-    {
-      "ingredient_name": "牛腱",
-      "ingredient_amount": 500,
-      "ingredient_unit": "g"
-    },
-    {
-      "ingredient_name": "蛋",
-      "ingredient_amount": 12,
-      "ingredient_unit": "顆"
-    },
-    {
-      "ingredient_name": "辣椒",
-      "ingredient_amount": 5,
-      "ingredient_unit": "條"
-    },
-    {
-      "ingredient_name": "雞胸肉",
-      "ingredient_amount": 250,
-      "ingredient_unit": "g"
-    },
-    {
-      "ingredient_name": "蔥",
-      "ingredient_amount": "",
-      "ingredient_unit": ""
-    }
+   
   ],
   "searched_recipes": [],
   "user_info": {

@@ -1,3 +1,4 @@
+import { theme } from '../../variables';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
@@ -13,6 +14,14 @@ export default function PostQueryForm() {
   const history = useHistory();
   const user = useSelector((state) => state.user_info);
   const [selected, setSelected] = useState([]);
+
+  function isSelected(leftover) {
+    return (
+      selected.findIndex(
+        (target) => target.ingredient_name === leftover.ingredient_name
+      ) >= 0
+    );
+  }
 
   function selectionHandler(e) {
     if (e.target.checked) {
@@ -43,29 +52,34 @@ export default function PostQueryForm() {
     });
   }
 
-  if (user && user.identity === 'none') return <Redirect to='/login' />;
+  if (!user) return <></>;
+  else if (user.identity === 'none') return <Redirect to="/login" />;
   return (
     <Main>
       <GoBackButton></GoBackButton>
+      <Title>剩食求解</Title>
       <QueryForm>
-        <Title>剩食求解</Title>
-        <Form action='' onSubmit={submitHandler}>
-          {user.left_overs &&
+        <Form action="" onSubmit={submitHandler}>
+          {user.left_overs.length === 0 ? (
+            <Redirect to={`/profile/${user.name}/fridge`} />
+          ) : (
             user.left_overs.map((leftover, i) => (
-              <div className='field' key={i}>
-                <input
-                  type='checkbox'
-                  name=''
+              <Field className="field" key={i} selected={isSelected(leftover)}>
+                <Input
+                  type="checkbox"
+                  name=""
+                  id={leftover.ingredient_name}
                   value={leftover.ingredient_name}
                   onChange={selectionHandler}
                 />
-                <label>
+                <Label htmlFor={leftover.ingredient_name}>
                   {leftover.ingredient_name} {leftover.ingredient_amount}{' '}
                   {leftover.ingredient_unit}
-                </label>
-              </div>
-            ))}
-          <Submit type='submit' value='確認送出' />
+                </Label>
+              </Field>
+            ))
+          )}
+          <Submit type="submit" value="確認送出" />
         </Form>
       </QueryForm>
     </Main>
@@ -82,29 +96,72 @@ const Main = styled.main`
 `;
 
 const QueryForm = styled.div`
-  padding: 20px 30px;
+  padding: 30px;
   max-width: 600px;
   margin: 20px auto;
-  background-color: #ededed;
+  border-radius: 20px;
+  background-color: white;
 
   @media screen and (min-width: 769px) {
-    background-color: white;
   }
 `;
 
 const Title = styled.h1`
   font-size: 1.2em;
   margin-bottom: 10px;
+  text-align: center;
+  color: white;
 `;
 
 const Form = styled.form`
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  & * {
+    color: ${theme.darkbrown};
+  }
+`;
+
+const Field = styled.div`
+  padding: 6px 20px;
+  width: fit-content;
+  border-radius: 20px;
+  background-color: ${(props) =>
+    props.selected ? `${theme.darkbrown}` : '#eaeaea'};
+  transition: 0.3s ease all;
+
+  &:hover {
+    background-color: ${(props) => (props.selected ? `#796451` : '#bababa')};
+  }
+
+  & label {
+    color: ${(props) => (props.selected ? `white` : '${theme.darkbrown}')};
+  }
+`;
+
+const Input = styled.input`
+  display: none;
+`;
+
+const Label = styled.label`
+  letter-spacing: 1px;
+  cursor: pointer;
 `;
 
 const Submit = styled.input`
-  margin-top: 10px;
-  padding: 3px 0;
+  margin-top: 30px;
+  padding: 5px 0;
+  border-radius: 10px;
   cursor: pointer;
+  letter-spacing: 3px;
+  background-color: ${theme.lightOrange};
+  /* color: white; */
+  border: none;
+  width: 100%;
+
+  &:hover {
+    background-color: ${theme.orange};
+  }
 `;

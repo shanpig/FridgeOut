@@ -1,8 +1,10 @@
-import { theme } from '../../variables';
+import { theme, mainContentConfig } from '../../variables';
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import { post, uploadRecipe, uploadImage } from '../../utils/firebase';
 import { GrFormAdd, GrFormTrash } from 'react-icons/gr';
 
@@ -10,10 +12,21 @@ export default function RecipeForm({ submit }) {
   const history = useHistory();
   const user = useSelector((state) => state.user_info);
   const [isLoading, setIsLoading] = useState(false);
-  const [title, setTitle] = useState('');
-  const [ingredients, setIngredients] = useState(['']);
-  const [steps, setSteps] = useState(['']);
-  const [tags, setTags] = useState('');
+  const [title, setTitle] = useState('香料番茄燉牛');
+  const [ingredients, setIngredients] = useState([
+    '洋蔥 0.5 顆',
+    '馬鈴薯 1 顆',
+    '紅蘿蔔 0.5 根',
+    '牛腱 140 g',
+  ]);
+  const [steps, setSteps] = useState([
+    '微量的油，蒜末爆香，洋蔥&紅蘿蔔切塊炒到洋蔥微軟黃色。放入番茄罐的整理番茄&1湯匙的番茄汁液',
+    '倒入1.5杯米的水量，蓋鍋煨煮',
+    '牛排（牛腱）燙過後，切塊。平底鍋加蒜香無水奶油，牛肉下鍋煎到焦香，加入湯鍋。撒入大蒜綜合香料，少許二砂糖、薄鹽醬油、鹽麴。',
+    '湯鍋煮滾後，蓋鍋蓋，文火燉10分鐘關火燜。鍋子摸起來不燙，再重複煮滾燜。重複3-4次就軟而不爛。每打開一次可視情況加水、調味。',
+    '煮香料飯、配半熟土雞蛋👍',
+  ]);
+  const [tags, setTags] = useState('牛腱 雞蛋 好吃!');
   const [imageSrc, setImageSrc] = useState('');
   const imageHolder = useRef(null);
 
@@ -33,6 +46,7 @@ export default function RecipeForm({ submit }) {
       }
       return error;
     }, []);
+    console.log(errors);
     return errors;
   }
 
@@ -137,86 +151,98 @@ export default function RecipeForm({ submit }) {
     }
   }
 
-  if (user && user.identity === 'none') return <Redirect to='/login' />;
+  if (user && user.identity === 'none') return <Redirect to="/login" />;
   return (
     <QueryForm>
       <Title>分享食譜</Title>
-      <Form action='' onSubmit={submitHandler}>
-        <Field>
-          <LabelMainImage htmlFor='main-image' src={imageSrc}>
-            <Textbox>{imageSrc ? '更換照片' : '上傳一張照片'}</Textbox>
-          </LabelMainImage>
-          <InputMainImage
-            id='main-image'
-            type='file'
-            accept='image/*'
-            ref={imageHolder}
-            onChange={(e) => acceptImage(e.target.files)}
-          />
-        </Field>
-        <Field>
-          <LabelTitle htmlFor='title'>食譜名稱</LabelTitle>
-          <InputTitle
-            id='title'
-            onChange={(e) => onTitleTextChange(e)}
-            required
-          />
-        </Field>
+      <Form action="" onSubmit={submitHandler}>
+        <LabelMainImage htmlFor="main-image" src={imageSrc}>
+          <Textbox>{imageSrc ? '更換照片' : '上傳一張照片'}</Textbox>
+        </LabelMainImage>
 
-        <Field>
-          <LabelIngredients htmlFor='ingredients'>食材</LabelIngredients>
-          <InputIngredients id='ingredients'>
-            {ingredients.map((ingredient, i) => {
-              return (
-                <Field key={i}>
-                  <IngredientInput
-                    value={ingredient}
-                    onChange={(e) => onIngredientsTextChange(e, i)}
-                    required
-                  />
-                  <RemoveButton onClick={() => removeIngredientInput(i)} />
-                </Field>
-              );
-            })}
-            <AddButton
-              onClick={() => {
-                addIngredientInput();
-              }}
+        <InputMainImage
+          id="main-image"
+          type="file"
+          accept="image/*"
+          ref={imageHolder}
+          onChange={(e) => acceptImage(e.target.files)}
+        />
+
+        <RecipeInfoContainer>
+          <Info>
+            <FieldSection>
+              <LabelTitle htmlFor="title">食譜名稱</LabelTitle>
+              <InputTitle
+                id="title"
+                onChange={(e) => onTitleTextChange(e)}
+                required
+                value={title}
+              />
+            </FieldSection>
+            <FieldSection>
+              <LabelIngredients htmlFor="ingredients">食材</LabelIngredients>
+              <InputIngredients id="ingredients">
+                {ingredients.map((ingredient, i) => {
+                  return (
+                    <Field key={i}>
+                      <IngredientInput
+                        value={ingredient}
+                        onChange={(e) => onIngredientsTextChange(e, i)}
+                        required
+                      />
+                      <RemoveButton onClick={() => removeIngredientInput(i)} />
+                    </Field>
+                  );
+                })}
+                <AddButton
+                  onClick={() => {
+                    addIngredientInput();
+                  }}
+                />
+              </InputIngredients>
+            </FieldSection>
+            <FieldSection>
+              <LabelSteps htmlFor="steps">步驟</LabelSteps>
+              <InputSteps id="steps">
+                {steps.map((step, i) => {
+                  return (
+                    <React.Fragment key={i}>
+                      <StepField>
+                        <StepNumber>{i + 1}</StepNumber>
+                        <StepInput
+                          rows={4}
+                          value={step}
+                          onChange={(e) => onStepsTextChange(e, i)}
+                          required
+                        />
+                        <RemoveButton onClick={() => removeStepsInput(i)} />
+                      </StepField>
+                    </React.Fragment>
+                  );
+                })}
+                <AddButton
+                  onClick={() => {
+                    addStepsInput();
+                  }}
+                />
+              </InputSteps>
+            </FieldSection>
+            <FieldSection>
+              <LabelTags htmlFor="tags">標籤</LabelTags>
+              <InputTags
+                id="tags"
+                onChange={(e) => onTagsTextChange(e)}
+                required
+                value={tags}
+              />
+            </FieldSection>
+            <Submit
+              type="submit"
+              value={isLoading ? '請稍後...' : '確認送出'}
+              disabled={isLoading}
             />
-          </InputIngredients>
-        </Field>
-        <Field>
-          <LabelSteps htmlFor='steps'>步驟</LabelSteps>
-          <InputSteps id='steps'>
-            {steps.map((step, i) => {
-              return (
-                <React.Fragment key={i}>
-                  <StepNumber>
-                    {i + 1}
-                    <RemoveButton onClick={() => removeStepsInput(i)} />
-                  </StepNumber>
-                  <Field>
-                    <StepInput
-                      value={step}
-                      onChange={(e) => onStepsTextChange(e, i)}
-                      required
-                    />
-                  </Field>
-                </React.Fragment>
-              );
-            })}
-            <AddButton
-              onClick={() => {
-                addStepsInput();
-              }}
-            />
-          </InputSteps>
-        </Field>
-        <Field>
-          <LabelTags htmlFor='tags'>標籤</LabelTags>
-          <InputTags id='tags' onChange={(e) => onTagsTextChange(e)} required />
-        </Field>
-        <Submit type='submit' value='確認送出' disabled={isLoading} />
+          </Info>
+        </RecipeInfoContainer>
       </Form>
     </QueryForm>
   );
@@ -230,106 +256,226 @@ const QueryForm = styled.div`
   /* background-color: #ededed; */
 `;
 
+const RecipeInfoContainer = styled(PerfectScrollbar)`
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 20px 20px;
+
+  @media screen and (min-width: 769px) {
+    padding: 20px 20px 20px 0;
+    width: 55%;
+  }
+`;
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
 const Title = styled.h1`
   font-size: 1.2em;
+  text-align: center;
   margin-bottom: 10px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.8);
+
   gap: 30px;
+  border-radius: 7px;
+  width: 100%;
+  margin: 20px auto;
+
+  @media screen and (min-width: 769px) {
+    flex-direction: row;
+    height: calc(${mainContentConfig.computer_height} - 150px);
+  }
 `;
 
 const Submit = styled.input`
   margin-top: 10px;
   padding: 3px 0;
   cursor: pointer;
+  border-radius: 20px;
+  /* border: 1px solid ${theme.darkbrown}; */
+  border: none;
+  color: ${theme.darkbrown};
+
+  &:hover {
+    background-color: ${theme.darkbrown};
+    color: white;
+  }
 `;
 
 const Field = styled.div`
   display: flex;
   position: relative;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 0 10px;
+`;
+const FieldSection = styled(Field)`
+  /* border-left: 1px solid ${theme.darkbrown}; */
 `;
 
 const Label = styled.label`
   min-width: 64px;
+  flex-shrink: 1;
   align-self: flex-start;
-  margin-top: 7px;
+  margin: 10px 0 0px;
+  /* border: 1px solid ${theme.darkbrown}; */
+  color: ${theme.darkbrown};
 `;
 
 const Input = styled.input`
   flex-grow: 1;
   border: 1.3px solid #d3d3d3;
-  padding: 7px;
+  background-color: #efefef;
+  padding: 7px 15px;
+  color: ${theme.darkbrown};
+  transition: all 0.2s ease;
+  border-radius: 20px;
+
+  &:hover,
+  &:focus {
+    background-color: white;
+  }
 `;
 
 const LabelTitle = styled(Label)``;
 const InputTitle = styled(Input)``;
 const LabelMainImage = styled(Label)`
   width: 100%;
-  height: 150px;
+  height: 350px;
+  border-radius: 7px 7px 0 0;
+  align-self: stretch;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px dashed #a3a3a3;
+  /* border: 2px dashed #a3a3a3; */
   cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
   background-image: url(${(props) => (props.src ? props.src : '')});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  transition: 0.3s ease all;
+  margin: 0;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+
+    &:hover > div {
+      background-color: ${theme.darkbrown};
+      color: white;
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    width: 45%;
+    border-radius: 7px 0 0 7px;
+    height: unset;
+  }
 `;
 const InputMainImage = styled.input`
   display: none;
 `;
 const Textbox = styled.div`
-  padding: 5px;
-  background-color: rgba(255, 255, 255, 0.6);
+  padding: 7px 20px;
+  color: ${theme.darkbrown};
+  border: 1px solid ${theme.darkbrown};
+  border-radius: 30px;
+  transition: 0.3s ease all;
+  /* background-color: rgba(255, 255, 255, 0.6); */
 `;
 const LabelIngredients = styled(Label)``;
 const InputIngredients = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
   flex-grow: 1;
 `;
 const IngredientInput = styled(Input)`
   position: relative;
 `;
 const AddButton = styled(GrFormAdd)`
-  width: 100px;
-  border: 1.3px solid #d0d0d0;
-  height: 20px;
-  margin-top: 5px;
+  width: 100%;
+  height: 30px;
   cursor: pointer;
-  /* background-color: ${theme.lighterOrange}; */
+  margin-top: -5px;
+  border-radius: 20px;
+  border: 1px solid ${theme.darkbrown};
+  transition: 0.1s ease all;
+
+  &:hover {
+    background-color: ${theme.darkbrown};
+    & path {
+      stroke: white;
+    }
+  }
 `;
 const RemoveButton = styled(GrFormTrash)`
   cursor: pointer;
   position: absolute;
   right: 5px;
-  top: 5px;
-  font-size: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 25px;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.09);
+    & path {
+      stroke: red;
+    }
+  }
 `;
-const LabelSteps = styled(Label)``;
+const LabelSteps = styled(Label)`
+  align-self: flex-start;
+  margin-top: 5px;
+`;
 const InputSteps = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 25px;
   flex-grow: 1;
+`;
+const StepField = styled(Field)`
+  flex-direction: column;
+
+  & ${RemoveButton} {
+    top: unset;
+    transform: none;
+    bottom: 5px;
+    &:hover {
+      transform: scale(1.09);
+    }
+  }
 `;
 const StepNumber = styled.h2`
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: bold;
   position: relative;
+  color: ${theme.darkbrown};
 `;
+
 const StepInput = styled.textarea`
+  margin-top: 5px;
   flex-grow: 1;
   resize: vertical;
-  width: 160px;
-  border: 1.3px solid #d3d3d3;
+  width: 100%;
+  min-height: max-content;
+  border-radius: 8px;
+  border: none;
+  padding: 5px 10px;
+  color: ${theme.darkbrown};
+  background-color: #efefef;
+  transition: background-color ease 0.2s;
+
+  &:hover,
+  &:focus {
+    background-color: white;
+  }
 `;
 const LabelTags = styled(Label)``;
 const InputTags = styled(Input)``;

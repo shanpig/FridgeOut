@@ -16,6 +16,7 @@ import RecipePage from './components/RecipePage/RecipePage';
 import SearchPage from './components/SearchPage/SearchPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/LoginPage/LoginPage';
+import PageNotFound from './components/404/PageNotFound';
 import RecommendForm from './components/Community/RecommendForm';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
@@ -60,6 +61,9 @@ function App() {
             </Route>
             <Route path="/form/share">
               <ShareRecipeForm></ShareRecipeForm>
+            </Route>
+            <Route path="/">
+              <PageNotFound></PageNotFound>
             </Route>
           </Switch>
         </Router>

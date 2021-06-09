@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { GrFormTrash } from 'react-icons/gr';
 import { removeFromFavorite } from '../../redux/reducers/user/userActions';
 import { Animated } from 'react-animated-css';
+import EmptyMessage from './EmptyMessage';
 
 export default function Favorites() {
   const d = useDispatch();
@@ -12,22 +13,30 @@ export default function Favorites() {
 
   return (
     <FavoritesContent>
-      {favorites.map((recipe, i) => (
-        <Animated animationInDelay={i * 200}>
-          <Recipe key={i}>
-            <ImageContainer to={`/recipe/${recipe.id}`}>
-              <Image src={recipe.main_image}></Image>
-            </ImageContainer>
-            <Title>{recipe.title}</Title>
-            <RemoveButton onClick={() => d(removeFromFavorite(recipe))} />
-          </Recipe>
-        </Animated>
-      ))}
+      {favorites.length === 0 ? (
+        <EmptyMessage text={'目前沒有收藏的食譜喔~'} />
+      ) : (
+        <Recipes>
+          {favorites.map((recipe, i) => (
+            <Animated animationInDelay={i * 200}>
+              <Recipe key={i}>
+                <ImageContainer to={`/recipe/${recipe.id}`}>
+                  <Image src={recipe.main_image}></Image>
+                </ImageContainer>
+                <Title>{recipe.title}</Title>
+                <RemoveButton onClick={() => d(removeFromFavorite(recipe))} />
+              </Recipe>
+            </Animated>
+          ))}
+        </Recipes>
+      )}
     </FavoritesContent>
   );
 }
 
-const FavoritesContent = styled.ul`
+const FavoritesContent = styled.ul``;
+
+const Recipes = styled.ul`
   padding: 5px;
   width: 100%;
   display: grid;

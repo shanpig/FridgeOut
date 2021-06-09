@@ -1,3 +1,4 @@
+import { mainContentConfig } from '../../variables';
 import RecipeForm from './RecipeForm';
 import styled from 'styled-components';
 import GoBackButton from '../common/GoBackButton';
@@ -20,17 +21,17 @@ export default function ShareRecipeForm() {
 
   return (
     <Main>
-      <GoBackButton></GoBackButton>
+      {/* <GoBackButton></GoBackButton> */}
       <RecipeForm submit={(recipe) => postRecipe(recipe)}></RecipeForm>
     </Main>
   );
 }
 
 const Main = styled.main`
-  padding: 10px;
+  /* padding: 10px; */
   position: relative;
 
   @media screen and (min-width: 769px) {
-    padding: 60px 42px;
+    /* height: calc(${mainContentConfig.computer_height} - 60px); */
   }
 `;

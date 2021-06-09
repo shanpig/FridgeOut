@@ -67,7 +67,7 @@ const PostsContainer = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 50px;
+  gap: 70px;
   width: 100%;
 `;
 

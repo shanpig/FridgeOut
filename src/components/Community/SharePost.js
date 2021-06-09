@@ -71,8 +71,10 @@ const Recipe = styled(Link)`
   /* color: ${theme.darkbrown}; */
   width: 100%;
   cursor: pointer;
+  /* background-color: white; */
   margin: 0 10px 10px;
-  border: 1px solid gray;
+  background-color: white;
+  /* border: 1px solid ${theme.darkbrown}; */
   border-radius: 4px;
   display: flex;
   padding: 10px 20px;

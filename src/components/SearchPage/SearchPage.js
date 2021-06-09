@@ -16,18 +16,22 @@ export default function SearchPage() {
   const d = useDispatch();
   const [recipes, setRecipes] = useState([]);
   const [recipesPage, setRecipesPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const selectedRecipes = useSelector((state) => state.user_info.my_kitchen);
   console.log(selectedRecipes);
   const searchKeywords = useSelector((state) => state.searched_keywords);
   const leftOvers = useSelector((state) => state.user_info.left_overs);
 
   useEffect(() => {
+    setIsLoading(true);
     let subscribed = true;
     let ingredientNames = searchKeywords.map((s) => s.ingredient_name);
     searchRecipesByIngredientNames(ingredientNames).then((searchedRecipes) => {
       if (subscribed) {
         setRecipes(searchedRecipes);
+        setIsLoading(false);
         setRecipesPage(0);
+        console.log(searchedRecipes);
       }
     });
 
@@ -52,34 +56,105 @@ export default function SearchPage() {
       <SearchBar></SearchBar>
 
       <ContentRow>
-        <SearchedRecipes>
-          {recipes
-            .sort((a, b) => a.ingredients.length - b.ingredients.length)
-            .slice(recipesPage * 10, recipesPage * 10 + 10)
-            .map((recipe, i) => (
-              <StyledAnimated
-                animationIn="fadeInUp"
-                animationInDelay={(i - 1) * 200}
-              >
-                <RecipeItem
-                  key={i}
-                  readOnly={true}
-                  recipe={recipe}
-                  Button={isSelected(recipe) ? DisabledButton : AddButton} //
-                  buttonAction={() => addToKitchen(recipe)}
-                />
-              </StyledAnimated>
-            ))}
-          <Pagination>
-            <PrevPageButton onClick={() => movePage(-1)}>
-              <PrevPageIcon />
-            </PrevPageButton>
-            {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
-            <NextPageButton onClick={() => movePage(1)}>
-              <NextPageIcon />
-            </NextPageButton>
-          </Pagination>
-        </SearchedRecipes>
+        {isLoading ? (
+          <IconContainer>
+            <lottie-player
+              src="https://assets6.lottiefiles.com/packages/lf20_UGvCSC/loading_animation.json"
+              background="transparent"
+              speed="1"
+              style={{ width: '300px', height: '300px' }}
+              loop
+              autoplay
+            ></lottie-player>
+          </IconContainer>
+        ) : recipes.length === 0 ? (
+          <IconContainer>
+            <lottie-player
+              src="https://assets5.lottiefiles.com/temp/lf20_hs090k.json"
+              background="transparent"
+              speed="1"
+              style={{
+                width: '100px',
+                height: '100px',
+              }}
+              loop
+              autoplay
+            ></lottie-player>
+            <Text>試著加入食材 ...</Text>
+          </IconContainer>
+        ) : (
+          <SearchedRecipes>
+            {recipes.length &&
+              recipes
+                .sort((a, b) => a.ingredients.length - b.ingredients.length)
+                .slice(recipesPage * 10, recipesPage * 10 + 10)
+                .map((recipe, i) => (
+                  <StyledAnimated
+                    key={i}
+                    animationIn="fadeInUp"
+                    animationInDelay={(i - 1) * 200}
+                  >
+                    <RecipeItem
+                      readOnly={true}
+                      recipe={recipe}
+                      Button={isSelected(recipe) ? DisabledButton : AddButton} //
+                      buttonAction={() => addToKitchen(recipe)}
+                    />
+                  </StyledAnimated>
+                ))}
+            <Pagination>
+              <PrevPageButton onClick={() => movePage(-1)}>
+                <PrevPageIcon />
+              </PrevPageButton>
+              {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
+              <NextPageButton onClick={() => movePage(1)}>
+                <NextPageIcon />
+              </NextPageButton>
+            </Pagination>
+          </SearchedRecipes>
+        )}
+        {/* {recipes.length > 0 ? (
+          <SearchedRecipes>
+            {recipes
+              .sort((a, b) => a.ingredients.length - b.ingredients.length)
+              .slice(recipesPage * 10, recipesPage * 10 + 10)
+              .map((recipe, i) => (
+                <StyledAnimated
+                  animationIn="fadeInUp"
+                  animationInDelay={(i - 1) * 200}
+                >
+                  <RecipeItem
+                    key={i}
+                    readOnly={true}
+                    recipe={recipe}
+                    Button={isSelected(recipe) ? DisabledButton : AddButton} //
+                    buttonAction={() => addToKitchen(recipe)}
+                  />
+                </StyledAnimated>
+              ))}
+            <Pagination>
+              <PrevPageButton onClick={() => movePage(-1)}>
+                <PrevPageIcon />
+              </PrevPageButton>
+              {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
+              <NextPageButton onClick={() => movePage(1)}>
+                <NextPageIcon />
+              </NextPageButton>
+            </Pagination>
+          </SearchedRecipes>
+        ) : (
+          <Loading>
+            <lottie-player
+              src="https://assets6.lottiefiles.com/packages/lf20_UGvCSC/loading_animation.json"
+              background="transparent"
+              speed="1"
+              style={{ width: '300px', height: '300px' }}
+              loop
+              autoplay
+            ></lottie-player>
+          </Loading>
+        )} */}
+
         <DeskTopSidebar>
           <SidebarBody />
         </DeskTopSidebar>
@@ -197,11 +272,28 @@ const SearchedRecipes = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 
   @media screen and (min-width: 769px) {
     width: 70%;
   }
+`;
+
+const IconContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 769px) {
+    width: 70%;
+  }
+`;
+
+const Text = styled.h2`
+  font-size: 1.5em;
+  color: white;
 `;
 
 const StyledAnimated = styled(Animated)`

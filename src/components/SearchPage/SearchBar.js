@@ -64,8 +64,10 @@ const Bar = styled.div`
 `;
 
 const H2 = styled.h2`
+  padding-left: 10px;
   white-space: nowrap;
   font-weight: bold;
+  font-size: 1.3em;
 `;
 
 const KeywordInputs = styled.ul`

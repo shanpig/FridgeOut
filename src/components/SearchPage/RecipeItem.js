@@ -74,12 +74,12 @@ export default function RecipeItem({
 
 const Item = styled.div`
   display: flex;
-  border-radius: 7px;
+  border-radius: 5px;
   background-color: white;
-  padding: 10px 15px;
+  padding: 8px;
 
   @media screen and (min-width: 769px) {
-    padding: 20px 25px;
+    /* padding: 20px 25px; */
   }
 `;
 
@@ -91,7 +91,7 @@ const ItemContent = styled(Link)`
   display: flex;
   /* position: relative; */
   align-items: center;
-
+  border-radius: 10px 0 0 10px;
   transition: all ease 0.2s;
 
   @media screen and (min-width: 769px) {
@@ -109,14 +109,16 @@ const ItemContent = styled(Link)`
 
 const ImageContainer = styled.div`
   flex: 1 1 100px;
-  border-radius: 10px;
-  height: 80px;
-  display: flex;
-  overflow: hidden;
+  border-radius: 5px 0 0 5px;
   align-items: center;
+
+  display: flex;
+  height: 80px;
+  overflow: hidden;
 
   @media screen and (min-width: 769px) {
     height: 100px;
+    /* height: 100%; */
   }
 `;
 
@@ -150,7 +152,7 @@ const TitleRow = styled.div`
 
 const ContentRow = styled.div`
   /* display: none; */
-  padding-left: 5px;
+  /* padding-left: 5px; */
 
   @media screen and (min-width: 769px) {
     display: unset;
@@ -196,7 +198,7 @@ const NeededLeftovers = styled.ul`
   gap: 7px 10px;
   flex-wrap: wrap;
   padding-top: 10px;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 `;
 
 const NeededLeftover = styled(LiItem)`

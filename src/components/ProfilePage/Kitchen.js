@@ -6,6 +6,7 @@ import RecipeItem from '../SearchPage/RecipeItem';
 import { GrFormTrash } from 'react-icons/gr';
 import { removeFromKitchen } from '../../redux/reducers/user/userActions';
 import { Animated } from 'react-animated-css';
+import EmptyMessage from './EmptyMessage';
 
 export default function Kitchen() {
   const kitchen = useSelector((state) => {
@@ -15,16 +16,23 @@ export default function Kitchen() {
 
   return (
     <KitchenContent>
-      {kitchen.map((recipe, i) => (
-        <Animated animationIn="fadeInUp" animationInDelay={(i - 1) * 100}>
-          <Recipe
+      {kitchen.length === 0 ? (
+        <EmptyMessage text={'廚房裡面沒有食譜唷~'} />
+      ) : (
+        kitchen.map((recipe, i) => (
+          <Animated
             key={i}
-            recipe={recipe}
-            Button={RemoveButton}
-            buttonAction={() => removeFromKitchen(recipe)}
-          />
-        </Animated>
-      ))}
+            animationIn="fadeInUp"
+            animationInDelay={(i - 1) * 100}
+          >
+            <Recipe
+              recipe={recipe}
+              Button={RemoveButton}
+              buttonAction={() => removeFromKitchen(recipe)}
+            />
+          </Animated>
+        ))
+      )}
     </KitchenContent>
   );
 }

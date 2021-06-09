@@ -4,9 +4,13 @@ import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router';
 import { getRecipe } from '../../utils/firebase';
 import SidebarBody from '../common/Sidebar/SidebarBody';
+import ScrollToTop from '../common/ScrollToTop';
 import backgroundImageSrc from '../../images/kitchen-table.jpg';
 import { GrClose, GrAdd, GrCheckmark } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Animated } from 'react-animated-css';
 import {
   addToFavorite,
   addToKitchen,
@@ -15,8 +19,13 @@ import GoBackButton from '../common/GoBackButton';
 // import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
 export default function RecipePage() {
-  const myKitchen = useSelector((state) => state.user_info.my_kitchen);
-  const myFavorite = useSelector((state) => state.user_info.my_favorites);
+  const {
+    my_kitchen: myKitchen,
+    my_favorites: myFavorite,
+    identity,
+  } = useSelector((state) => state.user_info);
+  // const myKitchen = useSelector((state) => state.user_info.my_kitchen);
+  // const myFavorite = useSelector((state) => state.user_info.my_favorites);
   const d = useDispatch();
   const history = useHistory();
   let cat = '';
@@ -47,102 +56,119 @@ export default function RecipePage() {
 
   return (
     <Main>
-      <Card>
-        <CloseButton onClick={() => history.goBack()}></CloseButton>
-        <CardHead></CardHead>
-        <RecipeImageContainer src={main_image}>
-          {/* <RecipeImage src={main_image} alt='' /> */}
-        </RecipeImageContainer>
-        <Title>{title}</Title>
-        <AddToButtonGroup>
-          <AddToButton
-            key={1}
-            value=""
-            className={isInFavorite(recipe) ? 'active' : ''}
-            onClick={() => {
-              if (recipe.id) d(addToFavorite(recipe));
-            }}
-          >
-            {isInFavorite(recipe) ? (
-              <CheckIcon></CheckIcon>
-            ) : (
-              <AddIcon></AddIcon>
-            )}
-            收藏
-          </AddToButton>
-          <AddToButton
-            key={2}
-            value=""
-            className={isInKitchen(recipe) ? 'active' : ''}
-            onClick={() => {
-              if (recipe.id) d(addToKitchen(recipe));
-            }}
-          >
-            {isInKitchen(recipe) ? (
-              <CheckIcon></CheckIcon>
-            ) : (
-              <AddIcon></AddIcon>
-            )}
-            我的廚房
-          </AddToButton>
-        </AddToButtonGroup>
+      <ScrollToTop />
+      <Animated>
+        <Card>
+          {/* <CloseButton onClick={() => history.goBack()}></CloseButton> */}
+          {/* <CardHead> */}
+          <RecipeImageContainer src={main_image}>
+            {/* <RecipeImage src={main_image} alt='' /> */}
+          </RecipeImageContainer>
+          {/* </CardHead> */}
+          <RecipeInfoContainer>
+            <Title>{title}</Title>
+            <AddToButtonGroup>
+              {identity !== 'none' ? (
+                <AddToButton
+                  key={1}
+                  value=""
+                  className={isInFavorite(recipe) ? 'active' : ''}
+                  onClick={() => {
+                    if (recipe.id) d(addToFavorite(recipe));
+                  }}
+                >
+                  {isInFavorite(recipe) ? (
+                    <CheckIcon></CheckIcon>
+                  ) : (
+                    <AddIcon></AddIcon>
+                  )}
+                  收藏
+                </AddToButton>
+              ) : (
+                <></>
+              )}
 
-        <ListContainer>
-          <ListTitle>
-            <ListTitleBullet>食材</ListTitleBullet>
-          </ListTitle>
-          <IngredientList>
-            {ingredients &&
-              ingredients.map((ingredient, i) => {
-                let ingredientItem = [];
+              <AddToButton
+                key={2}
+                value=""
+                className={isInKitchen(recipe) ? 'active' : ''}
+                onClick={() => {
+                  if (recipe.id) d(addToKitchen(recipe));
+                }}
+              >
+                {isInKitchen(recipe) ? (
+                  <CheckIcon></CheckIcon>
+                ) : (
+                  <AddIcon></AddIcon>
+                )}
+                我的廚房
+              </AddToButton>
+            </AddToButtonGroup>
 
-                if (ingredient.ingredient_cat !== cat) {
-                  ingredientItem.push(
-                    <IngredientCat>{ingredient.ingredient_cat}</IngredientCat>
-                  );
-                  cat = ingredient.ingredient_cat;
-                }
-                if (ingredient.ingredient_group !== group) {
-                  ingredientItem.push(
-                    <IngredientGroup>
-                      {ingredient.ingredient_group}
-                    </IngredientGroup>
-                  );
-                  group = ingredient.ingredient_group;
-                }
+            <Info>
+              <ListContainer>
+                <ListTitle>
+                  <ListTitleBullet>食材</ListTitleBullet>
+                </ListTitle>
+                <IngredientList>
+                  {ingredients &&
+                    ingredients.map((ingredient, i) => {
+                      let ingredientItem = [];
 
-                ingredientItem.push(
-                  <Ingredient>
-                    {ingredient.ingredient_name}&nbsp;
-                    {ingredient.ingredient_amount}&nbsp;
-                    {ingredient.ingredient_unit}
-                  </Ingredient>
-                );
+                      if (ingredient.ingredient_cat !== cat) {
+                        ingredientItem.push(
+                          <IngredientCat>
+                            {ingredient.ingredient_cat}
+                          </IngredientCat>
+                        );
+                        cat = ingredient.ingredient_cat;
+                      }
+                      if (ingredient.ingredient_group !== group) {
+                        ingredientItem.push(
+                          <IngredientGroup>
+                            {ingredient.ingredient_group}
+                          </IngredientGroup>
+                        );
+                        group = ingredient.ingredient_group;
+                      }
 
-                return (
-                  <IngredientItem key={i}>{ingredientItem}</IngredientItem>
-                );
-              })}
-          </IngredientList>
-        </ListContainer>
-        <StepsContainer>
-          <ListTitle>
-            <ListTitleBullet>步驟</ListTitleBullet>
-          </ListTitle>
-          <Steps>
-            {steps &&
-              steps.map((step, i) => (
-                <Step key={i}>
-                  <span>{i + 1}.</span>
-                  <span>{step.trim()}</span>
-                </Step>
-              ))}
-          </Steps>
-        </StepsContainer>
-        {/* <SidebarContent>
+                      ingredientItem.push(
+                        <Ingredient>
+                          {ingredient.ingredient_name}&nbsp;
+                          {ingredient.ingredient_amount}&nbsp;
+                          {ingredient.ingredient_unit}
+                        </Ingredient>
+                      );
+
+                      return (
+                        <IngredientItem key={i}>
+                          {ingredientItem}
+                        </IngredientItem>
+                      );
+                    })}
+                </IngredientList>
+              </ListContainer>
+              <ListContainer>
+                <ListTitle>
+                  <ListTitleBullet>步驟</ListTitleBullet>
+                </ListTitle>
+                <Steps>
+                  {steps &&
+                    steps.map((step, i) => (
+                      <Step key={i}>
+                        <span>{i + 1}.</span>
+                        <span>{step.trim()}</span>
+                      </Step>
+                    ))}
+                </Steps>
+              </ListContainer>
+            </Info>
+          </RecipeInfoContainer>
+          {/* <SidebarContent>
           <SidebarBody />
         </SidebarContent> */}
-      </Card>
+        </Card>
+      </Animated>
     </Main>
   );
 }
@@ -152,16 +178,16 @@ const Main = styled.main`
   position: relative;
   /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${backgroundImageSrc}); */
-  background-size: cover;
+  /* background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
   max-width: 1024px;
   margin: 0 auto;
-  min-height: ${mainContentConfig.computer_height};
+  min-height: ${mainContentConfig.mobile_height};
 
   @media screen and (min-width: 769px) {
-    min-height: ${mainContentConfig.mobile_height};
-    padding: 60px 42px;
+    min-height: ${mainContentConfig.computer_height};
+    padding: 30px 42px;
   }
 `;
 
@@ -171,6 +197,7 @@ const CloseButton = styled(GrClose)`
   top: 20px;
   width: 20px;
   height: 20px;
+  z-index: 1000;
   cursor: pointer;
 
   & path {
@@ -184,13 +211,14 @@ const CloseButton = styled(GrClose)`
 `;
 
 const Card = styled.div`
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  gap: 10px;
+
+  border-radius: 5px;
+
   max-width: 600px;
   width: 90%;
   margin: 20px auto;
@@ -199,13 +227,20 @@ const Card = styled.div`
     color: ${theme.darkbrown};
     /* font-family: 'Roboto'; */
   }
+
+  @media screen and (min-width: 769px) {
+    margin: 0 auto;
+    flex-direction: row;
+    height: calc(${mainContentConfig.computer_height} - 60px);
+    max-width: 1024px;
+  }
 `;
 
 const CardHead = styled.div`
-  height: 150px;
+  height: 100px;
   width: 100%;
-  border-radius: 20px 20px 0 0;
-  background-color: ${theme.orange};
+  border-radius: 5px 5px 0 0;
+  /* background-color: ${theme.orange}; */
 `;
 
 const AddToButton = styled.button`
@@ -224,11 +259,14 @@ const AddToButton = styled.button`
     border: none;
     pointer-events: none;
   }
-  &:hover {
-    background-color: ${theme.darkbrown};
-    color: white;
-    & path {
-      stroke: white;
+
+  @media screen and (min-width: 769px) {
+    &:hover {
+      background-color: ${theme.darkbrown};
+      color: white;
+      & path {
+        stroke: white;
+      }
     }
   }
 `;
@@ -238,26 +276,55 @@ const CheckIcon = styled(GrCheckmark)``;
 
 const RecipeImageContainer = styled.div`
   position: relative;
-  margin-top: -125px;
-  border: 2px solid white;
-  box-shadow: 0 0 10px -6px black;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
+  /* margin-top: 40px; */
+  /* margin-left: 60px;
+  border: 5px solid white;
+  border-radius: 10px; */
+  /* transform: rotateZ(-15deg); */
+  /* box-shadow: 0 0 10px -6px black; */
+  width: 100%;
+  height: 350px;
+  align-self: flex-start;
+  /* border-radius: 50%; */
   background-image: url(${(props) => props.src});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  /* border-radius: 0 0 30px 30px; */
 
-  &:hover ${AddToButton} {
-    top: 0;
+  @media screen and (min-width: 769px) {
+    width: 45%;
+    height: 100%;
   }
+`;
+
+const RecipeInfoContainer = styled(PerfectScrollbar)`
+  padding-top: 20px;
+
+  & .ps__rail-y {
+    left: unset;
+    right: 0;
+  }
+
+  @media screen and (min-width: 769px) {
+    width: 55%;
+    /* overflow: hidden; */
+  }
+`;
+
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
 `;
 
 const AddToButtonGroup = styled.div`
   display: flex;
+  justify-content: center;
   gap: 5px;
-  margin-bottom: 10px;
+  margin: 10px 0 20px;
 `;
 
 const Title = styled.h1`
@@ -282,9 +349,10 @@ const ListTitle = styled.h3`
 
 const ListTitleBullet = styled.div`
   width: fit-content;
-  padding: 5px 15px;
-  border-radius: 30px;
-  border: 1.5px solid ${theme.darkbrown};
+  font-size: 1.2em;
+  /* padding: 5px 15px; */
+  /* border-radius: 30px;
+  border: 1.5px solid ${theme.darkbrown}; */
 `;
 
 const IngredientList = styled.ul`
@@ -306,7 +374,7 @@ const IngredientCat = styled.div`
 const IngredientGroup = styled.div``;
 
 const Ingredient = styled.div`
-  padding-left: 30px;
+  padding-left: 10px;
 `;
 
 const StepTitle = styled.h3`

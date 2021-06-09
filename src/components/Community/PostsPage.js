@@ -6,6 +6,7 @@ import {
   NavLink,
   useRouteMatch,
 } from 'react-router-dom';
+import { Animated } from 'react-animated-css';
 import styled from 'styled-components';
 import SmallLogoSrc from '../../images/logo-small.svg';
 
@@ -19,14 +20,16 @@ export default function PostsPage() {
   return (
     <Main>
       <MainContent>
-        <ButtonGroup>
-          <PostQuery activeClassName="active" to={`${match.url}/query`}>
-            求食譜
-          </PostQuery>
-          <PostRecipe activeClassName="active" to={`${match.url}/share`}>
-            分享食譜
-          </PostRecipe>
-        </ButtonGroup>
+        <Animated style={{ zIndex: 100 }}>
+          <ButtonGroup>
+            <PostQuery activeClassName="active" to={`${match.url}/query`}>
+              求食譜
+            </PostQuery>
+            <PostRecipe activeClassName="active" to={`${match.url}/share`}>
+              分享食譜
+            </PostRecipe>
+          </ButtonGroup>
+        </Animated>
         <ButtonGroupSpacer />
         <Switch>
           <Route path={`${match.url}/query`}>
@@ -66,53 +69,52 @@ const EndSign = styled(GoPrimitiveDot)`
 `;
 
 const ButtonGroup = styled.div`
-  max-width: 600px;
-  width: 100%;
-  padding: 0 10px;
+  max-width: 400px;
+  width: 90%;
+  padding: 10px 0;
   display: flex;
+  border-radius: 30px;
   justify-content: space-evenly;
   /* align-items: stretch; */
 
   position: fixed;
   /* box-shadow: 0 1px 10px -5px gray; */
-  z-index: 10;
-  top: calc(${headerConfig.computer_height} + 10px);
+  z-index: 100;
+  top: calc(${headerConfig.computer_height} + 30px);
+  background-color: white;
   left: 0;
   right: 0;
 
   margin: 0 auto;
-  height: 30px;
 `;
 
 const ButtonGroupSpacer = styled.div`
-  height: 40px;
+  height: 100px;
 `;
 
 const Tab = styled(NavLink)`
-  width: 40%;
+  width: 45%;
   letter-spacing: 10px;
   text-indent: 10px;
-  color: white;
+  color: ${theme.darkbrown};
   text-align: center;
   text-decoration: none;
-  border-radius: 50px;
-  background-color: ${theme.darkbrown};
+  border-radius: 30px;
+  background-color: white;
   display: flex;
   align-items: center;
+  padding: 10px;
   justify-content: center;
   /* transform: scale(0.8); */
   transition: all ease 0.3s;
 
-  &:not(.active):hover {
-    width: 50%;
-  }
-
+  &:hover,
   &.active {
-    color: ${theme.darkbrown};
+    color: white;
     /* color: white; */
     /* flex-grow: 3; */
     /* transform: scale(1); */
-    background-color: white;
+    background-color: ${theme.darkbrown};
 
     &::after {
       display: unset;

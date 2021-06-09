@@ -7,6 +7,7 @@ import { fractionStringToTC, isValidNumberString } from '../../utils/math';
 import { setLeftOvers } from '../../redux/reducers/user/userActions';
 import FridgeIngredient from './FridgeIngredient';
 import { Animated } from 'react-animated-css';
+import EmptyMessage from './EmptyMessage';
 
 export default function Fridge() {
   const d = useDispatch();
@@ -99,18 +100,22 @@ export default function Fridge() {
   return (
     <Animated animationIn="fadeIn" animationInDuration={1000}>
       <FridgeContent>
-        {leftovers.map((ingredient, i) => (
-          <FridgeIngredient
-            key={i}
-            ingredient={ingredient}
-            removeLeftover={() => removeSingleLeftover(i)}
-            setLeftover={(leftover) => setSingleLeftover(leftover, i)}
-          />
-        ))}
-        <AddButton onClick={addNewLeftover}>
-          <AddIcon />
-        </AddButton>
+        {leftovers.length === 0 ? (
+          <EmptyMessage text="冰箱目前沒有食材喔！" />
+        ) : (
+          leftovers.map((ingredient, i) => (
+            <FridgeIngredient
+              key={i}
+              ingredient={ingredient}
+              removeLeftover={() => removeSingleLeftover(i)}
+              setLeftover={(leftover) => setSingleLeftover(leftover, i)}
+            />
+          ))
+        )}
       </FridgeContent>
+      <AddButton onClick={addNewLeftover}>
+        {leftovers.length === 0 ? <Text>點我加入食材...</Text> : <AddIcon />}
+      </AddButton>
     </Animated>
   );
 }
@@ -134,16 +139,24 @@ const AddButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px auto 0;
-  background-color: ${theme.lighterOrange};
+  margin: 30px auto 0;
+  background-color: ${theme.lightOrange};
   cursor: pointer;
   padding: 4px;
+  border-radius: 5px;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: ${theme.orange};
   }
 `;
 
+const Text = styled.div`
+  text-align: center;
+  margin: 8px 0 5px;
+  color: ${theme.darkbrown};
+`;
+
 const AddIcon = styled(AiOutlinePlus)`
+  font-size: 20px;
   fill: black;
 `;

@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { setUser } from '../redux/reducers/user/userActions';
 
 // const firebase = require('firebase');
 const firebaseConfig = {
@@ -20,7 +21,15 @@ const provider = new firebase.auth.GoogleAuthProvider();
 //   login_hint: 'user@example.com',
 // });
 
-function signInWithPopup() {
+function getAuthUser(setUser) {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUser(user);
+    } else setUser({});
+  });
+}
+
+function signInWithPopup(setUser) {
   return firebase
     .auth()
     .signInWithPopup(provider)
@@ -28,14 +37,12 @@ function signInWithPopup() {
       const credential = result.credential;
       const token = credential.accessToken;
       const user = result.user;
-      return {
-        signInMethod: credential.signInMethod,
-        accessToken: credential.accessToken,
+      setUser({
         uid: user.uid,
         username: user.displayName,
         email: user.email,
         profileImage: user.photoURL,
-      };
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -97,8 +104,9 @@ function removeRecipeFromUserFavorites(uid, recipe) {
 }
 
 function registerUser(userData) {
+  console.log(userData);
   db.collection('users')
-    .doc(userData.uid)
+    .doc(userData.id)
     .set(userData)
     .then(() => console.log(`user ${userData.name} added.`));
 }
@@ -223,6 +231,17 @@ async function post(message) {
     });
 }
 
+function watchMessages(userInfo, callback) {
+  return db
+    .collection('users')
+    .doc(userInfo.id)
+    .onSnapshot((doc) => {
+      const messages = doc.data().messages;
+      console.log(messages);
+      callback(messages);
+    });
+}
+
 function uploadRecipe(recipe) {
   console.log(recipe);
   return db
@@ -248,6 +267,7 @@ async function getPosts() {
 }
 
 export {
+  getAuthUser,
   signInWithPopup,
   logOut,
   getUserData,
@@ -268,6 +288,7 @@ export {
   getUserInfoByEmail,
   sendMessageTo,
   post,
+  watchMessages,
   getPosts,
   uploadRecipe,
   firebase,

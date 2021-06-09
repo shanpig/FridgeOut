@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import { Animated } from 'react-animated-css';
 import {
   registerUser,
-  signInWithPopup,
+  getAuthUser,
   getUserData,
+  signInWithPopup,
 } from '../../utils/firebase';
+import ReactLoading from 'react-loading';
 import { setUser } from '../../redux/reducers/user/userActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
@@ -27,32 +29,74 @@ const userTemplate = {
 
 export default function LoginPage() {
   const { identity, name } = useSelector((state) => state.user_info);
+  const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
   const d = useDispatch();
   async function signIn() {
-    let { uid, email, username, profileImage } = await signInWithPopup();
-    if (!uid) return;
-    getUserData(uid).then((data) => {
-      if (!data) {
-        let userData = {
-          ...userTemplate,
-          name: username,
-          email,
-          profile: profileImage,
-          id: uid,
-        };
-        registerUser(userData);
-        d(setUser(userData));
-      } else {
-        d(setUser(data));
-      }
+    await signInWithPopup().then((userInfo) => {
+      let { uid, email, username, profileImage } = userInfo;
+
+      if (!uid) return;
+      getUserData(uid).then((data) => {
+        if (!data) {
+          let userData = {
+            ...userTemplate,
+            name: username,
+            email,
+            profile: profileImage,
+            id: uid,
+          };
+          registerUser(userData);
+          d(setUser(userData));
+        } else {
+          d(setUser(data));
+        }
+      });
     });
   }
+
+  useEffect(() => {
+    getAuthUser((userInfo) => {
+      let {
+        uid,
+        email,
+        displayName: username,
+        photoURL: profileImage,
+      } = userInfo;
+      console.log(userInfo);
+      if (!uid) {
+        setIsLoading(false);
+        return;
+      }
+      getUserData(uid).then((data) => {
+        if (!data) {
+          let userData = {
+            ...userTemplate,
+            name: username,
+            email,
+            profile: profileImage,
+            id: uid,
+          };
+          registerUser(userData);
+          d(setUser(userData));
+        } else {
+          d(setUser(data));
+        }
+      });
+    });
+  }, []);
 
   useEffect(() => {
     if (identity !== 'none') history.goBack();
   }, [identity]);
 
+  if (isLoading) {
+    return (
+      <Main>
+        <ReactLoading type="spokes"></ReactLoading>
+      </Main>
+    );
+  }
   return (
     <Main>
       <Animated animationIn={'fadeIn'} animationInDuration={300}>

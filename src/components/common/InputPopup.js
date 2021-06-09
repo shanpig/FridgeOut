@@ -140,7 +140,12 @@ const StyledPopup = styled(Popup)`
 `;
 
 const ButtonContainer = styled.button`
+  display: flex;
+  align-items: center;
   margin-left: auto;
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
 
 const AddIcon = styled(GrFormAdd)`
@@ -206,11 +211,22 @@ const TextInput = styled.input`
   padding: 3px 7px;
   border-bottom: 1px solid ${theme.orange};
   position: relative;
-  background-color: rgba(122, 122, 122, 0.1);
+  background-color: rgba(122, 122, 122, 0.2);
+  transition: all ease 0.2s;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(122, 122, 122, 0.1);
+  }
 `;
 
 const AddInputIcon = styled(GrFormAdd)`
   font-size: 1.4em;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const RemoveInputIcon = styled(GrFormClose)`
@@ -231,32 +247,24 @@ const Button = styled.button`
   cursor: pointer;
   position: relative;
   border-radius: 4px;
+  transition: all ease 0.3s;
+
+  &:hover {
+    border-radius: 20px;
+  }
 `;
 
 const AddFromFridgeButton = styled(Button)`
   color: ${theme.darkbrown};
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    z-index: -1;
-    background-color: ${theme.darkbrown};
-    transition: height ease 0.1s;
-  }
+  background-color: #ececec;
+
   &:hover {
+    background-color: ${theme.darkbrown};
     color: white;
-    &::after {
-      height: 100%;
-    }
   }
 `;
 const ConfirmButton = styled(Button)`
   background-color: ${theme.darkbrown};
+  letter-spacing: 1.5px;
   color: white;
-  &::after {
-    height: 100%;
-  }
 `;

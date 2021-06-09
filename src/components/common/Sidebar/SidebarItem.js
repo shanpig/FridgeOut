@@ -1,3 +1,4 @@
+import { theme } from '../../../variables';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { removeInput } from '../../../redux/reducers/keyword/keywordActions';
@@ -38,17 +39,18 @@ export default function SidebarItem({ readOnly, className, ...props }) {
     target = props.recipe;
   }
   return (
-    <li className={className}>
-      {content}
+    <Item className={className}>
+      <Text>{content}</Text>
       {!readOnly ? (
         <CloseButton onClick={() => remove(target, props.type)}></CloseButton>
       ) : (
         ''
       )}
-    </li>
+    </Item>
   );
 }
-
+const Item = styled.li``;
+const Text = styled.span``;
 const CloseButton = styled(AiOutlineClose)`
   cursor: pointer;
 `;

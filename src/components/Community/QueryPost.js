@@ -87,9 +87,10 @@ const Ingredients = styled.ul`
   align-items: center;
   gap: 10px;
   margin: 5px 0;
-  padding: 5px 10px;
-  border: 1px solid lightgray;
+  padding: 10px 20px;
+  /* border: 1px solid lightgray; */
   border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
 `;
 const Ingredient = styled.li``;
 const Button = styled(Link)`

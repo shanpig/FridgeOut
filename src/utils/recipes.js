@@ -28,6 +28,7 @@ function isCombinable(a, b) {
   let basisA = units[unitA];
   let basisB = units[unitB];
 
+  if (!unitA || !unitB) return false;
   if ((basisA && !basisB) || (!basisA && basisB)) return false;
   if (!basisA && !basisB) return true;
   if (basisA.type === basisB.type) return true;
@@ -122,6 +123,7 @@ function gatherIngredientsFromRecipes(_recipes) {
 }
 
 function assessIngredientsUsage(_onHand, _required) {
+  console.log(_required);
   let onHand = _.cloneDeep(_onHand);
   let required = _.cloneDeep(_required);
 
@@ -144,6 +146,7 @@ function assessIngredientsUsage(_onHand, _required) {
       if (index >= 0 && isCombinable(onHand[index], ingredient)) {
         const targetAmount = onHand[index].ingredient_amount;
 
+        console.log(onHand[index], ingredient);
         const ingredientLeft = subtract(
           onHand[index],
           ingredient

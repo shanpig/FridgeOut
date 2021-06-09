@@ -164,7 +164,7 @@ const UnitField = styled(AmountField)``;
 const Input = styled.input`
   border: ${(props) => (props.error ? '1px solid red' : 'none')};
   background-color: ${(props) =>
-    props.error ? 'rgba(255, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.2)'};
+    props.error ? 'rgba(255, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.15)'};
   color: black;
   outline: none;
   border-radius: 0;

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setRecommendPostHolder } from '../../redux/reducers/user/userActions';
 import { timeDifference } from '../../utils/math';
+import Logo from '../../images/logo-small-nobg.svg';
 
 export default function Post({
   className,
@@ -32,8 +33,13 @@ const PostContainer = styled.div`
   align-items: center;
   position: relative;
   gap: 15px;
-  padding-top: 40px;
-  background-color: rgba(255, 255, 255, 0.8);
+  padding: 40px 10px 10px;
+  background-blend-mode: lighten;
+  background-color: rgba(255, 255, 255, 0.9);
+  background-image: url(${Logo});
+  background-size: cover;
+  background-position: 60px 30px;
+  background-repeat: no-repeat;
 
   & * {
     color: ${theme.darkbrown};
@@ -58,11 +64,11 @@ const Time = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background-color: ${theme.darkbrown};
   position: absolute;
-  top: -25px;
+  top: -40px;
   left: 50%;
   border: 2px solid white;
   transform: translateX(-50%);

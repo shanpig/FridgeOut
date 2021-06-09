@@ -20,27 +20,28 @@ export default function RecommendForm() {
 
   return (
     <Main>
-      <GoBackButton></GoBackButton>
+      {/* <GoBackButton></GoBackButton> */}
       <MainContent>
-        <LeftoverList>
+        {/* <LeftoverList>
           {queryPost.ingredients &&
             queryPost.ingredients.map((leftover) => (
               <li>{leftover.ingredient_name}</li>
             ))}
-        </LeftoverList>
+        </LeftoverList> */}
         <RecipeForm
-          submit={(recipe) => sendRecipeTo(queryPost.id, recipe)}></RecipeForm>
+          submit={(recipe) => sendRecipeTo(queryPost.id, recipe)}
+        ></RecipeForm>
       </MainContent>
     </Main>
   );
 }
 
 const Main = styled.main`
-  padding: 10px;
+  /* padding: 10px; */
   position: relative;
 
   @media screen and (min-width: 769px) {
-    padding: 60px 42px;
+    /* padding: 60px 42px; */
   }
 `;
 
