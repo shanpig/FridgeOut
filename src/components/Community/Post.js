@@ -26,25 +26,33 @@ export default function Post({
 }
 
 const PostContainer = styled.div`
+  max-width: 500px;
   width: 100%;
+  margin: 0 auto;
   display: flex;
-  border-radius: 5px;
+  border-radius: 10px;
   flex-direction: column;
   align-items: center;
   position: relative;
   gap: 15px;
   padding: 40px 10px 10px;
   background-blend-mode: lighten;
-  background-color: rgba(255, 255, 255, 0.9);
-  background-image: url(${Logo});
+  background-color: rgba(255, 255, 255, 0.8);
+  /* background-image: url(${Logo}); */
   background-size: cover;
   background-position: 60px 30px;
   background-repeat: no-repeat;
+  transition: all ease 0.2s;
 
   & * {
     color: ${theme.darkbrown};
     font-family: 'Noto Sans TC', 'Roboto';
     /* font-family: 'Roboto'; */
+  }
+
+  &:hover {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
   }
 `;
 
@@ -64,11 +72,11 @@ const Time = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background-color: ${theme.darkbrown};
   position: absolute;
-  top: -40px;
+  top: -30px;
   left: 50%;
   border: 2px solid white;
   transform: translateX(-50%);

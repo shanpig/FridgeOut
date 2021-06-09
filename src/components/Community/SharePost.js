@@ -28,7 +28,7 @@ export default function SharePost({ post }) {
           <RecipeImage src={recipe && recipe.main_image} alt="" />
         </ImageCol>
         <InfoCol>
-          <RecipeName>{recipe.title}</RecipeName>
+          <RecipeTitle>{recipe.title}</RecipeTitle>
           <RecipeIngredients>
             {recipe.ingredients &&
               recipe.ingredients.map((ingredient, i) => (
@@ -72,18 +72,25 @@ const Recipe = styled(Link)`
   width: 100%;
   cursor: pointer;
   /* background-color: white; */
-  margin: 0 10px 10px;
+  margin: 10px 10px 10px;
   background-color: white;
   /* border: 1px solid ${theme.darkbrown}; */
   border-radius: 4px;
   display: flex;
   padding: 10px 20px;
   gap: 10px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 1px 5px 4px lightgray;
+  }
 `;
 
-const RecipeName = styled.h2`
+const RecipeTitle = styled.h2`
   font-size: 1.2em;
   /* color: black; */
+  line-height: 1.3;
   font-weight: bold;
 `;
 

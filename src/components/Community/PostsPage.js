@@ -1,8 +1,9 @@
-import { headerConfig, mainContentConfig, theme } from '../../variables';
+import { headerConfig, footerConfig, theme } from '../../variables';
 import {
   Redirect,
   Switch,
   Route,
+  Link,
   NavLink,
   useRouteMatch,
 } from 'react-router-dom';
@@ -12,6 +13,7 @@ import SmallLogoSrc from '../../images/logo-small.svg';
 
 import Posts from './Posts';
 import { GoPrimitiveDot } from 'react-icons/go';
+import { BsPencilSquare } from 'react-icons/bs';
 import { useState } from 'react';
 
 export default function PostsPage() {
@@ -22,12 +24,23 @@ export default function PostsPage() {
       <MainContent>
         <Animated style={{ zIndex: 100 }}>
           <ButtonGroup>
-            <PostQuery activeClassName="active" to={`${match.url}/query`}>
+            <PostQuery
+              activeClassName="active"
+              to={`${match.url}/query`}
+              onClick={() => setTab('query')}
+            >
               求食譜
             </PostQuery>
-            <PostRecipe activeClassName="active" to={`${match.url}/share`}>
+            <PostRecipe
+              activeClassName="active"
+              to={`${match.url}/share`}
+              onClick={() => setTab('share')}
+            >
               分享食譜
             </PostRecipe>
+            <WritePostButton to={`/form/${tab}`} tab={tab}>
+              <WritePostIcon />
+            </WritePostButton>
           </ButtonGroup>
         </Animated>
         <ButtonGroupSpacer />
@@ -51,10 +64,10 @@ export default function PostsPage() {
 const Main = styled.main``;
 
 const MainContent = styled.div`
-  max-width: 400px;
+  max-width: 1024px;
   width: 100%;
   margin: 10px auto;
-  padding: 40px 10px 0;
+  padding: 40px 30px 0;
   display: flex;
   position: relative;
 
@@ -71,17 +84,17 @@ const EndSign = styled(GoPrimitiveDot)`
 const ButtonGroup = styled.div`
   max-width: 400px;
   width: 90%;
-  padding: 10px 0;
+  padding: 5px;
   display: flex;
   border-radius: 30px;
-  justify-content: space-evenly;
+  justify-content: space-between;
   /* align-items: stretch; */
 
   position: fixed;
   /* box-shadow: 0 1px 10px -5px gray; */
   z-index: 100;
   top: calc(${headerConfig.computer_height} + 30px);
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   left: 0;
   right: 0;
 
@@ -92,15 +105,71 @@ const ButtonGroupSpacer = styled.div`
   height: 100px;
 `;
 
+const WritePostIcon = styled(BsPencilSquare)`
+  width: 50%;
+  height: 50%;
+  fill: ${theme.darkbrown};
+`;
+
+const WritePostButton = styled(Link)`
+  display: block;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  bottom: calc(${footerConfig.mobile_height} + 10px);
+  display: flex;
+  border: 5px solid rgba(255, 255, 255, 0.8);
+  justify-content: center;
+  /* box-shadow: -1px 1px 5px -2px gray; */
+  align-items: center;
+  background-color: ${theme.lightOrange};
+  border-radius: 50%;
+
+  &:hover {
+    background-color: ${theme.darkbrown};
+    &::after {
+      opacity: 0;
+    }
+    & ${WritePostIcon} {
+      fill: white;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -100;
+    transform-origin: right;
+    transform: translateX(-50%)
+      ${(props) => (props.tab === 'query' ? 'rotateZ(0)' : 'rotateZ(180deg)')};
+    height: 20px;
+    background-color: ${theme.lightOrange};
+    clip-path: polygon(20% 50%, 60% 0, 100% 0, 100% 100%, 60% 100%);
+
+    transition: transform 0.3s ease;
+  }
+
+  @media screen and (min-width: 769px) {
+    bottom: 10px;
+  }
+`;
+
 const Tab = styled(NavLink)`
   width: 45%;
   letter-spacing: 10px;
+  white-space: nowrap;
   text-indent: 10px;
   color: ${theme.darkbrown};
   text-align: center;
   text-decoration: none;
   border-radius: 30px;
-  background-color: white;
+  /* background-color: white; */
   display: flex;
   align-items: center;
   padding: 10px;
@@ -124,9 +193,9 @@ const Tab = styled(NavLink)`
 `;
 
 const PostQuery = styled(Tab)`
-  /* border-radius: 5px 0 0 5px; */
+  border-radius: 30px 0 0 30px;
 `;
 
 const PostRecipe = styled(Tab)`
-  /* border-radius: 0 5px 5px 0; */
+  border-radius: 0 30px 30px 0;
 `;

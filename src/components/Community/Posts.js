@@ -48,6 +48,7 @@ export default function Posts({ category }) {
                     key={i}
                     animationIn="fadeInDown"
                     animationInDuration={500}
+                    animationInDelay={i * 100}
                   >
                     <SharePost post={post} />
                   </Animated>
@@ -56,50 +57,56 @@ export default function Posts({ category }) {
                 return;
             }
           })}
-      <WritePostButton to={`/form/${category}`}>
+      {/* <WritePostButton to={`/form/${category}`}>
         <WritePostIcon />
-      </WritePostButton>
+      </WritePostButton> */}
     </PostsContainer>
   );
 }
 
 const PostsContainer = styled.div`
-  display: flex;
   position: relative;
-  flex-direction: column;
-  gap: 70px;
+  display: grid;
+  gap: 70px 30px;
   width: 100%;
-`;
 
-const WritePostIcon = styled(BsPencilSquare)`
-  width: 50%;
-  height: 50%;
-  fill: ${theme.darkbrown};
-`;
-
-const WritePostButton = styled(Link)`
-  display: block;
-  width: 40px;
-  height: 40px;
-  position: fixed;
-  right: 35px;
-  bottom: calc(${footerConfig.mobile_height} + 10px);
-  display: flex;
-  justify-content: center;
-  box-shadow: -1px 1px 5px -2px gray;
-  align-items: center;
-  background-color: ${theme.lightOrange};
-  border-radius: 50%;
-
-  &:hover {
-    background-color: ${theme.darkbrown};
-    transform: scale(1.2);
-    & ${WritePostIcon} {
-      fill: white;
-    }
+  @media screen and (min-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
   }
-
-  @media screen and (min-width: 769px) {
-    bottom: 10px;
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
+
+// const WritePostIcon = styled(BsPencilSquare)`
+//   width: 50%;
+//   height: 50%;
+//   fill: ${theme.darkbrown};
+// `;
+
+// const WritePostButton = styled(Link)`
+//   display: block;
+//   width: 40px;
+//   height: 40px;
+//   position: fixed;
+//   right: 35px;
+//   bottom: calc(${footerConfig.mobile_height} + 10px);
+//   display: flex;
+//   justify-content: center;
+//   box-shadow: -1px 1px 5px -2px gray;
+//   align-items: center;
+//   background-color: ${theme.lightOrange};
+//   border-radius: 50%;
+
+//   &:hover {
+//     background-color: ${theme.darkbrown};
+//     transform: scale(1.2);
+//     & ${WritePostIcon} {
+//       fill: white;
+//     }
+//   }
+
+//   @media screen and (min-width: 769px) {
+//     bottom: 10px;
+//   }
+// `;
