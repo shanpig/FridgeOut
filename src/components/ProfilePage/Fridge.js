@@ -1,13 +1,15 @@
 import { theme } from '../../variables';
-import { useRef, useEffect, useState } from 'react';
 import styled, { isStyledComponent } from 'styled-components';
+import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Prompt } from 'react-router-dom';
 import { AiTwotoneEdit, AiFillSave, AiOutlinePlus } from 'react-icons/ai';
 import { fractionStringToTC, isValidNumberString } from '../../utils/math';
 import { setLeftOvers } from '../../redux/reducers/user/userActions';
 import FridgeIngredient from './FridgeIngredient';
 import { Animated } from 'react-animated-css';
 import EmptyMessage from './EmptyMessage';
+import Swal from 'sweetalert2';
 
 export default function Fridge() {
   const d = useDispatch();
@@ -113,6 +115,7 @@ export default function Fridge() {
           ))
         )}
       </FridgeContent>
+      {/* <Prompt when={true} message={'你有食材還未儲存'} /> */}
       <AddButton onClick={addNewLeftover}>
         {leftovers.length === 0 ? <Text>點我加入食材...</Text> : <AddIcon />}
       </AddButton>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
 import { AiFillSave, AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import ClickAwayListener from 'react-click-away-listener';
 
 export default function FridgeIngredient({
   ingredient: {
@@ -42,45 +43,48 @@ export default function FridgeIngredient({
 
   if (isEditing)
     return (
-      <Ingredient.Edit ref={FORM}>
-        <NameField>
-          <Input
-            required
-            error={error}
-            key="1"
-            type="text"
-            value={newName}
-            placeholder="雞肉"
-            onChange={(e) => onTextChange(e.target.value, setNewName)}
-          ></Input>
-        </NameField>
-        <AmountField>
-          <Input
-            key="2"
-            type="number"
-            value={newAmount}
-            placeholder="100"
-            onChange={(e) => onTextChange(e.target.value, setNewAmount)}
-          ></Input>
-        </AmountField>
-        <UnitField>
-          <Input
-            key="3"
-            type="text"
-            value={newUnit}
-            placeholder="g"
-            onChange={(e) => onTextChange(e.target.value, setNewUnit)}
-          ></Input>
-        </UnitField>
-        <Buttons>
-          <SaveButton onClick={saveEdition}>save</SaveButton>
-          <RemoveButton onClick={removeLeftover}>remove</RemoveButton>
-        </Buttons>
-      </Ingredient.Edit>
+      <ClickAwayListener onClickAway={() => setIsEditing(false)}>
+        <Ingredient.Edit ref={FORM}>
+          <NameField>
+            <Input
+              required
+              error={error}
+              key="1"
+              type="text"
+              value={newName}
+              placeholder="雞肉"
+              onChange={(e) => onTextChange(e.target.value, setNewName)}
+            ></Input>
+          </NameField>
+          <AmountField>
+            <Input
+              key="2"
+              type="number"
+              min={0}
+              value={newAmount}
+              placeholder="100"
+              onChange={(e) => onTextChange(e.target.value, setNewAmount)}
+            ></Input>
+          </AmountField>
+          <UnitField>
+            <Input
+              key="3"
+              type="text"
+              value={newUnit}
+              placeholder="g"
+              onChange={(e) => onTextChange(e.target.value, setNewUnit)}
+            ></Input>
+          </UnitField>
+          <Buttons>
+            <SaveButton onClick={saveEdition}>save</SaveButton>
+            <RemoveButton onClick={removeLeftover}>remove</RemoveButton>
+          </Buttons>
+        </Ingredient.Edit>
+      </ClickAwayListener>
     );
   else
     return (
-      <Ingredient.Display>
+      <Ingredient.Display onClick={() => setIsEditing(true)}>
         <Text>
           {name} {amount} {unit}
         </Text>
@@ -101,6 +105,11 @@ const Display = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #cfcfcf;
+  }
 `;
 const Ingredient = {
   Edit,

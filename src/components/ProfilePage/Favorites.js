@@ -18,8 +18,8 @@ export default function Favorites() {
       ) : (
         <Recipes>
           {favorites.map((recipe, i) => (
-            <Animated animationInDelay={i * 200}>
-              <Recipe key={i}>
+            <Animated key={i} animationInDelay={i * 200}>
+              <Recipe>
                 <ImageContainer to={`/recipe/${recipe.id}`}>
                   <Image src={recipe.main_image}></Image>
                 </ImageContainer>
@@ -63,6 +63,8 @@ const Recipe = styled.li`
 const ImageContainer = styled(Link)`
   overflow: hidden;
   width: 100%;
+  display: flex;
+  align-items: stretch;
   aspect-ratio: 1;
   /* max-height: 150px; */
 `;
@@ -81,8 +83,9 @@ const Title = styled.h2`
 
 const Image = styled.img`
   transition: transform ease 1s;
-  transform: translateY(-5%) scale(1.2);
+  transform: scale(1.2);
   width: 100%;
+  /* object-fit: cover; */
 `;
 
 const RemoveButton = styled(GrFormTrash)`

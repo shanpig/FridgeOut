@@ -11,7 +11,6 @@ export default function SharePost({ post }) {
 
   useEffect(() => {
     getRecipe(recipeData.id).then((recipe) => {
-      console.log(recipeData);
       setRecipe(recipeData);
     });
   }, []);

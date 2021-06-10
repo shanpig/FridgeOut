@@ -64,7 +64,11 @@ const Text = styled.div`
   transition: all ease 0.2s;
 
   position: absolute;
-  bottom: -100%;
+  bottom: 10px;
+
+  @media screen and (min-width: 769px) {
+    bottom: -100%;
+  }
 `;
 
 const Ingredients = styled.ul`
@@ -75,21 +79,27 @@ const Ingredients = styled.ul`
   align-items: center;
   gap: 10px;
   margin: 15px 0 5px;
-  padding: 10px 20px;
+  padding: 10px 20px 40px;
   /* border: 1px solid lightgray; */
   border-radius: 5px;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.6);
   transition: all 0.2s ease;
   overflow: hidden;
+  transform: translateY(-5px);
+  box-shadow: 1px 5px 4px lightgray;
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 1px 5px 4px lightgray;
-    padding-bottom: 40px;
+  @media screen and (min-width: 769px) {
+    transform: translateY(0);
+    padding-bottom: 10px;
 
-    & ${Text} {
-      bottom: 10px;
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 1px 5px 4px lightgray;
+      padding-bottom: 40px;
+      & ${Text} {
+        bottom: 10px;
+      }
     }
   }
 `;

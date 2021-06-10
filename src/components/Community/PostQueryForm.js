@@ -5,6 +5,7 @@ import { useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { post } from '../../utils/firebase';
 import GoBackButton from '../common/GoBackButton';
+import { RiFridgeFill } from 'react-icons/ri';
 
 function findIngredientByName(list, ingredientName) {
   return list.find((item) => item.ingredient_name === ingredientName);
@@ -59,28 +60,33 @@ export default function PostQueryForm() {
       <GoBackButton></GoBackButton>
       <Title>剩食求解</Title>
       <QueryForm>
-        <Form action="" onSubmit={submitHandler}>
-          {user.left_overs.length === 0 ? (
-            <Redirect to={`/profile/${user.name}/fridge`} />
-          ) : (
-            user.left_overs.map((leftover, i) => (
-              <Field className="field" key={i} selected={isSelected(leftover)}>
-                <Input
-                  type="checkbox"
-                  name=""
-                  id={leftover.ingredient_name}
-                  value={leftover.ingredient_name}
-                  onChange={selectionHandler}
-                />
-                <Label htmlFor={leftover.ingredient_name}>
-                  {leftover.ingredient_name} {leftover.ingredient_amount}{' '}
-                  {leftover.ingredient_unit}
-                </Label>
-              </Field>
-            ))
-          )}
+        <FridgeList action="" onSubmit={submitHandler}>
+          <FridgeIcon />
+          {user.left_overs.map((leftover, i) => (
+            <Field className="field" key={i} selected={isSelected(leftover)}>
+              <Input
+                type="checkbox"
+                name=""
+                id={leftover.ingredient_name}
+                value={leftover.ingredient_name}
+                onChange={selectionHandler}
+              />
+              <Label htmlFor={leftover.ingredient_name}>
+                {leftover.ingredient_name} {leftover.ingredient_amount}{' '}
+                {leftover.ingredient_unit}
+              </Label>
+            </Field>
+          ))}
+        </FridgeList>
+        <ToBeAddedList>
+          {selected.map((ingredient, i) => (
+            <Item key={i}>
+              {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}
+              {ingredient.ingredient_unit}
+            </Item>
+          ))}
           <Submit type="submit" value="確認送出" />
-        </Form>
+        </ToBeAddedList>
       </QueryForm>
     </Main>
   );
@@ -100,7 +106,10 @@ const QueryForm = styled.div`
   max-width: 600px;
   margin: 20px auto;
   border-radius: 20px;
-  background-color: white;
+  display: flex;
+  gap: 0 20px;
+
+  /* background-color: white; */
 
   @media screen and (min-width: 769px) {
   }
@@ -113,15 +122,41 @@ const Title = styled.h1`
   color: white;
 `;
 
-const Form = styled.form`
+const FridgeList = styled.form`
+  flex: 1 1 50%;
   display: flex;
-  flex-direction: row;
+  position: relative;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
   flex-wrap: wrap;
   gap: 10px;
+  padding: 10px;
 
   & * {
     color: ${theme.darkbrown};
   }
+`;
+const FridgeIcon = styled(RiFridgeFill)`
+  position: relative;
+  margin: -40px auto 10px;
+
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 10px;
+  border: 3px solid ${theme.darkbrown};
+`;
+
+const ToBeAddedList = styled.div`
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
 `;
 
 const Field = styled.div`
@@ -153,7 +188,7 @@ const Label = styled.label`
 const Submit = styled.input`
   margin-top: 30px;
   padding: 5px 0;
-  border-radius: 10px;
+  border-radius: 20px;
   cursor: pointer;
   letter-spacing: 3px;
   background-color: ${theme.lightOrange};
@@ -164,4 +199,12 @@ const Submit = styled.input`
   &:hover {
     background-color: ${theme.orange};
   }
+`;
+
+const Item = styled.div`
+  width: fit-content;
+  padding: 6px 20px;
+  border-radius: 20px;
+  background-color: #ddd;
+  color: ${theme.darkbrown};
 `;

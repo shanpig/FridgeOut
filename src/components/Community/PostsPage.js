@@ -6,6 +6,7 @@ import {
   Link,
   NavLink,
   useRouteMatch,
+  useHistory,
 } from 'react-router-dom';
 import { Animated } from 'react-animated-css';
 import styled from 'styled-components';
@@ -14,11 +15,18 @@ import SmallLogoSrc from '../../images/logo-small.svg';
 import Posts from './Posts';
 import { GoPrimitiveDot } from 'react-icons/go';
 import { BsPencilSquare } from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function PostsPage() {
-  const [tab, setTab] = useState('query');
   const match = useRouteMatch();
+  const history = useHistory();
+  const [tab, setTab] = useState('query');
+
+  useEffect(() => {
+    const newTab = history.location.pathname.split('/')[2];
+    console.log(newTab);
+    setTab(newTab);
+  }, [history.location.pathname]);
   return (
     <Main>
       <MainContent>
@@ -27,14 +35,14 @@ export default function PostsPage() {
             <PostQuery
               activeClassName="active"
               to={`${match.url}/query`}
-              onClick={() => setTab('query')}
+              // onClick={() => setTab('query')}
             >
               求食譜
             </PostQuery>
             <PostRecipe
               activeClassName="active"
               to={`${match.url}/share`}
-              onClick={() => setTab('share')}
+              // onClick={() => setTab('share')}
             >
               分享食譜
             </PostRecipe>
