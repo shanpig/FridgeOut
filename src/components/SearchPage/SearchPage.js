@@ -18,7 +18,6 @@ export default function SearchPage() {
   const [recipesPage, setRecipesPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const selectedRecipes = useSelector((state) => state.user_info.my_kitchen);
-  console.log(selectedRecipes);
   const searchKeywords = useSelector((state) => state.searched_keywords);
   const leftOvers = useSelector((state) => state.user_info.left_overs);
 
@@ -57,7 +56,7 @@ export default function SearchPage() {
 
       <ContentRow>
         {isLoading ? (
-          <IconContainer>
+          <LoadingAnimation key={1}>
             <lottie-player
               src="https://assets6.lottiefiles.com/packages/lf20_UGvCSC/loading_animation.json"
               background="transparent"
@@ -66,24 +65,24 @@ export default function SearchPage() {
               loop
               autoplay
             ></lottie-player>
-          </IconContainer>
+          </LoadingAnimation>
         ) : recipes.length === 0 ? (
-          <IconContainer>
+          <IconContainer key={2}>
             <lottie-player
-              src="https://assets5.lottiefiles.com/temp/lf20_hs090k.json"
+              src="https://assets5.lottiefiles.com/packages/lf20_MrIjH2.json"
               background="transparent"
               speed="1"
               style={{
-                width: '100px',
-                height: '100px',
+                width: '200px',
+                height: '200px',
               }}
               loop
               autoplay
             ></lottie-player>
-            <Text>試著加入食材 ...</Text>
+            <Text>找不到食譜</Text>
           </IconContainer>
         ) : (
-          <SearchedRecipes>
+          <SearchedRecipes key={3}>
             {recipes.length &&
               recipes
                 .sort((a, b) => a.ingredients.length - b.ingredients.length)
@@ -289,6 +288,11 @@ const IconContainer = styled.div`
   @media screen and (min-width: 769px) {
     width: 70%;
   }
+`;
+
+const LoadingAnimation = styled(IconContainer)``;
+const NoInputAnimation = styled(IconContainer)`
+  align-items: flex-start;
 `;
 
 const Text = styled.h2`
