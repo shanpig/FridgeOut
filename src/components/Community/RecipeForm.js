@@ -7,26 +7,29 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { post, uploadRecipe, uploadImage } from '../../utils/firebase';
 import { GrFormAdd, GrFormTrash } from 'react-icons/gr';
+import { TiArrowBack } from 'react-icons/ti';
 
-export default function RecipeForm({ submit }) {
+export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   const history = useHistory();
   const user = useSelector((state) => state.user_info);
   const [isLoading, setIsLoading] = useState(false);
-  const [title, setTitle] = useState('香料番茄燉牛');
-  const [ingredients, setIngredients] = useState([
-    '洋蔥 0.5 顆',
-    '馬鈴薯 1 顆',
-    '紅蘿蔔 0.5 根',
-    '牛腱 140 g',
-  ]);
+  const [title, setTitle] = useState('');
+  const [ingredients, setIngredients] = useState(
+    defaultIngredients || [
+      '洋蔥 0.5 顆',
+      '馬鈴薯 1 顆',
+      '紅蘿蔔 0.5 根',
+      '牛腱 140 g',
+    ]
+  );
   const [steps, setSteps] = useState([
-    '微量的油，蒜末爆香，洋蔥&紅蘿蔔切塊炒到洋蔥微軟黃色。放入番茄罐的整理番茄&1湯匙的番茄汁液',
-    '倒入1.5杯米的水量，蓋鍋煨煮',
-    '牛排（牛腱）燙過後，切塊。平底鍋加蒜香無水奶油，牛肉下鍋煎到焦香，加入湯鍋。撒入大蒜綜合香料，少許二砂糖、薄鹽醬油、鹽麴。',
-    '湯鍋煮滾後，蓋鍋蓋，文火燉10分鐘關火燜。鍋子摸起來不燙，再重複煮滾燜。重複3-4次就軟而不爛。每打開一次可視情況加水、調味。',
-    '煮香料飯、配半熟土雞蛋👍',
+    // '微量的油，蒜末爆香，洋蔥&紅蘿蔔切塊炒到洋蔥微軟黃色。放入番茄罐的整理番茄&1湯匙的番茄汁液',
+    // '倒入1.5杯米的水量，蓋鍋煨煮',
+    // '牛排（牛腱）燙過後，切塊。平底鍋加蒜香無水奶油，牛肉下鍋煎到焦香，加入湯鍋。撒入大蒜綜合香料，少許二砂糖、薄鹽醬油、鹽麴。',
+    // '湯鍋煮滾後，蓋鍋蓋，文火燉10分鐘關火燜。鍋子摸起來不燙，再重複煮滾燜。重複3-4次就軟而不爛。每打開一次可視情況加水、調味。',
+    // '煮香料飯、配半熟土雞蛋👍',
   ]);
-  const [tags, setTags] = useState('牛腱 雞蛋 好吃!');
+  const [tags, setTags] = useState('');
   const [imageSrc, setImageSrc] = useState('');
   const imageHolder = useRef(null);
 
@@ -154,11 +157,14 @@ export default function RecipeForm({ submit }) {
   if (user && user.identity === 'none') return <Redirect to="/login" />;
   return (
     <QueryForm>
-      <Title>分享食譜</Title>
+      <Title>{formTitle}</Title>
       <Form action="" onSubmit={submitHandler}>
-        <LabelMainImage htmlFor="main-image" src={imageSrc}>
-          <Textbox>{imageSrc ? '更換照片' : '上傳一張照片'}</Textbox>
-        </LabelMainImage>
+        <ImageHolder>
+          <GoBackButton onClick={(e) => history.goBack()} />
+          <LabelMainImage htmlFor="main-image" src={imageSrc}>
+            <Textbox>{imageSrc ? '更換照片' : '上傳一張照片'}</Textbox>
+          </LabelMainImage>
+        </ImageHolder>
 
         <InputMainImage
           id="main-image"
@@ -346,10 +352,18 @@ const Input = styled.input`
 const LabelTitle = styled(Label)``;
 const InputTitle = styled(Input)``;
 const LabelMainImage = styled(Label)`
-  width: 100%;
+  /* width: 100%;
   height: 350px;
   border-radius: 7px 7px 0 0;
   align-self: stretch;
+  position: relative;
+  @media screen and (min-width: 769px) {
+    width: 45%;
+    border-radius: 7px 0 0 7px;
+    height: unset;
+  } */
+  height: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -364,20 +378,49 @@ const LabelMainImage = styled(Label)`
   margin: 0;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.4);
 
     &:hover > div {
       background-color: ${theme.darkbrown};
       color: white;
     }
   }
+`;
 
+const ImageHolder = styled.div`
+  width: 100%;
+  height: 350px;
+  border-radius: 7px 7px 0 0;
+  align-self: stretch;
+  position: relative;
   @media screen and (min-width: 769px) {
     width: 45%;
     border-radius: 7px 0 0 7px;
     height: unset;
   }
 `;
+
+const GoBackButton = styled(TiArrowBack)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  padding: 5px 15px 15px 5px;
+  cursor: pointer;
+  fill: ${theme.darkbrown};
+  background-color: rgba(255, 255, 255, 0.8);
+  /* border-radius: 0 0 50px; */
+  transition: 0.3s all ease;
+  /* clip-path: polygon(0 0, 100% 0, 0 100%); */
+  clip-path: circle(50px at left top);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 1px 4px 4px black;
+  }
+`;
+
 const InputMainImage = styled.input`
   display: none;
 `;

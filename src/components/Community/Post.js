@@ -15,7 +15,11 @@ export default function Post({
 }) {
   return (
     <PostContainer>
-      <ProfileImage src={profile_image} alt="" />
+      <ProfileImage
+        src={profile_image}
+        alt=""
+        onLoad={(e) => (e.target.style.opacity = 1)}
+      />
       <Profile>
         <Name className="name">{name}</Name>
         <Time>{timeDifference(new Date(timestamp.toDate()))}</Time>
@@ -81,6 +85,8 @@ const ProfileImage = styled.img`
   border: 2px solid white;
   transform: translateX(-50%);
   border-radius: 50%;
+  transition: opacity 0.3s ease;
+  opacity: 0;
 `;
 
 const Content = styled.div`
