@@ -5,71 +5,59 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addInput } from '../../redux/reducers/keyword/keywordActions';
 import { GrFormClose, GrFormAdd } from 'react-icons/gr';
 import { fraction } from 'mathjs';
+import IngredientInput from './IngredientInput';
 import { getFractionFromTCAmount, fractionStringToTC } from '../../utils/math';
 import { useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
+import { uid } from 'react-uid';
 
-export default function InputPopup() {
-  const [open, setOpen] = useState(false);
-  const [inputs, setInputs] = useState(['']);
+const emptyInput = {
+  ingredient_name: '',
+  ingredient_amount: '',
+  ingredient_unit: '',
+};
+
+export default function InputPopup({ open, setOpen }) {
+  const [inputs, setInputs] = useState([emptyInput]);
   const identity = useSelector((state) => state.user_info.identity);
   const fridge = useSelector((state) => state.user_info.left_overs);
   const d = useDispatch();
   const history = useHistory();
 
   function addInputField() {
-    let lastInput = inputs[inputs.length - 1];
-    if (inputs.length && !lastInput.length) return;
-
-    setInputs([...inputs, '']);
+    setInputs([...inputs, emptyInput]);
   }
 
-  function removeInputField(i) {
-    setInputs([...inputs.slice(0, i), ...inputs.slice(i + 1)]);
+  function setSingleInputField(input, i) {
+    const newInputs = [...inputs.slice(0, i), input, ...inputs.slice(i + 1)];
+    setInputs(newInputs);
   }
 
-  function onTextChange(e, i) {
-    const text = e.target.value;
-    setInputs([...inputs.slice(0, i), text, ...inputs.slice(i + 1)]);
+  function removeSingleInputField(i) {
+    let newInputs = [...inputs.slice(0, i), ...inputs.slice(i + 1)];
+    if (newInputs.length === 0) newInputs = [emptyInput];
+    setInputs(newInputs);
   }
 
-  function addAllInputs() {
+  function addAllInputFields() {
     inputs.forEach((input) => {
-      input = input.replace(/ +/g, ' ').trim();
-      if (!input.length) return;
-      let [ingredient_name, ingredient_amount, ingredient_unit] =
-        input.split(' ');
-      ingredient_amount = getFractionFromTCAmount(ingredient_amount);
-      d(
-        addInput({
-          ingredient_name,
-          ingredient_amount,
-          ingredient_unit,
-        })
-      );
-      setInputs(['']);
+      if (input.ingredient_name) d(addInput(input));
+      setInputs([emptyInput]);
     });
 
     setOpen(false);
   }
 
-  function addAllFridgeItems() {
+  function addAllFridgeItemsToInput() {
     if (identity === 'none') return history.push('/login');
-    let ingredients = fridge.map(
-      (leftovers) =>
-        `${leftovers.ingredient_name} ${fractionStringToTC(
-          leftovers.ingredient_amount
-        )} ${leftovers.ingredient_unit}`
-    );
-    setInputs(ingredients);
+    setInputs(fridge);
   }
 
   return (
     <>
-      {/* <Mask isOpen={open} onClick={() => setOpen(false)} /> */}
-      <ButtonContainer onClick={() => setOpen(true)}>
+      {/* <ButtonContainer onClick={() => setOpen(true)}>
         <AddIcon></AddIcon>
-      </ButtonContainer>
+      </ButtonContainer> */}
       <StyledPopup
         offsetY={15}
         open={open}
@@ -89,27 +77,26 @@ export default function InputPopup() {
         <Form action="">
           {inputs.map((input, i) => {
             return (
-              <Field key={i}>
-                <TextInput
-                  type="text"
-                  value={input}
-                  onChange={(e) => onTextChange(e, i)}
-                  // disabled={i !== inputs.length - 1}
+              <Field key={uid(input)}>
+                <IngredientInput
+                  ingredient={input}
+                  removeLeftover={() => removeSingleInputField(i)}
+                  setLeftover={(leftover) => setSingleInputField(leftover, i)}
                 />
-                {i === inputs.length - 1 ? (
-                  <AddInputIcon onClick={() => addInputField()} />
-                ) : (
-                  <RemoveInputIcon onClick={() => removeInputField(i)} />
-                )}
+                <Button>
+                  <RemoveInputIcon
+                    onClick={() => removeSingleInputField(i)}
+                  ></RemoveInputIcon>
+                </Button>
               </Field>
             );
           })}
         </Form>
         <ButtonGroup>
-          <AddFromFridgeButton onClick={() => addAllFridgeItems()}>
+          <AddFromFridgeButton onClick={addAllFridgeItemsToInput}>
             使用冰箱食材
           </AddFromFridgeButton>
-          <ConfirmButton onClick={() => addAllInputs()}>確認新增</ConfirmButton>
+          <ConfirmButton onClick={addAllInputFields}>確認新增</ConfirmButton>
         </ButtonGroup>
       </StyledPopup>
     </>

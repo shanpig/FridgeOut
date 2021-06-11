@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import { AiFillSave, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import ClickAwayListener from 'react-click-away-listener';
 
-export default function FridgeIngredient({
+export default function IngredientInput({
   ingredient: {
     ingredient_name: name,
     ingredient_amount: amount,
@@ -12,6 +12,7 @@ export default function FridgeIngredient({
   removeLeftover,
   setLeftover,
 }) {
+  console.log('i got ', name);
   const FORM = useRef(null);
   let defaultEditState = name.length === 0;
   const [isEditing, setIsEditing] = useState(defaultEditState);
@@ -41,66 +42,62 @@ export default function FridgeIngredient({
     setIsEditing(false);
   }
 
-  if (isEditing)
-    return (
-      <ClickAwayListener onClickAway={saveEdition}>
-        <Ingredient.Edit ref={FORM}>
-          <NameField>
-            <Input
-              required
-              error={error}
-              key="1"
-              type="text"
-              value={newName}
-              placeholder="雞肉"
-              onChange={(e) => onTextChange(e.target.value, setNewName)}
-            ></Input>
-          </NameField>
-          <AmountField>
-            <Input
-              key="2"
-              type="number"
-              min={0}
-              value={newAmount}
-              placeholder="100"
-              onChange={(e) => onTextChange(e.target.value, setNewAmount)}
-            ></Input>
-          </AmountField>
-          <UnitField>
-            <Input
-              key="3"
-              type="text"
-              value={newUnit}
-              placeholder="g"
-              onChange={(e) => onTextChange(e.target.value, setNewUnit)}
-            ></Input>
-          </UnitField>
-          <Buttons>
-            <SaveButton onClick={saveEdition}>save</SaveButton>
-            <RemoveButton onClick={removeLeftover}>remove</RemoveButton>
-          </Buttons>
-        </Ingredient.Edit>
-      </ClickAwayListener>
-    );
-  else
-    return (
-      <Ingredient.Display onClick={() => setIsEditing(true)}>
-        <Text>
-          {name} {amount} {unit}
-        </Text>
-        <Buttons>
-          <EditButton onClick={() => setIsEditing(true)}>edit</EditButton>
+  return (
+    <ClickAwayListener onClickAway={() => setIsEditing(false)}>
+      <Ingredient.Edit ref={FORM} error={error}>
+        <NameField>
+          <Input
+            required
+            key="1"
+            type="text"
+            value={newName}
+            placeholder="雞肉"
+            onChange={(e) => onTextChange(e.target.value, setNewName)}
+          ></Input>
+        </NameField>
+        <AmountField>
+          <Input
+            key="2"
+            type="number"
+            min={0}
+            step={0.5}
+            value={newAmount}
+            placeholder="100"
+            onChange={(e) => onTextChange(e.target.value, setNewAmount)}
+          ></Input>
+        </AmountField>
+        <UnitField>
+          <Input
+            key="3"
+            type="text"
+            value={newUnit}
+            placeholder="g"
+            onChange={(e) => onTextChange(e.target.value, setNewUnit)}
+          ></Input>
+        </UnitField>
+        {/* <Buttons>
+          <SaveButton onClick={saveEdition}>save</SaveButton>
           <RemoveButton onClick={removeLeftover}>remove</RemoveButton>
-        </Buttons>
-      </Ingredient.Display>
-    );
+        </Buttons> */}
+      </Ingredient.Edit>
+    </ClickAwayListener>
+  );
 }
 
 const Edit = styled.form`
   display: flex;
   align-items: center;
   gap: 5px;
+  box-sizing: border-box;
+  width: 300px;
+
+  & input {
+    border: ${(props) => (props.error ? '1px solid red' : 'none')};
+    background-color: ${(props) =>
+      props.error ? 'rgba(255, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.15)'};
+  }
 `;
+
 const Display = styled.div`
   display: flex;
   align-items: center;
@@ -111,10 +108,12 @@ const Display = styled.div`
     background-color: #cfcfcf;
   }
 `;
+
 const Ingredient = {
   Edit,
   Display,
 };
+
 const Buttons = styled.div`
   margin-left: auto;
   display: flex;
@@ -160,20 +159,17 @@ const Field = styled.div`
 
 const NameField = styled(Field)`
   flex-grow: 3;
-  min-width: 100px;
-  max-width: 200px;
+  /* min-width: 100px;
+  max-width: 200px; */
 `;
 const AmountField = styled(Field)`
   flex-grow: 1;
   flex-shrink: 3;
-  max-width: 100px;
+  /* max-width: 100px; */
 `;
 const UnitField = styled(AmountField)``;
 
 const Input = styled.input`
-  border: ${(props) => (props.error ? '1px solid red' : 'none')};
-  background-color: ${(props) =>
-    props.error ? 'rgba(255, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.15)'};
   color: black;
   outline: none;
   border-radius: 0;

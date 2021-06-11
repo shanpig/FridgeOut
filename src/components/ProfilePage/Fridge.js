@@ -9,7 +9,7 @@ import { setLeftOvers } from '../../redux/reducers/user/userActions';
 import FridgeIngredient from './FridgeIngredient';
 import { Animated } from 'react-animated-css';
 import EmptyMessage from './EmptyMessage';
-import Swal from 'sweetalert2';
+import { uid } from 'react-uid';
 
 export default function Fridge() {
   const d = useDispatch();
@@ -45,31 +45,6 @@ export default function Fridge() {
     };
     setLeftovers([...leftovers, emptyLeftover]);
   }
-  // function checkIngredientsTextValidity() {
-  //   const inputLines = ingredientsText.trim().split(/[\r\n]+/g);
-  //   let leftovers = [];
-
-  //   for (let line of inputLines) {
-  //     let trimmedLine = line.trim();
-  //     console.log(
-  //       '🚀 ~ file: Fridge.js ~ line 20 ~ checkIngredientsTextValidity ~ trimmedLine',
-  //       trimmedLine
-  //     );
-  //     if (!trimmedLine) continue;
-
-  //     let ingredient = trimmedLine.split(' ');
-  //     if (ingredient.length !== 3 && ingredient.length !== 1)
-  //       console.log("ingredient doesn't have three or one part");
-  //     else if (isValidNumberString(ingredient)) console.log('wrong format');
-  //     else {
-  //       let [ingredient_name, ingredient_amount, ingredient_unit] = ingredient;
-  //       leftovers.push({ ingredient_name, ingredient_amount, ingredient_unit });
-  //     }
-  //   }
-  //   console.log(leftovers);
-
-  //   d(setLeftOvers(leftovers));
-  // }
 
   useEffect(() => {
     if (firstUpdate.current) {
@@ -107,7 +82,7 @@ export default function Fridge() {
         ) : (
           leftovers.map((ingredient, i) => (
             <FridgeIngredient
-              key={i}
+              key={uid(ingredient)}
               ingredient={ingredient}
               removeLeftover={() => removeSingleLeftover(i)}
               setLeftover={(leftover) => setSingleLeftover(leftover, i)}
