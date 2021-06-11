@@ -66,7 +66,7 @@ const Icon = styled.img`
 `;
 
 const Text = styled.div`
-  font-size: 2em;
+  font-size: 1.5em;
   text-align: center;
   line-height: 1.7;
 `;

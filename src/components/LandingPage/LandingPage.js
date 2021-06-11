@@ -50,7 +50,7 @@ const MainContent = styled.div`
   color: white;
   padding: 40px 56px;
   width: 100%;
-  height: ${mainContentConfig.mobile_height};
+  /* height: ${mainContentConfig.mobile_height}; */
   /* overflow: auto; */
 
   gap: 20px;
@@ -58,6 +58,7 @@ const MainContent = styled.div`
     gap: 0;
     flex-direction: row;
     justify-content: space-between;
+    height: ${mainContentConfig.computer_height};
   }
 `;
 
