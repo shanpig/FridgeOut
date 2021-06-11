@@ -7,6 +7,8 @@ import SidebarBody from '../common/Sidebar/SidebarBody';
 import ScrollToTop from '../common/ScrollToTop';
 import backgroundImageSrc from '../../images/kitchen-table.jpg';
 import { GrClose, GrAdd, GrCheckmark } from 'react-icons/gr';
+import { TiArrowBack } from 'react-icons/ti';
+
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -15,7 +17,7 @@ import {
   addToFavorite,
   addToKitchen,
 } from '../../redux/reducers/user/userActions';
-import GoBackButton from '../common/GoBackButton';
+// import GoBackButton from '../common/GoBackButton';
 // import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
 export default function RecipePage() {
@@ -61,6 +63,7 @@ export default function RecipePage() {
         <Card>
           {/* <CloseButton onClick={() => history.goBack()}></CloseButton> */}
           {/* <CardHead> */}
+          <GoBackButton onClick={(e) => history.goBack()} />
           <RecipeImageContainer src={main_image}>
             {/* <RecipeImage src={main_image} alt='' /> */}
           </RecipeImageContainer>
@@ -212,10 +215,11 @@ const CloseButton = styled(GrClose)`
 
 const Card = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   border-radius: 5px;
 
@@ -295,6 +299,28 @@ const RecipeImageContainer = styled.div`
   @media screen and (min-width: 769px) {
     width: 45%;
     height: 100%;
+  }
+`;
+
+const GoBackButton = styled(TiArrowBack)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  padding: 5px 15px 15px 5px;
+  cursor: pointer;
+  z-index: 100;
+  fill: ${theme.darkbrown};
+  background-color: rgba(255, 255, 255, 0.8);
+  /* border-radius: 0 0 50px; */
+  transition: 0.3s all ease;
+  /* clip-path: polygon(0 0, 100% 0, 0 100%); */
+  clip-path: circle(50px at left top);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 1px 4px 4px black;
   }
 `;
 
