@@ -93,7 +93,10 @@ export default function LoginPage() {
   if (isLoading) {
     return (
       <Main>
-        <ReactLoading type="spokes"></ReactLoading>
+        <LoadingMessage>
+          <ReactLoading type="spokes"></ReactLoading>
+          <Text>登入中，請稍後 ...</Text>
+        </LoadingMessage>
       </Main>
     );
   }
@@ -119,6 +122,18 @@ const Main = styled.main`
   & * {
     color: black;
   }
+`;
+
+const Text = styled.div`
+  text-align: center;
+  color: white;
+`;
+
+const LoadingMessage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 `;
 
 const Title = styled.h1`
