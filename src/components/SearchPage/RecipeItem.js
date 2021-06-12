@@ -10,6 +10,7 @@ function removeRepeat(array) {
 }
 
 export default function RecipeItem({
+  className,
   recipe,
   readOnly = false,
   Button,
@@ -40,7 +41,7 @@ export default function RecipeItem({
   }, [ingredients, leftovers]);
 
   return (
-    <Item>
+    <Item className={className}>
       <ItemContent to={`/recipe/${id}`}>
         <ImageContainer>
           <Image src={main_image}></Image>
@@ -125,6 +126,7 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   transition: 1s ease all;
   transform: scale(1.2);
+  background-color: #ababab;
   width: 100%;
 `;
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { theme, headerConfig } from '../../variables';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import SmallLogoSrc from '../../images/logo-small.svg';
 import LargeLogoSrc from '../../images/logo.svg';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -27,20 +27,21 @@ export default function Header() {
           ></LogoImg>
         </StyledLink>
         <Nav>
-          <NavButton to="/search" id="search">
+          <NavButton activeClassName="active" to="/search" id="search">
             <SearchIcon />
             <span>搜尋</span>
           </NavButton>
-          <NavButton to="/posts">
+          <NavButton activeClassName="active" to="/posts">
             <CommunityIcon />
             <span>社群</span>
           </NavButton>
           <NavButton
+            activeClassName="active"
             to={identity !== 'none' ? `/profile/${name}/fridge` : '/profile'}
             id="profile"
           >
             {profile ? <ProfileImage src={profile} /> : <ProfileIcon />}
-            <span>個人</span>
+            <span>{identity !== 'none' ? '個人' : '登入'}</span>
           </NavButton>
         </Nav>
       </MainHeader>
@@ -99,6 +100,7 @@ const LogoImg = styled.div`
   height: 40px;
 
   @media screen and (min-width: 769px) {
+    width: 150px;
     background-image: url(${LargeLogoSrc});
     background-position: left;
   }
@@ -119,24 +121,28 @@ const Nav = styled.nav`
 
   @media screen and (min-width: 769px) {
     width: fit-content;
+    height: 100%;
     position: unset;
     float: right;
     background-color: transparent;
   }
 `;
 
-const NavButton = styled(Link)`
+const NavButton = styled(NavLink)`
   flex: 1 1 50%;
-  background-color: transparent;
   border: none;
   position: relative;
   text-decoration: none;
   width: 70px;
-  height: 60%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+
+  &.active {
+    background-color: #5c5c5c;
+  }
 
   &:not(:first-child) {
     border-left: 1px solid lightslategrey;
@@ -148,10 +154,15 @@ const NavButton = styled(Link)`
       opacity: 0;
       position: absolute;
       display: flex;
-      height: 100%;
+      /* height: 100%; */
+      padding: 1em;
       align-items: center;
       background-color: rgba(0, 0, 0, 0.8);
       transition: all 0.2s ease;
+    }
+
+    &.active > span {
+      background-color: #5c5c5c;
     }
 
     &:hover span {

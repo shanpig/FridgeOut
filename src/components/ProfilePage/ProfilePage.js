@@ -316,23 +316,39 @@ const NavItem = styled(Link)`
 `;
 
 const FridgeIcon = styled(CgSmartHomeRefrigerator)`
-  font-size: 25px;
+  font-size: 20px;
 
   & path {
     fill: ${theme.darkbrown};
   }
+
+  @media screen and (min-width: 769px) {
+    font-size: 25px;
+  }
 `;
 const KitchenIcon = styled(GiCook)`
-  font-size: 25px;
+  font-size: 20px;
   fill: ${theme.darkbrown};
+
+  @media screen and (min-width: 769px) {
+    font-size: 25px;
+  }
 `;
 const FavoriteIcon = styled(RiNewspaperFill)`
-  font-size: 25px;
+  font-size: 20px;
   fill: ${theme.darkbrown};
+
+  @media screen and (min-width: 769px) {
+    font-size: 25px;
+  }
 `;
 const MessageIcon = styled(RiMessage2Fill)`
-  font-size: 25px;
+  font-size: 20px;
   fill: ${theme.darkbrown};
+
+  @media screen and (min-width: 769px) {
+    font-size: 25px;
+  }
 `;
 
 const ContentRow = styled(Row)`

@@ -46,8 +46,14 @@ const KitchenContent = styled.ul`
 `;
 
 const Recipe = styled(RecipeItem)`
-  border: 1px solid ${theme.orange};
-  height: 100px;
+  /* height: 100px; */
+  transition: all ease 0.3s;
+
+  &:hover {
+    transform: translate(-2px, -5px);
+    box-shadow: 1px 3px 4px lightgray;
+    border-right: 10px solid ${theme.darkbrown};
+  }
 `;
 
 const RemoveButton = styled(GrFormTrash)`

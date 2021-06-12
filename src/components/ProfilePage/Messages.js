@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { watchMessages } from '../../utils/firebase';
 import styled from 'styled-components';
-import { GrFormTrash } from 'react-icons/gr';
-import { removeFromKitchen } from '../../redux/reducers/user/userActions';
 import { timeDifference } from '../../utils/math';
 import EmptyMessage from './EmptyMessage';
 import { Animated } from 'react-animated-css';
@@ -100,6 +98,8 @@ const RecipeImage = styled.div`
   background-size: 130%;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #ececec;
+  border-radius: 9px 0 0 9px;
   transition: background-size ease 1s;
 
   @media screen and (min-width: 460px) {
@@ -113,9 +113,18 @@ const RecipeImage = styled.div`
 const Recipe = styled(Link)`
   border: 1px solid gray;
   display: flex;
+  margin-top: 10px;
+  border-radius: 10px;
   height: 100px;
+  padding: 0;
   text-decoration: none;
+  transition: all ease 0.3s, border-right ease 0.1s;
 
+  &:hover {
+    transform: translate(-2px, -5px);
+    box-shadow: 1px 3px 4px lightgray;
+    border-right: 10px solid ${theme.darkbrown};
+  }
   &:hover ${RecipeImage} {
     background-size: 100%;
   }
@@ -145,7 +154,8 @@ const Name = styled.span`
 `;
 const Time = styled.span`
   margin-left: auto;
-  color: ${theme.darkbrown};
+  color: #705256;
+  font-size: 0.8em;
 `;
 const RecipeTitle = styled.h2`
   font-size: 1.5em;
@@ -157,6 +167,7 @@ const Ingredients = styled.ul`
   gap: 5px;
   flex-wrap: wrap;
 `;
+
 const Ingredient = styled.li`
   color: ${theme.darkbrown};
   border-bottom: 1.5px solid ${theme.orange};
