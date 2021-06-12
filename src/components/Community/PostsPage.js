@@ -128,6 +128,7 @@ const WritePostButton = styled(Link)`
   left: 50%;
   z-index: 10;
   transform: translate(-50%, -50%);
+  box-shadow: 1px 1px 4px gray;
   bottom: calc(${footerConfig.mobile_height} + 10px);
   display: flex;
   border: 5px solid rgba(255, 255, 255, 0.8);

@@ -7,25 +7,32 @@ import { GrFormClose, GrFormAdd } from 'react-icons/gr';
 import { fraction } from 'mathjs';
 import IngredientInput from './IngredientInput';
 import { getFractionFromTCAmount, fractionStringToTC } from '../../utils/math';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
-import { uid } from 'react-uid';
+// import { uid } from 'react-uid';
+import { v1 as uid } from 'uuid';
+import { addLeftOver } from '../../redux/reducers/user/userActions';
 
 const emptyInput = {
   ingredient_name: '',
   ingredient_amount: '',
   ingredient_unit: '',
+  input_uid: uid(),
 };
 
 export default function InputPopup({ open, setOpen }) {
   const [inputs, setInputs] = useState([emptyInput]);
-  const identity = useSelector((state) => state.user_info.identity);
+  const ADDTOFRIDGE = useRef(null);
+  const isLoggedIn = useSelector(
+    (state) => state.user_info.identity !== 'none'
+  );
   const fridge = useSelector((state) => state.user_info.left_overs);
   const d = useDispatch();
   const history = useHistory();
 
   function addInputField() {
-    setInputs([...inputs, emptyInput]);
+    const input = { ...emptyInput, input_uid: uid() };
+    setInputs([...inputs, input]);
   }
 
   function setSingleInputField(input, i) {
@@ -41,65 +48,80 @@ export default function InputPopup({ open, setOpen }) {
 
   function addAllInputFields() {
     inputs.forEach((input) => {
-      if (input.ingredient_name) d(addInput(input));
-      setInputs([emptyInput]);
+      console.log(input);
+      if (input.ingredient_name) {
+        d(addInput(input));
+        if (ADDTOFRIDGE.current.checked) d(addLeftOver(input));
+      }
     });
 
+    setInputs([emptyInput]);
     setOpen(false);
   }
 
-  function addAllFridgeItemsToInput() {
-    if (identity === 'none') return history.push('/login');
-    setInputs(fridge);
-  }
+  // function addAllFridgeItemsToInput() {
+  //   if (identity === 'none') return history.push('/login');
+  //   const newInputs = fridge.map((input) => {
+  //     input.input_uid = uid();
+  //     return input;
+  //   });
+  //   setInputs(newInputs);
+  // }
 
   return (
-    <>
-      {/* <ButtonContainer onClick={() => setOpen(true)}>
-        <AddIcon></AddIcon>
-      </ButtonContainer> */}
-      <StyledPopup
-        offsetY={15}
-        open={open}
-        onClose={() => setOpen(false)}
-        modal={true}
-        position="top right"
-        closeOnDocumentClick
-      >
-        <Title
-          onClick={() => {
-            console.log('close');
-            setOpen(false);
-          }}
-        >
-          輸入剩食 (例：雞肉 100 克)
-        </Title>
-        <Form action="">
-          {inputs.map((input, i) => {
-            return (
-              <Field key={uid(input)}>
-                <IngredientInput
-                  ingredient={input}
-                  removeLeftover={() => removeSingleInputField(i)}
-                  setLeftover={(leftover) => setSingleInputField(leftover, i)}
-                />
-                <Button>
-                  <RemoveInputIcon
-                    onClick={() => removeSingleInputField(i)}
-                  ></RemoveInputIcon>
-                </Button>
-              </Field>
-            );
-          })}
-        </Form>
-        <ButtonGroup>
-          <AddFromFridgeButton onClick={addAllFridgeItemsToInput}>
-            使用冰箱食材
-          </AddFromFridgeButton>
-          <ConfirmButton onClick={addAllInputFields}>確認新增</ConfirmButton>
-        </ButtonGroup>
-      </StyledPopup>
-    </>
+    <StyledPopup
+      offsetY={15}
+      open={open}
+      onClose={() => setOpen(false)}
+      modal={true}
+      position="top right"
+      closeOnDocumentClick
+    >
+      <Title>輸入剩食 (例：雞肉 100 克)</Title>
+      <Form action="">
+        {inputs.map((input, i) => {
+          return (
+            <Field key={input.input_uid}>
+              <IngredientInput
+                ingredient={input}
+                removeLeftover={() => removeSingleInputField(i)}
+                setLeftover={(leftover) => setSingleInputField(leftover, i)}
+              />
+              <RemoveInputButton>
+                <RemoveInputIcon
+                  onClick={() => removeSingleInputField(i)}
+                ></RemoveInputIcon>
+              </RemoveInputButton>
+            </Field>
+          );
+        })}
+        <AddInputButton onClick={addInputField}>加入食材</AddInputButton>
+      </Form>
+      {isLoggedIn ? (
+        <></>
+      ) : (
+        <LabelText>
+          <LoginText to="/login">登入</LoginText>
+          之後可同步新增至我的冰箱，下次輸入時便不須重新輸入。
+        </LabelText>
+      )}
+      <ButtonGroup>
+        {isLoggedIn ? (
+          <AddToFridgeOption htmlFor="addToFridge">
+            <AddToFridgeCheckbox
+              ref={ADDTOFRIDGE}
+              type="checkbox"
+              name=""
+              id="addToFridge"
+            />
+            <LabelText>同步新增到冰箱</LabelText>
+          </AddToFridgeOption>
+        ) : (
+          <></>
+        )}
+        <ConfirmButton onClick={addAllInputFields}>確認新增</ConfirmButton>
+      </ButtonGroup>
+    </StyledPopup>
   );
 }
 
@@ -117,61 +139,36 @@ const StyledPopup = styled(Popup)`
     display: flex;
     gap: 10px;
     background-color: white;
-    border-radius: 5px;
 
     & h1,
     input {
       color: ${theme.darkbrown};
     }
+
+    @media screen and (min-width: 400px) {
+      border-radius: 5px;
+    }
   }
 `;
 
-const ButtonContainer = styled.button`
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  &:hover {
-    transform: scale(1.3);
-  }
-`;
-
-const AddIcon = styled(GrFormAdd)`
-  transform: scale(1.5);
-  min-width: 20px;
-  min-height: 20px;
+const AddInputButton = styled.div`
+  width: 100%;
+  color: ${theme.darkbrown};
+  text-align: center;
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 4px;
+  margin-top: 5px;
 
   cursor: pointer;
 
-  @media screen and (min-width: 769px) {
-    transform: scale(1.2);
-    font-size: 1em;
+  &:hover {
+    background-color: #ccc;
   }
-`;
 
-// const Popup = styled.div`
-//   padding: 10px 20px;
-//   display: ${(props) => (props.open ? 'flex' : 'none')};
-//   flex-direction: column;
-//   gap: 10px;
-//   position: absolute;
-//   background-color: white;
-//   border-radius: 1px;
-//   top: calc(100% + 10px);
-//   right: 0;
-//   z-index: 999;
-//   min-width: 300px;
-//   width: fit-content;
-// `;
-
-const Mask = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 1);
-  display: ${(props) => (props.open ? 'unset' : 'none')};
+  @media screen and (min-width: 400px) {
+    padding: 7px;
+  }
 `;
 
 const Title = styled.h1`
@@ -182,7 +179,7 @@ const Title = styled.h1`
 const Form = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 `;
 
 const Field = styled.div`
@@ -191,28 +188,24 @@ const Field = styled.div`
   gap: 10px;
 `;
 
-const TextInput = styled.input`
-  font-size: 1.1em;
-  outline: none;
-  border: none;
-  padding: 3px 7px;
-  border-bottom: 1px solid ${theme.orange};
+const Button = styled.button`
+  font-size: 0.8em;
+  padding: 5px 10px;
+  /* border-bottom: 1px solid black; */
+  cursor: pointer;
   position: relative;
-  background-color: rgba(122, 122, 122, 0.2);
+  border-radius: 4px;
   transition: all ease 0.2s;
 
-  &:hover,
-  &:focus {
-    background-color: rgba(122, 122, 122, 0.1);
+  &:hover {
+    border-radius: 20px;
   }
 `;
 
-const AddInputIcon = styled(GrFormAdd)`
-  font-size: 1.4em;
-  cursor: pointer;
-
+const RemoveInputButton = styled(Button)`
+  padding: 0;
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.5);
   }
 `;
 
@@ -225,31 +218,41 @@ const ButtonGroup = styled.div`
   align-items: center;
   justify-content: space-between;
   font-size: 0.8em;
+  margin-top: 10px;
 `;
 
-const Button = styled.button`
-  font-size: 0.8em;
-  padding: 5px 10px;
-  /* border-bottom: 1px solid black; */
+const AddToFridgeOption = styled.label`
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  position: relative;
-  border-radius: 4px;
-  transition: all ease 0.3s;
-
-  &:hover {
-    border-radius: 20px;
-  }
+  margin-top: 10px;
 `;
 
-const AddFromFridgeButton = styled(Button)`
+const LabelText = styled.div`
   color: ${theme.darkbrown};
-  background-color: #ececec;
-
-  &:hover {
-    background-color: ${theme.darkbrown};
-    color: white;
-  }
+  white-space: break-all;
+  font-size: 0.7em;
+  line-height: 1.5;
 `;
+
+const LoginText = styled(Link)`
+  color: ${theme.darkbrown};
+  text-decoration: none;
+  border-bottom: 1px solid ${theme.darkbrown};
+`;
+
+const AddToFridgeCheckbox = styled.input``;
+
+// const AddFromFridgeButton = styled(Button)`
+//   color: ${theme.darkbrown};
+//   background-color: #ececec;
+
+//   &:hover {
+//     background-color: ${theme.darkbrown};
+//     color: white;
+//   }
+// `;
+
 const ConfirmButton = styled(Button)`
   background-color: ${theme.darkbrown};
   letter-spacing: 1.5px;

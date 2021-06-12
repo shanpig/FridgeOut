@@ -1,4 +1,6 @@
+import { AiFillCodeSandboxCircle } from 'react-icons/ai';
 import { user_info } from '../../../mockData/state/state.json';
+import { combine } from '../../../utils/recipes';
 
 export default function userReducer(state = user_info, action) {
   switch (action.type) {
@@ -15,15 +17,34 @@ export default function userReducer(state = user_info, action) {
 
     case 'user/set/leftOver': {
       let newIngredient = action.payload;
-      let newLeftOvers = state.left_overs.map((left) => {
-        if (left.ingredient_name === newIngredient.ingredient_name) {
-          return newIngredient;
-        } else return left;
-      });
+      let targetIndex = state.left_overs.findIndex(
+        (target) => target.ingredient_name === newIngredient.ingredient_name
+      );
 
       return {
         ...state,
-        left_overs: newLeftOvers,
+        left_overs: [
+          ...state.left_overs.slice(0, targetIndex),
+          newIngredient,
+          ...state.left_overs.slice(targetIndex + 1),
+        ],
+      };
+    }
+
+    case 'user/add/leftOver': {
+      let newIngredient = action.payload;
+      // console.log('reducer: newIngredient: ', newIngredient);
+      // let newLeftOvers = state.left_overs;
+
+      // let newLeftOvers = state.left_overs.map((left) => {
+      //   if (left.ingredient_name === newIngredient.ingredient_name) {
+      //     return newIngredient;
+      //   } else return left;
+      // });
+
+      return {
+        ...state,
+        left_overs: [...state.left_overs, newIngredient],
       };
     }
 

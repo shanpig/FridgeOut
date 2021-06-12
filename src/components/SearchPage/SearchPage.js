@@ -51,7 +51,6 @@ export default function SearchPage() {
 
   return (
     <Main>
-      {/* <FilterBar></FilterBar> */}
       <SearchBar></SearchBar>
 
       <ContentRow>
@@ -112,61 +111,10 @@ export default function SearchPage() {
             </Pagination>
           </SearchedRecipes>
         )}
-        {/* {recipes.length > 0 ? (
-          <SearchedRecipes>
-            {recipes
-              .sort((a, b) => a.ingredients.length - b.ingredients.length)
-              .slice(recipesPage * 10, recipesPage * 10 + 10)
-              .map((recipe, i) => (
-                <StyledAnimated
-                  animationIn="fadeInUp"
-                  animationInDelay={(i - 1) * 200}
-                >
-                  <RecipeItem
-                    key={i}
-                    readOnly={true}
-                    recipe={recipe}
-                    Button={isSelected(recipe) ? DisabledButton : AddButton} //
-                    buttonAction={() => addToKitchen(recipe)}
-                  />
-                </StyledAnimated>
-              ))}
-            <Pagination>
-              <PrevPageButton onClick={() => movePage(-1)}>
-                <PrevPageIcon />
-              </PrevPageButton>
-              {recipesPage + 1}/{Math.floor(recipes.length / 10) + 1}
-              <NextPageButton onClick={() => movePage(1)}>
-                <NextPageIcon />
-              </NextPageButton>
-            </Pagination>
-          </SearchedRecipes>
-        ) : (
-          <Loading>
-            <lottie-player
-              src="https://assets6.lottiefiles.com/packages/lf20_UGvCSC/loading_animation.json"
-              background="transparent"
-              speed="1"
-              style={{ width: '300px', height: '300px' }}
-              loop
-              autoplay
-            ></lottie-player>
-          </Loading>
-        )} */}
-
         <DeskTopSidebar>
-          <SidebarBody />
+          <StyledSidebarBody />
         </DeskTopSidebar>
       </ContentRow>
-      <MiscRow>
-        {/* <SortSelection>
-          <option value='' disabled>
-            排序
-          </option>
-          <option value=''>食材種類 (少到多)</option>
-          <option value=''>食材種類 (多到少)</option>
-        </SortSelection> */}
-      </MiscRow>
     </Main>
   );
 }
@@ -176,9 +124,9 @@ const Main = styled.main`
   max-width: 760px;
   margin: 0 auto;
 
-  & * {
+  /* & * {
     color: ${theme.darkbrown};
-  }
+  } */
   /* background-color: rgba(255, 255, 255, 0.8); */
 
   @media screen and (min-width: 769px) {
@@ -332,4 +280,10 @@ const AddButton = styled(GrFormAdd)`
 
 const DisabledButton = styled(AddButton)`
   pointer-events: none;
+`;
+
+const StyledSidebarBody = styled(SidebarBody)`
+  & * {
+    color: ${theme.darkbrown};
+  }
 `;

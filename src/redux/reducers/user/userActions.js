@@ -1,3 +1,4 @@
+import { AiOutlineConsoleSql } from 'react-icons/ai';
 import {
   setUserLeftovers,
   addRecipeToUserKitchen,
@@ -5,6 +6,8 @@ import {
   addRecipeToUserFavorites,
   removeRecipeFromUserFavorites,
 } from '../../../utils/firebase';
+
+import { combine } from '../../../utils/recipes';
 
 const userTemplate = {
   identity: 'none',
@@ -47,6 +50,46 @@ const setLeftOvers = (leftOvers) => {
     if (userInfo.identity !== 'none') setUserLeftovers(userInfo.id, leftOvers);
 
     return dispatch(_setLeftOvers(leftOvers));
+  };
+};
+
+const _addLeftOver = (leftOver) => {
+  console.log(leftOver);
+  return {
+    type: 'user/add/leftOver',
+    payload: leftOver,
+  };
+};
+
+const _setLeftOver = (leftOver) => {
+  return {
+    type: 'user/set/leftOver',
+    payload: leftOver,
+  };
+};
+
+const addLeftOver = (newIngredient) => {
+  return function (dispatch, getState) {
+    const leftovers = getState().user_info.left_overs;
+    const targetIndex = leftovers.findIndex(
+      (leftover) => leftover.ingredient_name === newIngredient.ingredient_name
+    );
+    let newLeftovers;
+    if (targetIndex >= 0) {
+      const leftover = combine(leftovers[targetIndex], newIngredient);
+      leftover.ingredient_amount = leftover.ingredient_amount.toString();
+
+      newLeftovers = [
+        ...leftovers.slice(0, targetIndex),
+        leftover,
+        ...leftovers.slice(targetIndex + 1),
+      ];
+    } else {
+      newLeftovers = [...leftovers, newIngredient];
+    }
+    console.log(newLeftovers);
+
+    return dispatch(setLeftOvers(newLeftovers));
   };
 };
 
@@ -133,6 +176,7 @@ export {
   setUser,
   signOutUser,
   setLeftOvers,
+  addLeftOver,
   addToFavorite,
   removeFromFavorite,
   addToKitchen,
