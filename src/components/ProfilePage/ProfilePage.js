@@ -44,6 +44,7 @@ export default function ProfilePage() {
     console.log('hi');
     logOut().then(() => {
       d(signOutUser());
+      history.push('/search');
     });
   }
 
