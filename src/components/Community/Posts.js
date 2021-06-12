@@ -8,6 +8,7 @@ import SharePost from './SharePost';
 import { getPosts } from '../../utils/firebase';
 import { Animated } from 'react-animated-css';
 import { BsPencilSquare } from 'react-icons/bs';
+import { v1 as uid } from 'uuid';
 
 const fromNewToOld = (post1, post2) => {
   return post2.timestamp - post1.timestamp;
@@ -17,10 +18,16 @@ export default function Posts({ category }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    let subscribed = true;
     getPosts().then((posts) => {
       console.log(posts);
+      if (!subscribed) return;
       setPosts(posts);
     });
+
+    return () => {
+      subscribed = false;
+    };
   }, []);
 
   return (
@@ -34,7 +41,7 @@ export default function Posts({ category }) {
               case 'query':
                 return (
                   <Animated
-                    key={i}
+                    key={uid()}
                     animationIn="fadeInDown"
                     animationInDuration={500}
                     animationInDelay={i * 100}
@@ -45,7 +52,7 @@ export default function Posts({ category }) {
               case 'share':
                 return (
                   <Animated
-                    key={i}
+                    key={uid()}
                     animationIn="fadeInDown"
                     animationInDuration={500}
                     animationInDelay={i * 100}
