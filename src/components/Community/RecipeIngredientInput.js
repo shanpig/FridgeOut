@@ -2,15 +2,24 @@ import styled from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 import { AiFillSave, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
-export default function IngredientInput({
-  ingredient,
-  removeLeftover,
-  setLeftover,
-}) {
-  const FORM = useRef(null);
+export default function RecipeIngredientInput({ ingredient, setLeftover }) {
+  const AMOUNT = useRef(null);
   const [error, setError] = useState(false);
 
-  // const [ingredientInput, setIngredientInput] = useState(ingredient);
+  function onAmountChange(newText, key) {
+    console.log(newText);
+    const value = AMOUNT.current.value;
+    console.log(value);
+    console.log(value.match(/[^0-9\.]/g));
+    if (value.match(/[^0-9\.]/g)) setError(true);
+    else setError(false);
+    // if (AMOUNT.current.checkValidity() || AMOUNT.current.value === '') {
+    //   setError(false);
+    // } else {
+    //   setError(true);
+    // }
+    onTextChange(newText, key);
+  }
 
   function onTextChange(newText, key) {
     const text = newText.trim();
@@ -21,13 +30,13 @@ export default function IngredientInput({
   }
 
   return (
-    <Ingredient.Edit ref={FORM} error={error}>
+    <Ingredient.Edit error={error}>
       <NameField>
         <Input
           required
           key="1"
           type="text"
-          value={ingredient.ingredient_name}
+          value={ingredient ? ingredient.ingredient_name : ''}
           placeholder="雞肉"
           onChange={(e) => onTextChange(e.target.value, 'ingredient_name')}
         ></Input>
@@ -37,10 +46,12 @@ export default function IngredientInput({
           key="2"
           type="number"
           min={0}
+          ref={AMOUNT}
+          error={error}
           step={0.5}
           value={ingredient.ingredient_amount}
           placeholder="100"
-          onChange={(e) => onTextChange(e.target.value, 'ingredient_amount')}
+          onChange={(e) => onAmountChange(e.target.value, 'ingredient_amount')}
         ></Input>
       </AmountField>
       <UnitField>
@@ -56,17 +67,16 @@ export default function IngredientInput({
   );
 }
 
-const Edit = styled.form`
+const Edit = styled.div`
   display: flex;
   align-items: center;
   gap: 3px;
   box-sizing: border-box;
-  max-width: 300px;
 
   & input {
     border: ${(props) => (props.error ? '1px solid red' : 'none')};
     background-color: ${(props) =>
-      props.error ? 'rgba(255, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.05)'};
+      props.error ? 'rgba(255, 0, 0, 0.2)' : 'rgba(255,255,255,0.3)'};
   }
 `;
 
@@ -132,7 +142,8 @@ const Field = styled.div`
 const NameField = styled(Field)`
   flex-grow: 3;
   & input {
-    border-radius: 5px 0 0 5px;
+    padding-left: 15px;
+    border-radius: 20px 0 0 20px;
   }
   /* min-width: 100px;
   max-width: 200px; */
@@ -144,23 +155,28 @@ const AmountField = styled(Field)`
 `;
 const UnitField = styled(AmountField)`
   & input {
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 20px 20px 0;
   }
 `;
 
 const Input = styled.input`
   color: black;
   outline: none;
-  border-radius: 0;
   padding: 5px 10px;
   width: 100%;
+  transition: background-color 0.2s ease;
 
   &::placeholder {
     color: #aaa;
   }
 
+  &::-webkit-inner-spin-button {
+    appearance: none;
+  }
+
   &:hover,
   &:focus {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: ${(props) =>
+      props.error ? 'rgba(255, 0, 0, 0.2)' : 'white'};
   }
 `;

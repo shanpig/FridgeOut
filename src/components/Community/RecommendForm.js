@@ -28,16 +28,7 @@ export default function RecommendForm() {
         <RecipeForm
           formTitle="推薦食譜"
           submit={(recipe) => sendRecipeTo(queryPost.id, recipe)}
-          defaultIngredients={
-            queryPost.ingredients &&
-            queryPost.ingredients.map(
-              ({
-                ingredient_name: name,
-                ingredient_amount: amount,
-                ingredient_unit: unit,
-              }) => `${name} ${amount} ${unit}`
-            )
-          }
+          defaultIngredients={queryPost.ingredients}
         ></RecipeForm>
       </MainContent>
     </Main>

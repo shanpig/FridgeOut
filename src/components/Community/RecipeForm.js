@@ -8,6 +8,15 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { post, uploadRecipe, uploadImage } from '../../utils/firebase';
 import { GrFormAdd, GrFormTrash } from 'react-icons/gr';
 import { TiArrowBack } from 'react-icons/ti';
+import RecipeIngredientInput from './RecipeIngredientInput';
+import { v1 as uid } from 'uuid';
+
+const emptyIngredient = {
+  ingredient_name: '',
+  ingredient_amount: '',
+  ingredient_unit: '',
+  ingredient_uid: uid(),
+};
 
 export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   const history = useHistory();
@@ -15,12 +24,13 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState(
-    defaultIngredients || [
-      '洋蔥 0.5 顆',
-      '馬鈴薯 1 顆',
-      '紅蘿蔔 0.5 根',
-      '牛腱 140 g',
-    ]
+    defaultIngredients || [emptyIngredient]
+    // || [
+    //   '洋蔥 0.5 顆',
+    //   '馬鈴薯 1 顆',
+    //   '紅蘿蔔 0.5 根',
+    //   '牛腱 140 g',
+    // ]
   );
   const [steps, setSteps] = useState([
     '',
@@ -74,21 +84,21 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
     const imageURL = await uploadImage(imageFile);
     console.log(title);
     console.log(ingredients);
-    const ingredientsData = ingredients.map((ingredient) => {
-      const [ingredient_name, ingredient_amount, ingredient_unit] =
-        ingredient.split(' ');
-      return {
-        ingredient_name,
-        ingredient_amount: ingredient_amount || '',
-        ingredient_unit: ingredient_unit || '',
-        ingredient_cat: '【材 料】',
-      };
-    });
+    // const ingredientsData = ingredients.map((ingredient) => {
+    //   const [ingredient_name, ingredient_amount, ingredient_unit] =
+    //     ingredient.split(' ');
+    //   return {
+    //     ingredient_name,
+    //     ingredient_amount: ingredient_amount || '',
+    //     ingredient_unit: ingredient_unit || '',
+    //     ingredient_cat: '【材 料】',
+    //   };
+    // });
     console.log(steps);
     console.log(tags);
     return {
-      ingredients: ingredientsData,
-      keyword: ingredientsData.map((ingr) => ingr.ingredient_name),
+      ingredients,
+      keyword: ingredients.map((ingr) => ingr.ingredient_name),
       main_image: imageURL,
       steps,
       tags: tags.split(' '),
@@ -115,20 +125,26 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
     setTitle(e.target.value);
   }
 
-  function onIngredientsTextChange(e, i) {
+  function setIngredient(ingredient, i) {
     setIngredients([
       ...ingredients.slice(0, i),
-      e.target.value,
+      ingredient,
       ...ingredients.slice(i + 1),
     ]);
   }
 
   function addIngredientInput() {
-    setIngredients([...ingredients, '']);
+    let newIngredient = { ...emptyIngredient, ingredient_uid: uid() };
+    setIngredients([...ingredients, newIngredient]);
   }
 
   function removeIngredientInput(i) {
-    setIngredients([...ingredients.slice(0, i), ...ingredients.slice(i + 1)]);
+    const newIngredients = [
+      ...ingredients.slice(0, i),
+      ...ingredients.slice(i + 1),
+    ];
+    if (newIngredients.length === 0) return setIngredients([emptyIngredient]);
+    setIngredients(newIngredients);
   }
 
   function onStepsTextChange(e, i) {
@@ -140,7 +156,9 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   }
 
   function removeStepsInput(i) {
-    setSteps([...steps.slice(0, i), ...steps.slice(i + 1)]);
+    const newSteps = [...steps.slice(0, i), ...steps.slice(i + 1)];
+    if (newSteps.length === 0) return setSteps(['']);
+    setSteps(newSteps);
   }
 
   function onTagsTextChange(e) {
@@ -189,7 +207,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
             <FieldSection>
               <LabelIngredients htmlFor="ingredients">食材</LabelIngredients>
               <InputIngredients id="ingredients">
-                {ingredients.map((ingredient, i) => {
+                {/* {ingredients.map((ingredient, i) => {
                   return (
                     <Field key={i}>
                       <IngredientInput
@@ -200,12 +218,19 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
                       <RemoveButton onClick={() => removeIngredientInput(i)} />
                     </Field>
                   );
-                })}
-                <AddButton
-                  onClick={() => {
-                    addIngredientInput();
-                  }}
-                />
+                })} */}
+                {ingredients.map((ingredient, i) => (
+                  <IngredientField key={ingredient.ingredient_uid}>
+                    <RecipeIngredientInput
+                      ingredient={ingredient}
+                      setLeftover={(ingredient) => setIngredient(ingredient, i)}
+                    />
+                    <RemoveIngredientButton
+                      onClick={() => removeIngredientInput(i)}
+                    />
+                  </IngredientField>
+                ))}
+                <AddButton onClick={addIngredientInput} />
               </InputIngredients>
             </FieldSection>
             <FieldSection>
@@ -258,17 +283,19 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
 }
 
 const QueryForm = styled.div`
-  padding: 20px 30px;
   max-width: 800px;
   margin: 20px auto;
   position: relative;
   /* background-color: #ededed; */
+  @media screen and (min-width: 400px) {
+    padding: 20px 30px;
+  }
 `;
 
 const RecipeInfoContainer = styled(PerfectScrollbar)`
   width: 90%;
   margin: 0 auto;
-  padding: 0 20px 20px;
+  padding: 0 0 20px;
 
   @media screen and (min-width: 769px) {
     padding: 20px 20px 20px 0;
@@ -293,9 +320,12 @@ const Form = styled.form`
   background-color: rgba(255, 255, 255, 0.8);
 
   gap: 30px;
-  border-radius: 7px;
   width: 100%;
   margin: 20px auto;
+
+  @media screen and (min-width: 400px) {
+    border-radius: 7px;
+  }
 
   @media screen and (min-width: 769px) {
     flex-direction: row;
@@ -324,7 +354,13 @@ const Field = styled.div`
   justify-content: space-between;
   gap: 0 10px;
 `;
+
 const FieldSection = styled(Field)`
+  flex-direction: column;
+  gap: 10px;
+  @media screen and (min-width: 769px) {
+    /* flex-direction: row; */
+  }
   /* border-left: 1px solid ${theme.darkbrown}; */
 `;
 
@@ -333,14 +369,13 @@ const Label = styled.label`
   flex-shrink: 1;
   align-self: flex-start;
   margin: 10px 0 0px;
-  /* border: 1px solid ${theme.darkbrown}; */
   color: ${theme.darkbrown};
 `;
 
 const Input = styled.input`
   flex-grow: 1;
   border: 1.3px solid #d3d3d3;
-  background-color: #efefef;
+  background-color: rgba(255, 255, 255, 0.3);
   padding: 7px 15px;
   color: ${theme.darkbrown};
   transition: all 0.2s ease;
@@ -352,7 +387,14 @@ const Input = styled.input`
   }
 `;
 
-const LabelTitle = styled(Label)``;
+const TextLabel = styled(Label)`
+  font-size: 1.3em;
+  width: 100%;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid ${theme.darkbrown};
+`;
+
+const LabelTitle = styled(TextLabel)``;
 const InputTitle = styled(Input)``;
 const LabelMainImage = styled(Label)`
   /* width: 100%;
@@ -392,10 +434,17 @@ const LabelMainImage = styled(Label)`
 
 const ImageHolder = styled.div`
   width: 100%;
-  height: 350px;
+  height: 200px;
   border-radius: 7px 7px 0 0;
   align-self: stretch;
   position: relative;
+
+  @media screen and (min-width: 400px) {
+    height: 300px;
+  }
+  @media screen and (min-width: 600px) {
+    height: 350px;
+  }
   @media screen and (min-width: 769px) {
     width: 45%;
     border-radius: 7px 0 0 7px;
@@ -435,25 +484,30 @@ const Textbox = styled.div`
   transition: 0.3s ease all;
   /* background-color: rgba(255, 255, 255, 0.6); */
 `;
-const LabelIngredients = styled(Label)``;
+
+const IngredientField = styled(Field)`
+  align-items: center;
+`;
+const LabelIngredients = styled(TextLabel)``;
 const InputIngredients = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 15px;
   flex-grow: 1;
 `;
-const IngredientInput = styled(Input)`
-  position: relative;
-`;
+
 const AddButton = styled(GrFormAdd)`
   width: 30px;
   height: 30px;
   cursor: pointer;
   margin-top: -5px;
   border-radius: 20px;
-  border: 1px solid ${theme.darkbrown};
+  border: 1px solid gray;
   transition: 0.1s ease all;
 
+  & path {
+    stroke: darkgray;
+  }
   &:hover {
     background-color: ${theme.darkbrown};
     & path {
@@ -461,6 +515,7 @@ const AddButton = styled(GrFormAdd)`
     }
   }
 `;
+
 const RemoveButton = styled(GrFormTrash)`
   cursor: pointer;
   position: absolute;
@@ -470,7 +525,7 @@ const RemoveButton = styled(GrFormTrash)`
   font-size: 25px;
 
   & path {
-    stroke: #afafaf;
+    stroke: #999;
   }
 
   &:hover {
@@ -480,7 +535,26 @@ const RemoveButton = styled(GrFormTrash)`
     }
   }
 `;
-const LabelSteps = styled(Label)`
+
+const RemoveIngredientButton = styled(GrFormTrash)`
+  cursor: pointer;
+  min-width: 25px;
+  margin-right: 5px;
+  font-size: 25px;
+
+  & path {
+    stroke: #999;
+  }
+
+  &:hover {
+    transform: scale(1.09);
+    & path {
+      stroke: red;
+    }
+  }
+`;
+
+const LabelSteps = styled(TextLabel)`
   align-self: flex-start;
   margin-top: 5px;
 `;
@@ -519,7 +593,7 @@ const StepInput = styled.textarea`
   border: none;
   padding: 10px;
   color: ${theme.darkbrown};
-  background-color: #efefef;
+  background-color: rgba(255, 255, 255, 0.3);
   transition: background-color ease 0.2s;
 
   &:hover,
@@ -527,5 +601,5 @@ const StepInput = styled.textarea`
     background-color: white;
   }
 `;
-const LabelTags = styled(Label)``;
+const LabelTags = styled(TextLabel)``;
 const InputTags = styled(Input)``;
