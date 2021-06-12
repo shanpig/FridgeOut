@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { RiFridgeLine } from 'react-icons/ri';
+import { useState, useEffect } from 'react';
 
 export default function FridgeSelectionList() {
   const d = useDispatch();
@@ -21,6 +22,7 @@ export default function FridgeSelectionList() {
     console.log(state.user_info.left_overs);
     return state.user_info.left_overs;
   });
+  const [selectionContent, setSelectionContent] = useState([]);
 
   function isSelected(ingredient) {
     return (
@@ -38,6 +40,25 @@ export default function FridgeSelectionList() {
     }
   }
 
+  useEffect(() => {
+    console.log('fridge: ', fridge);
+    let content;
+    if (fridge.length === 0) {
+      content = '你的冰箱空空如也';
+    } else {
+      content = fridge.map((ingredient) => (
+        <Option
+          selected={isSelected(ingredient)}
+          onClick={() => toggleIngredientSelection(ingredient)}
+        >
+          {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}
+          {ingredient.ingredient_unit}
+        </Option>
+      ));
+    }
+    setSelectionContent(content);
+  }, [fridge]);
+
   return (
     <SelectionList>
       <SelectionTitle
@@ -48,16 +69,7 @@ export default function FridgeSelectionList() {
       </SelectionTitle>
       <SelectionOptions>
         {isLoggedIn ? (
-          fridge &&
-          fridge.map((ingredient) => (
-            <Option
-              selected={isSelected(ingredient)}
-              onClick={() => toggleIngredientSelection(ingredient)}
-            >
-              {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}
-              {ingredient.ingredient_unit}
-            </Option>
-          ))
+          selectionContent
         ) : (
           <LogInNotification>
             <StyledLink to="/login">登入</StyledLink>之後即可直接從冰箱取出食材
