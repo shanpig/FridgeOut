@@ -139,13 +139,14 @@ const NavButton = styled(NavLink)`
   align-items: center;
   justify-content: center;
   gap: 10px;
+  background-color: black;
 
   &.active {
     background-color: #5c5c5c;
   }
 
   &:not(:first-child) {
-    border-left: 1px solid lightslategrey;
+    border-left: 1px solid ${theme.darkbrown};
   }
 
   @media screen and (min-width: 769px) {

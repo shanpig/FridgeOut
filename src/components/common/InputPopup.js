@@ -51,7 +51,7 @@ export default function InputPopup({ open, setOpen }) {
       console.log(input);
       if (input.ingredient_name) {
         d(addInput(input));
-        if (ADDTOFRIDGE.current.checked) d(addLeftOver(input));
+        if (isLoggedIn && ADDTOFRIDGE.current.checked) d(addLeftOver(input));
       }
     });
 
