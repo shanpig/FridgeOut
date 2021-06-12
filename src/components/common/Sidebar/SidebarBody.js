@@ -9,7 +9,7 @@ import {
   gatherIngredientsFromRecipes,
 } from '../../../utils/recipes';
 
-export default function SidebarBody() {
+export default function SidebarBody({ className }) {
   const SELECTED_LEFTOVER = useRef(null);
   const SELECTED_RECIPES = useRef(null);
   const REMAIN_LEFTOVERS = useRef(null);
@@ -33,28 +33,7 @@ export default function SidebarBody() {
   }, [selectedLeftover, selectedRecipes]);
 
   return (
-    <BodySection>
-      {/* <Section ref={SELECTED_LEFTOVER} className='open'>
-        <SectionTitle
-          onClick={(e) => SELECTED_LEFTOVER.current.classList.toggle('open')}>
-          <h2>已選剩食</h2>
-          <DropDownArrow />
-        </SectionTitle>
-        <List>
-          {selectedLeftover &&
-            selectedLeftover.map((leftover, i) => {
-              return (
-                <Item
-                  key={i}
-                  className='item'
-                  type='ingredient'
-                  ingredient={leftover}
-                />
-              );
-            })}
-        </List>
-      </Section> */}
-
+    <BodySection className={className}>
       <Section ref={SELECTED_RECIPES} className="open">
         <SectionTitle
           onClick={() => SELECTED_RECIPES.current.classList.toggle('open')}

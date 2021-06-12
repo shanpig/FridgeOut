@@ -23,6 +23,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
     ]
   );
   const [steps, setSteps] = useState([
+    '',
     // '微量的油，蒜末爆香，洋蔥&紅蘿蔔切塊炒到洋蔥微軟黃色。放入番茄罐的整理番茄&1湯匙的番茄汁液',
     // '倒入1.5杯米的水量，蓋鍋煨煮',
     // '牛排（牛腱）燙過後，切塊。平底鍋加蒜香無水奶油，牛肉下鍋煎到焦香，加入湯鍋。撒入大蒜綜合香料，少許二砂糖、薄鹽醬油、鹽麴。',
@@ -214,14 +215,16 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
                   return (
                     <React.Fragment key={i}>
                       <StepField>
-                        <StepNumber>{i + 1}</StepNumber>
+                        <StepNumber>
+                          {i + 1}
+                          <RemoveButton onClick={() => removeStepsInput(i)} />
+                        </StepNumber>
                         <StepInput
                           rows={4}
                           value={step}
                           onChange={(e) => onStepsTextChange(e, i)}
                           required
                         />
-                        <RemoveButton onClick={() => removeStepsInput(i)} />
                       </StepField>
                     </React.Fragment>
                   );
@@ -443,7 +446,7 @@ const IngredientInput = styled(Input)`
   position: relative;
 `;
 const AddButton = styled(GrFormAdd)`
-  width: 100%;
+  width: 30px;
   height: 30px;
   cursor: pointer;
   margin-top: -5px;
@@ -465,6 +468,10 @@ const RemoveButton = styled(GrFormTrash)`
   top: 50%;
   transform: translateY(-50%);
   font-size: 25px;
+
+  & path {
+    stroke: #afafaf;
+  }
 
   &:hover {
     transform: translateY(-50%) scale(1.09);
@@ -489,7 +496,7 @@ const StepField = styled(Field)`
   & ${RemoveButton} {
     top: unset;
     transform: none;
-    bottom: 5px;
+    bottom: 2px;
     &:hover {
       transform: scale(1.09);
     }
@@ -510,7 +517,7 @@ const StepInput = styled.textarea`
   min-height: max-content;
   border-radius: 8px;
   border: none;
-  padding: 5px 10px;
+  padding: 10px;
   color: ${theme.darkbrown};
   background-color: #efefef;
   transition: background-color ease 0.2s;

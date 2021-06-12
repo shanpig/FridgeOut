@@ -13,7 +13,7 @@ export default function PageNotFound() {
 
   useEffect(() => {
     const countDown = setTimeout(() => {
-      if (time === 0) history.push('/');
+      if (time === 1) history.push('/');
       setTime(time - 1);
     }, 1000);
 

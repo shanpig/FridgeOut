@@ -25,6 +25,10 @@ button {
   border: none;
 }
 
+input, textarea{
+  outline: none;
+}
+
 html,
 body,
 div,
