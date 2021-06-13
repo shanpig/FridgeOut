@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import GoBackButton from '../common/GoBackButton';
 import { post } from '../../utils/firebase';
 import { useSelector } from 'react-redux';
+import { Animated } from 'react-animated-css';
 
 export default function ShareRecipeForm() {
   const user = useSelector((state) => state.user_info);
@@ -22,10 +23,12 @@ export default function ShareRecipeForm() {
   return (
     <Main>
       {/* <GoBackButton></GoBackButton> */}
-      <RecipeForm
-        formTitle="分享食譜"
-        submit={(recipe) => postRecipe(recipe)}
-      ></RecipeForm>
+      <Animated>
+        <RecipeForm
+          formTitle="分享食譜"
+          submit={(recipe) => postRecipe(recipe)}
+        ></RecipeForm>
+      </Animated>
     </Main>
   );
 }

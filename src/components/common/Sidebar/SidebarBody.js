@@ -8,6 +8,7 @@ import {
   assessIngredientsUsage,
   gatherIngredientsFromRecipes,
 } from '../../../utils/recipes';
+import { Link } from 'react-router-dom';
 
 export default function SidebarBody({ className }) {
   const SELECTED_LEFTOVER = useRef(null);
@@ -44,7 +45,9 @@ export default function SidebarBody({ className }) {
         <List>
           {selectedRecipes &&
             selectedRecipes.map((recipe, i) => (
-              <Item key={i} className="item" type="recipe" recipe={recipe} />
+              <SelectedRecipeItem to={`/recipe/${recipe.id}`} key={i}>
+                <Item className="item" type="recipe" recipe={recipe} />
+              </SelectedRecipeItem>
             ))}
         </List>
       </Section>
@@ -97,6 +100,10 @@ const BodySection = styled.section`
   flex-grow: 1;
   padding: 0;
   overflow-y: auto;
+
+  & * {
+    color: white;
+  }
 `;
 
 const SectionTitle = styled.div`
@@ -141,6 +148,14 @@ const Section = styled.section`
   &.open > ${List} {
     margin: 15px 0;
     height: fit-content;
+  }
+`;
+
+const SelectedRecipeItem = styled(Link)`
+  text-decoration: none;
+
+  &:hover span {
+    color: ${theme.lightOrange};
   }
 `;
 

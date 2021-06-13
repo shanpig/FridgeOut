@@ -238,20 +238,18 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
               <InputSteps id="steps">
                 {steps.map((step, i) => {
                   return (
-                    <React.Fragment key={i}>
-                      <StepField>
-                        <StepNumber>
-                          {i + 1}
-                          <RemoveButton onClick={() => removeStepsInput(i)} />
-                        </StepNumber>
-                        <StepInput
-                          rows={4}
-                          value={step}
-                          onChange={(e) => onStepsTextChange(e, i)}
-                          required
-                        />
-                      </StepField>
-                    </React.Fragment>
+                    <StepField key={i}>
+                      <StepNumber>
+                        {i + 1}
+                        <RemoveButton onClick={() => removeStepsInput(i)} />
+                      </StepNumber>
+                      <StepInput
+                        rows={4}
+                        value={step}
+                        onChange={(e) => onStepsTextChange(e, i)}
+                        required
+                      />
+                    </StepField>
                   );
                 })}
                 <AddButton
@@ -312,6 +310,7 @@ const Title = styled.h1`
   font-size: 1.2em;
   text-align: center;
   margin-bottom: 10px;
+  color: white;
 `;
 
 const Form = styled.form`

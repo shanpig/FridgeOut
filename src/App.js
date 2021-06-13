@@ -1,11 +1,9 @@
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import { theme } from './variables';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from './redux/reducers/user/userActions';
+import { useEffect } from 'react';
+import { getUserData } from './utils/firebase';
 import styled from 'styled-components';
 import Header from './components/common/Header';
 import backgroundImageSrc from './images/kitchen-table.jpg';
@@ -20,10 +18,18 @@ import PageNotFound from './components/404/PageNotFound';
 import RecommendForm from './components/Community/RecommendForm';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
-import ScrollToTop from './components/common/ScrollToTop';
 import PostsPage from './components/Community/PostsPage';
 
 function App() {
+  const d = useDispatch();
+  useEffect(() => {
+    const uid = localStorage.getItem('fridgeoutid');
+    if (uid) {
+      getUserData(uid).then((data) => {
+        if (data) d(setUser(data));
+      });
+    }
+  });
   return (
     <>
       <Body>

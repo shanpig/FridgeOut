@@ -38,6 +38,8 @@ export default function LoginPage() {
 
       if (!uid) return;
       getUserData(uid).then((data) => {
+        console.log(uid);
+        window.localStorage.setItem('fridgeoutid', uid);
         if (!data) {
           let userData = {
             ...userTemplate,

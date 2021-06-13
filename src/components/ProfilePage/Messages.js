@@ -44,7 +44,11 @@ export default function Messages() {
           const { from, timestamp, recipe } = message;
           const time = new Date(timestamp.toDate());
           return (
-            <Animated animationIn="fadeInUp" animationInDelay={(i - 1) * 100}>
+            <Animated
+              key={i}
+              animationIn="fadeInUp"
+              animationInDelay={(i - 1) * 100}
+            >
               <Message>
                 <From>
                   <Name>{from}</Name>

@@ -53,4 +53,8 @@ const Item = styled.li``;
 const Text = styled.span``;
 const CloseButton = styled(AiOutlineClose)`
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;

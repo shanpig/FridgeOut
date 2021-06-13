@@ -11827,7 +11827,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.0.0", "prop-types@^15.5.10", "prop-types@^15.6.0", "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.7.2":
+"prop-types@^15.0.0", "prop-types@^15.5.10", "prop-types@^15.6.0", "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15.0.0":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -12097,6 +12097,11 @@
     "prop-types" "^15.7.2"
     "tiny-invariant" "^1.1.0"
 
+"react-bootstrap-sweetalert@^5.2.0":
+  "integrity" "sha512-7eaKHgDcYfoRUxiYPZuHjygeLa3yDycGWB+Xwr+PWo6h0HDixwfgGXqWBmDYXI4ZQ453BcY77iBWBZhRbnH/6g=="
+  "resolved" "https://registry.npmjs.org/react-bootstrap-sweetalert/-/react-bootstrap-sweetalert-5.2.0.tgz"
+  "version" "5.2.0"
+
 "react-click-away-listener@^2.0.3":
   "integrity" "sha512-buvbebDZ10me+ConatrMcv33BNH6D+3HvEjztiNdz6LvDvyEYHxD0QLXw9aaO7bXjz2YPC7zbgIxLX+cEsFjkA=="
   "resolved" "https://registry.npmjs.org/react-click-away-listener/-/react-click-away-listener-2.0.3.tgz"
@@ -12132,7 +12137,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^0.14.0 || ^15.0.0 || ^16 || ^17", "react-dom@^17.0.2", "react-dom@>= 16.8.0", "react-dom@>=16", "react-dom@>=16.3.3":
+"react-dom@*", "react-dom@^0.14.0 || ^15.0.0 || ^16 || ^17", "react-dom@^16.0.0 || ^17.0.0", "react-dom@^17.0.2", "react-dom@>= 16.8.0", "react-dom@>=16", "react-dom@>=16.3.3":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -12308,7 +12313,7 @@
   dependencies:
     "tslib" "^1.10.0"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16 || ^17", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.2", "react@>= 16", "react@>= 16.8.0", "react@>=0.14.0", "react@>=15", "react@>=16", "react@>=16.3.3", "react@17.0.2":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16 || ^17", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.2", "react@>= 16", "react@>= 16.8.0", "react@>=0.14.0", "react@>=15", "react@>=16", "react@>=16.0.0", "react@>=16.3.3", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -14053,7 +14058,12 @@
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
 
-"sweetalert2@^11.0.16":
+"sweetalert2-react-content@^4.0.1":
+  "integrity" "sha512-vS7/k1BplmX72O0lFp2eG7+FsCvrZ9VOgKNHE2wUx1tbeKx+DLEPgAHnQ19DNhbdleRTW8o998atBmYjCkdg7Q=="
+  "resolved" "https://registry.npmjs.org/sweetalert2-react-content/-/sweetalert2-react-content-4.0.1.tgz"
+  "version" "4.0.1"
+
+"sweetalert2@^11.0.0", "sweetalert2@^11.0.16":
   "integrity" "sha512-9XStCZJMQpLQBAT/jr/4qZuA5Xwoupi/x5FagZYM1qGnyRqYecaJTPD1Cb5gc7G+9B5muH/JaDaBQGrvLpCmvQ=="
   "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.0.16.tgz"
   "version" "11.0.16"

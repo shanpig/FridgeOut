@@ -16,7 +16,10 @@ import { Animated } from 'react-animated-css';
 import {
   addToFavorite,
   addToKitchen,
+  removeFromFavorite,
+  removeFromKitchen,
 } from '../../redux/reducers/user/userActions';
+import { GiConsoleController } from 'react-icons/gi';
 // import GoBackButton from '../common/GoBackButton';
 // import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
@@ -52,8 +55,19 @@ export default function RecipePage() {
     console.log(myKitchen.findIndex((target) => target.id === recipe.id));
     return myKitchen.findIndex((target) => target.id === recipe.id) >= 0;
   }
+
   function isInFavorite(recipe) {
     return myFavorite.findIndex((target) => target.id === recipe.id) >= 0;
+  }
+
+  function toggleKitchenRecipe(recipe) {
+    if (isInKitchen(recipe)) d(removeFromKitchen(recipe));
+    else d(addToKitchen(recipe));
+  }
+
+  function toggleFavoriteRecipe(recipe) {
+    if (isInFavorite(recipe)) d(removeFromFavorite(recipe));
+    else d(addToFavorite(recipe));
   }
 
   return (
@@ -77,7 +91,7 @@ export default function RecipePage() {
                   value=""
                   className={isInFavorite(recipe) ? 'active' : ''}
                   onClick={() => {
-                    if (recipe.id) d(addToFavorite(recipe));
+                    if (recipe.id) toggleFavoriteRecipe(recipe);
                   }}
                 >
                   {isInFavorite(recipe) ? (
@@ -96,7 +110,7 @@ export default function RecipePage() {
                 value=""
                 className={isInKitchen(recipe) ? 'active' : ''}
                 onClick={() => {
-                  if (recipe.id) d(addToKitchen(recipe));
+                  if (recipe.id) toggleKitchenRecipe(recipe);
                 }}
               >
                 {isInKitchen(recipe) ? (
@@ -261,11 +275,11 @@ const AddToButton = styled.button`
 
   &.active {
     border: none;
-    pointer-events: none;
+    /* pointer-events: none; */
   }
 
   @media screen and (min-width: 769px) {
-    &:hover {
+    &:not(.active):hover {
       background-color: ${theme.darkbrown};
       color: white;
       & path {
@@ -326,6 +340,7 @@ const GoBackButton = styled(TiArrowBack)`
 
 const RecipeInfoContainer = styled(PerfectScrollbar)`
   padding-top: 20px;
+  overflow: auto;
 
   & .ps__rail-y {
     left: unset;

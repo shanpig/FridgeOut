@@ -9,6 +9,7 @@ export default function GoBackButton() {
 
 const Button = styled(BiArrowBack)`
   cursor: pointer;
+  color: white;
   /* position: absolute;
   top: 30px;
   left: 30px; */

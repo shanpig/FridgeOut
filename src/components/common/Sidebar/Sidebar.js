@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import SidebarBody from './SidebarBody';
 import { IoChevronBackSharp } from 'react-icons/io5';
-import LogoSrc from '../../../images/LogoWithTextOrange.png';
+import LogoSrc from '../../../images/logo-small-nobg.svg';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const MASK = useRef(null);
@@ -12,7 +12,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
       <Mask masked={sidebarOpen} onClick={() => setSidebarOpen(false)}></Mask>
       <HeaderSection>
         <BackIcon onClick={() => setSidebarOpen(false)} />
-        <Logo>LOGO</Logo>
+        <Logo />
       </HeaderSection>
       <SidebarBody />
     </Aside>
@@ -62,7 +62,7 @@ const BackIcon = styled(IoChevronBackSharp)`
   top: 10px;
   font-size: 30px;
   font-weight: lighter;
-  color: ${theme.orange};
+  color: white;
   transition: 0.2s margin-right ease;
   & path {
     stroke-width: 24;
@@ -73,8 +73,9 @@ const BackIcon = styled(IoChevronBackSharp)`
   }
 `;
 
-const Logo = styled.h2`
-  padding: 10px 0;
-  line-height: 1.3;
-  font-size: 2em;
+const Logo = styled.div`
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  background-image: url(${LogoSrc});
 `;

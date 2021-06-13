@@ -46,8 +46,9 @@ export default function FridgeSelectionList() {
     if (fridge.length === 0) {
       content = '你的冰箱空空如也';
     } else {
-      content = fridge.map((ingredient) => (
+      content = fridge.map((ingredient, i) => (
         <Option
+          key={i}
           selected={isSelected(ingredient)}
           onClick={() => toggleIngredientSelection(ingredient)}
         >
@@ -57,7 +58,7 @@ export default function FridgeSelectionList() {
       ));
     }
     setSelectionContent(content);
-  }, [fridge]);
+  }, [fridge, selected]);
 
   return (
     <SelectionList>

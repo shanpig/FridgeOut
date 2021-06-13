@@ -44,11 +44,12 @@ export default function ProfilePage() {
     console.log('hi');
     logOut().then(() => {
       d(signOutUser());
-      history.push('/search');
+      history.push('/');
     });
   }
 
   if (identity === 'none') {
+    history.push('/profile');
     return <Redirect to="/login" />;
   }
   return (
@@ -264,32 +265,16 @@ const NavItem = styled(Link)`
     white-space: nowrap;
     width: 63px;
     transition: width 0.2s linear;
+    color: white;
     overflow: hidden;
   }
 
   &:not(.active) span {
     width: 0;
   }
-  /* &::after {
-    position: absolute;
-    content: '';
-    left: 50%;
-    right: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    transform-origin: center;
-    transform: translate(-50%, 0);
-    background-color: ${theme.orange};
-    transition: width ease 0.2s;
-  } */
 
   &.active,
   &:hover {
-    /* background-color: #f0f0f0; */
-    /* &::after {
-      width: 80%;
-    } */
     background-color: ${theme.darkbrown};
 
     & svg:first-child > path {

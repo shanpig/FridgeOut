@@ -1,0 +1,33 @@
+/* popup styles */
+
+.icon {
+  color: unset;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.popup_button {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.popup_button-confirm {
+  color: white !important;
+  background-color: #633b0d !important;
+}
+.popup_button-confirm:hover {
+  background-color: rgb(65, 26, 6) !important;
+}
+
+.popup_button-cancel {
+  color: #412403;
+  background-color: #efefef;
+}
+.popup_button-cancel:hover {
+  background-color: #cfcfcf;
+}

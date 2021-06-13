@@ -117,7 +117,9 @@ const Button = styled.div`
   position: relative;
   gap: 10px;
   padding: 20px 5px 10px;
+  color: white;
   transition: gap 0.2s ease-out;
+
   &::after {
     content: '';
     position: absolute;

@@ -8,9 +8,11 @@ import {
   useRouteMatch,
   useHistory,
 } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Animated } from 'react-animated-css';
 import styled from 'styled-components';
 import SmallLogoSrc from '../../images/logo-small.svg';
+import './popupStyles.css';
 
 import Posts from './Posts';
 import { GoPrimitiveDot } from 'react-icons/go';
@@ -27,6 +29,7 @@ export default function PostsPage() {
     console.log(newTab);
     setTab(newTab);
   }, [history.location.pathname]);
+
   return (
     <Main>
       <MainContent>
@@ -74,13 +77,16 @@ const Main = styled.main``;
 const MainContent = styled.div`
   max-width: 1024px;
   width: 100%;
-  margin: 10px auto;
   padding: 40px 30px 0;
   display: flex;
   position: relative;
 
   min-height: calc(100vh - ${headerConfig.mobile_height});
   flex-direction: column;
+
+  @media screen and (min-width: 769px) {
+    margin: 0px auto;
+  }
 `;
 
 const EndSign = styled(GoPrimitiveDot)`
@@ -124,6 +130,7 @@ const WritePostButton = styled(Link)`
   width: 60px;
   height: 60px;
   position: absolute;
+  cursor: pointer;
   top: 50%;
   left: 50%;
   z-index: 10;

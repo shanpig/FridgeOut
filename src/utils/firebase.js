@@ -37,12 +37,12 @@ function signInWithPopup(setUser) {
       const credential = result.credential;
       const token = credential.accessToken;
       const user = result.user;
-      setUser({
+      return {
         uid: user.uid,
         username: user.displayName,
         email: user.email,
         profileImage: user.photoURL,
-      });
+      };
     })
     .catch((err) => {
       console.log(err);

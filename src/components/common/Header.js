@@ -77,6 +77,7 @@ const BurgerButton = styled.div`
 `;
 
 const Burger = styled(GiHamburgerMenu)`
+  color: white;
   width: 100%;
   height: 100%;
 `;
@@ -111,13 +112,17 @@ const Nav = styled.nav`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40px;
+  height: 60px;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   background-color: rgb(50, 50, 50);
   overflow-y: hidden;
+
+  & * {
+    color: white;
+  }
 
   @media screen and (min-width: 769px) {
     width: fit-content;

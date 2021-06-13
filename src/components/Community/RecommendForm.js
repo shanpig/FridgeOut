@@ -3,6 +3,7 @@ import GoBackButton from '../common/GoBackButton';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { sendMessageTo } from '../../utils/firebase';
+import { Animated } from 'react-animated-css';
 
 export default function RecommendForm() {
   const queryPost = useSelector(
@@ -25,11 +26,13 @@ export default function RecommendForm() {
     <Main>
       {/* <GoBackButton></GoBackButton> */}
       <MainContent>
-        <RecipeForm
-          formTitle="推薦食譜"
-          submit={(recipe) => sendRecipeTo(queryPost.id, recipe)}
-          defaultIngredients={queryPost.ingredients}
-        ></RecipeForm>
+        <Animated>
+          <RecipeForm
+            formTitle="推薦食譜"
+            submit={(recipe) => sendRecipeTo(queryPost.id, recipe)}
+            defaultIngredients={queryPost.ingredients}
+          ></RecipeForm>
+        </Animated>
       </MainContent>
     </Main>
   );
