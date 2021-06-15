@@ -1,15 +1,16 @@
 import firebase from 'firebase';
 import { setUser } from '../redux/reducers/user/userActions';
+require('dotenv').config();
 
 // const firebase = require('firebase');
 const firebaseConfig = {
-  apiKey: 'AIzaSyAeh2HyVueHBPxSDEq9DQiXHsVDcQhffGI',
-  authDomain: 'leftoverrecipe-3910d.firebaseapp.com',
-  projectId: 'leftoverrecipe-3910d',
-  storageBucket: 'leftoverrecipe-3910d.appspot.com',
-  messagingSenderId: '691276619582',
-  appId: '1:691276619582:web:f9c4a4f835912ad154166f',
-  measurementId: 'G-GL512WJCPD',
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
+  measurementId: process.env.REACT_APP_measurementId,
 };
 
 firebase.initializeApp(firebaseConfig);

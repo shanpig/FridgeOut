@@ -35,20 +35,20 @@ function App() {
       <Body>
         <Router>
           {/* <ScrollToTop /> */}
-          <Header></Header>
-          <HeaderSpacer></HeaderSpacer>
+          <Header />
+          <HeaderSpacer />
           <Switch>
             <Route exact path="/">
-              <LandingPage></LandingPage>
+              <LandingPage />
             </Route>
             <Route path="/search">
-              <SearchPage></SearchPage>
+              <SearchPage />
             </Route>
             <Route path="/posts">
-              <PostsPage></PostsPage>
+              <PostsPage />
             </Route>
             <Route path="/recipe/:id">
-              <RecipePage></RecipePage>
+              <RecipePage />
             </Route>
             <Route path="/login">
               <LoginPage />
@@ -57,23 +57,23 @@ function App() {
               <ProfilePage />
             </Route>
             <Route exact path="/profile">
-              <ProfilePage></ProfilePage>
+              <ProfilePage />
             </Route>
             <Route path="/form/query">
-              <PostQueryForm></PostQueryForm>
+              <PostQueryForm />
             </Route>
             <Route path="/form/recommend/:id">
-              <RecommendForm></RecommendForm>
+              <RecommendForm />
             </Route>
             <Route path="/form/share">
-              <ShareRecipeForm></ShareRecipeForm>
+              <ShareRecipeForm />
             </Route>
             <Route path="/">
-              <PageNotFound></PageNotFound>
+              <PageNotFound />
             </Route>
           </Switch>
         </Router>
-        <FooterSpacer></FooterSpacer>
+        <FooterSpacer />
       </Body>
     </>
   );
