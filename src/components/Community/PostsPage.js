@@ -24,7 +24,7 @@ export default function PostsPage() {
 
   useEffect(() => {
     const newTab = history.location.pathname.split('/')[2];
-    console.log(newTab);
+
     setTab(newTab);
   }, [history.location.pathname]);
 

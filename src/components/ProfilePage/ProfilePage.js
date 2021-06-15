@@ -36,7 +36,6 @@ export default function ProfilePage() {
   let match = useRouteMatch();
 
   function signOut() {
-    console.log('hi');
     logOut().then(() => {
       d(signOutUser());
       history.push('/');

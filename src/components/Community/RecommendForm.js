@@ -8,7 +8,6 @@ export default function RecommendForm() {
   const queryPost = useSelector(
     (state) => state.user_info.recommend_post_holder
   );
-  console.log(queryPost);
 
   const { name } = useSelector((state) => state.user_info);
 

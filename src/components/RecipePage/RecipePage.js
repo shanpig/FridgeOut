@@ -45,8 +45,6 @@ export default function RecipePage() {
   }, [id]);
 
   function isInKitchen(recipe) {
-    console.log(myKitchen);
-    console.log(myKitchen.findIndex((target) => target.id === recipe.id));
     return myKitchen.findIndex((target) => target.id === recipe.id) >= 0;
   }
 

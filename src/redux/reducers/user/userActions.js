@@ -37,7 +37,6 @@ const signOutUser = () => {
 };
 
 const _setLeftOvers = (leftOvers) => {
-  console.log('set left over to: ', leftOvers);
   return {
     type: 'user/set/leftOvers',
     payload: leftOvers,
@@ -54,7 +53,6 @@ const setLeftOvers = (leftOvers) => {
 };
 
 const _addLeftOver = (leftOver) => {
-  console.log(leftOver);
   return {
     type: 'user/add/leftOver',
     payload: leftOver,
@@ -87,14 +85,12 @@ const addLeftOver = (newIngredient) => {
     } else {
       newLeftovers = [...leftovers, newIngredient];
     }
-    console.log(newLeftovers);
 
     return dispatch(setLeftOvers(newLeftovers));
   };
 };
 
 const _addToFavorite = (recipe) => {
-  console.log('add to favorite: ', recipe);
   return {
     type: 'user/add/favorite',
     payload: recipe,
@@ -112,7 +108,6 @@ const addToFavorite = (recipe) => {
 };
 
 const _removeFromFavorite = (id) => {
-  console.log('remove from favorite: ', id);
   return {
     type: 'user/remove/favorite',
     payload: id,
@@ -158,9 +153,8 @@ const removeFromKitchen = (recipe) => {
     const userInfo = getState().user_info;
     if (userInfo.identity !== 'none') {
       await removeRecipeFromUserKitchen(userInfo.id, recipe);
-      console.log('hi, ', userInfo.name);
     }
-    console.log(`remove recipe from kitchen ${recipe}`);
+
     return dispatch(_removeFromKitchen(recipe.id));
   };
 };

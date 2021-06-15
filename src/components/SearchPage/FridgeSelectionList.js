@@ -19,7 +19,6 @@ export default function FridgeSelectionList() {
   const user = useSelector((state) => state.user_info);
   const selected = useSelector((state) => state.searched_keywords);
   const fridge = useSelector((state) => {
-    console.log(state.user_info.left_overs);
     return state.user_info.left_overs;
   });
   const [selectionContent, setSelectionContent] = useState([]);
@@ -41,7 +40,6 @@ export default function FridgeSelectionList() {
   }
 
   useEffect(() => {
-    console.log('fridge: ', fridge);
     let content;
     if (fridge.length === 0) {
       content = '你的冰箱空空如也';

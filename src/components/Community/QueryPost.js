@@ -7,9 +7,8 @@ import Post from './Post';
 export default function QueryPost({ post }) {
   const d = useDispatch();
   const { by: name, profile_image, ingredients, timestamp, post_id } = post;
-  console.log(name);
+
   function setPostHolder() {
-    console.log(ingredients);
     d(setRecommendPostHolder(post));
   }
   return (

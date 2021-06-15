@@ -27,7 +27,6 @@ export default function SearchPage() {
         setRecipes(searchedRecipes);
         setIsLoading(false);
         setRecipesPage(0);
-        console.log(searchedRecipes);
       }
     });
 

@@ -123,7 +123,6 @@ function gatherIngredientsFromRecipes(_recipes) {
 }
 
 function assessIngredientsUsage(_onHand, _required) {
-  console.log(_required);
   let onHand = _.cloneDeep(_onHand);
   let required = _.cloneDeep(_required);
 
@@ -146,7 +145,6 @@ function assessIngredientsUsage(_onHand, _required) {
       if (index >= 0 && isCombinable(onHand[index], ingredient)) {
         const targetAmount = onHand[index].ingredient_amount;
 
-        console.log(onHand[index], ingredient);
         const ingredientLeft = subtract(
           onHand[index],
           ingredient

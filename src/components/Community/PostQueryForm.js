@@ -48,8 +48,6 @@ export default function PostQueryForm() {
   function submitHandler(e) {
     e.preventDefault();
     setIsUploading(true);
-    if (selected.length === 0)
-      return console.log('No ingredient submitted, cannot submit.');
     const message = {
       type: 'query',
       by: user.name,
@@ -57,11 +55,9 @@ export default function PostQueryForm() {
       ingredients: selected,
       profile_image: user.profile,
     };
-    console.log(message);
 
     post(message).then((id) => {
       setIsUploading(false);
-      console.log('message has posted on doc id: ', id);
       history.goBack();
     });
   }
@@ -152,7 +148,7 @@ export default function PostQueryForm() {
               </Field>
             ))}
             <Submit
-              disabled={fridge.length === 0}
+              disabled={fridge.length === 0 || selected.length === 0}
               type="submit"
               value={isUploading ? '上傳中...' : '確認送出'}
             />

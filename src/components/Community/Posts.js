@@ -16,7 +16,6 @@ export default function Posts({ category }) {
   useEffect(() => {
     let subscribed = true;
     getPosts().then((posts) => {
-      console.log(posts);
       if (!subscribed) return;
       setPosts(posts);
     });

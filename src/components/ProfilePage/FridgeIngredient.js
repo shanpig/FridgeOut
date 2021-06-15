@@ -21,7 +21,6 @@ export default function FridgeIngredient({
   const [newUnit, setNewUnit] = useState(unit);
 
   function onTextChange(newText, setState) {
-    console.log(newText);
     setState(newText);
   }
 
@@ -36,7 +35,7 @@ export default function FridgeIngredient({
       ingredient_amount: newAmount,
       ingredient_unit: newUnit,
     };
-    console.log('writing new ingredient: ', newIngredient);
+
     setLeftover(newIngredient);
     setIsEditing(false);
   }

@@ -52,8 +52,6 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   async function createRecipe() {
     const imageFile = imageHolder.current.files[0];
     const imageURL = await uploadImage(imageFile);
-    console.log(title);
-    console.log(ingredients);
 
     return {
       ingredients,
@@ -67,14 +65,14 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
 
   async function submitHandler(e) {
     e.preventDefault();
-    console.log('sending');
+
     if (checkFormValidity()) {
       setIsLoading(true);
       const recipe = await createRecipe();
       const refId = await uploadRecipe(recipe);
       recipe.id = refId;
       if (submit) submit(recipe);
-      console.log(`recipe written at ${refId}`);
+
       setIsLoading(false);
       history.goBack();
     }

@@ -33,7 +33,7 @@ export default function userReducer(state = user_info, action) {
 
     case 'user/add/leftOver': {
       let newIngredient = action.payload;
-      // console.log('reducer: newIngredient: ', newIngredient);
+
       // let newLeftOvers = state.left_overs;
 
       // let newLeftOvers = state.left_overs.map((left) => {

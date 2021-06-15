@@ -8,7 +8,6 @@ import { Animated } from 'react-animated-css';
 export default function ShareRecipeForm() {
   const user = useSelector((state) => state.user_info);
   function postRecipe(recipe) {
-    console.log('recipe: ', recipe);
     const postData = {
       type: 'share',
       by: user.name,

@@ -46,7 +46,6 @@ function signInWithPopup(setUser) {
       };
     })
     .catch((err) => {
-      console.log(err);
       return '';
     });
 }
@@ -82,7 +81,6 @@ function removeRecipeFromUserKitchen(uid, recipe) {
 }
 
 function setUserLeftovers(uid, leftovers) {
-  console.log(leftovers);
   return db.collection('users').doc(uid).update({
     left_overs: leftovers,
   });
@@ -105,11 +103,7 @@ function removeRecipeFromUserFavorites(uid, recipe) {
 }
 
 function registerUser(userData) {
-  console.log(userData);
-  db.collection('users')
-    .doc(userData.id)
-    .set(userData)
-    .then(() => console.log(`user ${userData.name} added.`));
+  db.collection('users').doc(userData.id).set(userData);
 }
 
 function uploadImage(imageFile) {
@@ -210,7 +204,7 @@ async function removeFromFavorite(userId, recipeId) {
 
 async function sendMessageTo(userId, message) {
   message.timestamp = getTimestamp();
-  console.log(message);
+
   return await db
     .collection('users')
     .doc(userId)
@@ -238,13 +232,12 @@ function watchMessages(userInfo, callback) {
     .doc(userInfo.id)
     .onSnapshot((doc) => {
       const messages = doc.data().messages;
-      console.log(messages);
+
       callback(messages);
     });
 }
 
 function uploadRecipe(recipe) {
-  console.log(recipe);
   return db
     .collection('recipes')
     .add(recipe)

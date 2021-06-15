@@ -7,10 +7,8 @@ export default function RecipeIngredientInput({ ingredient, setLeftover }) {
   const [error, setError] = useState(false);
 
   function onAmountChange(newText, key) {
-    console.log(newText);
     const value = AMOUNT.current.value;
-    console.log(value);
-    console.log(value.match(/[^0-9\.]/g));
+
     if (value.match(/[^0-9\.]/g)) setError(true);
     else setError(false);
     onTextChange(newText, key);

@@ -21,9 +21,7 @@ export default function Messages() {
   }, []);
 
   useEffect(() => {
-    console.log(userInfo);
     const unsubscribe = watchMessages(userInfo, (newMessages) => {
-      console.log(newMessages);
       setMessages(newMessages);
     });
 

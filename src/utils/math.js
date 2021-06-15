@@ -28,7 +28,6 @@ function fractionStringToTC(fractionString) {
 }
 
 function isValidNumberString(string) {
-  console.log('checking ', string);
   try {
     fractionStringToTC(string);
     return true;
@@ -66,7 +65,7 @@ function timeDifference(previous) {
   }
 }
 // let a = getFractionFromTCAmount('1/4');
-// console.log(isValidNumberString(a));
+
 export {
   getFractionFromTCAmount,
   fractionStringToTC,

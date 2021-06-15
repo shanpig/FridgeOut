@@ -43,7 +43,6 @@ export default function InputPopup({ open, setOpen }) {
   }
   function addAllInputFields() {
     inputs.forEach((input) => {
-      console.log(input);
       if (input.ingredient_name) {
         d(addInput(input));
         if (isLoggedIn && ADDTOFRIDGE.current.checked) d(addLeftOver(input));
