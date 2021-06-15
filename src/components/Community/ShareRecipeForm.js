@@ -22,12 +22,11 @@ export default function ShareRecipeForm() {
 
   return (
     <Main>
-      {/* <GoBackButton></GoBackButton> */}
       <Animated>
         <RecipeForm
           formTitle="分享食譜"
           submit={(recipe) => postRecipe(recipe)}
-        ></RecipeForm>
+        />
       </Animated>
     </Main>
   );

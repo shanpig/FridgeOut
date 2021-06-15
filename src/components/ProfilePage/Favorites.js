@@ -21,7 +21,7 @@ export default function Favorites() {
             <Animated key={i} animationInDelay={i * 200}>
               <Recipe>
                 <ImageContainer to={`/recipe/${recipe.id}`}>
-                  <Image src={recipe.main_image}></Image>
+                  <Image src={recipe.main_image} />
                 </ImageContainer>
                 <Title>{recipe.title}</Title>
                 <RemoveButton onClick={() => d(removeFromFavorite(recipe))} />

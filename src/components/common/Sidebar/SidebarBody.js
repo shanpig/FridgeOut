@@ -45,8 +45,13 @@ export default function SidebarBody({ className }) {
         <List>
           {selectedRecipes &&
             selectedRecipes.map((recipe, i) => (
-              <SelectedRecipeItem to={`/recipe/${recipe.id}`} key={i}>
-                <Item className="item" type="recipe" recipe={recipe} />
+              <SelectedRecipeItem key={i}>
+                <Item
+                  linkTo={`/recipe/${recipe.id}`}
+                  className="item"
+                  type="recipe"
+                  recipe={recipe}
+                />
               </SelectedRecipeItem>
             ))}
         </List>
@@ -151,13 +156,7 @@ const Section = styled.section`
   }
 `;
 
-const SelectedRecipeItem = styled(Link)`
-  text-decoration: none;
-
-  &:hover span {
-    color: ${theme.lightOrange};
-  }
-`;
+const SelectedRecipeItem = styled.div``;
 
 const Item = styled(SidebarItem)`
   width: 100%;

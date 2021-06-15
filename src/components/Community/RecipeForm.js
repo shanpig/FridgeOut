@@ -22,7 +22,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   const history = useHistory();
   const user = useSelector((state) => state.user_info);
   const [isLoading, setIsLoading] = useState(false);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('照燒紫蘇雞肉丸子');
   const [ingredients, setIngredients] = useState(
     defaultIngredients || [emptyIngredient]
     // || [
@@ -33,14 +33,20 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
     // ]
   );
   const [steps, setSteps] = useState([
-    '',
+    '雞肉丸子備料：蔥切成蔥花、荸薺頭尾切除削皮後切小塊、紫蘇葉切成細絲。',
+    '雞肉丸子的所有材料加上盆內，攪拌均勻。',
+    '烤盤上鋪上一層烘焙紙方便清潔，用冰淇淋挖杓（scoop）分成球狀，約可做9顆。',
+    '照燒醬：水跟玉米粉先混合均勻，加入其他材料，拌勻。',
+    '鍋子加2小匙油後以中火預熱2分鐘，看鍋子的大小分次加入雞肉丸子（我是10吋鍋，分兩次加入），一面煎2~3分鐘上色，翻面再煎，兩面都呈現金黃色。',
+    '煎好的雞肉丸子取出，如果鍋底太多焦黑物就把鍋子洗乾淨，轉中小火，倒入照燒醬稍微攪拌一下，將丸子加回鍋子，蓋上鍋蓋，燜煮3~4分鐘直到醬子變稠，丸子側面整體都變色/熟。最後可用湯匙把醬汁淋在丸子表面讓它更入味。',
+    '盛盤，先將丸子取出，最後淋上鍋內的照燒醬，撒上一點白芝麻裝飾（選擇性）。推薦可另外準備紫蘇葉，包著丸子一起吃，口感更清爽消暑～',
     // '微量的油，蒜末爆香，洋蔥&紅蘿蔔切塊炒到洋蔥微軟黃色。放入番茄罐的整理番茄&1湯匙的番茄汁液',
     // '倒入1.5杯米的水量，蓋鍋煨煮',
     // '牛排（牛腱）燙過後，切塊。平底鍋加蒜香無水奶油，牛肉下鍋煎到焦香，加入湯鍋。撒入大蒜綜合香料，少許二砂糖、薄鹽醬油、鹽麴。',
     // '湯鍋煮滾後，蓋鍋蓋，文火燉10分鐘關火燜。鍋子摸起來不燙，再重複煮滾燜。重複3-4次就軟而不爛。每打開一次可視情況加水、調味。',
     // '煮香料飯、配半熟土雞蛋👍',
   ]);
-  const [tags, setTags] = useState('');
+  const [tags, setTags] = useState('紫蘇雞肉丸子');
   const [imageSrc, setImageSrc] = useState('');
   const imageHolder = useRef(null);
 
@@ -66,16 +72,14 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
 
   function checkFormValidity() {
     let imageExists = checkImageExists();
-    let ingredientFormatIsCorrect =
-      checkIngredientFormatIsCorrect().length === 0;
-    console.log(
-      '🚀 ~ file: ShareRecipeForm.js ~ line 43 ~ checkFormValidity ~ ingredientFormatIsCorrect',
-      ingredientFormatIsCorrect
-    );
+    // let ingredientFormatIsCorrect =
+    //   checkIngredientFormatIsCorrect().length === 0;
+    // console.log(
+    //   '🚀 ~ file: ShareRecipeForm.js ~ line 43 ~ checkFormValidity ~ ingredientFormatIsCorrect',
+    //   ingredientFormatIsCorrect
+    // );
 
-    let isValid = [imageExists, ingredientFormatIsCorrect].every(
-      (check) => check
-    );
+    let isValid = [imageExists].every((check) => check);
     return isValid;
   }
 

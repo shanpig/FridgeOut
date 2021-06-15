@@ -4,7 +4,7 @@ import { BiArrowBack } from 'react-icons/bi';
 
 export default function GoBackButton() {
   const history = useHistory();
-  return <Button onClick={history.goBack}></Button>;
+  return <Button onClick={history.goBack} />;
 }
 
 const Button = styled(BiArrowBack)`

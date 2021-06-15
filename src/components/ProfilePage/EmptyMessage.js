@@ -11,7 +11,7 @@ export default function EmptyMessage({ text }) {
         style={{ width: '200px', height: '200px' }}
         loop
         autoplay
-      ></lottie-player>
+      />
       <Text>{text}</Text>
     </NoMessages>
   );

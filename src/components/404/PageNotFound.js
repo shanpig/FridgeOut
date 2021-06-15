@@ -22,7 +22,7 @@ export default function PageNotFound() {
   return (
     <Main>
       <Animated animationInDuration={1500} animationIn="fadeInDown">
-        <Icon src={IconSrc}></Icon>
+        <Icon src={IconSrc} />
       </Animated>
       <Animated animationInDuration={1500} animationIn="fadeInUp">
         <Text>沒有這個頁面</Text>

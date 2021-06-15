@@ -75,13 +75,8 @@ export default function RecipePage() {
       <ScrollToTop />
       <Animated>
         <Card>
-          {/* <CloseButton onClick={() => history.goBack()}></CloseButton> */}
-          {/* <CardHead> */}
           <GoBackButton onClick={(e) => history.goBack()} />
-          <RecipeImageContainer src={main_image}>
-            {/* <RecipeImage src={main_image} alt='' /> */}
-          </RecipeImageContainer>
-          {/* </CardHead> */}
+          <RecipeImageContainer src={main_image} />
           <RecipeInfoContainer>
             <Title>{title}</Title>
             <AddToButtonGroup>
@@ -94,11 +89,7 @@ export default function RecipePage() {
                     if (recipe.id) toggleFavoriteRecipe(recipe);
                   }}
                 >
-                  {isInFavorite(recipe) ? (
-                    <CheckIcon></CheckIcon>
-                  ) : (
-                    <AddIcon></AddIcon>
-                  )}
+                  {isInFavorite(recipe) ? <CheckIcon /> : <AddIcon />}
                   收藏
                 </AddToButton>
               ) : (
@@ -113,11 +104,7 @@ export default function RecipePage() {
                   if (recipe.id) toggleKitchenRecipe(recipe);
                 }}
               >
-                {isInKitchen(recipe) ? (
-                  <CheckIcon></CheckIcon>
-                ) : (
-                  <AddIcon></AddIcon>
-                )}
+                {isInKitchen(recipe) ? <CheckIcon /> : <AddIcon />}
                 我的廚房
               </AddToButton>
             </AddToButtonGroup>
@@ -272,6 +259,11 @@ const AddToButton = styled.button`
   display: flex;
   align-items: center;
   gap: 0 5px;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
 
   &.active {
     border: none;

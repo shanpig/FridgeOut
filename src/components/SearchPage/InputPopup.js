@@ -45,7 +45,6 @@ export default function InputPopup({ open, setOpen }) {
     if (newInputs.length === 0) newInputs = [emptyInput];
     setInputs(newInputs);
   }
-
   function addAllInputFields() {
     inputs.forEach((input) => {
       console.log(input);
@@ -88,9 +87,7 @@ export default function InputPopup({ open, setOpen }) {
                 setLeftover={(leftover) => setSingleInputField(leftover, i)}
               />
               <RemoveInputButton>
-                <RemoveInputIcon
-                  onClick={() => removeSingleInputField(i)}
-                ></RemoveInputIcon>
+                <RemoveInputIcon onClick={() => removeSingleInputField(i)} />
               </RemoveInputButton>
             </Field>
           );
@@ -225,13 +222,13 @@ const AddToFridgeOption = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 `;
 
 const LabelText = styled.div`
   color: ${theme.darkbrown};
   white-space: break-all;
-  font-size: 0.7em;
+  font-size: 0.8em;
   line-height: 1.5;
 `;
 

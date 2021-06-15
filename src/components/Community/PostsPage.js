@@ -57,10 +57,10 @@ export default function PostsPage() {
         <ButtonGroupSpacer />
         <Switch>
           <Route path={`${match.url}/query`}>
-            <Posts category="query"></Posts>
+            <Posts category="query" />
           </Route>
           <Route path={`${match.url}/share`}>
-            <Posts category="share"></Posts>
+            <Posts category="share" />
           </Route>
           <Route path={`${match.url}`}>
             <Redirect to={`${match.url}/query`} />

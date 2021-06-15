@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SearchBar from './SearchBar';
-import FilterBar from './FilterBar';
-import RecipeItem from './RecipeItem';
+import RecipeItem from '../common/RecipeItem';
 import SidebarBody from '../common/Sidebar/SidebarBody';
 import { GrFormAdd } from 'react-icons/gr';
 import { theme } from '../../variables';
@@ -13,13 +12,11 @@ import { addToKitchen } from '../../redux/reducers/user/userActions';
 import { Animated } from 'react-animated-css';
 
 export default function SearchPage() {
-  const d = useDispatch();
   const [recipes, setRecipes] = useState([]);
   const [recipesPage, setRecipesPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const selectedRecipes = useSelector((state) => state.user_info.my_kitchen);
   const searchKeywords = useSelector((state) => state.searched_keywords);
-  const leftOvers = useSelector((state) => state.user_info.left_overs);
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,7 +48,7 @@ export default function SearchPage() {
 
   return (
     <Main>
-      <SearchBar></SearchBar>
+      <SearchBar />
 
       <ContentRow>
         {isLoading ? (
@@ -63,7 +60,7 @@ export default function SearchPage() {
               style={{ width: '300px', height: '300px' }}
               loop
               autoplay
-            ></lottie-player>
+            />
           </LoadingAnimation>
         ) : recipes.length === 0 ? (
           <IconContainer key={2}>
@@ -77,7 +74,7 @@ export default function SearchPage() {
               }}
               loop
               autoplay
-            ></lottie-player>
+            />
             <Text>找不到食譜</Text>
           </IconContainer>
         ) : (
@@ -143,16 +140,9 @@ const Row = styled.div`
   width: 100%;
 `;
 
-const MiscRow = styled(Row)`
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-`;
-
 const ContentRow = styled(Row)`
   margin-top: 30px;
   align-items: flex-start;
-  /* background-color: rgba(255, 255, 255, 0.8); */
 `;
 
 const Button = styled.button`
@@ -211,10 +201,6 @@ const Pagination = styled.div`
   }
 `;
 
-const SortSelection = styled.select`
-  padding: 3px 5px;
-`;
-
 const SearchedRecipes = styled.ul`
   width: 100%;
   display: flex;
@@ -239,9 +225,6 @@ const IconContainer = styled.div`
 `;
 
 const LoadingAnimation = styled(IconContainer)``;
-const NoInputAnimation = styled(IconContainer)`
-  align-items: flex-start;
-`;
 
 const Text = styled.h2`
   font-size: 1.5em;

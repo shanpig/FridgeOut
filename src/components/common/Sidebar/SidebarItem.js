@@ -7,6 +7,7 @@ import {
   fractionStringToTC,
   getFractionFromTCAmount,
 } from '../../../utils/math';
+import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 
 export default function SidebarItem({ readOnly, className, ...props }) {
@@ -40,9 +41,9 @@ export default function SidebarItem({ readOnly, className, ...props }) {
   }
   return (
     <Item className={className}>
-      <Text>{content}</Text>
+      <Text to={props.type === 'recipe' ? props.linkTo : ''}>{content}</Text>
       {!readOnly ? (
-        <CloseButton onClick={() => remove(target, props.type)}></CloseButton>
+        <CloseButton onClick={() => remove(target, props.type)} />
       ) : (
         ''
       )}
@@ -50,7 +51,14 @@ export default function SidebarItem({ readOnly, className, ...props }) {
   );
 }
 const Item = styled.li``;
-const Text = styled.span``;
+const Text = styled(Link)`
+  text-decoration: none;
+  cursor: ${(props) => (props.to ? 'pointer' : 'unset')};
+
+  &:hover {
+    color: ${(props) => (props.to ? theme.orange : '')};
+  }
+`;
 const CloseButton = styled(AiOutlineClose)`
   cursor: pointer;
 

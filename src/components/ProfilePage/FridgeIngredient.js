@@ -54,7 +54,7 @@ export default function FridgeIngredient({
               value={newName}
               placeholder="雞肉"
               onChange={(e) => onTextChange(e.target.value, setNewName)}
-            ></Input>
+            />
           </NameField>
           <AmountField>
             <Input
@@ -64,7 +64,7 @@ export default function FridgeIngredient({
               value={newAmount}
               placeholder="100"
               onChange={(e) => onTextChange(e.target.value, setNewAmount)}
-            ></Input>
+            />
           </AmountField>
           <UnitField>
             <Input
@@ -73,7 +73,7 @@ export default function FridgeIngredient({
               value={newUnit}
               placeholder="g"
               onChange={(e) => onTextChange(e.target.value, setNewUnit)}
-            ></Input>
+            />
           </UnitField>
           <Buttons>
             <SaveButton onClick={saveEdition}>save</SaveButton>

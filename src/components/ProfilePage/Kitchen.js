@@ -2,7 +2,7 @@ import { theme } from '../../variables';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import RecipeItem from '../SearchPage/RecipeItem';
+import RecipeItem from '../common/RecipeItem';
 import { GrFormTrash } from 'react-icons/gr';
 import { removeFromKitchen } from '../../redux/reducers/user/userActions';
 import { Animated } from 'react-animated-css';

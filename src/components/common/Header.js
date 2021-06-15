@@ -24,7 +24,7 @@ export default function Header() {
           <LogoImg
             src={SmallLogoSrc}
             srcSet={`${SmallLogoSrc} 500w, ${LargeLogoSrc} 769w`}
-          ></LogoImg>
+          />
         </StyledLink>
         <Nav>
           <NavButton activeClassName="active" to="/search" id="search">

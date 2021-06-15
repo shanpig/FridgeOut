@@ -39,7 +39,7 @@ export default function RecipeIngredientInput({ ingredient, setLeftover }) {
           value={ingredient ? ingredient.ingredient_name : ''}
           placeholder="雞肉"
           onChange={(e) => onTextChange(e.target.value, 'ingredient_name')}
-        ></Input>
+        />
       </NameField>
       <AmountField>
         <Input
@@ -52,7 +52,7 @@ export default function RecipeIngredientInput({ ingredient, setLeftover }) {
           value={ingredient.ingredient_amount}
           placeholder="100"
           onChange={(e) => onAmountChange(e.target.value, 'ingredient_amount')}
-        ></Input>
+        />
       </AmountField>
       <UnitField>
         <Input
@@ -61,7 +61,7 @@ export default function RecipeIngredientInput({ ingredient, setLeftover }) {
           value={ingredient.ingredient_unit}
           placeholder="g"
           onChange={(e) => onTextChange(e.target.value, 'ingredient_unit')}
-        ></Input>
+        />
       </UnitField>
     </Ingredient.Edit>
   );

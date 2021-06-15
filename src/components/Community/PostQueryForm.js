@@ -1,5 +1,5 @@
 import { theme } from '../../variables';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,7 +9,6 @@ import { RiFridgeFill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Animated } from 'react-animated-css';
-import { useEffect } from 'react';
 const ReactSwal = withReactContent(Swal);
 
 function findIngredientByName(list, ingredientName) {
@@ -19,12 +18,13 @@ function findIngredientByName(list, ingredientName) {
 export default function PostQueryForm() {
   const history = useHistory();
   const user = useSelector((state) => state.user_info);
+  const [isUploading, setIsUploading] = useState(false);
   const fridge = useSelector((state) => state.user_info.left_overs);
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
-    checkIngredients();
-  }, []);
+    if (user.identity !== 'none') checkIngredients();
+  }, [user]);
 
   function isSelected(leftover) {
     return (
@@ -47,6 +47,7 @@ export default function PostQueryForm() {
 
   function submitHandler(e) {
     e.preventDefault();
+    setIsUploading(true);
     if (selected.length === 0)
       return console.log('No ingredient submitted, cannot submit.');
     const message = {
@@ -56,8 +57,10 @@ export default function PostQueryForm() {
       ingredients: selected,
       profile_image: user.profile,
     };
+    console.log(message);
 
     post(message).then((id) => {
+      setIsUploading(false);
       console.log('message has posted on doc id: ', id);
       history.goBack();
     });
@@ -104,11 +107,11 @@ export default function PostQueryForm() {
   else if (user.identity === 'none') return <Redirect to="/login" />;
   return (
     <Main>
-      <GoBackButton></GoBackButton>
+      <GoBackButton />
       <Title>選擇你想要發問的食材</Title>
       <Animated>
-        <QueryForm>
-          <FridgeList action="" onSubmit={submitHandler}>
+        <QueryForm action="" onSubmit={submitHandler}>
+          <FridgeList>
             <FridgeIcon
               onClick={() => history.push(`/profile/${user.name}/fridge`)}
             />
@@ -155,7 +158,7 @@ export default function PostQueryForm() {
             <Submit
               disabled={fridge.length === 0}
               type="submit"
-              value="確認送出"
+              value={isUploading ? '上傳中...' : '確認送出'}
             />
           </ToBeAddedList>
         </QueryForm>
@@ -173,7 +176,7 @@ const Main = styled.main`
   }
 `;
 
-const QueryForm = styled.div`
+const QueryForm = styled.form`
   padding: 30px;
   max-width: 600px;
   min-height: 300px;
@@ -196,7 +199,7 @@ const Title = styled.h1`
   color: white;
 `;
 
-const FridgeList = styled.form`
+const FridgeList = styled.div`
   flex: 1 1 50%;
   display: flex;
   position: relative;

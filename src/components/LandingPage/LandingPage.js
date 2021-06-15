@@ -1,10 +1,17 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { theme, headerConfig, mainContentConfig } from '../../variables';
 import { Animated } from 'react-animated-css';
 import { BsChevronRight } from 'react-icons/bs';
-import backgroundImageSrc from '../../images/kitchen-table.jpg';
+
 export default function LandingPage() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleModal(e) {
+    setIsOpen(!isOpen);
+  }
+
   return (
     <Main>
       <MainContent>
@@ -23,7 +30,7 @@ export default function LandingPage() {
             <Animated animationIn="fadeInLeft" animationInDelay={500}>
               <Button>
                 前往搜尋
-                <BsChevronRight></BsChevronRight>
+                <BsChevronRight />
               </Button>
             </Animated>
           </StyledLink>
@@ -32,6 +39,7 @@ export default function LandingPage() {
     </Main>
   );
 }
+
 const Main = styled.main`
   width: 100%;
   display: flex;

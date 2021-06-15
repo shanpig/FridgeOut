@@ -9,7 +9,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const MASK = useRef(null);
   return (
     <Aside open={sidebarOpen}>
-      <Mask masked={sidebarOpen} onClick={() => setSidebarOpen(false)}></Mask>
+      <Mask masked={sidebarOpen} onClick={() => setSidebarOpen(false)} />
       <HeaderSection>
         <BackIcon onClick={() => setSidebarOpen(false)} />
         <Logo />

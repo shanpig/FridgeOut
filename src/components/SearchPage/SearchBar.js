@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Animated } from 'react-animated-css';
 import { useSelector, useDispatch } from 'react-redux';
 import { GrFormClose, GrFormAdd } from 'react-icons/gr';
-import InputPopup from '../common/InputPopup';
+import InputPopup from './InputPopup';
 import { removeInput } from '../../redux/reducers/keyword/keywordActions';
 import { fractionStringToTC } from '../../utils/math';
 import FridgeSelectionList from './FridgeSelectionList';
@@ -38,9 +38,7 @@ export default function SearchBar() {
                   return (
                     <Input key={i}>
                       {name} {fractionStringToTC(amount)} {unit}
-                      <RemoveInput
-                        onClick={() => d(removeInput(keyword))}
-                      ></RemoveInput>
+                      <RemoveInput onClick={() => d(removeInput(keyword))} />
                     </Input>
                   );
                 })

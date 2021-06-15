@@ -92,17 +92,17 @@ export default function ProfilePage() {
             <MainContent>
               <Switch>
                 <Route path={`${match.url}/kitchen`}>
-                  <Kitchen></Kitchen>
+                  <Kitchen />
                 </Route>
                 <Route path={`${match.url}/favorites`}>
-                  <Favorites></Favorites>
+                  <Favorites />
                 </Route>
                 <Route path={`${match.url}/messages`}>
-                  <Messages></Messages>
+                  <Messages />
                 </Route>
                 <Route path={`${match.url}/`}>
                   <Redirect to={`${match.url}/fridge`} />
-                  <Fridge></Fridge>
+                  <Fridge />
                 </Route>
               </Switch>
             </MainContent>

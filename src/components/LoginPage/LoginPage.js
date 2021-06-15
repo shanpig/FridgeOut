@@ -96,7 +96,7 @@ export default function LoginPage() {
     return (
       <Main>
         <LoadingMessage>
-          <ReactLoading type="spokes"></ReactLoading>
+          <ReactLoading type="spokes" />
           <Text>登入中，請稍後 ...</Text>
         </LoadingMessage>
       </Main>

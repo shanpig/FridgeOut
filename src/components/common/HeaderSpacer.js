@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { headerConfig } from '../../variables';
 
 export default function HeaderSpacer() {
-  return <Spacer></Spacer>;
+  return <Spacer />;
 }
 
 const Spacer = styled.div`

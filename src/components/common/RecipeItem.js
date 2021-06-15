@@ -44,7 +44,7 @@ export default function RecipeItem({
     <Item className={className}>
       <ItemContent to={`/recipe/${id}`}>
         <ImageContainer>
-          <Image src={main_image}></Image>
+          <Image src={main_image} />
         </ImageContainer>
         <TextSection>
           <TitleRow>

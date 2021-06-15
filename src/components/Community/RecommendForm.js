@@ -24,14 +24,13 @@ export default function RecommendForm() {
 
   return (
     <Main>
-      {/* <GoBackButton></GoBackButton> */}
       <MainContent>
         <Animated>
           <RecipeForm
             formTitle="推薦食譜"
             submit={(recipe) => sendRecipeTo(queryPost.id, recipe)}
             defaultIngredients={queryPost.ingredients}
-          ></RecipeForm>
+          />
         </Animated>
       </MainContent>
     </Main>

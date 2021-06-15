@@ -138,6 +138,7 @@ const SelectionOptions = styled(PerfectScrollbar)`
   position: relative;
   padding-bottom: 10px;
   margin-top: 5px;
+  color: white;
 
   & .ps__rail-x {
     height: 0;

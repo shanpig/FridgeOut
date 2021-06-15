@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default function FooterSpacer() {
-  return <Spacer></Spacer>;
+  return <Spacer />;
 }
 
 const Spacer = styled.div`
