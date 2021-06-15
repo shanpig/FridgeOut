@@ -13,11 +13,6 @@ export default function RecipeIngredientInput({ ingredient, setLeftover }) {
     console.log(value.match(/[^0-9\.]/g));
     if (value.match(/[^0-9\.]/g)) setError(true);
     else setError(false);
-    // if (AMOUNT.current.checkValidity() || AMOUNT.current.value === '') {
-    //   setError(false);
-    // } else {
-    //   setError(true);
-    // }
     onTextChange(newText, key);
   }
 
@@ -96,44 +91,6 @@ const Ingredient = {
   Display,
 };
 
-const Buttons = styled.div`
-  margin-left: auto;
-  display: flex;
-  gap: 5px;
-`;
-const EditButton = styled(AiFillEdit)`
-  width: 30px;
-  font-size: 20px;
-  cursor: pointer;
-  fill: black;
-  &:hover {
-    transform: scale(1.3);
-  }
-`;
-const RemoveButton = styled(AiFillDelete)`
-  width: 30px;
-  font-size: 20px;
-  cursor: pointer;
-  fill: black;
-  &:hover {
-    transform: scale(1.3);
-    fill: red;
-  }
-`;
-const SaveButton = styled(AiFillSave)`
-  width: 30px;
-  font-size: 20px;
-  cursor: pointer;
-  fill: black;
-  &:hover {
-    transform: scale(1.3);
-  }
-`;
-const Text = styled.p`
-  padding: 5px;
-  color: black;
-`;
-
 const Field = styled.div`
   flex-basis: 30px;
   min-width: 30px;
@@ -145,13 +102,10 @@ const NameField = styled(Field)`
     padding-left: 15px;
     border-radius: 20px 0 0 20px;
   }
-  /* min-width: 100px;
-  max-width: 200px; */
 `;
 const AmountField = styled(Field)`
   flex-grow: 1;
   flex-shrink: 3;
-  /* max-width: 100px; */
 `;
 const UnitField = styled(AmountField)`
   & input {

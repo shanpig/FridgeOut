@@ -1,10 +1,9 @@
 import { theme } from '../../variables';
-import styled, { isStyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Prompt } from 'react-router-dom';
-import { AiTwotoneEdit, AiFillSave, AiOutlinePlus } from 'react-icons/ai';
-import { fractionStringToTC, isValidNumberString } from '../../utils/math';
+
+import { AiOutlinePlus } from 'react-icons/ai';
 import { setLeftOvers } from '../../redux/reducers/user/userActions';
 import FridgeIngredient from './FridgeIngredient';
 import { Animated } from 'react-animated-css';
@@ -13,8 +12,6 @@ import { uid } from 'react-uid';
 
 export default function Fridge() {
   const d = useDispatch();
-  const firstUpdate = useRef(true);
-  const [isEditing, setIsEditing] = useState(false);
   const [leftovers, setLeftovers] = useState([]);
   const fridge = useSelector((state) => {
     const _leftovers = state.user_info.left_overs;
@@ -47,30 +44,6 @@ export default function Fridge() {
   }
 
   useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-    if (isEditing) return;
-    console.log('leftovers', leftovers);
-  }, [isEditing]);
-
-  // useEffect(() => {
-  //   const ingredientsText = fridge
-  //     .map(
-  //       ({
-  //         ingredient_name: name,
-  //         ingredient_amount: amount,
-  //         ingredient_unit: unit,
-  //       }) => {
-  //         if (isValidNumberString(amount))
-  //           return `${name} ${fractionStringToTC(amount) || ''} ${unit || ''}`;
-  //       }
-  //     )
-
-  //   setIngredientsText(ingredientsText);
-  // }, [fridge]);
-  useEffect(() => {
     setLeftovers(fridge);
   }, [fridge]);
 
@@ -90,7 +63,6 @@ export default function Fridge() {
           ))
         )}
       </FridgeContent>
-      {/* <Prompt when={true} message={'你有食材還未儲存'} /> */}
       <AddButton onClick={addNewLeftover}>
         {leftovers.length === 0 ? <Text>點我加入食材...</Text> : <AddIcon />}
       </AddButton>
@@ -99,21 +71,17 @@ export default function Fridge() {
 }
 
 const FridgeContent = styled.div`
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
   gap: 5px;
   position: relative;
   background-color: white;
   padding: 15px 10px 10px;
-  /* margin-left: 20px; */
   border-radius: 5px;
 `;
 
 const AddButton = styled.div`
   width: 100%;
-  /* min-width: 20px;
-  max-width: 100px; */
   display: flex;
   align-items: center;
   justify-content: center;

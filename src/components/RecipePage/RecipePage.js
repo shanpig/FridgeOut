@@ -3,7 +3,6 @@ import { mainContentConfig, theme } from '../../variables';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router';
 import { getRecipe } from '../../utils/firebase';
-import SidebarBody from '../common/Sidebar/SidebarBody';
 import ScrollToTop from '../common/ScrollToTop';
 import backgroundImageSrc from '../../images/kitchen-table.jpg';
 import { GrClose, GrAdd, GrCheckmark } from 'react-icons/gr';
@@ -19,9 +18,6 @@ import {
   removeFromFavorite,
   removeFromKitchen,
 } from '../../redux/reducers/user/userActions';
-import { GiConsoleController } from 'react-icons/gi';
-// import GoBackButton from '../common/GoBackButton';
-// import { addRecipeToSelections } from '../../redux/reducers/user/userActions';
 
 export default function RecipePage() {
   const {
@@ -29,8 +25,6 @@ export default function RecipePage() {
     my_favorites: myFavorite,
     identity,
   } = useSelector((state) => state.user_info);
-  // const myKitchen = useSelector((state) => state.user_info.my_kitchen);
-  // const myFavorite = useSelector((state) => state.user_info.my_favorites);
   const d = useDispatch();
   const history = useHistory();
   let cat = '';
@@ -168,9 +162,6 @@ export default function RecipePage() {
               </ListContainer>
             </Info>
           </RecipeInfoContainer>
-          {/* <SidebarContent>
-          <SidebarBody />
-        </SidebarContent> */}
         </Card>
       </Animated>
     </Main>
@@ -180,11 +171,6 @@ export default function RecipePage() {
 const Main = styled.main`
   padding: 10px 0 50px;
   position: relative;
-  /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(${backgroundImageSrc}); */
-  /* background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; */
   max-width: 1024px;
   margin: 0 auto;
   min-height: ${mainContentConfig.mobile_height};
@@ -195,28 +181,8 @@ const Main = styled.main`
   }
 `;
 
-const CloseButton = styled(GrClose)`
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  width: 20px;
-  height: 20px;
-  z-index: 1000;
-  cursor: pointer;
-
-  & path {
-    stroke-width: 3;
-    stroke: ${theme.darkbrown};
-  }
-
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
-
 const Card = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
-  /* overflow: hidden; */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -230,7 +196,6 @@ const Card = styled.div`
 
   & * {
     color: ${theme.darkbrown};
-    /* font-family: 'Roboto'; */
   }
 
   @media screen and (min-width: 769px) {
@@ -239,13 +204,6 @@ const Card = styled.div`
     height: calc(${mainContentConfig.computer_height} - 60px);
     max-width: 1024px;
   }
-`;
-
-const CardHead = styled.div`
-  height: 100px;
-  width: 100%;
-  border-radius: 5px 5px 0 0;
-  /* background-color: ${theme.orange}; */
 `;
 
 const AddToButton = styled.button`
@@ -267,7 +225,6 @@ const AddToButton = styled.button`
 
   &.active {
     border: none;
-    /* pointer-events: none; */
   }
 
   @media screen and (min-width: 769px) {
@@ -286,21 +243,13 @@ const CheckIcon = styled(GrCheckmark)``;
 
 const RecipeImageContainer = styled.div`
   position: relative;
-  /* margin-top: 40px; */
-  /* margin-left: 60px;
-  border: 5px solid white;
-  border-radius: 10px; */
-  /* transform: rotateZ(-15deg); */
-  /* box-shadow: 0 0 10px -6px black; */
   width: 100%;
   height: 350px;
   align-self: flex-start;
-  /* border-radius: 50%; */
   background-image: url(${(props) => props.src});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  /* border-radius: 0 0 30px 30px; */
 
   @media screen and (min-width: 769px) {
     width: 45%;
@@ -319,9 +268,7 @@ const GoBackButton = styled(TiArrowBack)`
   z-index: 100;
   fill: ${theme.darkbrown};
   background-color: rgba(255, 255, 255, 0.8);
-  /* border-radius: 0 0 50px; */
   transition: 0.3s all ease;
-  /* clip-path: polygon(0 0, 100% 0, 0 100%); */
   clip-path: circle(50px at left top);
 
   &:hover {
@@ -341,7 +288,6 @@ const RecipeInfoContainer = styled(PerfectScrollbar)`
 
   @media screen and (min-width: 769px) {
     width: 55%;
-    /* overflow: hidden; */
   }
 `;
 
@@ -383,9 +329,6 @@ const ListTitle = styled.h3`
 const ListTitleBullet = styled.div`
   width: fit-content;
   font-size: 1.2em;
-  /* padding: 5px 15px; */
-  /* border-radius: 30px;
-  border: 1.5px solid ${theme.darkbrown}; */
 `;
 
 const IngredientList = styled.ul`
@@ -410,10 +353,6 @@ const Ingredient = styled.div`
   padding-left: 10px;
 `;
 
-const StepTitle = styled.h3`
-  margin-top: 16px;
-`;
-
 const Steps = styled.ul`
   padding-left: 30px;
   display: flex;
@@ -432,19 +371,4 @@ const Step = styled.li`
   span:first-child {
     margin-right: 5px;
   }
-`;
-
-const SidebarContent = styled.div`
-  display: none;
-  @media screen and (min-width: 769px) {
-    display: unset;
-    flex-grow: 1;
-    flex-basis: 300px;
-    margin-left: 40px;
-    background-color: white;
-  }
-`;
-
-const StepsContainer = styled(ListContainer)`
-  border-radius: 0 0 20px 20px;
 `;

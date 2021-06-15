@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { theme } from '../../variables';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { signInWithPopup, getUserData, logOut } from '../../utils/firebase';
-import { setUser, signOutUser } from '../../redux/reducers/user/userActions';
+import { logOut } from '../../utils/firebase';
+import { signOutUser } from '../../redux/reducers/user/userActions';
 import { FiLogOut } from 'react-icons/fi';
 import { CgSmartHomeRefrigerator } from 'react-icons/cg';
 import { GiCook } from 'react-icons/gi';
@@ -15,7 +14,6 @@ import Messages from './Messages';
 import Favorites from './Favorites';
 import {
   useRouteMatch,
-  useParams,
   useHistory,
   Switch,
   Redirect,
@@ -30,12 +28,9 @@ export default function ProfilePage() {
   const {
     identity,
     name,
-    email,
     profile,
-    left_overs: leftOvers,
     my_favorites: myFavorites,
     my_kitchen: myKitchen,
-    messages,
   } = useSelector((state) => state.user_info);
 
   let match = useRouteMatch();
@@ -128,14 +123,11 @@ const Main = styled.main`
 `;
 
 const Card = styled.div`
-  /* width: 100%; */
   max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  /* padding-bottom: 20px; */
   overflow: hidden;
-  /* background-color: white; */
   background-color: #fcfcfc;
 
   @media screen and (min-width: 769px) {
@@ -163,12 +155,7 @@ const ProfileInfo = styled.div`
 `;
 
 const ProfileRow = styled(Row)`
-  /* background-image: url('https://picsum.photos/400/150');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat; */
   justify-content: center;
-  /* background-color: #ffe6c2; */
   flex-direction: column;
   align-items: center;
   gap: 0 30px;
@@ -188,20 +175,11 @@ const ProfileRow = styled(Row)`
     z-index: 1;
     background-color: ${theme.darkbrown};
   }
-  /* margin-bottom: 50px; */
 
   @media screen and (min-width: 769px) {
     border-radius: 5px 5px 0 0;
     padding-bottom: 20px;
   }
-  /* margin-left: 40px;
-  margin-bottom: 30px;
-  padding: 20px 30px 20px 60px;
-  width: fit-content;
-  background-color: white;
-  
-  
-  font-size: 1.3em; */
 `;
 const ProfileImage = styled.img`
   width: 125px;
@@ -211,19 +189,9 @@ const ProfileImage = styled.img`
   object-fit: contain;
   z-index: 20;
   border-radius: 50%;
-  /* box-shadow: 2px 1px 7px -5px black; */
-  /* position: absolute; */
-  /* bottom: 0; */
-  /* transform: translate(10px, 60%); */
-
-  /* 
-  position: absolute;*/
 `;
 
 const UserName = styled.div`
-  /* position: absolute; */
-  /* bottom: 0;
-  transform: translate(80px, calc(60% + 15px)); */
   color: ${theme.darkbrown};
   text-align: center;
   font-weight: bold;
@@ -234,12 +202,9 @@ const UserName = styled.div`
 const NavRow = styled(Row)`
   justify-content: center;
   align-items: center;
-  /* gap: 5px; */
-  /* background-color: rgba(255, 255, 255, 0.8); */
   min-height: 50px;
   padding: 10px 0 20px;
   gap: 15px;
-  /* background-color: #fcfcfc; */
   flex-wrap: wrap;
 
   @media screen and (min-width: 769px) {
@@ -249,7 +214,6 @@ const NavRow = styled(Row)`
 `;
 
 const NavItem = styled(Link)`
-  /* color: black; */
   text-decoration: none;
   padding: 7px 10px;
   height: 100%;
@@ -350,7 +314,6 @@ const MainContent = styled.div`
 `;
 
 const Statistics = styled.div`
-  /* display: none; */
   display: flex;
   width: 100%;
   align-items: center;
@@ -363,10 +326,6 @@ const Statistics = styled.div`
     justify-content: center;
     gap: 5px 220px;
     margin-top: -170px;
-    /* flex: 1 1;
-    border-radius: 5px;
-    justify-content: space-evenly;
-    background-color: rgba(255, 255, 255, 0.9); */
   }
 `;
 
@@ -378,11 +337,8 @@ const StatisticsCount = styled.div`
   align-items: center;
   justify-content: space-evenly;
 
-  /* gap: 8px; */
   font-size: 0.8em;
   border-radius: 20px;
-  /* border-radius: 50%; */
-  /* padding: 20px; */
   padding: 0 10px;
 
   & span {
@@ -390,7 +346,6 @@ const StatisticsCount = styled.div`
     font-family: 'Roboto';
     font-weight: bold;
     color: ${theme.darkbrown};
-    /* text-shadow: 1px 1px black; */
   }
 
   & p {
@@ -413,8 +368,6 @@ const StatisticsCount = styled.div`
 
 const KitchenCount = styled(StatisticsCount)``;
 const FavoriteCount = styled(StatisticsCount)``;
-
-const UserEmail = styled.div``;
 
 const Logout = styled.button`
   margin-left: auto;

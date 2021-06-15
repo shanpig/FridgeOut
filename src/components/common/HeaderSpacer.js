@@ -1,4 +1,3 @@
-import { head } from 'lodash';
 import styled from 'styled-components';
 import { headerConfig } from '../../variables';
 

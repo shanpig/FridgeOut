@@ -1,5 +1,4 @@
 import RecipeForm from './RecipeForm';
-import GoBackButton from '../common/GoBackButton';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { sendMessageTo } from '../../utils/firebase';
@@ -38,21 +37,9 @@ export default function RecommendForm() {
 }
 
 const Main = styled.main`
-  /* padding: 10px; */
   position: relative;
-
-  @media screen and (min-width: 769px) {
-    /* padding: 60px 42px; */
-  }
 `;
 
-const Title = styled.h1`
-  font-size: 1.2em;
-  text-align: center;
-  margin-bottom: 10px;
-`;
-
-const LeftoverList = styled.ul``;
 const MainContent = styled.div`
   max-width: 800px;
   margin: 0 auto;

@@ -67,13 +67,10 @@ const Title = styled.h2`
 
 const Recipe = styled(Link)`
   text-decoration: none;
-  /* color: ${theme.darkbrown}; */
   width: 100%;
   cursor: pointer;
-  /* background-color: white; */
   margin: 10px 10px 10px;
   background-color: white;
-  /* border: 1px solid ${theme.darkbrown}; */
   border-radius: 4px;
   display: flex;
   padding: 10px 20px;
@@ -88,7 +85,6 @@ const Recipe = styled(Link)`
 
 const RecipeTitle = styled.h2`
   font-size: 1.2em;
-  /* color: black; */
   line-height: 1.3;
   font-weight: bold;
 `;

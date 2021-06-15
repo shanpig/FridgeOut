@@ -1,15 +1,12 @@
-import { headerConfig, mainContentConfig, theme } from '../../variables';
+import { theme } from '../../variables';
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInput } from '../../redux/reducers/keyword/keywordActions';
-import { GrFormClose, GrFormAdd } from 'react-icons/gr';
-import { fraction } from 'mathjs';
+import { GrFormClose } from 'react-icons/gr';
 import IngredientInput from './IngredientInput';
-import { getFractionFromTCAmount, fractionStringToTC } from '../../utils/math';
 import { Link, useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
-// import { uid } from 'react-uid';
 import { v1 as uid } from 'uuid';
 import { addLeftOver } from '../../redux/reducers/user/userActions';
 
@@ -26,9 +23,8 @@ export default function InputPopup({ open, setOpen }) {
   const isLoggedIn = useSelector(
     (state) => state.user_info.identity !== 'none'
   );
-  const fridge = useSelector((state) => state.user_info.left_overs);
+
   const d = useDispatch();
-  const history = useHistory();
 
   function addInputField() {
     const input = { ...emptyInput, input_uid: uid() };
@@ -57,15 +53,6 @@ export default function InputPopup({ open, setOpen }) {
     setInputs([emptyInput]);
     setOpen(false);
   }
-
-  // function addAllFridgeItemsToInput() {
-  //   if (identity === 'none') return history.push('/login');
-  //   const newInputs = fridge.map((input) => {
-  //     input.input_uid = uid();
-  //     return input;
-  //   });
-  //   setInputs(newInputs);
-  // }
 
   return (
     <StyledPopup
@@ -188,7 +175,6 @@ const Field = styled.div`
 const Button = styled.button`
   font-size: 0.8em;
   padding: 5px 10px;
-  /* border-bottom: 1px solid black; */
   cursor: pointer;
   position: relative;
   border-radius: 4px;
@@ -222,7 +208,6 @@ const AddToFridgeOption = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
-  /* margin-top: 10px; */
 `;
 
 const LabelText = styled.div`
@@ -239,16 +224,6 @@ const LoginText = styled(Link)`
 `;
 
 const AddToFridgeCheckbox = styled.input``;
-
-// const AddFromFridgeButton = styled(Button)`
-//   color: ${theme.darkbrown};
-//   background-color: #ececec;
-
-//   &:hover {
-//     background-color: ${theme.darkbrown};
-//     color: white;
-//   }
-// `;
 
 const ConfirmButton = styled(Button)`
   background-color: ${theme.darkbrown};

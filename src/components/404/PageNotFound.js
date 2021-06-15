@@ -18,7 +18,8 @@ export default function PageNotFound() {
     }, 1000);
 
     return () => clearTimeout(countDown);
-  }, [time]);
+  }, [time, history]);
+
   return (
     <Main>
       <Animated animationInDuration={1500} animationIn="fadeInDown">
@@ -48,26 +49,15 @@ const Main = styled.main`
   }
 `;
 
-// const Card = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-const H1 = styled.h1`
-  font-size: 8em;
-`;
-
 const Icon = styled.img`
   width: 150px;
   height: 150px;
-  /* animation: pulse 1s ease infinite; */
 `;
 
 const Text = styled.div`
   font-size: 1.5em;
   text-align: center;
+  color: white;
   line-height: 1.7;
 `;
 

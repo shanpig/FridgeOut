@@ -1,7 +1,6 @@
 import { mainContentConfig } from '../../variables';
 import RecipeForm from './RecipeForm';
 import styled from 'styled-components';
-import GoBackButton from '../common/GoBackButton';
 import { post } from '../../utils/firebase';
 import { useSelector } from 'react-redux';
 import { Animated } from 'react-animated-css';
@@ -33,10 +32,5 @@ export default function ShareRecipeForm() {
 }
 
 const Main = styled.main`
-  /* padding: 10px; */
   position: relative;
-
-  @media screen and (min-width: 769px) {
-    /* height: calc(${mainContentConfig.computer_height} - 60px); */
-  }
 `;

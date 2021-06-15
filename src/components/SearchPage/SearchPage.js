@@ -121,11 +121,6 @@ const Main = styled.main`
   max-width: 760px;
   margin: 0 auto;
 
-  /* & * {
-    color: ${theme.darkbrown};
-  } */
-  /* background-color: rgba(255, 255, 255, 0.8); */
-
   @media screen and (min-width: 769px) {
     padding: 30px 0;
   }

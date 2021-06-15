@@ -1,12 +1,10 @@
 import { theme } from '../../../variables';
-import { useRef } from 'react';
 import styled from 'styled-components';
 import SidebarBody from './SidebarBody';
 import { IoChevronBackSharp } from 'react-icons/io5';
 import LogoSrc from '../../../images/logo-small-nobg.svg';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
-  const MASK = useRef(null);
   return (
     <Aside open={sidebarOpen}>
       <Mask masked={sidebarOpen} onClick={() => setSidebarOpen(false)} />
@@ -51,8 +49,6 @@ const Mask = styled.div`
 
 const HeaderSection = styled.section`
   padding: 40px 40px 10px;
-  /* border-bottom: 3px solid ${theme.orange}; */
-  /* height: 130px; */
 `;
 
 const BackIcon = styled(IoChevronBackSharp)`

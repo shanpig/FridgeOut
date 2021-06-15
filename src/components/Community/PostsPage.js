@@ -8,10 +8,8 @@ import {
   useRouteMatch,
   useHistory,
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Animated } from 'react-animated-css';
 import styled from 'styled-components';
-import SmallLogoSrc from '../../images/logo-small.svg';
 import './popupStyles.css';
 
 import Posts from './Posts';
@@ -35,18 +33,10 @@ export default function PostsPage() {
       <MainContent>
         <Animated style={{ zIndex: 100 }}>
           <ButtonGroup>
-            <PostQuery
-              activeClassName="active"
-              to={`${match.url}/query`}
-              // onClick={() => setTab('query')}
-            >
+            <PostQuery activeClassName="active" to={`${match.url}/query`}>
               求食譜
             </PostQuery>
-            <PostRecipe
-              activeClassName="active"
-              to={`${match.url}/share`}
-              // onClick={() => setTab('share')}
-            >
+            <PostRecipe activeClassName="active" to={`${match.url}/share`}>
               分享食譜
             </PostRecipe>
             <WritePostButton to={`/form/${tab}`} tab={tab}>
@@ -102,10 +92,8 @@ const ButtonGroup = styled.div`
   display: flex;
   border-radius: 30px;
   justify-content: space-between;
-  /* align-items: stretch; */
 
   position: fixed;
-  /* box-shadow: 0 1px 10px -5px gray; */
   z-index: 100;
   top: calc(${headerConfig.computer_height} + 30px);
   background-color: rgba(255, 255, 255, 0.9);
@@ -140,7 +128,6 @@ const WritePostButton = styled(Link)`
   display: flex;
   border: 5px solid rgba(255, 255, 255, 0.8);
   justify-content: center;
-  /* box-shadow: -1px 1px 5px -2px gray; */
   align-items: center;
   background-color: ${theme.lightOrange};
   border-radius: 50%;
@@ -185,26 +172,20 @@ const Tab = styled(NavLink)`
   text-align: center;
   text-decoration: none;
   border-radius: 30px;
-  /* background-color: white; */
   display: flex;
   align-items: center;
   padding: 10px;
   justify-content: center;
-  /* transform: scale(0.8); */
   transition: all ease 0.3s;
 
   &:hover,
   &.active {
     color: white;
-    /* color: white; */
-    /* flex-grow: 3; */
-    /* transform: scale(1); */
     background-color: ${theme.darkbrown};
 
     &::after {
       display: unset;
     }
-    /* background-color: white; */
   }
 `;
 

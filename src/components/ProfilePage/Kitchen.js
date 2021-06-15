@@ -1,6 +1,5 @@
 import { theme } from '../../variables';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import RecipeItem from '../common/RecipeItem';
 import { GrFormTrash } from 'react-icons/gr';
@@ -46,7 +45,6 @@ const KitchenContent = styled.ul`
 `;
 
 const Recipe = styled(RecipeItem)`
-  /* height: 100px; */
   transition: all ease 0.3s;
 
   &:hover {

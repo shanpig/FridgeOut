@@ -1,13 +1,11 @@
-import { theme } from '../../variables';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 export default function FilterBar() {
   return (
     <Bar>
       <Filter>
-        <CheckBox id='no-purchasing' type='checkbox' />
-        <Label htmlFor='no-purchasing'>不用採買</Label>
+        <CheckBox id="no-purchasing" type="checkbox" />
+        <Label htmlFor="no-purchasing">不用採買</Label>
       </Filter>
     </Bar>
   );

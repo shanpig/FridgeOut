@@ -11,7 +11,7 @@ import {
 import ReactLoading from 'react-loading';
 import { setUser } from '../../redux/reducers/user/userActions';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 
 const userTemplate = {
@@ -28,7 +28,7 @@ const userTemplate = {
 };
 
 export default function LoginPage() {
-  const { identity, name } = useSelector((state) => state.user_info);
+  const { identity } = useSelector((state) => state.user_info);
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
   const d = useDispatch();

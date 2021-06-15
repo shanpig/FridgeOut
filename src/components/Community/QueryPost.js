@@ -1,4 +1,3 @@
-import { theme } from '../../variables';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -29,9 +28,7 @@ export default function QueryPost({ post }) {
                 {ingredient.ingredient_unit}
               </Ingredient>
             ))}
-          {/* <Button to={`/form/recommend/${post_id}`} onClick={setPostHolder}> */}
           <Text>幫助他！</Text>
-          {/* </Button> */}
         </Ingredients>
       </Button>
     </PostContent>
@@ -57,7 +54,6 @@ const Title = styled.h2`
 const Text = styled.div`
   width: 100%;
   text-align: center;
-  /* border-top: 1px solid #bababa; */
   padding: 5px 5px 0;
   font-size: 0.7em;
   color: #605245;
@@ -80,7 +76,6 @@ const Ingredients = styled.ul`
   gap: 10px;
   margin: 15px 0 5px;
   padding: 10px 20px 40px;
-  /* border: 1px solid lightgray; */
   border-radius: 5px;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.6);

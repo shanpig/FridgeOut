@@ -15,11 +15,6 @@ const fromNewToOld = (message1, message2) => {
 export default function Messages() {
   const [messages, setMessages] = useState([]);
   const userInfo = useSelector((state) => state.user_info);
-  // const messages = useSelector((state) => {
-  //   const userInfo = state.user_info;
-  //   console.log(userInfo.messages);
-  //   return userInfo.messages;
-  // });
 
   useEffect(() => {
     setMessages(userInfo.messages);
@@ -83,10 +78,6 @@ const MessagesContent = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 10px;
-
-  & * {
-    /* color: black; */
-  }
 `;
 
 const Message = styled.li`
@@ -96,7 +87,6 @@ const Message = styled.li`
 `;
 
 const RecipeImage = styled.div`
-  /* flex-basis: 100px; */
   width: 100px;
   background-image: url(${(props) => props.src});
   background-size: 130%;

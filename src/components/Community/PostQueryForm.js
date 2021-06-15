@@ -133,10 +133,6 @@ export default function PostQueryForm() {
           </FridgeList>
           <ToBeAddedList>
             {selected.map((ingredient, i) => (
-              // <Item onClick={selectionHandler} key={i}>
-              //   {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}
-              //   {ingredient.ingredient_unit}
-              // </Item>
               <Field
                 className="field"
                 key={i}
@@ -185,8 +181,6 @@ const QueryForm = styled.form`
   display: flex;
   align-items: stretch;
   gap: 0 20px;
-
-  /* background-color: white; */
 
   @media screen and (min-width: 769px) {
   }
@@ -279,21 +273,12 @@ const Submit = styled.input`
     props.disabled ? `#ccc` : `${theme.darkbrown}`};
   pointer-events: ${(props) => (props.disabled ? 'none' : 'initial')};
   transition: all ease 0.2s;
-  /* color: white; */
   border: none;
   width: 100%;
 
   &:hover {
     border-radius: 20px;
   }
-`;
-
-const Item = styled.div`
-  width: fit-content;
-  padding: 6px 20px;
-  border-radius: 20px;
-  background-color: #ddd;
-  color: ${theme.darkbrown};
 `;
 
 const PopupText = styled.div`

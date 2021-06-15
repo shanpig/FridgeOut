@@ -6,7 +6,6 @@ import SmallLogoSrc from '../../images/logo-small.svg';
 import LargeLogoSrc from '../../images/logo.svg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsSearch, BsPeople, BsPerson } from 'react-icons/bs';
-import { CgProfile } from 'react-icons/cg';
 import Sidebar from './Sidebar/Sidebar';
 import { useSelector } from 'react-redux';
 
@@ -20,7 +19,6 @@ export default function Header() {
           <Burger />
         </BurgerButton>
         <StyledLink to="/">
-          {/* <Logo>LOGO</Logo> */}
           <LogoImg
             src={SmallLogoSrc}
             srcSet={`${SmallLogoSrc} 500w, ${LargeLogoSrc} 769w`}
@@ -156,11 +154,9 @@ const NavButton = styled(NavLink)`
 
   @media screen and (min-width: 769px) {
     & > span {
-      /* display: none; */
       opacity: 0;
       position: absolute;
       display: flex;
-      /* height: 100%; */
       padding: 1em;
       align-items: center;
       background-color: rgba(0, 0, 0, 0.8);

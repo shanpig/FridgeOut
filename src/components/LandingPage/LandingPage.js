@@ -1,17 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { theme, headerConfig, mainContentConfig } from '../../variables';
+import { headerConfig, mainContentConfig } from '../../variables';
 import { Animated } from 'react-animated-css';
 import { BsChevronRight } from 'react-icons/bs';
 
 export default function LandingPage() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function toggleModal(e) {
-    setIsOpen(!isOpen);
-  }
-
   return (
     <Main>
       <MainContent>

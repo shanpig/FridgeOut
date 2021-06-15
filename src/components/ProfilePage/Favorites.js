@@ -1,4 +1,3 @@
-import { theme } from '../../variables';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -66,7 +65,6 @@ const ImageContainer = styled(Link)`
   display: flex;
   align-items: stretch;
   aspect-ratio: 1;
-  /* max-height: 150px; */
 `;
 
 const Title = styled.h2`
@@ -85,7 +83,6 @@ const Image = styled.img`
   transition: transform ease 1s;
   transform: scale(1.2);
   width: 100%;
-  /* object-fit: cover; */
 `;
 
 const RemoveButton = styled(GrFormTrash)`

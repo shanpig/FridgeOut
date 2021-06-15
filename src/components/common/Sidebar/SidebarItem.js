@@ -1,5 +1,5 @@
 import { theme } from '../../../variables';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { removeInput } from '../../../redux/reducers/keyword/keywordActions';
 import { removeFromKitchen } from '../../../redux/reducers/user/userActions';

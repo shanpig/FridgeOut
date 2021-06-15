@@ -91,7 +91,6 @@ const SelectionList = styled.div`
     gap: 15px;
     padding: 0 10px;
   }
-  /* padding: 5px 10px; */
 `;
 
 const SelectionTitle = styled(Link)`

@@ -1,8 +1,5 @@
 import { theme } from '../../variables';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setRecommendPostHolder } from '../../redux/reducers/user/userActions';
 import { timeDifference } from '../../utils/math';
 import Logo from '../../images/logo-small-nobg.svg';
 
@@ -42,7 +39,6 @@ const PostContainer = styled.div`
   padding: 40px 10px 10px;
   background-blend-mode: lighten;
   background-color: rgba(255, 255, 255, 0.8);
-  /* background-image: url(${Logo}); */
   background-size: cover;
   background-position: 60px 30px;
   background-repeat: no-repeat;
@@ -51,7 +47,6 @@ const PostContainer = styled.div`
   & * {
     color: ${theme.darkbrown};
     font-family: 'Noto Sans TC', 'Roboto';
-    /* font-family: 'Roboto'; */
   }
 
   &:hover {

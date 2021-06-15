@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 import { theme } from '../../../variables';
 import { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { AiFillCaretLeft, AiOutlineClose } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { AiFillCaretLeft } from 'react-icons/ai';
 import SidebarItem from './SidebarItem';
 import {
   assessIngredientsUsage,
   gatherIngredientsFromRecipes,
 } from '../../../utils/recipes';
-import { Link } from 'react-router-dom';
 
 export default function SidebarBody({ className }) {
-  const SELECTED_LEFTOVER = useRef(null);
   const SELECTED_RECIPES = useRef(null);
   const REMAIN_LEFTOVERS = useRef(null);
   const NEEDED_INGREDIENT = useRef(null);

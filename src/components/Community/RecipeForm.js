@@ -5,7 +5,7 @@ import { useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import { post, uploadRecipe, uploadImage } from '../../utils/firebase';
+import { uploadRecipe, uploadImage } from '../../utils/firebase';
 import { GrFormAdd, GrFormTrash } from 'react-icons/gr';
 import { TiArrowBack } from 'react-icons/ti';
 import RecipeIngredientInput from './RecipeIngredientInput';
@@ -25,12 +25,6 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   const [title, setTitle] = useState('照燒紫蘇雞肉丸子');
   const [ingredients, setIngredients] = useState(
     defaultIngredients || [emptyIngredient]
-    // || [
-    //   '洋蔥 0.5 顆',
-    //   '馬鈴薯 1 顆',
-    //   '紅蘿蔔 0.5 根',
-    //   '牛腱 140 g',
-    // ]
   );
   const [steps, setSteps] = useState([
     '雞肉丸子備料：蔥切成蔥花、荸薺頭尾切除削皮後切小塊、紫蘇葉切成細絲。',
@@ -40,11 +34,6 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
     '鍋子加2小匙油後以中火預熱2分鐘，看鍋子的大小分次加入雞肉丸子（我是10吋鍋，分兩次加入），一面煎2~3分鐘上色，翻面再煎，兩面都呈現金黃色。',
     '煎好的雞肉丸子取出，如果鍋底太多焦黑物就把鍋子洗乾淨，轉中小火，倒入照燒醬稍微攪拌一下，將丸子加回鍋子，蓋上鍋蓋，燜煮3~4分鐘直到醬子變稠，丸子側面整體都變色/熟。最後可用湯匙把醬汁淋在丸子表面讓它更入味。',
     '盛盤，先將丸子取出，最後淋上鍋內的照燒醬，撒上一點白芝麻裝飾（選擇性）。推薦可另外準備紫蘇葉，包著丸子一起吃，口感更清爽消暑～',
-    // '微量的油，蒜末爆香，洋蔥&紅蘿蔔切塊炒到洋蔥微軟黃色。放入番茄罐的整理番茄&1湯匙的番茄汁液',
-    // '倒入1.5杯米的水量，蓋鍋煨煮',
-    // '牛排（牛腱）燙過後，切塊。平底鍋加蒜香無水奶油，牛肉下鍋煎到焦香，加入湯鍋。撒入大蒜綜合香料，少許二砂糖、薄鹽醬油、鹽麴。',
-    // '湯鍋煮滾後，蓋鍋蓋，文火燉10分鐘關火燜。鍋子摸起來不燙，再重複煮滾燜。重複3-4次就軟而不爛。每打開一次可視情況加水、調味。',
-    // '煮香料飯、配半熟土雞蛋👍',
   ]);
   const [tags, setTags] = useState('紫蘇雞肉丸子');
   const [imageSrc, setImageSrc] = useState('');
@@ -54,31 +43,8 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
     return imageHolder.current.files.length > 0;
   }
 
-  function checkIngredientFormatIsCorrect() {
-    const errors = ingredients.reduce((error, ingredient, i) => {
-      const ingredientSplit = ingredient.split(' ');
-      if (ingredientSplit.length < 1 || ingredientSplit.length > 3) {
-        error.push(`ingredient ${i} wrong format. ${ingredientSplit}`);
-      } else if (ingredientSplit.length === 3) {
-        if (!Number(ingredientSplit[1])) {
-          error.push(`ingredient ${i} has error amount: ${ingredientSplit[1]}`);
-        }
-      }
-      return error;
-    }, []);
-    console.log(errors);
-    return errors;
-  }
-
   function checkFormValidity() {
     let imageExists = checkImageExists();
-    // let ingredientFormatIsCorrect =
-    //   checkIngredientFormatIsCorrect().length === 0;
-    // console.log(
-    //   '🚀 ~ file: ShareRecipeForm.js ~ line 43 ~ checkFormValidity ~ ingredientFormatIsCorrect',
-    //   ingredientFormatIsCorrect
-    // );
-
     let isValid = [imageExists].every((check) => check);
     return isValid;
   }
@@ -88,18 +54,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
     const imageURL = await uploadImage(imageFile);
     console.log(title);
     console.log(ingredients);
-    // const ingredientsData = ingredients.map((ingredient) => {
-    //   const [ingredient_name, ingredient_amount, ingredient_unit] =
-    //     ingredient.split(' ');
-    //   return {
-    //     ingredient_name,
-    //     ingredient_amount: ingredient_amount || '',
-    //     ingredient_unit: ingredient_unit || '',
-    //     ingredient_cat: '【材 料】',
-    //   };
-    // });
-    console.log(steps);
-    console.log(tags);
+
     return {
       ingredients,
       keyword: ingredients.map((ingr) => ingr.ingredient_name),
@@ -211,18 +166,6 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
             <FieldSection>
               <LabelIngredients htmlFor="ingredients">食材</LabelIngredients>
               <InputIngredients id="ingredients">
-                {/* {ingredients.map((ingredient, i) => {
-                  return (
-                    <Field key={i}>
-                      <IngredientInput
-                        value={ingredient}
-                        onChange={(e) => onIngredientsTextChange(e, i)}
-                        required
-                      />
-                      <RemoveButton onClick={() => removeIngredientInput(i)} />
-                    </Field>
-                  );
-                })} */}
                 {ingredients.map((ingredient, i) => (
                   <IngredientField key={ingredient.ingredient_uid}>
                     <RecipeIngredientInput
@@ -341,7 +284,6 @@ const Submit = styled.input`
   padding: 3px 0;
   cursor: pointer;
   border-radius: 20px;
-  /* border: 1px solid ${theme.darkbrown}; */
   border: none;
   color: ${theme.darkbrown};
 
@@ -361,10 +303,6 @@ const Field = styled.div`
 const FieldSection = styled(Field)`
   flex-direction: column;
   gap: 10px;
-  @media screen and (min-width: 769px) {
-    /* flex-direction: row; */
-  }
-  /* border-left: 1px solid ${theme.darkbrown}; */
 `;
 
 const Label = styled.label`
@@ -400,22 +338,11 @@ const TextLabel = styled(Label)`
 const LabelTitle = styled(TextLabel)``;
 const InputTitle = styled(Input)``;
 const LabelMainImage = styled(Label)`
-  /* width: 100%;
-  height: 350px;
-  border-radius: 7px 7px 0 0;
-  align-self: stretch;
-  position: relative;
-  @media screen and (min-width: 769px) {
-    width: 45%;
-    border-radius: 7px 0 0 7px;
-    height: unset;
-  } */
   height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 2px dashed #a3a3a3; */
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.2);
   background-image: url(${(props) => (props.src ? props.src : '')});
@@ -465,9 +392,7 @@ const GoBackButton = styled(TiArrowBack)`
   cursor: pointer;
   fill: ${theme.darkbrown};
   background-color: rgba(255, 255, 255, 0.8);
-  /* border-radius: 0 0 50px; */
   transition: 0.3s all ease;
-  /* clip-path: polygon(0 0, 100% 0, 0 100%); */
   clip-path: circle(50px at left top);
 
   &:hover {
@@ -485,7 +410,6 @@ const Textbox = styled.div`
   border: 1px solid ${theme.darkbrown};
   border-radius: 30px;
   transition: 0.3s ease all;
-  /* background-color: rgba(255, 255, 255, 0.6); */
 `;
 
 const IngredientField = styled(Field)`
