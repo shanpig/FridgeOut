@@ -1,0 +1,205 @@
+
+> fridgeout@0.1.0 lint
+> eslint src/**/*.js
+
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\404\PageNotFound.js
+  21:6  warning  React Hook useEffect has a missing dependency: 'history'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  58:7  warning  'H1' is assigned a value but never used                                                                     no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\Post.js
+  3:10  warning  'Link' is defined but never used                    no-unused-vars
+  4:10  warning  'useDispatch' is defined but never used             no-unused-vars
+  5:10  warning  'setRecommendPostHolder' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\PostQueryForm.js
+   27:6   warning  React Hook useEffect has a missing dependency: 'checkIngredients'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  255:53  warning  Unexpected template string expression                                                                                no-template-curly-in-string
+  291:7   warning  'Item' is assigned a value but never used                                                                            no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\Posts.js
+   1:10  warning  'footerConfig' is defined but never used                          no-unused-vars
+   1:24  warning  'theme' is defined but never used                                 no-unused-vars
+   4:10  warning  'useSelector' is defined but never used                           no-unused-vars
+   5:10  warning  'Link' is defined but never used                                  no-unused-vars
+  10:10  warning  'BsPencilSquare' is defined but never used                        no-unused-vars
+  64:17  warning  Array.prototype.map() expects a return value from arrow function  array-callback-return
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\PostsPage.js
+  11:10  warning  'useSelector' is defined but never used   no-unused-vars
+  14:8   warning  'SmallLogoSrc' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\QueryPost.js
+  1:10  warning  'theme' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\RecipeForm.js
+   8:10  warning  'post' is defined but never used                            no-unused-vars
+  57:12  warning  'checkIngredientFormatIsCorrect' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\RecipeIngredientInput.js
+    2:28  warning  'useEffect' is defined but never used              no-unused-vars
+   13:35  warning  Unnecessary escape character: \.                   no-useless-escape
+   14:27  warning  Unnecessary escape character: \.                   no-useless-escape
+   99:7   warning  'Buttons' is assigned a value but never used       no-unused-vars
+  104:7   warning  'EditButton' is assigned a value but never used    no-unused-vars
+  113:7   warning  'RemoveButton' is assigned a value but never used  no-unused-vars
+  123:7   warning  'SaveButton' is assigned a value but never used    no-unused-vars
+  132:7   warning  'Text' is assigned a value but never used          no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\RecommendForm.js
+   2:8  warning  'GoBackButton' is defined but never used           no-unused-vars
+  49:7  warning  'Title' is assigned a value but never used         no-unused-vars
+  55:7  warning  'LeftoverList' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\SharePost.js
+  16:6  warning  React Hook useEffect has a missing dependency: 'recipeData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\Community\ShareRecipeForm.js
+  4:8  warning  'GoBackButton' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\LandingPage\LandingPage.js
+   4:10  warning  'theme' is defined but never used         no-unused-vars
+  11:12  warning  'toggleModal' is defined but never used   no-unused-vars
+  81:7   warning  'GIF' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\LoginPage\LoginPage.js
+  14:22  warning  'Redirect' is defined but never used                                                                        no-unused-vars
+  31:21  warning  'name' is assigned a value but never used                                                                   no-unused-vars
+  89:6   warning  React Hook useEffect has a missing dependency: 'd'. Either include it or remove the dependency array        react-hooks/exhaustive-deps
+  93:6   warning  React Hook useEffect has a missing dependency: 'history'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\ProfilePage\Favorites.js
+  1:10  warning  'theme' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\ProfilePage\Fridge.js
+   2:18  warning  'isStyledComponent' is defined but never used                                                                 no-unused-vars
+   5:10  warning  'Prompt' is defined but never used                                                                            no-unused-vars
+   6:10  warning  'AiTwotoneEdit' is defined but never used                                                                     no-unused-vars
+   6:25  warning  'AiFillSave' is defined but never used                                                                        no-unused-vars
+   7:10  warning  'fractionStringToTC' is defined but never used                                                                no-unused-vars
+   7:30  warning  'isValidNumberString' is defined but never used                                                               no-unused-vars
+  17:21  warning  'setIsEditing' is assigned a value but never used                                                             no-unused-vars
+  56:6   warning  React Hook useEffect has a missing dependency: 'leftovers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\ProfilePage\Kitchen.js
+  3:10  warning  'Link' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\ProfilePage\Messages.js
+  26:6  warning  React Hook useEffect has a missing dependency: 'userInfo.messages'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\ProfilePage\ProfilePage.js
+    4:10  warning  'useState' is defined but never used            no-unused-vars
+    4:20  warning  'useEffect' is defined but never used           no-unused-vars
+    5:10  warning  'signInWithPopup' is defined but never used     no-unused-vars
+    5:27  warning  'getUserData' is defined but never used         no-unused-vars
+    6:10  warning  'setUser' is defined but never used             no-unused-vars
+   18:3   warning  'useParams' is defined but never used           no-unused-vars
+   33:5   warning  'email' is assigned a value but never used      no-unused-vars
+   35:17  warning  'leftOvers' is assigned a value but never used  no-unused-vars
+   38:5   warning  'messages' is assigned a value but never used   no-unused-vars
+  417:7   warning  'UserEmail' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\RecipePage\RecipePage.js
+    6:8   warning  'SidebarBody' is defined but never used                                                                      no-unused-vars
+   22:10  warning  'GiConsoleController' is defined but never used                                                              no-unused-vars
+   51:6   warning  React Hook useEffect has a missing dependency: 'recipeId'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  198:7   warning  'CloseButton' is assigned a value but never used                                                             no-unused-vars
+  244:7   warning  'CardHead' is assigned a value but never used                                                                no-unused-vars
+  413:7   warning  'StepTitle' is assigned a value but never used                                                               no-unused-vars
+  437:7   warning  'SidebarContent' is assigned a value but never used                                                          no-unused-vars
+  448:7   warning  'StepsContainer' is assigned a value but never used                                                          no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\SearchPage\FilterBar.js
+  1:10  warning  'theme' is defined but never used        no-unused-vars
+  3:10  warning  'useSelector' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\SearchPage\FridgeSelectionList.js
+  61:6  warning  React Hook useEffect has missing dependencies: 'isSelected' and 'toggleIngredientSelection'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\SearchPage\IngredientInput.js
+    2:28  warning  'useEffect' is defined but never used              no-unused-vars
+   11:17  warning  'setError' is assigned a value but never used      no-unused-vars
+   89:7   warning  'Buttons' is assigned a value but never used       no-unused-vars
+   94:7   warning  'EditButton' is assigned a value but never used    no-unused-vars
+  103:7   warning  'RemoveButton' is assigned a value but never used  no-unused-vars
+  113:7   warning  'SaveButton' is assigned a value but never used    no-unused-vars
+  122:7   warning  'Text' is assigned a value but never used          no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\SearchPage\InputPopup.js
+   1:10  warning  'headerConfig' is defined but never used             no-unused-vars
+   1:24  warning  'mainContentConfig' is defined but never used        no-unused-vars
+   6:23  warning  'GrFormAdd' is defined but never used                no-unused-vars
+   7:10  warning  'fraction' is defined but never used                 no-unused-vars
+   9:10  warning  'getFractionFromTCAmount' is defined but never used  no-unused-vars
+   9:35  warning  'fractionStringToTC' is defined but never used       no-unused-vars
+  29:9   warning  'fridge' is assigned a value but never used          no-unused-vars
+  31:9   warning  'history' is assigned a value but never used         no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\SearchPage\RecipeItem.js
+    6:10  warning  'Animated' is defined but never used                no-unused-vars
+   22:10  warning  'usedLeftovers' is assigned a value but never used  no-unused-vars
+   32:28  warning  'amount' is assigned a value but never used         no-unused-vars
+   33:26  warning  'unit' is assigned a value but never used           no-unused-vars
+  186:7   warning  'UsedLeftovers' is assigned a value but never used  no-unused-vars
+  194:7   warning  'UsedLeftover' is assigned a value but never used   no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\SearchPage\SearchBar.js
+    6:23  warning  'GrFormAdd' is defined but never used            no-unused-vars
+   16:9   warning  'isLoggedIn' is assigned a value but never used  no-unused-vars
+   19:9   warning  'fridge' is assigned a value but never used      no-unused-vars
+  124:7   warning  'Button' is assigned a value but never used      no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\SearchPage\SearchPage.js
+    5:8  warning  'FilterBar' is defined but never used                  no-unused-vars
+   16:9  warning  'd' is assigned a value but never used                 no-unused-vars
+   22:9  warning  'leftOvers' is assigned a value but never used         no-unused-vars
+  146:7  warning  'MiscRow' is assigned a value but never used           no-unused-vars
+  214:7  warning  'SortSelection' is assigned a value but never used     no-unused-vars
+  242:7  warning  'NoInputAnimation' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\common\Header.js
+  9:10  warning  'CgProfile' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\common\HeaderSpacer.js
+  1:10  warning  'head' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\common\Sidebar\Sidebar.js
+  9:9  warning  'MASK' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\common\Sidebar\SidebarBody.js
+   4:23  warning  'useDispatch' is defined but never used                 no-unused-vars
+   5:27  warning  'AiOutlineClose' is defined but never used              no-unused-vars
+  11:10  warning  'Link' is defined but never used                        no-unused-vars
+  14:9   warning  'SELECTED_LEFTOVER' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\components\common\Sidebar\SidebarItem.js
+   2:10  warning  'useSelector' is defined but never used  no-unused-vars
+  38:20  warning  'id' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\redux\reducers\keyword\keywordReducer.js
+  36:28  warning  'amount' is assigned a value but never used  no-unused-vars
+  37:26  warning  'unit' is assigned a value but never used    no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\redux\reducers\user\userActions.js
+   1:10  warning  'AiOutlineConsoleSql' is defined but never used    no-unused-vars
+  56:7   warning  '_addLeftOver' is assigned a value but never used  no-unused-vars
+  64:7   warning  '_setLeftOver' is assigned a value but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\redux\reducers\user\userReducer.js
+  1:10  warning  'AiFillCodeSandboxCircle' is defined but never used  no-unused-vars
+  3:10  warning  'combine' is defined but never used                  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\utils\firebase.js
+   2:10  warning  'setUser' is defined but never used           no-unused-vars
+  39:13  warning  'token' is assigned a value but never used    no-unused-vars
+  66:10  warning  'updateUserFridge' is defined but never used  no-unused-vars
+
+C:\Users\shanp\code\projects\FridgeOut\src\utils\recipes.js
+   26:28  warning  'nameA' is assigned a value but never used  no-unused-vars
+   27:28  warning  'nameB' is assigned a value but never used  no-unused-vars
+   89:26  warning  'unit' is assigned a value but never used   no-unused-vars
+  137:24  warning  'unit' is assigned a value but never used   no-unused-vars
+  181:24  warning  'unit' is assigned a value but never used   no-unused-vars
+
+✖ 126 problems (0 errors, 126 warnings)
+
