@@ -1,8 +1,11 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { headerConfig, mainContentConfig } from '../../variables';
-import { Animated } from 'react-animated-css';
 import { BsChevronRight } from 'react-icons/bs';
+
+import { headerConfig, mainContentConfig } from '../../variables';
+
+import { Link } from 'react-router-dom';
+
+import styled from 'styled-components';
+import { Animated } from 'react-animated-css';
 
 export default function LandingPage() {
   return (

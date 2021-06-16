@@ -1,15 +1,21 @@
-import { theme, mainContentConfig } from '../../variables';
-import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import { uploadRecipe, uploadImage } from '../../utils/firebase';
+
 import { GrFormAdd, GrFormTrash } from 'react-icons/gr';
 import { TiArrowBack } from 'react-icons/ti';
+
+import { theme, mainContentConfig } from '../../variables';
+
 import RecipeIngredientInput from './RecipeIngredientInput';
+
+import React, { useRef, useState } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import styled from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { v1 as uid } from 'uuid';
+
+import { uploadRecipe, uploadImage } from '../../utils/firebase';
 
 const emptyIngredient = {
   ingredient_name: '',

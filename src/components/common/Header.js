@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { theme, headerConfig } from '../../variables';
-import { Link, NavLink } from 'react-router-dom';
 import SmallLogoSrc from '../../images/logo-small.svg';
 import LargeLogoSrc from '../../images/logo.svg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsSearch, BsPeople, BsPerson } from 'react-icons/bs';
+
+import { theme, headerConfig } from '../../variables';
+
 import Sidebar from './Sidebar/Sidebar';
+
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
+
+import styled from 'styled-components';
 
 export default function Header() {
   const { identity, name, profile } = useSelector((state) => state.user_info);

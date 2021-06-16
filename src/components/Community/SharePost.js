@@ -1,7 +1,10 @@
 import { theme } from '../../variables';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 import Post from './Post';
+
+import { Link } from 'react-router-dom';
+
+import styled from 'styled-components';
 
 export default function SharePost({ post }) {
   const { by: name, profile_image, timestamp, recipe } = post;

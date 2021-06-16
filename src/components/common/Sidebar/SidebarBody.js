@@ -1,9 +1,14 @@
-import styled from 'styled-components';
+import { AiFillCaretLeft } from 'react-icons/ai';
+
 import { theme } from '../../../variables';
+
+import SidebarItem from './SidebarItem';
+
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { AiFillCaretLeft } from 'react-icons/ai';
-import SidebarItem from './SidebarItem';
+
+import styled from 'styled-components';
+
 import {
   assessIngredientsUsage,
   gatherIngredientsFromRecipes,

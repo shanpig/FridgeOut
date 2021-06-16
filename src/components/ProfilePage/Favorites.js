@@ -1,10 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { GrFormTrash } from 'react-icons/gr';
-import { removeFromFavorite } from '../../redux/reducers/user/userActions';
-import { Animated } from 'react-animated-css';
+
 import EmptyMessage from './EmptyMessage';
+
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromFavorite } from '../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
+import { Animated } from 'react-animated-css';
 
 export default function Favorites() {
   const d = useDispatch();

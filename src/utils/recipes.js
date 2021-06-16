@@ -1,7 +1,8 @@
-import { create, all } from 'mathjs';
 import _ from 'lodash';
+import { create, all } from 'mathjs';
 import units from './unit_converter.json';
 import { getFractionFromTCAmount } from './math';
+
 const math = create(all);
 
 function compareAmount(a, b) {

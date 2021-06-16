@@ -1,12 +1,16 @@
 import { theme } from '../../variables';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { watchMessages } from '../../utils/firebase';
-import styled from 'styled-components';
-import { timeDifference } from '../../utils/math';
+
 import EmptyMessage from './EmptyMessage';
+
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import styled from 'styled-components';
 import { Animated } from 'react-animated-css';
+
+import { watchMessages } from '../../utils/firebase';
+import { timeDifference } from '../../utils/math';
 
 const fromNewToOld = (message1, message2) => {
   return message2.timestamp - message1.timestamp;

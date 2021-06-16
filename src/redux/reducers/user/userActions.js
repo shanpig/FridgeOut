@@ -5,7 +5,6 @@ import {
   addRecipeToUserFavorites,
   removeRecipeFromUserFavorites,
 } from '../../../utils/firebase';
-
 import { combine } from '../../../utils/recipes';
 
 const userTemplate = {

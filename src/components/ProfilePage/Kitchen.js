@@ -1,11 +1,15 @@
-import { theme } from '../../variables';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import RecipeItem from '../common/RecipeItem';
 import { GrFormTrash } from 'react-icons/gr';
-import { removeFromKitchen } from '../../redux/reducers/user/userActions';
-import { Animated } from 'react-animated-css';
+
+import { theme } from '../../variables';
+
+import RecipeItem from '../common/RecipeItem';
 import EmptyMessage from './EmptyMessage';
+
+import { useSelector } from 'react-redux';
+import { removeFromKitchen } from '../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
+import { Animated } from 'react-animated-css';
 
 export default function Kitchen() {
   const kitchen = useSelector((state) => {

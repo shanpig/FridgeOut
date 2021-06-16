@@ -1,6 +1,8 @@
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
+
+import { useHistory } from 'react-router-dom';
+
+import styled from 'styled-components';
 
 export default function GoBackButton() {
   const history = useHistory();

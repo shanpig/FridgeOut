@@ -1,5 +1,4 @@
 import { create, all } from 'mathjs';
-// const math = require('mathjs');
 
 const math = create(all);
 
@@ -64,7 +63,6 @@ function timeDifference(previous) {
     return Math.round(elapsed / msPerYear) + ' 年前';
   }
 }
-// let a = getFractionFromTCAmount('1/4');
 
 export {
   getFractionFromTCAmount,

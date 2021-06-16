@@ -1,7 +1,9 @@
-import styled from 'styled-components';
-import SidebarBody from './SidebarBody';
-import { IoChevronBackSharp } from 'react-icons/io5';
 import LogoSrc from '../../../images/logo-small-nobg.svg';
+import { IoChevronBackSharp } from 'react-icons/io5';
+
+import SidebarBody from './SidebarBody';
+
+import styled from 'styled-components';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
   return (

@@ -1,9 +1,13 @@
-import styled from 'styled-components';
-import { mainContentConfig } from '../../variables';
-import IconSrc from '../../images/logo-small-nobg.svg';
 import { Animated } from 'react-animated-css';
+
+import IconSrc from '../../images/logo-small-nobg.svg';
+
+import { mainContentConfig } from '../../variables';
+
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import styled from 'styled-components';
 
 const COUNT_DOWN_TIME = 5;
 

@@ -1,17 +1,15 @@
-import styled from 'styled-components';
-import { theme } from '../../variables';
-import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../utils/firebase';
-import { signOutUser } from '../../redux/reducers/user/userActions';
 import { FiLogOut } from 'react-icons/fi';
 import { CgSmartHomeRefrigerator } from 'react-icons/cg';
 import { GiCook } from 'react-icons/gi';
 import { RiNewspaperFill, RiMessage2Fill } from 'react-icons/ri';
-import { Animated } from 'react-animated-css';
+
+import { theme } from '../../variables';
+
 import Fridge from './Fridge';
 import Kitchen from './Kitchen';
 import Messages from './Messages';
 import Favorites from './Favorites';
+
 import {
   useRouteMatch,
   useHistory,
@@ -20,6 +18,13 @@ import {
   Route,
   NavLink as Link,
 } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOutUser } from '../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
+import { Animated } from 'react-animated-css';
+
+import { logOut } from '../../utils/firebase';
 
 export default function ProfilePage() {
   const d = useDispatch();

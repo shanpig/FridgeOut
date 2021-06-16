@@ -1,12 +1,6 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setUser } from './redux/reducers/user/userActions';
-import { useEffect } from 'react';
-import { getUserData } from './utils/firebase';
-import styled from 'styled-components';
-import Header from './components/common/Header';
 import backgroundImageSrc from './images/kitchen-table.jpg';
+
 import PostQueryForm from './components/Community/PostQueryForm';
 import ShareRecipeForm from './components/Community/ShareRecipeForm';
 import ProfilePage from './components/ProfilePage/ProfilePage';
@@ -19,6 +13,16 @@ import RecommendForm from './components/Community/RecommendForm';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
 import PostsPage from './components/Community/PostsPage';
+import Header from './components/common/Header';
+
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from './redux/reducers/user/userActions';
+
+import styled from 'styled-components';
+
+import { getUserData } from './utils/firebase';
 
 function App() {
   const d = useDispatch();

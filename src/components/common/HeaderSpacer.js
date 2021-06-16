@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import { headerConfig } from '../../variables';
+
+import styled from 'styled-components';
 
 export default function HeaderSpacer() {
   return <Spacer />;

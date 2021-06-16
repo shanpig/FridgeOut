@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { mainContentConfig, theme } from '../../variables';
-import styled from 'styled-components';
-import { useParams, useHistory } from 'react-router';
-import { getRecipe } from '../../utils/firebase';
-import ScrollToTop from '../common/ScrollToTop';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+
 import { GrAdd, GrCheckmark } from 'react-icons/gr';
 import { TiArrowBack } from 'react-icons/ti';
 
+import { mainContentConfig, theme } from '../../variables';
+
+import ScrollToTop from '../common/ScrollToTop';
+
+import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import { Animated } from 'react-animated-css';
 import {
   addToFavorite,
   addToKitchen,
   removeFromFavorite,
   removeFromKitchen,
 } from '../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Animated } from 'react-animated-css';
+
+import { getRecipe } from '../../utils/firebase';
 
 export default function RecipePage() {
   const {

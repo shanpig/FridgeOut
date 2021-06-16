@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import { useRef } from 'react';
+
+import styled from 'styled-components';
 
 export default function IngredientInput({ ingredient, setLeftover }) {
   const FORM = useRef(null);

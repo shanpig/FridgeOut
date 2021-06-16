@@ -1,14 +1,18 @@
+import { GrFormClose } from 'react-icons/gr';
+
 import { theme } from '../../variables';
-import styled from 'styled-components';
+
+import IngredientInput from './IngredientInput';
+
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addInput } from '../../redux/reducers/keyword/keywordActions';
-import { GrFormClose } from 'react-icons/gr';
-import IngredientInput from './IngredientInput';
-import { Link } from 'react-router-dom';
+import { addLeftOver } from '../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
 import Popup from 'reactjs-popup';
 import { v1 as uid } from 'uuid';
-import { addLeftOver } from '../../redux/reducers/user/userActions';
 
 const emptyInput = {
   ingredient_name: '',

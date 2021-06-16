@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import { theme } from '../../variables';
+
+import styled from 'styled-components';
 
 export default function EmptyMessage({ text }) {
   return (

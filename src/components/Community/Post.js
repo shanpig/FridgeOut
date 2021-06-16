@@ -1,5 +1,7 @@
 import { theme } from '../../variables';
+
 import styled from 'styled-components';
+
 import { timeDifference } from '../../utils/math';
 
 export default function Post({

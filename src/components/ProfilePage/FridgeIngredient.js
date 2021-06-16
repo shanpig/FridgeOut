@@ -1,6 +1,8 @@
-import styled from 'styled-components';
-import { useState, useRef } from 'react';
 import { AiFillSave, AiFillDelete, AiFillEdit } from 'react-icons/ai';
+
+import { useState, useRef } from 'react';
+
+import styled from 'styled-components';
 import ClickAwayListener from 'react-click-away-listener';
 
 export default function FridgeIngredient({

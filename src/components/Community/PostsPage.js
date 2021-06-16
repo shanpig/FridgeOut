@@ -1,4 +1,13 @@
+import './popupStyles.css';
+
+import { GoPrimitiveDot } from 'react-icons/go';
+import { BsPencilSquare } from 'react-icons/bs';
+
 import { headerConfig, footerConfig, theme } from '../../variables';
+
+import Posts from './Posts';
+
+import { useEffect, useState } from 'react';
 import {
   Redirect,
   Switch,
@@ -8,14 +17,9 @@ import {
   useRouteMatch,
   useHistory,
 } from 'react-router-dom';
+
 import { Animated } from 'react-animated-css';
 import styled from 'styled-components';
-import './popupStyles.css';
-
-import Posts from './Posts';
-import { GoPrimitiveDot } from 'react-icons/go';
-import { BsPencilSquare } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
 
 export default function PostsPage() {
   const match = useRouteMatch();

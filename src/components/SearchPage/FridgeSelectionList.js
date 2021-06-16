@@ -1,15 +1,19 @@
+import 'react-perfect-scrollbar/dist/css/styles.css';
+
+import { RiFridgeLine } from 'react-icons/ri';
+
 import { theme } from '../../variables';
-import styled from 'styled-components';
+
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addInput,
   removeInput,
 } from '../../redux/reducers/keyword/keywordActions';
-import { Link } from 'react-router-dom';
-import 'react-perfect-scrollbar/dist/css/styles.css';
+
+import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { RiFridgeLine } from 'react-icons/ri';
-import { useState, useEffect } from 'react';
 
 export default function FridgeSelectionList() {
   const d = useDispatch();

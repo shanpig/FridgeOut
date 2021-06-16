@@ -1,8 +1,11 @@
 import RecipeForm from './RecipeForm';
-import styled from 'styled-components';
-import { post } from '../../utils/firebase';
+
 import { useSelector } from 'react-redux';
+
+import styled from 'styled-components';
 import { Animated } from 'react-animated-css';
+
+import { post } from '../../utils/firebase';
 
 export default function ShareRecipeForm() {
   const user = useSelector((state) => state.user_info);

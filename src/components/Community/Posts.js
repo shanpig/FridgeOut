@@ -1,10 +1,13 @@
-import styled from 'styled-components';
-import { useState, useEffect } from 'react';
 import QueryPost from './QueryPost';
 import SharePost from './SharePost';
-import { getPosts } from '../../utils/firebase';
-import { Animated } from 'react-animated-css';
+
+import { useState, useEffect } from 'react';
+
+import styled from 'styled-components';
 import { v1 as uid } from 'uuid';
+import { Animated } from 'react-animated-css';
+
+import { getPosts } from '../../utils/firebase';
 
 const fromNewToOld = (post1, post2) => {
   return post2.timestamp - post1.timestamp;

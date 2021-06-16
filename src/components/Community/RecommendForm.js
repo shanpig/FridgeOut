@@ -1,8 +1,11 @@
 import RecipeForm from './RecipeForm';
-import styled from 'styled-components';
+
 import { useSelector } from 'react-redux';
-import { sendMessageTo } from '../../utils/firebase';
+
+import styled from 'styled-components';
 import { Animated } from 'react-animated-css';
+
+import { sendMessageTo } from '../../utils/firebase';
 
 export default function RecommendForm() {
   const queryPost = useSelector(

@@ -1,14 +1,18 @@
+import { AiOutlineClose } from 'react-icons/ai';
+
 import { theme } from '../../../variables';
+
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import { removeInput } from '../../../redux/reducers/keyword/keywordActions';
 import { removeFromKitchen } from '../../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
+
 import {
   fractionStringToTC,
   getFractionFromTCAmount,
 } from '../../../utils/math';
-import { Link } from 'react-router-dom';
-import { AiOutlineClose } from 'react-icons/ai';
 
 export default function SidebarItem({ readOnly, className, ...props }) {
   const d = useDispatch();

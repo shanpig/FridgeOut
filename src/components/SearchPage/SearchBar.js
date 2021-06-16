@@ -1,13 +1,18 @@
-import { theme } from '../../variables';
-import styled from 'styled-components';
-import { useState } from 'react';
-import { Animated } from 'react-animated-css';
-import { useSelector, useDispatch } from 'react-redux';
 import { GrFormClose } from 'react-icons/gr';
+
+import { theme } from '../../variables';
+
 import InputPopup from './InputPopup';
-import { removeInput } from '../../redux/reducers/keyword/keywordActions';
-import { fractionStringToTC } from '../../utils/math';
 import FridgeSelectionList from './FridgeSelectionList';
+
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeInput } from '../../redux/reducers/keyword/keywordActions';
+
+import styled from 'styled-components';
+import { Animated } from 'react-animated-css';
+
+import { fractionStringToTC } from '../../utils/math';
 
 export default function SearchBar() {
   const d = useDispatch();

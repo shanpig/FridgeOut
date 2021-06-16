@@ -1,15 +1,20 @@
-import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { GrFormAdd } from 'react-icons/gr';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+
+import { theme } from '../../variables';
+
 import SearchBar from './SearchBar';
 import RecipeItem from '../common/RecipeItem';
 import SidebarBody from '../common/Sidebar/SidebarBody';
-import { GrFormAdd } from 'react-icons/gr';
-import { theme } from '../../variables';
-import { searchRecipesByIngredientNames } from '../../utils/firebase';
-import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { addToKitchen } from '../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
 import { Animated } from 'react-animated-css';
+
+import { searchRecipesByIngredientNames } from '../../utils/firebase';
 
 export default function SearchPage() {
   const [recipes, setRecipes] = useState([]);

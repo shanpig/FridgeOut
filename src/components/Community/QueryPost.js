@@ -1,8 +1,10 @@
-import styled from 'styled-components';
+import Post from './Post';
+
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setRecommendPostHolder } from '../../redux/reducers/user/userActions';
-import Post from './Post';
+
+import styled from 'styled-components';
 
 export default function QueryPost({ post }) {
   const d = useDispatch();

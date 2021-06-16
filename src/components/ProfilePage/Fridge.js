@@ -1,14 +1,17 @@
+import { AiOutlinePlus } from 'react-icons/ai';
+
 import { theme } from '../../variables';
-import styled from 'styled-components';
+
+import FridgeIngredient from './FridgeIngredient';
+import EmptyMessage from './EmptyMessage';
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { AiOutlinePlus } from 'react-icons/ai';
 import { setLeftOvers } from '../../redux/reducers/user/userActions';
-import FridgeIngredient from './FridgeIngredient';
-import { Animated } from 'react-animated-css';
-import EmptyMessage from './EmptyMessage';
+
 import { uid } from 'react-uid';
+import styled from 'styled-components';
+import { Animated } from 'react-animated-css';
 
 export default function Fridge() {
   const d = useDispatch();

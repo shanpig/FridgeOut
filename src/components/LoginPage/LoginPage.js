@@ -1,6 +1,14 @@
-import styled from 'styled-components';
+import { FcGoogle } from 'react-icons/fc';
+
 import { theme } from '../../variables';
+
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../redux/reducers/user/userActions';
+
+import styled from 'styled-components';
+import ReactLoading from 'react-loading';
 import { Animated } from 'react-animated-css';
 import {
   registerUser,
@@ -8,11 +16,6 @@ import {
   getUserData,
   signInWithPopup,
 } from '../../utils/firebase';
-import ReactLoading from 'react-loading';
-import { setUser } from '../../redux/reducers/user/userActions';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
 
 const NEW_USER_TEMPLATE = {
   identity: 'user',

@@ -1,14 +1,19 @@
-import { theme } from '../../variables';
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
-import { post } from '../../utils/firebase';
-import GoBackButton from '../common/GoBackButton';
 import { RiFridgeFill } from 'react-icons/ri';
+
+import { theme } from '../../variables';
+
+import GoBackButton from '../common/GoBackButton';
+
+import React, { useState, useEffect } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Animated } from 'react-animated-css';
+
+import { post } from '../../utils/firebase';
 
 const ReactSwal = withReactContent(Swal);
 const SWAL_CONFIG = {

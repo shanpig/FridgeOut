@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import keywordReducer from './reducers/keyword/keywordReducer';
 import userReducer from './reducers/user/userReducer';
+import keywordReducer from './reducers/keyword/keywordReducer';
 
 const reducer = combineReducers({
   user_info: userReducer,
