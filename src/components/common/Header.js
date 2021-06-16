@@ -88,6 +88,7 @@ const StyledLink = styled(Link)`
   margin: 0 auto;
   text-decoration: none;
   flex-grow: 1;
+
   @media screen and (min-width: 769px) {
     margin: 0;
     margin-right: auto;

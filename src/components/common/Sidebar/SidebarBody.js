@@ -14,7 +14,7 @@ import {
   gatherIngredientsFromRecipes,
 } from '../../../utils/recipes';
 
-export default function SidebarBody({ className }) {
+export default function SidebarBody({ className, closeSidebar }) {
   const SELECTED_RECIPES = useRef(null);
   const REMAIN_LEFTOVERS = useRef(null);
   const NEEDED_INGREDIENT = useRef(null);
@@ -51,6 +51,7 @@ export default function SidebarBody({ className }) {
               <SelectedRecipeItem key={i}>
                 <Item
                   linkTo={`/recipe/${recipe.id}`}
+                  closeSidebar={closeSidebar}
                   className="item"
                   type="recipe"
                   recipe={recipe}

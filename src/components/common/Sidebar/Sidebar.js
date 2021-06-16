@@ -13,7 +13,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
         <BackIcon onClick={() => setSidebarOpen(false)} />
         <Logo />
       </HeaderSection>
-      <SidebarBody />
+      <SidebarBody closeSidebar={() => setSidebarOpen(false)} />
     </Aside>
   );
 }

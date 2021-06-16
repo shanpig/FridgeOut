@@ -45,7 +45,12 @@ export default function SidebarItem({ readOnly, className, ...props }) {
   }
   return (
     <Item className={className}>
-      <Text to={props.type === 'recipe' ? props.linkTo : ''}>{content}</Text>
+      <Text
+        to={props.type === 'recipe' ? props.linkTo : ''}
+        onClick={props.closeSidebar}
+      >
+        {content}
+      </Text>
       {!readOnly ? (
         <CloseButton onClick={() => remove(target, props.type)} />
       ) : (
@@ -58,6 +63,7 @@ const Item = styled.li``;
 const Text = styled(Link)`
   text-decoration: none;
   cursor: ${(props) => (props.to ? 'pointer' : 'unset')};
+  pointer-events: ${(props) => (props.to ? 'all' : 'none')};
 
   &:hover {
     color: ${(props) => (props.to ? theme.orange : '')};
