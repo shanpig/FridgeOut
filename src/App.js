@@ -12,7 +12,7 @@ import PageNotFound from './components/404/PageNotFound';
 import RecommendForm from './components/Community/RecommendForm';
 import HeaderSpacer from './components/common/HeaderSpacer';
 import FooterSpacer from './components/common/FooterSpacer';
-import PostsPage from './components/Community/PostsPage';
+import CommunityPage from './components/Community/CommunityPage';
 import Header from './components/common/Header';
 
 import { useEffect } from 'react';
@@ -49,7 +49,7 @@ function App() {
               <SearchPage />
             </Route>
             <Route path="/posts">
-              <PostsPage />
+              <CommunityPage />
             </Route>
             <Route path="/recipe/:id">
               <RecipePage />

@@ -21,7 +21,7 @@ import {
 import { Animated } from 'react-animated-css';
 import styled from 'styled-components';
 
-export default function PostsPage() {
+export default function CommunityPage() {
   const match = useRouteMatch();
   const history = useHistory();
   const [tab, setTab] = useState('query');
