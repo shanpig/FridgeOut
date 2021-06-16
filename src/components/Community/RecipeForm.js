@@ -43,10 +43,10 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   ]);
   const [tags, setTags] = useState('紫蘇雞肉丸子');
   const [imageSrc, setImageSrc] = useState('');
-  const imageHolder = useRef(null);
+  const IMAGE_REF = useRef(null);
 
   function checkImageExists() {
-    return imageHolder.current.files.length > 0;
+    return IMAGE_REF.current.files.length > 0;
   }
 
   function checkFormValidity() {
@@ -56,7 +56,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   }
 
   async function createRecipe() {
-    const imageFile = imageHolder.current.files[0];
+    const imageFile = IMAGE_REF.current.files[0];
     const imageURL = await uploadImage(imageFile);
 
     return {
@@ -129,11 +129,14 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   }
 
   function acceptImage(imageFile) {
-    if (imageFile.length === 0) setImageSrc('');
-    else {
-      const imgURL = URL.createObjectURL(imageFile[0]);
-      setImageSrc(imgURL);
-    }
+    const imgURL = URL.createObjectURL(imageFile);
+    setImageSrc(imgURL);
+  }
+
+  function onImageChange(e) {
+    const imageFiles = e.target.files;
+    if (imageFiles.length === 0) setImageSrc('');
+    else acceptImage(imageFiles[0]);
   }
 
   if (user && user.identity === 'none') return <Redirect to="/login" />;
@@ -142,7 +145,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
       <Title>{formTitle}</Title>
       <Form action="" onSubmit={submitHandler}>
         <ImageHolder>
-          <GoBackButton onClick={(e) => history.goBack()} />
+          <GoBackButton onClick={history.goBack} />
           <LabelMainImage htmlFor="main-image" src={imageSrc}>
             <Textbox>{imageSrc ? '更換照片' : '上傳一張照片'}</Textbox>
           </LabelMainImage>
@@ -152,8 +155,8 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
           id="main-image"
           type="file"
           accept="image/*"
-          ref={imageHolder}
-          onChange={(e) => acceptImage(e.target.files)}
+          ref={IMAGE_REF}
+          onChange={onImageChange}
         />
 
         <RecipeInfoContainer>
@@ -162,7 +165,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
               <LabelTitle htmlFor="title">食譜名稱</LabelTitle>
               <InputTitle
                 id="title"
-                onChange={(e) => onTitleTextChange(e)}
+                onChange={onTitleTextChange}
                 required
                 value={title}
               />
@@ -214,7 +217,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
               <LabelTags htmlFor="tags">標籤</LabelTags>
               <InputTags
                 id="tags"
-                onChange={(e) => onTagsTextChange(e)}
+                onChange={onTagsTextChange}
                 required
                 value={tags}
               />

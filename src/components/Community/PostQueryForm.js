@@ -68,7 +68,8 @@ export default function PostQueryForm() {
         });
     }
 
-    if (user.identity !== 'none') checkIngredients();
+    const isLoggedIn = user.identity !== 'none';
+    if (isLoggedIn) checkIngredients();
   }, [user, fridge.length, history]);
 
   function isSelected(leftover) {
@@ -81,8 +82,8 @@ export default function PostQueryForm() {
 
   function selectionHandler(e) {
     if (e.target.checked) {
-      let ing = findIngredientByName(user.left_overs, e.target.value);
-      setSelected((selected) => [...selected, ing]);
+      let ingredient = findIngredientByName(user.left_overs, e.target.value);
+      setSelected((selected) => [...selected, ingredient]);
     } else {
       setSelected((selected) =>
         selected.filter((s) => s.ingredient_name !== e.target.value)
@@ -101,7 +102,7 @@ export default function PostQueryForm() {
       profile_image: user.profile,
     };
 
-    post(message).then((id) => {
+    post(message).then(() => {
       setIsUploading(false);
       history.goBack();
     });

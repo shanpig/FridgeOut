@@ -118,7 +118,7 @@ export default function RecipePage() {
 
                       if (ingredient.ingredient_cat !== cat) {
                         ingredientItem.push(
-                          <IngredientCat>
+                          <IngredientCat key={i + 'cat'}>
                             {ingredient.ingredient_cat}
                           </IngredientCat>
                         );
@@ -126,7 +126,7 @@ export default function RecipePage() {
                       }
                       if (ingredient.ingredient_group !== group) {
                         ingredientItem.push(
-                          <IngredientGroup>
+                          <IngredientGroup key={i + 'group'}>
                             {ingredient.ingredient_group}
                           </IngredientGroup>
                         );
@@ -134,7 +134,7 @@ export default function RecipePage() {
                       }
 
                       ingredientItem.push(
-                        <Ingredient>
+                        <Ingredient key={i + 'ingredient'}>
                           {ingredient.ingredient_name}&nbsp;
                           {ingredient.ingredient_amount}&nbsp;
                           {ingredient.ingredient_unit}
