@@ -55,7 +55,7 @@ export default function RecipeItem({
         </TextSection>
       </ItemContent>
       <ButtonContent>
-        {readOnly ? <></> : <Button onClick={() => d(buttonAction(recipe))} />}
+        {!readOnly && <Button onClick={() => d(buttonAction(recipe))} />}
       </ButtonContent>
     </Item>
   );

@@ -13,6 +13,7 @@ export default function QueryPost({ post }) {
   function setPostHolder() {
     d(setRecommendPostHolder(post));
   }
+
   return (
     <PostContent
       name={name}

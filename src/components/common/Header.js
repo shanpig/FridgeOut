@@ -14,12 +14,23 @@ import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Header() {
-  const { identity, name, profile } = useSelector((state) => state.user_info);
+  const { isLoggedIn, name, profile } = useSelector((state) => {
+    const isLoggedIn = state.user_info.identity !== 'none';
+    return {
+      ...state.user_info,
+      isLoggedIn,
+    };
+  });
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  function openSidebar() {
+    setSidebarOpen(true);
+  }
+
   return (
     <>
       <MainHeader>
-        <BurgerButton onClick={() => setSidebarOpen(true)}>
+        <BurgerButton onClick={openSidebar}>
           <Burger />
         </BurgerButton>
         <StyledLink to="/">
@@ -39,11 +50,11 @@ export default function Header() {
           </NavButton>
           <NavButton
             activeClassName="active"
-            to={identity !== 'none' ? `/profile/${name}/fridge` : '/profile'}
+            to={isLoggedIn ? `/profile/${name}/fridge` : '/profile'}
             id="profile"
           >
             {profile ? <ProfileImage src={profile} /> : <ProfileIcon />}
-            <span>{identity !== 'none' ? '個人' : '登入'}</span>
+            <span>{isLoggedIn ? '個人' : '登入'}</span>
           </NavButton>
         </Nav>
       </MainHeader>

@@ -36,12 +36,20 @@ export default function SidebarBody({ className, closeSidebar }) {
     setIngredientsNeeded(needed);
   }, [selectedLeftover, selectedRecipes]);
 
+  function toggleRecipesSection() {
+    SELECTED_RECIPES.current.classList.toggle('open');
+  }
+  function toggleRemainLeftoversSection() {
+    REMAIN_LEFTOVERS.current.classList.toggle('open');
+  }
+  function toggleNeededIngredientSection() {
+    NEEDED_INGREDIENT.current.classList.toggle('open');
+  }
+
   return (
     <BodySection className={className}>
       <Section ref={SELECTED_RECIPES} className="open">
-        <SectionTitle
-          onClick={() => SELECTED_RECIPES.current.classList.toggle('open')}
-        >
+        <SectionTitle onClick={toggleRecipesSection}>
           <H2>已選食譜</H2>
           <DropDownArrow />
         </SectionTitle>
@@ -62,9 +70,7 @@ export default function SidebarBody({ className, closeSidebar }) {
       </Section>
 
       <Section ref={REMAIN_LEFTOVERS} className="open">
-        <SectionTitle
-          onClick={() => REMAIN_LEFTOVERS.current.classList.toggle('open')}
-        >
+        <SectionTitle onClick={toggleRemainLeftoversSection}>
           <H2>剩餘食材</H2>
           <DropDownArrow />
         </SectionTitle>
@@ -83,9 +89,7 @@ export default function SidebarBody({ className, closeSidebar }) {
       </Section>
 
       <Section ref={NEEDED_INGREDIENT} className="open">
-        <SectionTitle
-          onClick={() => NEEDED_INGREDIENT.current.classList.toggle('open')}
-        >
+        <SectionTitle onClick={toggleNeededIngredientSection}>
           <H2>不足食材</H2>
           <DropDownArrow />
         </SectionTitle>

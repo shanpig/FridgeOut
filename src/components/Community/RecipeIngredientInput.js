@@ -11,6 +11,7 @@ export default function RecipeIngredientInput({ ingredient, setLeftover }) {
 
     if (value.match(/[^0-9.]/g)) setError(true);
     else setError(false);
+
     onTextChange(newText, key);
   }
 

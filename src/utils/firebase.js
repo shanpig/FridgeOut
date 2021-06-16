@@ -17,7 +17,7 @@ const db = firebase.firestore();
 const storage = firebase.storage().ref();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-function getAuthUser(setUser) {
+function onUserChanged(setUser) {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       setUser(user);
@@ -250,7 +250,7 @@ async function getPosts() {
 }
 
 export {
-  getAuthUser,
+  onUserChanged,
   signInWithPopup,
   logOut,
   getUserData,

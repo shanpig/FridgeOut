@@ -12,7 +12,7 @@ import ReactLoading from 'react-loading';
 import { Animated } from 'react-animated-css';
 import {
   registerUser,
-  getAuthUser,
+  onUserChanged,
   getUserData,
   signInWithPopup,
 } from '../../utils/firebase';
@@ -31,60 +31,53 @@ const NEW_USER_TEMPLATE = {
 };
 
 export default function LoginPage() {
-  const { identity } = useSelector((state) => state.user_info);
-  const [isLoading, setIsLoading] = useState(true);
-  const history = useHistory();
   const d = useDispatch();
+  const history = useHistory();
+  const [isLoading, setIsLoading] = useState(true);
+  const { identity } = useSelector((state) => state.user_info);
+
   async function signIn() {
     await signInWithPopup().then((userInfo) => {
-      let { uid: id, email, username: name, profileImage: profile } = userInfo;
+      let { uid } = userInfo;
 
-      if (!id) return;
-      getUserData(id).then((data) => {
-        window.localStorage.setItem('fridgeoutid', id);
-        const isNewUser = !data;
-        if (isNewUser) {
-          let userData = {
-            ...NEW_USER_TEMPLATE,
-            name,
-            email,
-            profile,
-            id,
-          };
-          registerUser(userData);
-          d(setUser(userData));
-        } else {
-          d(setUser(data));
-        }
+      if (!uid) return;
+
+      getUserData(uid).then((data) => {
+        window.localStorage.setItem('fridgeoutid', uid);
+        activateUserData(data, userInfo);
       });
     });
   }
 
-  useEffect(() => {
-    getAuthUser((userInfo) => {
-      let { uid: id, email, displayName: name, photoURL: profile } = userInfo;
+  function activateUserData(data, userInfo) {
+    const { uid: id, email, username: name, profileImage: profile } = userInfo;
+    const isNewUser = !data;
+    if (isNewUser) {
+      let userData = {
+        ...NEW_USER_TEMPLATE,
+        name,
+        email,
+        profile,
+        id,
+      };
+      registerUser(userData);
+      d(setUser(userData));
+    } else {
+      d(setUser(data));
+    }
+  }
 
-      if (!id) {
-        setIsLoading(false);
-        return;
-      }
-      getUserData(id).then((data) => {
-        if (!data) {
-          let userData = {
-            ...NEW_USER_TEMPLATE,
-            name,
-            email,
-            profile,
-            id,
-          };
-          registerUser(userData);
-          d(setUser(userData));
-        } else {
-          d(setUser(data));
-        }
+  useEffect(() => {
+    onUserChanged((userInfo) => {
+      let { uid } = userInfo;
+
+      if (!uid) return setIsLoading(false);
+
+      getUserData(uid).then((data) => {
+        activateUserData(data, userInfo);
       });
     });
-  }, [d]);
+  }, []);
 
   useEffect(() => {
     if (identity !== 'none') history.goBack();

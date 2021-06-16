@@ -58,8 +58,10 @@ export default function Messages() {
                   <RecipeContent>
                     <RecipeTitle>{recipe.title}</RecipeTitle>
                     <Ingredients>
-                      {recipe.ingredients.slice(0, 5).map((ingredients) => (
-                        <Ingredient>{ingredients.ingredient_name}</Ingredient>
+                      {recipe.ingredients.slice(0, 5).map((ingredients, i) => (
+                        <Ingredient key={i}>
+                          {ingredients.ingredient_name}
+                        </Ingredient>
                       ))}
                     </Ingredients>
                   </RecipeContent>

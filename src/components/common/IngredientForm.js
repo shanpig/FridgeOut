@@ -6,6 +6,7 @@ export default function IngredientForm({ submitAction }) {
   const [amount, setAmount] = useState(1);
   const [unit, setUnit] = useState('');
   const d = useDispatch();
+
   function submitHandler(e) {
     e.preventDefault();
     d(
@@ -16,6 +17,7 @@ export default function IngredientForm({ submitAction }) {
       })
     );
   }
+
   return (
     <form action="" onSubmit={submitHandler}>
       <input

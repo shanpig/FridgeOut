@@ -8,7 +8,7 @@ import { Animated } from 'react-animated-css';
 import { sendMessageTo } from '../../utils/firebase';
 
 export default function RecommendForm() {
-  const queryPost = useSelector(
+  const { id, ingredients } = useSelector(
     (state) => state.user_info.recommend_post_holder
   );
 
@@ -23,14 +23,18 @@ export default function RecommendForm() {
     sendMessageTo(userId, message);
   }
 
+  function submitHandler() {
+    return (recipe) => sendRecipeTo(id, recipe);
+  }
+
   return (
     <Main>
       <MainContent>
         <Animated>
           <RecipeForm
             formTitle="推薦食譜"
-            submit={(recipe) => sendRecipeTo(queryPost.id, recipe)}
-            defaultIngredients={queryPost.ingredients}
+            submit={submitHandler}
+            defaultIngredients={ingredients}
           />
         </Animated>
       </MainContent>

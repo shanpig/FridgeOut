@@ -16,16 +16,19 @@ const fromNewToOld = (post1, post2) => {
 export default function Posts({ category }) {
   const [posts, setPosts] = useState([]);
 
+  function postsOfCategory(category) {
+    return (post) => post.type === category;
+  }
+
   useEffect(() => {
     let subscribed = true;
+
     getPosts().then((posts) => {
       if (!subscribed) return;
       setPosts(posts);
     });
 
-    return () => {
-      subscribed = false;
-    };
+    return () => (subscribed = false);
   }, []);
 
   return (
@@ -33,7 +36,7 @@ export default function Posts({ category }) {
       {posts &&
         posts
           .sort(fromNewToOld)
-          .filter((post) => post.type === category)
+          .filter(postsOfCategory(category))
           .map((post, i) => {
             return (
               <Animated

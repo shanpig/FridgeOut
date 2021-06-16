@@ -9,12 +9,12 @@ import { removeFromKitchen } from '../../../redux/reducers/user/userActions';
 
 import styled from 'styled-components';
 
-import {
-  fractionStringToTC,
-  getFractionFromTCAmount,
-} from '../../../utils/math';
-
-export default function SidebarItem({ readOnly, className, ...props }) {
+export default function SidebarItem({
+  readOnly,
+  className,
+  closeSidebar,
+  ...props
+}) {
   const d = useDispatch();
   let content, target;
 
@@ -32,14 +32,12 @@ export default function SidebarItem({ readOnly, className, ...props }) {
       ingredient_amount: amount,
       ingredient_unit: unit,
     } = props.ingredient;
-    if (amount) {
-      amount = getFractionFromTCAmount(amount);
-      amount = fractionStringToTC(amount);
-    }
+
     content = `${name} ${amount} ${unit}`;
     target = props.ingredient;
   } else if (props.type === 'recipe') {
     const { title } = props.recipe;
+
     content = title;
     target = props.recipe;
   }
@@ -47,7 +45,7 @@ export default function SidebarItem({ readOnly, className, ...props }) {
     <Item className={className}>
       <Text
         to={props.type === 'recipe' ? props.linkTo : ''}
-        onClick={props.closeSidebar}
+        onClick={closeSidebar}
       >
         {content}
       </Text>

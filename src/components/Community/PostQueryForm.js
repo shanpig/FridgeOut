@@ -16,6 +16,7 @@ import { Animated } from 'react-animated-css';
 import { post } from '../../utils/firebase';
 
 const ReactSwal = withReactContent(Swal);
+
 const SWAL_CONFIG = {
   customClass: {
     cancelButton: 'popup_button popup_button-cancel',
@@ -39,10 +40,10 @@ function findIngredientByName(list, ingredientName) {
 
 export default function PostQueryForm() {
   const history = useHistory();
-  const user = useSelector((state) => state.user_info);
-  const [isUploading, setIsUploading] = useState(false);
-  const fridge = useSelector((state) => state.user_info.left_overs);
   const [selected, setSelected] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const user = useSelector((state) => state.user_info);
+  const fridge = useSelector((state) => state.user_info.left_overs);
 
   useEffect(() => {
     function checkIngredients() {

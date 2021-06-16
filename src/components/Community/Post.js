@@ -11,16 +11,17 @@ export default function Post({
   timestamp,
   children,
 }) {
+  function fadeIn(e) {
+    e.target.style.opacity = 1;
+  }
+  let timeAgo = timeDifference(new Date(timestamp.toDate()));
+
   return (
     <PostContainer>
-      <ProfileImage
-        src={profile_image}
-        alt=""
-        onLoad={(e) => (e.target.style.opacity = 1)}
-      />
+      <ProfileImage src={profile_image} alt="" onLoad={fadeIn} />
       <Profile>
         <Name className="name">{name}</Name>
-        <Time>{timeDifference(new Date(timestamp.toDate()))}</Time>
+        <Time>{timeAgo}</Time>
       </Profile>
       <Content className={className}>{children}</Content>
     </PostContainer>

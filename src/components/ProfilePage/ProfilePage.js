@@ -42,6 +42,7 @@ export default function ProfilePage() {
 
   function signOut() {
     logOut().then(() => {
+      window.localStorage.removeItem('fridgeoutid');
       d(signOutUser());
       history.push('/');
     });
@@ -107,7 +108,7 @@ export default function ProfilePage() {
             </MainContent>
           </ContentRow>
           <Row>
-            <Logout onClick={signOut}>
+            <Logout onClick={() => signOut()}>
               登出
               <LogoutButton />
             </Logout>

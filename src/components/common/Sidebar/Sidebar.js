@@ -6,14 +6,18 @@ import SidebarBody from './SidebarBody';
 import styled from 'styled-components';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  function closeSidebar() {
+    setSidebarOpen(false);
+  }
+
   return (
     <Aside open={sidebarOpen}>
-      <Mask masked={sidebarOpen} onClick={() => setSidebarOpen(false)} />
+      <Mask masked={sidebarOpen} onClick={closeSidebar} />
       <HeaderSection>
-        <BackIcon onClick={() => setSidebarOpen(false)} />
+        <BackIcon onClick={closeSidebar} />
         <Logo />
       </HeaderSection>
-      <SidebarBody closeSidebar={() => setSidebarOpen(false)} />
+      <SidebarBody closeSidebar={closeSidebar} />
     </Aside>
   );
 }

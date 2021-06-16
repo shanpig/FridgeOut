@@ -7,25 +7,25 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function SharePost({ post }) {
-  const { by: name, profile_image, timestamp, recipe } = post;
+  const {
+    by: name,
+    timestamp,
+    recipe: { id, main_image, title, ingredients },
+  } = post;
 
   return (
-    <PostContent
-      name={name}
-      profile_image={profile_image}
-      timestamp={timestamp}
-    >
+    <PostContent name={name} timestamp={timestamp}>
       <Title>分享了一份食譜！</Title>
-      <Recipe to={`/recipe/${recipe.id}`}>
+      <Recipe to={`/recipe/${id}`}>
         <ImageCol>
-          <RecipeImage src={recipe && recipe.main_image} alt="" />
+          <RecipeImage src={main_image} alt="" />
         </ImageCol>
         <InfoCol>
-          <RecipeTitle>{recipe.title}</RecipeTitle>
+          <RecipeTitle>{title}</RecipeTitle>
           <RecipeIngredients>
-            {recipe.ingredients &&
-              recipe.ingredients.map((ingredient, i) => (
-                <Ingredient key={i}>{ingredient.ingredient_name}</Ingredient>
+            {ingredients &&
+              ingredients.map(({ ingredient_name }, i) => (
+                <Ingredient key={i}>{ingredient_name}</Ingredient>
               ))}
           </RecipeIngredients>
         </InfoCol>

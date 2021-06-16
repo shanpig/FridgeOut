@@ -20,13 +20,14 @@ export default function ShareRecipeForm() {
     post(postData);
   }
 
+  function submitHandler() {
+    return (recipe) => postRecipe(recipe);
+  }
+
   return (
     <Main>
       <Animated>
-        <RecipeForm
-          formTitle="分享食譜"
-          submit={(recipe) => postRecipe(recipe)}
-        />
+        <RecipeForm formTitle="分享食譜" submit={submitHandler} />
       </Animated>
     </Main>
   );
