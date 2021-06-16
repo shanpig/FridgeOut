@@ -1,4 +1,3 @@
-import { AiOutlineConsoleSql } from 'react-icons/ai';
 import {
   setUserLeftovers,
   addRecipeToUserKitchen,
@@ -49,20 +48,6 @@ const setLeftOvers = (leftOvers) => {
     if (userInfo.identity !== 'none') setUserLeftovers(userInfo.id, leftOvers);
 
     return dispatch(_setLeftOvers(leftOvers));
-  };
-};
-
-const _addLeftOver = (leftOver) => {
-  return {
-    type: 'user/add/leftOver',
-    payload: leftOver,
-  };
-};
-
-const _setLeftOver = (leftOver) => {
-  return {
-    type: 'user/set/leftOver',
-    payload: leftOver,
   };
 };
 

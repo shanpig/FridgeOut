@@ -1,7 +1,6 @@
 import { theme } from '../../variables';
 import styled from 'styled-components';
 import { timeDifference } from '../../utils/math';
-import Logo from '../../images/logo-small-nobg.svg';
 
 export default function Post({
   className,

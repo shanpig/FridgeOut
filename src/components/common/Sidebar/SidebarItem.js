@@ -35,7 +35,7 @@ export default function SidebarItem({ readOnly, className, ...props }) {
     content = `${name} ${amount} ${unit}`;
     target = props.ingredient;
   } else if (props.type === 'recipe') {
-    const { title, id } = props.recipe;
+    const { title } = props.recipe;
     content = title;
     target = props.recipe;
   }

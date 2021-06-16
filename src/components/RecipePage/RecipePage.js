@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router';
 import { getRecipe } from '../../utils/firebase';
 import ScrollToTop from '../common/ScrollToTop';
-import backgroundImageSrc from '../../images/kitchen-table.jpg';
-import { GrClose, GrAdd, GrCheckmark } from 'react-icons/gr';
+import { GrAdd, GrCheckmark } from 'react-icons/gr';
 import { TiArrowBack } from 'react-icons/ti';
 
 import { useDispatch, useSelector } from 'react-redux';

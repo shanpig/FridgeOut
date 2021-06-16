@@ -94,9 +94,7 @@ export default function PostQueryForm() {
 
   function checkIngredients() {
     const fridgeIsEmpty = fridge.length === 0;
-    if (fridgeIsEmpty) {
-      showFridgeIsEmptyPrompt();
-    }
+    if (fridgeIsEmpty) showFridgeIsEmptyPrompt();
   }
 
   if (!user) return <></>;
@@ -242,7 +240,7 @@ const Field = styled.div`
   }
 
   & label {
-    color: ${(props) => (props.selected ? `white` : '${theme.darkbrown}')};
+    color: ${(props) => (props.selected ? `white` : `${theme.darkbrown}`)};
   }
 `;
 

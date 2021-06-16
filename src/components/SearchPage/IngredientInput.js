@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 import { useRef } from 'react';
-import { AiFillSave, AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
-export default function IngredientInput({
-  ingredient,
-  // removeLeftover,
-  setLeftover,
-}) {
+export default function IngredientInput({ ingredient, setLeftover }) {
   const FORM = useRef(null);
 
   function onTextChange(newText, key) {

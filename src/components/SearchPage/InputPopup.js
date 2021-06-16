@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addInput } from '../../redux/reducers/keyword/keywordActions';
 import { GrFormClose } from 'react-icons/gr';
 import IngredientInput from './IngredientInput';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { v1 as uid } from 'uuid';
 import { addLeftOver } from '../../redux/reducers/user/userActions';

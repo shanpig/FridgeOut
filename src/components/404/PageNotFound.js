@@ -5,10 +5,10 @@ import { Animated } from 'react-animated-css';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const countDownTime = 5;
+const COUNT_DOWN_TIME = 5;
 
 export default function PageNotFound() {
-  const [time, setTime] = useState(countDownTime);
+  const [time, setTime] = useState(COUNT_DOWN_TIME);
   const history = useHistory();
 
   useEffect(() => {

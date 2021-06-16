@@ -31,11 +31,7 @@ export default function keywordReducer(state = keywords, action) {
     }
 
     case 'keyword/removeInput': {
-      const {
-        ingredient_name: name,
-        ingredient_amount: amount,
-        ingredient_unit: unit,
-      } = action.payload;
+      const { ingredient_name: name } = action.payload;
       const indexOfIngredient = newState.findIndex(
         (k) => k.ingredient_name === name
       );

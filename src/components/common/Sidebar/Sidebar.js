@@ -1,4 +1,3 @@
-import { theme } from '../../../variables';
 import styled from 'styled-components';
 import SidebarBody from './SidebarBody';
 import { IoChevronBackSharp } from 'react-icons/io5';

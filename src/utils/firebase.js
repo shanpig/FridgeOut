@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { setUser } from '../redux/reducers/user/userActions';
 require('dotenv').config();
 
 // const firebase = require('firebase');
@@ -16,11 +15,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage().ref();
-// const auth = firebase.auth().useDeviceLanguage();
 const provider = new firebase.auth.GoogleAuthProvider();
-// provider.setCustomParameters({
-//   login_hint: 'user@example.com',
-// });
 
 function getAuthUser(setUser) {
   firebase.auth().onAuthStateChanged((user) => {
@@ -30,13 +25,11 @@ function getAuthUser(setUser) {
   });
 }
 
-function signInWithPopup(setUser) {
+function signInWithPopup() {
   return firebase
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
-      const credential = result.credential;
-      const token = credential.accessToken;
       const user = result.user;
       return {
         uid: user.uid,
@@ -46,7 +39,7 @@ function signInWithPopup(setUser) {
       };
     })
     .catch((err) => {
-      return '';
+      return err;
     });
 }
 
@@ -60,10 +53,6 @@ function getUserData(uid) {
     .doc(uid)
     .get()
     .then((doc) => doc.data());
-}
-
-function updateUserFridge(uid, fridge) {
-  return db.collection('users').doc(uid).update({ left_overs: fridge });
 }
 
 function addRecipeToUserKitchen(uid, recipe) {

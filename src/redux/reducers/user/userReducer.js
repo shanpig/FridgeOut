@@ -1,6 +1,4 @@
-import { AiFillCodeSandboxCircle } from 'react-icons/ai';
 import { user_info } from '../../../mockData/state/state.json';
-import { combine } from '../../../utils/recipes';
 
 export default function userReducer(state = user_info, action) {
   switch (action.type) {

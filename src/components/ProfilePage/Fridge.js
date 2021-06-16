@@ -1,6 +1,6 @@
 import { theme } from '../../variables';
 import styled from 'styled-components';
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AiOutlinePlus } from 'react-icons/ai';

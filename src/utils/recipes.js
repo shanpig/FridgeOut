@@ -28,6 +28,7 @@ function isCombinable(a, b) {
   let basisA = units[unitA];
   let basisB = units[unitB];
 
+  if (nameA !== nameB) return false;
   if (!unitA || !unitB) return false;
   if ((basisA && !basisB) || (!basisA && basisB)) return false;
   if (!basisA && !basisB) return true;
@@ -83,11 +84,7 @@ function gatherIngredientsFromRecipes(_recipes) {
 
   ingredientsGroup.forEach((group) => {
     group.forEach((ingredient) => {
-      let {
-        ingredient_name: name,
-        ingredient_amount: amount,
-        ingredient_unit: unit,
-      } = ingredient;
+      let { ingredient_name: name, ingredient_amount: amount } = ingredient;
 
       if (amount) {
         amount = getFractionFromTCAmount(amount);
@@ -130,11 +127,9 @@ function assessIngredientsUsage(_onHand, _required) {
   let needed = [];
 
   required.forEach((ingredient) => {
-    let {
-      ingredient_name: name,
-      ingredient_amount: amount,
-      ingredient_unit: unit,
-    } = { ...ingredient };
+    let { ingredient_name: name, ingredient_amount: amount } = {
+      ...ingredient,
+    };
 
     if (amount) {
       amount = getFractionFromTCAmount(amount);
@@ -173,11 +168,9 @@ function assessIngredientsUsage(_onHand, _required) {
   });
 
   used.forEach((ingredient) => {
-    let {
-      ingredient_name: name,
-      ingredient_amount: amount,
-      ingredient_unit: unit,
-    } = { ...ingredient };
+    let { ingredient_name: name, ingredient_amount: amount } = {
+      ...ingredient,
+    };
 
     if (amount) {
       let index = onHand.findIndex((ingr) => ingr.ingredient_name === name);
