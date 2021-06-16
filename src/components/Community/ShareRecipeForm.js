@@ -1,4 +1,3 @@
-import { mainContentConfig } from '../../variables';
 import RecipeForm from './RecipeForm';
 import styled from 'styled-components';
 import { post } from '../../utils/firebase';

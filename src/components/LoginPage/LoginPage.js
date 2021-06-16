@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 
-const userTemplate = {
+const NEW_USER_TEMPLATE = {
   identity: 'user',
   id: '',
   name: 'Random',
@@ -34,18 +34,19 @@ export default function LoginPage() {
   const d = useDispatch();
   async function signIn() {
     await signInWithPopup().then((userInfo) => {
-      let { uid, email, username, profileImage } = userInfo;
+      let { uid: id, email, username: name, profileImage: profile } = userInfo;
 
-      if (!uid) return;
-      getUserData(uid).then((data) => {
-        window.localStorage.setItem('fridgeoutid', uid);
-        if (!data) {
+      if (!id) return;
+      getUserData(id).then((data) => {
+        window.localStorage.setItem('fridgeoutid', id);
+        const isNewUser = !data;
+        if (isNewUser) {
           let userData = {
-            ...userTemplate,
-            name: username,
+            ...NEW_USER_TEMPLATE,
+            name,
             email,
-            profile: profileImage,
-            id: uid,
+            profile,
+            id,
           };
           registerUser(userData);
           d(setUser(userData));
@@ -58,25 +59,20 @@ export default function LoginPage() {
 
   useEffect(() => {
     getAuthUser((userInfo) => {
-      let {
-        uid,
-        email,
-        displayName: username,
-        photoURL: profileImage,
-      } = userInfo;
+      let { uid: id, email, displayName: name, photoURL: profile } = userInfo;
 
-      if (!uid) {
+      if (!id) {
         setIsLoading(false);
         return;
       }
-      getUserData(uid).then((data) => {
+      getUserData(id).then((data) => {
         if (!data) {
           let userData = {
-            ...userTemplate,
-            name: username,
+            ...NEW_USER_TEMPLATE,
+            name,
             email,
-            profile: profileImage,
-            id: uid,
+            profile,
+            id,
           };
           registerUser(userData);
           d(setUser(userData));
@@ -85,11 +81,11 @@ export default function LoginPage() {
         }
       });
     });
-  }, []);
+  }, [d]);
 
   useEffect(() => {
     if (identity !== 'none') history.goBack();
-  }, [identity]);
+  }, [identity, history]);
 
   if (isLoading) {
     return (

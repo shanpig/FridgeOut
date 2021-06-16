@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { useState, useRef, useEffect } from 'react';
-import { AiFillSave, AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { useState, useRef } from 'react';
 
 export default function RecipeIngredientInput({ ingredient, setLeftover }) {
   const AMOUNT = useRef(null);
@@ -9,7 +8,7 @@ export default function RecipeIngredientInput({ ingredient, setLeftover }) {
   function onAmountChange(newText, key) {
     const value = AMOUNT.current.value;
 
-    if (value.match(/[^0-9\.]/g)) setError(true);
+    if (value.match(/[^0-9.]/g)) setError(true);
     else setError(false);
     onTextChange(newText, key);
   }

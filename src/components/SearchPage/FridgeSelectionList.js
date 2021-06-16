@@ -23,23 +23,21 @@ export default function FridgeSelectionList() {
   });
   const [selectionContent, setSelectionContent] = useState([]);
 
-  function isSelected(ingredient) {
-    return (
-      selected.findIndex(
-        (item) => item.ingredient_name === ingredient.ingredient_name
-      ) >= 0
-    );
-  }
-
-  function toggleIngredientSelection(ingredient) {
-    if (isSelected(ingredient)) {
-      d(removeInput(ingredient));
-    } else {
-      d(addInput(ingredient));
-    }
-  }
-
   useEffect(() => {
+    function toggleIngredientSelection(ingredient) {
+      if (isSelected(ingredient)) {
+        d(removeInput(ingredient));
+      } else {
+        d(addInput(ingredient));
+      }
+    }
+    function isSelected(ingredient) {
+      return (
+        selected.findIndex(
+          (item) => item.ingredient_name === ingredient.ingredient_name
+        ) >= 0
+      );
+    }
     let content;
     if (fridge.length === 0) {
       content = '你的冰箱空空如也';
@@ -56,7 +54,7 @@ export default function FridgeSelectionList() {
       ));
     }
     setSelectionContent(content);
-  }, [fridge, selected]);
+  }, [fridge, selected, d]);
 
   return (
     <SelectionList>

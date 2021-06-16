@@ -28,8 +28,9 @@ export default function RecipePage() {
   const history = useHistory();
   let cat = '';
   let group = '';
-  const [{ id, title, main_image, ingredients, steps }, setRecipeInfo] =
-    useState({});
+  const [{ title, main_image, ingredients, steps }, setRecipeInfo] = useState(
+    {}
+  );
   const [recipe, setRecipe] = useState({});
   const { id: recipeId } = useParams();
 
@@ -41,7 +42,7 @@ export default function RecipePage() {
     getRecipe(recipeId).then((recipe) => {
       setRecipe(recipe);
     });
-  }, [id]);
+  }, [recipeId]);
 
   function isInKitchen(recipe) {
     return myKitchen.findIndex((target) => target.id === recipe.id) >= 0;

@@ -32,32 +32,20 @@ export default function Posts({ category }) {
           .sort(fromNewToOld)
           .filter((post) => post.type === category)
           .map((post, i) => {
-            switch (post.type) {
-              case 'query':
-                return (
-                  <Animated
-                    key={uid()}
-                    animationIn="fadeInDown"
-                    animationInDuration={500}
-                    animationInDelay={i * 100}
-                  >
-                    <QueryPost post={post} />
-                  </Animated>
-                );
-              case 'share':
-                return (
-                  <Animated
-                    key={uid()}
-                    animationIn="fadeInDown"
-                    animationInDuration={500}
-                    animationInDelay={i * 100}
-                  >
-                    <SharePost post={post} />
-                  </Animated>
-                );
-              default:
-                return;
-            }
+            return (
+              <Animated
+                key={uid()}
+                animationIn="fadeInDown"
+                animationInDuration={500}
+                animationInDelay={i * 100}
+              >
+                {category === 'query' ? (
+                  <QueryPost post={post} />
+                ) : (
+                  <SharePost post={post} />
+                )}
+              </Animated>
+            );
           })}
     </PostsContainer>
   );

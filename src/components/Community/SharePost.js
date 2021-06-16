@@ -1,19 +1,10 @@
 import { theme } from '../../variables';
-import { useEffect, useState } from 'react';
-import { getRecipe } from '../../utils/firebase';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Post from './Post';
 
 export default function SharePost({ post }) {
-  const [recipe, setRecipe] = useState({});
-  const { by: name, profile_image, timestamp, recipe: recipeData } = post;
-
-  useEffect(() => {
-    getRecipe(recipeData.id).then((recipe) => {
-      setRecipe(recipeData);
-    });
-  }, []);
+  const { by: name, profile_image, timestamp, recipe } = post;
 
   return (
     <PostContent

@@ -9,7 +9,24 @@ import { RiFridgeFill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Animated } from 'react-animated-css';
+
 const ReactSwal = withReactContent(Swal);
+const SWAL_CONFIG = {
+  customClass: {
+    cancelButton: 'popup_button popup_button-cancel',
+    confirmButton: 'popup_button popup_button-confirm',
+    actions: 'actions',
+    icon: 'icon',
+  },
+  buttonsStyling: false,
+  reverseButtons: true,
+};
+const SWAL_FIRE_CONFIG = {
+  showCancelButton: true,
+  cancelButtonText: '去我的冰箱',
+  confirmButtonText: '取消',
+  icon: 'warning',
+};
 
 function findIngredientByName(list, ingredientName) {
   return list.find((item) => item.ingredient_name === ingredientName);
@@ -23,8 +40,31 @@ export default function PostQueryForm() {
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
+    function checkIngredients() {
+      const fridgeIsEmpty = fridge.length === 0;
+      if (fridgeIsEmpty) showFridgeIsEmptyPrompt();
+    }
+
+    function showFridgeIsEmptyPrompt() {
+      ReactSwal.mixin(SWAL_CONFIG)
+        .fire({
+          title: <PopupText>你的冰箱沒有食材喔</PopupText>,
+          html: (
+            <PopupText>
+              你可以在輸入食材搜尋的同時，將食材加入冰箱，或是直接到我的冰箱進行輸入。
+            </PopupText>
+          ),
+          ...SWAL_FIRE_CONFIG,
+        })
+        .then((result) => {
+          if (result.dismiss === Swal.DismissReason.cancel) {
+            history.push(`/profile/${user.name}/fridge`);
+          }
+        });
+    }
+
     if (user.identity !== 'none') checkIngredients();
-  }, [user]);
+  }, [user, fridge.length, history]);
 
   function isSelected(leftover) {
     return (
@@ -60,41 +100,6 @@ export default function PostQueryForm() {
       setIsUploading(false);
       history.goBack();
     });
-  }
-
-  function showFridgeIsEmptyPrompt() {
-    ReactSwal.mixin({
-      customClass: {
-        cancelButton: 'popup_button popup_button-cancel',
-        confirmButton: 'popup_button popup_button-confirm',
-        actions: 'actions',
-        icon: 'icon',
-      },
-      buttonsStyling: false,
-      reverseButtons: true,
-    })
-      .fire({
-        title: <PopupText>你的冰箱沒有食材喔</PopupText>,
-        html: (
-          <PopupText>
-            你可以在輸入食材搜尋的同時，將食材加入冰箱，或是直接到我的冰箱進行輸入。
-          </PopupText>
-        ),
-        showCancelButton: true,
-        cancelButtonText: '去我的冰箱',
-        confirmButtonText: '取消',
-        icon: 'warning',
-      })
-      .then((result) => {
-        if (result.dismiss === Swal.DismissReason.cancel) {
-          history.push(`/profile/${user.name}/fridge`);
-        }
-      });
-  }
-
-  function checkIngredients() {
-    const fridgeIsEmpty = fridge.length === 0;
-    if (fridgeIsEmpty) showFridgeIsEmptyPrompt();
   }
 
   if (!user) return <></>;
