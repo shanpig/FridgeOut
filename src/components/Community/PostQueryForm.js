@@ -27,12 +27,17 @@ const SWAL_CONFIG = {
   buttonsStyling: false,
   reverseButtons: true,
 };
+
 const SWAL_FIRE_CONFIG = {
   showCancelButton: true,
   cancelButtonText: '去我的冰箱',
   confirmButtonText: '取消',
   icon: 'warning',
 };
+
+const SWAL_TITLE = '你的冰箱沒有食材喔';
+const SWAL_CONTENT =
+  '你可以在輸入食材搜尋的同時，將食材加入冰箱，或是直接到我的冰箱進行輸入。';
 
 function findIngredientByName(list, ingredientName) {
   return list.find((item) => item.ingredient_name === ingredientName);
@@ -54,16 +59,13 @@ export default function PostQueryForm() {
     function showFridgeIsEmptyPrompt() {
       ReactSwal.mixin(SWAL_CONFIG)
         .fire({
-          title: <PopupText>你的冰箱沒有食材喔</PopupText>,
-          html: (
-            <PopupText>
-              你可以在輸入食材搜尋的同時，將食材加入冰箱，或是直接到我的冰箱進行輸入。
-            </PopupText>
-          ),
           ...SWAL_FIRE_CONFIG,
+          title: <PopupText>{SWAL_TITLE}</PopupText>,
+          html: <PopupText>{SWAL_CONTENT}</PopupText>,
         })
         .then((result) => {
-          if (result.dismiss === Swal.DismissReason.cancel) {
+          const pressCancel = result.dismiss === Swal.DismissReason.cancel;
+          if (pressCancel) {
             history.push(`/profile/${user.name}/fridge`);
           }
         });
@@ -81,14 +83,12 @@ export default function PostQueryForm() {
     );
   }
 
-  function selectionHandler(e) {
+  function onSelectedChanged(e) {
     if (e.target.checked) {
       let ingredient = findIngredientByName(user.left_overs, e.target.value);
-      setSelected((selected) => [...selected, ingredient]);
+      setSelected([...selected, ingredient]);
     } else {
-      setSelected((selected) =>
-        selected.filter((s) => s.ingredient_name !== e.target.value)
-      );
+      setSelected(selected.filter((s) => s.ingredient_name !== e.target.value));
     }
   }
 
@@ -128,7 +128,7 @@ export default function PostQueryForm() {
                   name=""
                   id={leftover.ingredient_name}
                   value={leftover.ingredient_name}
-                  onChange={selectionHandler}
+                  onChange={onSelectedChanged}
                 />
                 <Label htmlFor={leftover.ingredient_name}>
                   {leftover.ingredient_name} {leftover.ingredient_amount}{' '}
@@ -149,7 +149,7 @@ export default function PostQueryForm() {
                   name=""
                   id={ingredient.ingredient_name}
                   value={ingredient.ingredient_name}
-                  onChange={selectionHandler}
+                  onChange={onSelectedChanged}
                 />
                 <SelectedLabel htmlFor={ingredient.ingredient_name}>
                   {ingredient.ingredient_name} {ingredient.ingredient_amount}{' '}

@@ -53,8 +53,8 @@ const MainContent = styled.div`
   color: white;
   padding: 40px 56px;
   width: 100%;
-
   gap: 20px;
+
   @media screen and (min-width: 769px) {
     gap: 0;
     flex-direction: row;

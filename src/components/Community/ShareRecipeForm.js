@@ -9,6 +9,7 @@ import { post } from '../../utils/firebase';
 
 export default function ShareRecipeForm() {
   const user = useSelector((state) => state.user_info);
+
   function postRecipe(recipe) {
     const postData = {
       type: 'share',

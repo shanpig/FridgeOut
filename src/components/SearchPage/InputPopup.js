@@ -45,6 +45,7 @@ export default function InputPopup({ open, setOpen }) {
     if (newInputs.length === 0) newInputs = [emptyInput];
     setInputs(newInputs);
   }
+
   function addAllInputFields() {
     inputs.forEach((input) => {
       if (input.ingredient_name) {
