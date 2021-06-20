@@ -1,12 +1,7 @@
-import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 
-import {
-  BrowserRouter,
-  BrowserRouter as Router,
-  Link,
-  useHistory,
-} from 'react-router-dom';
+import { BrowserRouter, BrowserRouter as Router, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import initialState from './mockData/state/state.json';
