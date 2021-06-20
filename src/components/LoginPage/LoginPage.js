@@ -68,7 +68,7 @@ export default function LoginPage() {
   }
 
   useEffect(() => {
-    onUserChanged((userInfo) => {
+    const unsubscribe = onUserChanged((userInfo) => {
       let { uid } = userInfo;
 
       if (!uid) return setIsLoading(false);
@@ -77,6 +77,8 @@ export default function LoginPage() {
         activateUserData(data, userInfo);
       });
     });
+
+    return unsubscribe;
   }, []);
 
   useEffect(() => {

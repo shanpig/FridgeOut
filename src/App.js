@@ -1,19 +1,18 @@
-import './App.css';
 import backgroundImageSrc from './images/kitchen-table.jpg';
 
-import PostQueryForm from './components/Community/PostQueryForm';
-import ShareRecipeForm from './components/Community/ShareRecipeForm';
-import ProfilePage from './components/ProfilePage/ProfilePage';
-import RecipePage from './components/RecipePage/RecipePage';
-import SearchPage from './components/SearchPage/SearchPage';
-import LandingPage from './components/LandingPage/LandingPage';
-import LoginPage from './components/LoginPage/LoginPage';
-import PageNotFound from './components/404/PageNotFound';
-import RecommendForm from './components/Community/RecommendForm';
-import HeaderSpacer from './components/common/HeaderSpacer';
-import FooterSpacer from './components/common/FooterSpacer';
-import CommunityPage from './components/Community/CommunityPage';
 import Header from './components/common/Header';
+import HeaderSpacer from './components/common/HeaderSpacer';
+import LandingPage from './components/LandingPage/LandingPage';
+import SearchPage from './components/SearchPage/SearchPage';
+import CommunityPage from './components/CommunityPage/CommunityPage';
+import RecipePage from './components/RecipePage/RecipePage';
+import LoginPage from './components/LoginPage/LoginPage';
+import ProfilePage from './components/ProfilePage/ProfilePage';
+import PostQueryForm from './components/CommunityPage/PostQueryForm';
+import RecommendForm from './components/CommunityPage/RecommendForm';
+import ShareRecipeForm from './components/CommunityPage/ShareRecipeForm';
+import PageNotFound from './components/404/PageNotFound';
+import FooterSpacer from './components/common/FooterSpacer';
 
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -26,6 +25,7 @@ import { getUserData } from './utils/firebase';
 
 function App() {
   const d = useDispatch();
+
   useEffect(() => {
     const uid = localStorage.getItem('fridgeoutid');
     if (uid) {
@@ -35,54 +35,50 @@ function App() {
     }
   });
   return (
-    <>
-      <Body>
-        <Router>
-          {/* <ScrollToTop /> */}
-          <Header />
-          <HeaderSpacer />
-          <Switch>
-            <Route exact path="/">
-              <LandingPage />
-            </Route>
-            <Route path="/search">
-              <SearchPage />
-            </Route>
-            <Route path="/posts">
-              <CommunityPage />
-            </Route>
-            <Route path="/recipe/:id">
-              <RecipePage />
-            </Route>
-            <Route path="/login">
-              <LoginPage />
-            </Route>
-            <Route path="/profile/:uid">
-              <ProfilePage />
-            </Route>
-            <Route exact path="/profile">
-              <ProfilePage />
-            </Route>
-            <Route path="/form/query">
-              <PostQueryForm />
-            </Route>
-            <Route path="/form/recommend/:id">
-              <RecommendForm />
-            </Route>
-            <Route path="/form/share">
-              <ShareRecipeForm />
-            </Route>
-            <Route path="/">
-              <PageNotFound />
-            </Route>
-          </Switch>
-        </Router>
-        <FooterSpacer />
-      </Body>
-    </>
+    <Body>
+      <Router>
+        <Header />
+        <HeaderSpacer />
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="/search">
+            <SearchPage />
+          </Route>
+          <Route path="/posts">
+            <CommunityPage />
+          </Route>
+          <Route path="/recipe/:id">
+            <RecipePage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/profile/:uid">
+            <ProfilePage />
+          </Route>
+          <Route exact path="/profile">
+            <ProfilePage />
+          </Route>
+          <Route path="/form/query">
+            <PostQueryForm />
+          </Route>
+          <Route path="/form/recommend/:id">
+            <RecommendForm />
+          </Route>
+          <Route path="/form/share">
+            <ShareRecipeForm />
+          </Route>
+          <Route path="/">
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </Router>
+      <FooterSpacer />
+    </Body>
   );
 }
-
 const Body = styled.div`
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${backgroundImageSrc});

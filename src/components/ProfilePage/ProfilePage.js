@@ -49,7 +49,6 @@ export default function ProfilePage() {
   }
 
   if (identity === 'none') {
-    // history.push('/login');
     return <Redirect to="/login"></Redirect>;
   }
   return (

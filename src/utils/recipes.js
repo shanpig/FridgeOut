@@ -89,7 +89,10 @@ function gatherIngredientsFromRecipes(_recipes) {
 
       if (amount) {
         amount = getFractionFromTCAmount(amount);
-        amount = math.fraction(amount);
+        const formattedIngredient = {
+          ...ingredient,
+          ingredient_amount: amount,
+        };
 
         const index = gatheredIngredients.findIndex(
           (ingr) => ingr.ingredient_name === name
@@ -97,14 +100,14 @@ function gatherIngredientsFromRecipes(_recipes) {
 
         if (
           index >= 0 &&
-          isCombinable(gatheredIngredients[index], ingredient)
+          isCombinable(gatheredIngredients[index], formattedIngredient)
         ) {
           gatheredIngredients[index] = combine(
             gatheredIngredients[index],
-            ingredient
+            formattedIngredient
           );
         } else {
-          gatheredIngredients.push(ingredient);
+          gatheredIngredients.push(formattedIngredient);
         }
       } else {
         const index = gatheredIngredients.findIndex(
@@ -127,44 +130,48 @@ function assessIngredientsUsage(_onHand, _required) {
   let used = [];
   let needed = [];
 
-  required.forEach((ingredient) => {
+  required.forEach((requiredIngredient) => {
     let { ingredient_name: name, ingredient_amount: amount } = {
-      ...ingredient,
+      ...requiredIngredient,
     };
 
     if (amount) {
       amount = getFractionFromTCAmount(amount);
       amount = math.fraction(amount);
 
-      let index = onHand.findIndex((ingr) => ingr.ingredient_name === name);
+      let index = onHand.findIndex(
+        (onHandIngredient) => onHandIngredient.ingredient_name === name
+      );
 
-      if (index >= 0 && isCombinable(onHand[index], ingredient)) {
-        const targetAmount = onHand[index].ingredient_amount;
+      if (index >= 0 && isCombinable(onHand[index], requiredIngredient)) {
+        const onHandTargetAmount = onHand[index].ingredient_amount;
 
-        const ingredientLeft = subtract(
+        const remainAmount = subtract(
           onHand[index],
-          ingredient
+          requiredIngredient
         ).ingredient_amount;
 
-        if (ingredientLeft >= 0) {
-          used.push({ ...ingredient });
-        } else if (ingredientLeft < 0) {
+        if (remainAmount >= 0) {
+          used.push({ ...requiredIngredient });
+        } else if (remainAmount < 0) {
           used.push({
-            ...ingredient,
-            ingredient_amount: targetAmount,
+            ...requiredIngredient,
+            ingredient_amount: onHandTargetAmount,
           });
           needed.push({
-            ...ingredient,
-            ingredient_amount: -ingredientLeft,
+            ...requiredIngredient,
+            ingredient_amount: -remainAmount,
           });
         }
       } else {
-        needed.push(ingredient);
+        needed.push(requiredIngredient);
       }
     } else {
-      let index = onHand.findIndex((ingr) => ingr.ingredient_name === name);
-      if (index >= 0) used.push(ingredient);
-      else needed.push(ingredient);
+      let index = onHand.findIndex(
+        (onHandIngredient) => onHandIngredient.ingredient_name === name
+      );
+      if (index >= 0) used.push(requiredIngredient);
+      else needed.push(requiredIngredient);
     }
   });
 
@@ -174,11 +181,13 @@ function assessIngredientsUsage(_onHand, _required) {
     };
 
     if (amount) {
-      let index = onHand.findIndex((ingr) => ingr.ingredient_name === name);
+      let index = onHand.findIndex(
+        (onHandIngredient) => onHandIngredient.ingredient_name === name
+      );
 
-      const ingredientLeft = subtract(onHand[index], ingredient);
+      const remain = subtract(onHand[index], ingredient);
 
-      onHand[index] = ingredientLeft;
+      onHand[index] = remain;
     }
   });
 
