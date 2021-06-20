@@ -34,47 +34,46 @@ function App() {
       });
     }
   });
+
   return (
     <Body>
-      <Router>
-        <Header />
-        <HeaderSpacer />
-        <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/search">
-            <SearchPage />
-          </Route>
-          <Route path="/posts">
-            <CommunityPage />
-          </Route>
-          <Route path="/recipe/:id">
-            <RecipePage />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/profile/:uid">
-            <ProfilePage />
-          </Route>
-          <Route exact path="/profile">
-            <ProfilePage />
-          </Route>
-          <Route path="/form/query">
-            <PostQueryForm />
-          </Route>
-          <Route path="/form/recommend/:id">
-            <RecommendForm />
-          </Route>
-          <Route path="/form/share">
-            <ShareRecipeForm />
-          </Route>
-          <Route path="/">
-            <PageNotFound />
-          </Route>
-        </Switch>
-      </Router>
+      <Header />
+      <HeaderSpacer />
+      <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+        <Route path="/search">
+          <SearchPage />
+        </Route>
+        <Route path="/posts">
+          <CommunityPage />
+        </Route>
+        <Route path="/recipe/:id">
+          <RecipePage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route path="/profile/:uid">
+          <ProfilePage />
+        </Route>
+        <Route exact path="/profile">
+          <ProfilePage />
+        </Route>
+        <Route path="/form/query">
+          <PostQueryForm />
+        </Route>
+        <Route path="/form/recommend/:id">
+          <RecommendForm />
+        </Route>
+        <Route path="/form/share">
+          <ShareRecipeForm />
+        </Route>
+        <Route path="/">
+          <PageNotFound />
+        </Route>
+      </Switch>
       <FooterSpacer />
     </Body>
   );

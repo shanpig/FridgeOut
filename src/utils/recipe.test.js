@@ -2,20 +2,26 @@ import { combine } from './recipes';
 import { create, all } from 'mathjs';
 const math = create(all);
 
-const combineTests = [
-  [
-    { ingredient_name: 'a', ingredient_unit: 'g', ingredient_amount: '100' },
-    { ingredient_name: 'a', ingredient_unit: '克', ingredient_amount: '25' },
-    {
+describe('Test for combine()', () => {
+  it('should combine different units of same ingredient', () => {
+    const a = {
+      ingredient_name: 'a',
+      ingredient_unit: 'g',
+      ingredient_amount: '100',
+    };
+
+    const b = {
+      ingredient_name: 'a',
+      ingredient_unit: '克',
+      ingredient_amount: '25',
+    };
+
+    const expectedValue = {
       ingredient_name: 'a',
       ingredient_unit: 'g',
       ingredient_amount: math.fraction(125),
-    },
-  ],
-];
+    };
 
-it('test combine', () => {
-  combineTests.forEach(([a, b, expectedValue]) => {
     expect(combine(a, b)).toStrictEqual(expectedValue);
   });
 });

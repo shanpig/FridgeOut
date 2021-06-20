@@ -14,7 +14,7 @@ export default function IngredientInput({ ingredient, setLeftover }) {
   }
 
   return (
-    <Ingredient.Edit ref={FORM}>
+    <IngredientInputField ref={FORM}>
       <NameField>
         <Input
           required
@@ -45,11 +45,11 @@ export default function IngredientInput({ ingredient, setLeftover }) {
           onChange={(e) => onTextChange(e.target.value, 'ingredient_unit')}
         />
       </UnitField>
-    </Ingredient.Edit>
+    </IngredientInputField>
   );
 }
 
-const Edit = styled.form`
+const IngredientInputField = styled.form`
   display: flex;
   align-items: center;
   gap: 3px;
@@ -61,22 +61,6 @@ const Edit = styled.form`
     background-color: rgba(0, 0, 0, 0.05);
   }
 `;
-
-const Display = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #cfcfcf;
-  }
-`;
-
-const Ingredient = {
-  Edit,
-  Display,
-};
 
 const Field = styled.div`
   flex-basis: 30px;
