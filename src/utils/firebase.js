@@ -1,4 +1,7 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 require('dotenv').config();
 
 // const firebase = require('firebase');
@@ -18,7 +21,7 @@ const storage = firebase.storage().ref();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 function onUserChanged(setUser) {
-  firebase.auth().onAuthStateChanged((user) => {
+  return firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       setUser(user);
     } else setUser({});
@@ -43,6 +46,10 @@ function signInWithPopup() {
     });
 }
 
+function registerUser(userData) {
+  db.collection('users').doc(userData.id).set(userData);
+}
+
 function logOut() {
   return firebase.auth().signOut();
 }
@@ -53,6 +60,51 @@ function getUserData(uid) {
     .doc(uid)
     .get()
     .then((doc) => doc.data());
+}
+
+function getTimestamp() {
+  return firebase.firestore.Timestamp.now();
+}
+
+function uploadImage(imageFile) {
+  return storage
+    .child(imageFile.name)
+    .put(imageFile)
+    .then((snap) => snap.ref.getDownloadURL());
+}
+
+// Due to firebase limitations, compound query cannot exceed 10 logical computations.
+// e.g. getRecipes with idList larger than [Array(10)]
+
+async function getRecipe(id) {
+  return await db
+    .collection('recipes')
+    .doc(id)
+    .get()
+    .then((snap) => snap.data());
+}
+
+function uploadRecipe(recipe) {
+  return db
+    .collection('recipes')
+    .add(recipe)
+    .then((docRef) => {
+      docRef.update({
+        id: docRef.id,
+      });
+      return docRef.id;
+    });
+}
+
+async function searchRecipesByIngredientNames(ingredientNames) {
+  if (ingredientNames.length === 0) return [];
+  let recipes = [];
+  await db
+    .collection('recipes')
+    .where('keyword', 'array-contains-any', ingredientNames)
+    .get()
+    .then((snap) => snap.forEach((doc) => recipes.push(doc.data())));
+  return recipes;
 }
 
 function addRecipeToUserKitchen(uid, recipe) {
@@ -89,88 +141,6 @@ function removeRecipeFromUserFavorites(uid, recipe) {
     .update({
       my_favorites: firebase.firestore.FieldValue.arrayRemove(recipe),
     });
-}
-
-function registerUser(userData) {
-  db.collection('users').doc(userData.id).set(userData);
-}
-
-function uploadImage(imageFile) {
-  return storage
-    .child(imageFile.name)
-    .put(imageFile)
-    .then((snap) => snap.ref.getDownloadURL());
-}
-
-// Due to firebase limitations, compound query cannot exceed 10 logical computations.
-// e.g. getRecipes with idList larger than [Array(10)]
-
-function getTimestamp() {
-  return firebase.firestore.Timestamp.now();
-}
-
-async function getRecipe(id) {
-  return await db
-    .collection('recipes')
-    .doc(id)
-    .get()
-    .then((snap) => snap.data());
-}
-
-async function getRecipes(idList) {
-  let recipes = [];
-  await db
-    .collection('recipes')
-    .where('id', 'in', idList)
-    .get()
-    .then((snap) => {
-      snap.forEach((s) => recipes.push(s.data()));
-    });
-
-  return recipes;
-}
-
-async function searchRecipesByIngredientNames(ingredientNames) {
-  if (ingredientNames.length === 0) return [];
-  let recipes = [];
-  await db
-    .collection('recipes')
-    .where('keyword', 'array-contains-any', ingredientNames)
-    .get()
-    .then((snap) => snap.forEach((doc) => recipes.push(doc.data())));
-  return recipes;
-}
-
-async function signUpNewUser(userInfo) {
-  const isRegistered =
-    (await db
-      .collection('users')
-      .where('email', '==', userInfo.email)
-      .get()
-      .then((snap) => snap.length)) !== 0;
-  if (!isRegistered) {
-    return await db
-      .collection('users')
-      .add(userInfo)
-      .then((docRef) => {
-        docRef.update({
-          id: docRef.id,
-        });
-        return docRef.id;
-      });
-  } else return 0;
-}
-
-async function getUserInfoByEmail(email) {
-  let userInfo = [];
-  await db
-    .collection('users')
-    .where('email', '==', email)
-    .get()
-    .then((snap) => {
-      snap.forEach((s) => userInfo.push(s.data()));
-    });
-  return userInfo[0];
 }
 
 async function addToFavorite(userId, recipeId) {
@@ -226,18 +196,6 @@ function watchMessages(userInfo, callback) {
     });
 }
 
-function uploadRecipe(recipe) {
-  return db
-    .collection('recipes')
-    .add(recipe)
-    .then((docRef) => {
-      docRef.update({
-        id: docRef.id,
-      });
-      return docRef.id;
-    });
-}
-
 async function getPosts() {
   return await db
     .collection('society')
@@ -252,27 +210,23 @@ async function getPosts() {
 export {
   onUserChanged,
   signInWithPopup,
+  registerUser,
   logOut,
   getUserData,
-  registerUser,
   getTimestamp,
-  getRecipe,
-  getRecipes,
   uploadImage,
+  getRecipe,
+  uploadRecipe,
   searchRecipesByIngredientNames,
   addRecipeToUserKitchen,
   removeRecipeFromUserKitchen,
   addRecipeToUserFavorites,
   removeRecipeFromUserFavorites,
   setUserLeftovers,
-  signUpNewUser,
   addToFavorite,
   removeFromFavorite,
-  getUserInfoByEmail,
   sendMessageTo,
   post,
   watchMessages,
   getPosts,
-  uploadRecipe,
-  firebase,
 };
