@@ -2,7 +2,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 import { theme } from '../../variables';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/user/userActions';
@@ -34,7 +34,8 @@ export default function LoginPage() {
   const d = useDispatch();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-  const { identity } = useSelector((state) => state.user_info);
+  const user = useSelector((state) => state.user_info);
+  const { identity } = user;
 
   async function signIn() {
     await signInWithPopup().then((userInfo) => {
@@ -44,7 +45,7 @@ export default function LoginPage() {
 
       getUserData(uid).then((data) => {
         window.localStorage.setItem('fridgeoutid', uid);
-        activateUserData(data, userInfo);
+        memoizedActivateUserData(data, userInfo);
       });
     });
   }
@@ -67,6 +68,8 @@ export default function LoginPage() {
     }
   }
 
+  const memoizedActivateUserData = useCallback(activateUserData, [d]);
+
   useEffect(() => {
     const unsubscribe = onUserChanged((userInfo) => {
       let { uid } = userInfo;
@@ -74,16 +77,16 @@ export default function LoginPage() {
       if (!uid) return setIsLoading(false);
 
       getUserData(uid).then((data) => {
-        activateUserData(data, userInfo);
+        memoizedActivateUserData(data, userInfo);
       });
     });
 
     return unsubscribe;
-  }, []);
+  }, [memoizedActivateUserData]);
 
   useEffect(() => {
-    if (identity !== 'none') history.goBack();
-  }, [identity, history]);
+    if (identity !== 'none') history.push(`/profile/${user.name}`);
+  }, [identity, history, user.name]);
 
   if (isLoading) {
     return (
@@ -100,7 +103,7 @@ export default function LoginPage() {
       <Animated animationIn={'fadeIn'} animationInDuration={300}>
         <LoginForm>
           <Title>請先登入</Title>
-          <LoginButton onClick={() => signIn()}>
+          <LoginButton onClick={signIn}>
             <GoogleLogin />以 Google 帳號登入
           </LoginButton>
         </LoginForm>
