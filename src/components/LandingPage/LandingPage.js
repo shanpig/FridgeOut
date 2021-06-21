@@ -13,6 +13,7 @@ export default function LandingPage() {
       <MainContent>
         <Column>
           <Animated animationIn="fadeInDown">
+            <H1>Test CICD for changing</H1>
             <H1>Fridge Out</H1>
           </Animated>
           <Animated animationIn="fadeInUp">
