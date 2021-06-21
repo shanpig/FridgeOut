@@ -15,6 +15,8 @@ const firebaseConfig = {
   measurementId: process.env.MEASUREMENTID,
 };
 
+console.log(firebaseConfig);
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage().ref();
