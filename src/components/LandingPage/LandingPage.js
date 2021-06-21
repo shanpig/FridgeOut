@@ -14,6 +14,7 @@ export default function LandingPage() {
         <Column>
           <Animated animationIn="fadeInDown">
             <H1>Test CICD for changing</H1>
+            <H1>Fridge Out</H1>
           </Animated>
           <Animated animationIn="fadeInUp">
             <Text>尊重食材，用至分毫。</Text>
