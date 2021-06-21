@@ -15,7 +15,7 @@ import PageNotFound from './components/404/PageNotFound';
 import FooterSpacer from './components/common/FooterSpacer';
 
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from './redux/reducers/user/userActions';
 
