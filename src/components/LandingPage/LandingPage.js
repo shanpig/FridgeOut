@@ -13,7 +13,7 @@ export default function LandingPage() {
       <MainContent>
         <Column>
           <Animated animationIn="fadeInDown">
-            <H1>Test CICD</H1>
+            <H1>Test CICD for changing</H1>
           </Animated>
           <Animated animationIn="fadeInUp">
             <Text>尊重食材，用至分毫。</Text>
