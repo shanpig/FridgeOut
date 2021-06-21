@@ -6,14 +6,19 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+env:
+  REACT_APP_apiKey: ${{secrets.APIKEY}}
+  REACT_APP_authDomain: ${{secrets.AUTHDOMAIN}}
+  REACT_APP_projectId: ${{secrets.PROJECTID}}
+  REACT_APP_storageBucket: ${{secrets.STORAGEBUCKET}}
+  REACT_APP_messagingSenderId: ${{secrets.MESSAGINGSENDERID}}
+  REACT_APP_appId: ${{secrets.APPID}}
+  REACT_APP_measurementId: ${{secrets.MEASUREMENTID}}
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-          with: 
-            node-version: '15'
       - run: npm install && npm run test -- --watchAll=false && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
