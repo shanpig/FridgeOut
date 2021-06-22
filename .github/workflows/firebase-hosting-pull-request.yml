@@ -4,13 +4,13 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 env:
-  REACT_APP_apiKey: ${{secrets.APIKEY}}
-  REACT_APP_authDomain: ${{secrets.AUTHDOMAIN}}
-  REACT_APP_projectId: ${{secrets.PROJECTID}}
-  REACT_APP_storageBucket: ${{secrets.STORAGEBUCKET}}
-  REACT_APP_messagingSenderId: ${{secrets.MESSAGINGSENDERID}}
-  REACT_APP_appId: ${{secrets.APPID}}
-  REACT_APP_measurementId: ${{secrets.MEASUREMENTID}}
+  REACT_APP_apiKey: ${{ secrets.APIKEY }}
+  REACT_APP_authDomain: ${{ secrets.AUTHDOMAIN }}
+  REACT_APP_projectId: ${{ secrets.PROJECTID }}
+  REACT_APP_storageBucket: ${{ secrets.STORAGEBUCKET }}
+  REACT_APP_messagingSenderId: ${{ secrets.MESSAGINGSENDERID }}
+  REACT_APP_appId: ${{ secrets.APPID }}
+  REACT_APP_measurementId: ${{ secrets.MEASUREMENTID }}
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
