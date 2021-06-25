@@ -37,19 +37,19 @@ Please login with your google account.
 ![chart](media/flow-chart.png)
 
 ## Features
-- Search recipes with ingredients.
+- #### Search recipes with ingredients.
 ![simple search](media/simpleinput.gif)
-- Browse recipes and add recipes to favorite / kitchen.
+- #### Browse recipes and add recipes to favorite / kitchen.
 ![addtofavorite](media/addtofavorite.gif)
-- FridgeOut will calculate the ingredients you need for you.
+- #### FridgeOut will calculate the ingredients you need for you.
 ![calculate](media/calculate.gif)
-- Add / edit ingredients to your fridge, so you can search by few clicks.
+- #### Add / edit ingredients to your fridge, so you can search by few clicks.
 ![editfridge](media/editfridge.gif)
-- No recipe found ? Ask for others help !
+- #### No recipe found ? Ask for others help !
 ![querypost](media/querypost.gif)
-- Help others think of recipes with their ingredients !
+- #### Help others think of recipes with their ingredients !
 ![recommend](media/recommend.gif)
-- Contribute your recipe to the community.
+- #### Contribute your recipe to the community.
 ![share](media/share.gif)
 
 ## Future features
