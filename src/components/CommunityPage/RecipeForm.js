@@ -24,24 +24,38 @@ const emptyIngredient = {
   ingredient_uid: uid(),
 };
 
+const testIngredients = [
+  {
+    ingredient_name: '雞蛋',
+    ingredient_amount: '4',
+    ingredient_unit: '顆',
+    ingredient_uid: uid(),
+  },
+  {
+    ingredient_name: '蔥',
+    ingredient_amount: '3',
+    ingredient_unit: '根',
+    ingredient_uid: uid(),
+  },
+];
+
 export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
   const history = useHistory();
   const user = useSelector((state) => state.user_info);
   const [isLoading, setIsLoading] = useState(false);
-  const [title, setTitle] = useState('照燒紫蘇雞肉丸子');
+  const [title, setTitle] = useState('雙色蔥香玉子燒');
   const [ingredients, setIngredients] = useState(
-    defaultIngredients || [emptyIngredient]
+    defaultIngredients || testIngredients || [emptyIngredient]
   );
   const [steps, setSteps] = useState([
-    '雞肉丸子備料：蔥切成蔥花、荸薺頭尾切除削皮後切小塊、紫蘇葉切成細絲。',
-    '雞肉丸子的所有材料加上盆內，攪拌均勻。',
-    '烤盤上鋪上一層烘焙紙方便清潔，用冰淇淋挖杓（scoop）分成球狀，約可做9顆。',
-    '照燒醬：水跟玉米粉先混合均勻，加入其他材料，拌勻。',
-    '鍋子加2小匙油後以中火預熱2分鐘，看鍋子的大小分次加入雞肉丸子（我是10吋鍋，分兩次加入），一面煎2~3分鐘上色，翻面再煎，兩面都呈現金黃色。',
-    '煎好的雞肉丸子取出，如果鍋底太多焦黑物就把鍋子洗乾淨，轉中小火，倒入照燒醬稍微攪拌一下，將丸子加回鍋子，蓋上鍋蓋，燜煮3~4分鐘直到醬子變稠，丸子側面整體都變色/熟。最後可用湯匙把醬汁淋在丸子表面讓它更入味。',
-    '盛盤，先將丸子取出，最後淋上鍋內的照燒醬，撒上一點白芝麻裝飾（選擇性）。推薦可另外準備紫蘇葉，包著丸子一起吃，口感更清爽消暑～',
+    '蔥切成蔥花，將蛋黃、蛋白分開裝在不同容器，並各自打散，加點鹽調味。',
+    '把蔥花倒到蛋白液中攪勻。',
+    '在鍋子表面塗一層薄薄的油，熱鍋後轉中小火，倒入約2大匙蔥蛋白，轉動鍋子往四個方向讓蛋白填滿鍋面。',
+    '蛋白凝固後，用筷子將蛋白往自己的方向捲起，捲好後再推往鍋子另一側。',
+    '重複倒蛋液的動作，轉動鍋子時，用筷子將已捲好的蛋捲稍微提起，讓蛋液流入與蛋捲重疊。',
+    '最後倒入蛋黃液，捲起來讓他定型就完成囉!',
   ]);
-  const [tags, setTags] = useState('紫蘇雞肉丸子');
+  const [tags, setTags] = useState('雙色蔥香玉子燒');
   const [imageSrc, setImageSrc] = useState('');
   const IMAGE_REF = useRef(null);
 
@@ -77,6 +91,7 @@ export default function RecipeForm({ formTitle, submit, defaultIngredients }) {
       const recipe = await createRecipe();
       const refId = await uploadRecipe(recipe);
       recipe.id = refId;
+
       if (submit) submit(recipe);
 
       setIsLoading(false);

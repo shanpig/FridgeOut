@@ -33,19 +33,24 @@ Please login with your google account.
 
  
 ## Flow Chart
-![pages](pages.png)
-![chart](flow-chart.png)
+![pages](media/pages.png)
+![chart](media/flow-chart.png)
 
 ## Features
-- Applied **React Router** for single-page React application
-- Applied **smooth transition animations** with Animate.css
-- Calculated ingredient amount with different units
-- Constructed the database by **crawling and scraping** recipes from websites with crawler.js
-- Hosted the website with **Firebase Hosting**
-- Implemented Google login method with **Firebase Auth**
-- Managed data flow with **Redux** and **Firebase**
-- Synchronize data between Redux and Firebase with **Redux thunk**
-- Used **styled-component** for component encapsulation
+- Search recipes with ingredients.
+![simple search](media/simpleinput.gif)
+- Browse recipes and add recipes to favorite / kitchen.
+![addtofavorite](media/addtofavorite.gif)
+- FridgeOut will calculate the ingredients you need for you.
+![calculate](media/calculate.gif)
+- Add / edit ingredients to your fridge, so you can search by few clicks.
+![editfridge](media/editfridge.gif)
+- No recipe found ? Ask for others help !
+![querypost](media/querypost.gif)
+- Help others think of recipes with their ingredients !
+![recommend](media/recommend.gif)
+- Contribute your recipe to the community.
+![share](media/share.gif)
 
 ## Future features
 - Generate shoplist of ingredients for recipes in "我的廚房".

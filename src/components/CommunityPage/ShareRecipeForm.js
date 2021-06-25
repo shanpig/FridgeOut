@@ -18,17 +18,14 @@ export default function ShareRecipeForm() {
       recipe,
       profile_image: user.profile,
     };
-    post(postData);
-  }
 
-  function submitHandler() {
-    return (recipe) => postRecipe(recipe);
+    post(postData);
   }
 
   return (
     <Main>
       <Animated>
-        <RecipeForm formTitle="分享食譜" submit={submitHandler} />
+        <RecipeForm formTitle="分享食譜" submit={postRecipe} />
       </Animated>
     </Main>
   );
