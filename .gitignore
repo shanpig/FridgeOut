@@ -12,6 +12,8 @@
 /build
 
 # misc
+*.pptx
+*.xmind
 *.docx
 .firebase/*
 .DS_Store
