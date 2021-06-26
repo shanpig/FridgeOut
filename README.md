@@ -1,6 +1,7 @@
 <div align="center" ><img width="100px" src="src/images/logo-small.svg"/></div>
-<h2 align="center">FridgeOut</h2>
+<h1 align="center">FridgeOut</h1>
 
+# Introduction
 - FridgeOut is a recipe searching website attempting to clean your fridge.
 - Add your leftover ingredients in the list, then search recipes in just a few clicks.
 - Search thousands of recipes by ingredients, see how many ingredients you need at a glance.
