@@ -98,6 +98,8 @@ const SelectionTitle = styled(Link)`
   color: white;
   white-space: nowrap;
   width: 40px;
+  min-width: 20px;
+  margin-right: 5px;
   position: relative;
   text-align: center;
 
