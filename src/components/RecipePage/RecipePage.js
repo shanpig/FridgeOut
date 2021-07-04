@@ -45,6 +45,7 @@ export default function RecipePage() {
 
   useEffect(() => {
     getRecipe(recipeId).then((recipe) => {
+      if (!recipe) history.push('/error');
       setRecipe(recipe);
     });
   }, [recipeId]);
