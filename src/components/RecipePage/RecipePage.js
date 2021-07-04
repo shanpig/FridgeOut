@@ -48,7 +48,7 @@ export default function RecipePage() {
       if (!recipe) history.push('/error');
       setRecipe(recipe);
     });
-  }, [recipeId]);
+  }, [recipeId, history]);
 
   function isInKitchen(recipe) {
     return myKitchen.findIndex((target) => target.id === recipe.id) >= 0;
