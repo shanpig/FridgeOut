@@ -23,8 +23,8 @@ export default function RecommendForm() {
     sendMessageTo(userId, message);
   }
 
-  function submitHandler() {
-    return (recipe) => sendRecipeTo(id, recipe);
+  function submitHandler(recipe) {
+    sendRecipeTo(id, recipe);
   }
 
   return (
