@@ -5,6 +5,7 @@ const theme = {
   lightBlue: '#cbf3f0',
   blue: '#2ec4b6',
   darkbrown: '#412403',
+  something: '#23123',
 };
 
 const headerConfig = {
