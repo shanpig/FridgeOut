@@ -3,7 +3,7 @@ import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
 import { theme } from '../../variables';
 
-import SearchBar from './SearchBar';
+import SearchBar from './components/SearchBar';
 import RecipeItem from '../common/RecipeItem';
 import SidebarBody from '../common/Sidebar/SidebarBody';
 

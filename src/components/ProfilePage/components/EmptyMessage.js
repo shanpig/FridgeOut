@@ -1,4 +1,4 @@
-import { theme } from '../../variables';
+import { theme } from '../../../variables';
 
 import styled from 'styled-components';
 
